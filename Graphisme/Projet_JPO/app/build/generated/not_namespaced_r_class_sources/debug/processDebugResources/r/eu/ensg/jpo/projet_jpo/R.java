@@ -5209,7 +5209,7 @@ public final class R {
     public static final int line3=0x7f08005f;
     public static final int listMode=0x7f080060;
     public static final int list_item=0x7f080061;
-    public static final int login_form=0x7f080062;
+    public static final int formulaire =0x7f080062;
     public static final int login_progress=0x7f080063;
     public static final int masked=0x7f080064;
     public static final int message=0x7f080065;
@@ -5369,7 +5369,7 @@ public final class R {
     public static final int abc_search_view=0x7f0b0019;
     public static final int abc_select_dialog_material=0x7f0b001a;
     public static final int abc_tooltip=0x7f0b001b;
-    public static final int activity_login=0x7f0b001c;
+    public static final int activiteConnexion =0x7f0b001c;
     public static final int activity_main=0x7f0b001d;
     public static final int design_bottom_navigation_item=0x7f0b001e;
     public static final int design_bottom_sheet_dialog=0x7f0b001f;
