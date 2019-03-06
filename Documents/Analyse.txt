@@ -1,0 +1,27 @@
+Liste des tâches :
+
+ - Contexte du projet
+	+ Pour qui ?
+	+ Pourquoi ?
+	+ Enjeux ?
+
+ - Reformulation du besoin
+	+ Objectifs
+	+ Contraintes
+	+ Acteurs -> enquête, sondage
+
+ - Solutions proposées
+	-> Diagrammes (classes, séquences, activités)
+
+ - Choix des logiciels (facultative)
+	+ logiciels
+	+ types de données
+	  -> diagramme de déploiement
+	  -> diagramme de composants
+	  -> diagramme d'état
+ 
+ - Réalisation et suivi de projet
+	+ risques
+	+ planning
+	  -> diagramme de Pert
+	  -> diagramme de Gantt
