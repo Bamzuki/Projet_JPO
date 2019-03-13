@@ -1,0 +1,308 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 763 584" style="enable-background:new 0 0 763 584;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;fill:#C0C0C0;enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'Arial-BoldMT';}
+	.st4{font-size:13px;}
+	.st5{font-family:'Arial-BoldItalicMT';}
+</style>
+<g>
+	<g>
+		<g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="247" y="431" class="st0" width="123.1" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="240" y="424" class="st1" width="123.1" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M240,424h123.1v44H240V424z"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M240,449h123.1"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M240,459h123.1"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 249.5337 443.5)" class="st3 st4">ActiviteConnexion</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="159" y="551" class="st0" width="211" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="152" y="544" class="st1" width="211" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M152,544h211v44H152V544z"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M152,569h211"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M152,579h211"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 192.4746 563.5)" class="st3 st4">ActiviteEnregistrement</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="711" y="415" class="st0" width="122.4" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="704" y="408" class="st1" width="122.4" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M704,408h122.4v44H704V408z"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M704,433h122.4"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M704,443h122.4"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 713.5432 427.5)" class="st3 st4">ActiviteNavigation</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="791" y="567" class="st0" width="111" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="784" y="560" class="st1" width="111" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M784,560h111v44H784V560z"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M784,585h111"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M784,595h111"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 793.251 579.5)" class="st3 st4">ActivitePlanning</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="447" y="351" class="st0" width="115.2" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="440" y="344" class="st1" width="115.2" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M440,344h115.2v44H440V344z"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M440,369h115.2"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M440,379h115.2"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 455.6909 363.5)" class="st3 st4">ActiviteAccueil</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="359" y="655" class="st0" width="102.2" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="352" y="648" class="st1" width="102.2" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M352,648h102.2v44H352V648z"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M352,673h102.2"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M352,683h102.2"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 360.8418 667.5)" class="st3 st4">ActiviteFavoris</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<rect x="615" y="679" class="st0" width="129.6" height="44"/>
+					</g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<rect x="608" y="672" class="st1" width="129.6" height="44"/>
+					</g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<path class="st2" d="M608,672h129.6v44H608V672z"/>
+					</g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<path class="st2" d="M608,697h129.6"/>
+					</g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<path class="st2" d="M608,707h129.6"/>
+					</g>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 618.27 691.5)" class="st3 st4">ActiviteSatisfaction</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="495" y="519" class="st0" width="129.6" height="44"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<rect x="488" y="512" class="st1" width="129.6" height="44"/>
+				</g>
+				<g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<path class="st2" d="M488,512h129.6v44H488V512z"/>
+					</g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<path class="st2" d="M488,537h129.6"/>
+					</g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<path class="st2" d="M488,547h129.6"/>
+					</g>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 497.8987 531.5)" class="st5 st4">AppCompatActivity</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-142,-334) scale(1,1)">
+						<rect x="490.6" y="799" class="st0" width="79.8" height="44"/>
+					</g>
+					<g>
+						<g transform="translate(-142,-334) scale(1,1)">
+							<rect x="483.6" y="792" class="st1" width="79.8" height="44"/>
+						</g>
+						<g>
+							<g transform="translate(-142,-334) scale(1,1)">
+								<path class="st2" d="M483.6,792h79.8v44h-79.8V792z"/>
+							</g>
+							<g>
+								<g transform="translate(-142,-334) scale(1,1)">
+									<path class="st2" d="M483.6,817h79.8"/>
+								</g>
+								<g transform="translate(-142,-334) scale(1,1)">
+									<path class="st2" d="M483.6,827h79.8"/>
+								</g>
+							</g>
+						</g>
+					</g>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 490.6191 811.5)" class="st3 st4">Constantes</text>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g id="Fleches">
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M428,647l99-90"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M517.6,576.9L527,557l-20.7,7.4"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M517.6,576.9L527,557l-20.7,7.4L517.6,576.9"/>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M505,389l39,122"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M529.8,494.2L544,511l1.8-21.9"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M529.8,494.2L544,511l1.8-21.9L529.8,494.2"/>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M718,453l-119,58"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M613.6,494.5L599,511l22-1.3"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M613.6,494.5L599,511l22-1.3L613.6,494.5"/>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M783,573l-164-28"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M640.5,540.1L619,545l18.6,11.7"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M640.5,540.1L619,545l18.6,11.7L640.5,540.1"/>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M364,554l123-13"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M467.7,551.5L487,541l-21.1-6.2"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M467.7,551.5L487,541l-21.1-6.2L467.7,551.5"/>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M364,468l123,43"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M465,512.2l22-1.2l-16.4-14.7"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M465,512.2l22-1.2l-16.4-14.7L465,512.2"/>
+				</g>
+			</g>
+			<g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M655,671l-86-114"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st1" d="M588,568.2L569,557l5.5,21.3"/>
+				</g>
+				<g transform="translate(-142,-334) scale(1,1)">
+					<path class="st2" d="M588,568.2L569,557l5.5,21.3L588,568.2"/>
+				</g>
+			</g>
+		</g>
+	</g>
+</g>
+</svg>
