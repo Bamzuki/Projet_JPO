@@ -786,7 +786,7 @@
 											"top": 351,
 											"width": 106.18994140625,
 											"height": 13,
-											"text": "ActiviteAffichage"
+											"text": "ActiviteAccueil"
 										},
 										{
 											"_type": "LabelView",
@@ -2407,7 +2407,7 @@
 					"_parent": {
 						"$ref": "AAAAAAFo5znuTAME8MY="
 					},
-					"name": "ActiviteAffichage",
+					"name": "ActiviteAccueil",
 					"ownedElements": [
 						{
 							"_type": "UMLGeneralization",
