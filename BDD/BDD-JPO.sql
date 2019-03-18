@@ -54,15 +54,15 @@ INSERT INTO ecoles (nom, site, description) VALUES ('Communauté Université Par
 INSERT INTO ecoles (nom, site, description) VALUES ('Compagnons du devoir et du tour de France', 'https://www.compagnons-du-devoir.com/', '« Savoir-faire et savoir-être ». Se former et s''épanouir dans et par son métier :\n - En alternance : formation par le travail en entreprise, complété par des stages\n - En voyageant grâce au Tour de France, dont une étape à l''international\n - En partageant des expériences et des moments de vie en communauté\n - 30 métiers, 6 filières : Aménagement et finition ; Bâtiment ; Métiers du goût ; Matériaux souples ; Métallurgie et industrie ; Métiers du vivant. De la formation initiale (CAP, Bac pro) à la formation supérieure (DEUST, Licence pro).');
 INSERT INTO ecoles (nom, site, description) VALUES ('ESO Paris SUPOSTEO', 'https://www.eso-suposteo.fr/', 'L''école d''ostéopathie référente en France et en Europe :\nDes conditions optimales pour former des ostéopathes passionnés et rigoureux. Un cursus complet en 4865 heures (5 ans) et la plus importante clinique ostéopathique de France.\n - Diplôme d''ostéopathe, titre national inscrit au RNCP niveau 1\n - Formation Bac+5');
 
-CREATE TABLE batiments (id SERIAL UNIQUE, nom character varying(50), type character varying(30), lat float, lng float);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('ENSG', 'enseignement', 48.8410959, 2.5873874);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('Copernic', 'enseignement', 48.839159, 2.5866814);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('EUP', 'enseignement', 48.842614, 2.5861283);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('EAVT', 'enseignement', 48.8411598, 2.5918843);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('ESIEE', 'enseignement', 48.8402383, 2.5816832);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('CFA Descartes', 'enseignement', 48.8360343, 2.5923958);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('IUT Champs', 'enseignement', 48.837046, 2.5842788);
-INSERT INTO batiments (nom, type, lat, lng) VALUES ('ESO', 'enseignement', 48.836663, 2.5913698);
+CREATE TABLE batiments (id SERIAL UNIQUE, nom character varying(50), fonction character varying(30), lat float, lng float);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('ENSG', 'enseignement', 48.8410959, 2.5873874);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('Copernic', 'enseignement', 48.839159, 2.5866814);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('EUP', 'enseignement', 48.842614, 2.5861283);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('EAVT', 'enseignement', 48.8411598, 2.5918843);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('ESIEE', 'enseignement', 48.8402383, 2.5816832);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('CFA Descartes', 'enseignement', 48.8360343, 2.5923958);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('IUT Champs', 'enseignement', 48.837046, 2.5842788);
+INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('ESO', 'enseignement', 48.836663, 2.5913698);
 
 CREATE TABLE formations (id SERIAL UNIQUE, nom character varying(200), niveau character varying(30), id_ecole INTEGER, id_batiment INTEGER, id_filiere INTEGER);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('M1&2 Forêt et bois', 'Master', 1, 1, 1);
