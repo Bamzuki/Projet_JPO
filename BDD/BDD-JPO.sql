@@ -105,3 +105,31 @@ INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES (
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Arts, Lettres et Civilisations - Musique et Informatique Musicale (MIM)', 'Master', 2, 2, 5);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Arts, Lettres et Civilisations - Création et arts sonores', 'Master', 2, 2, 5);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Arts, Lettres et Civilisations - Musique et Production musicale', 'Master', 2, 2, 5);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('L1 à L3 Arts - Cinéma et Audiovisuel', 'Licence Générale', 2, 2, 6);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Arts, Lettres et Civilisations - Cinéma et audiovisuel (CAV)', 'Master', 2, 2, 6);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Guide conférencier', 'Licence Professionnelle', 2, 2, 7);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Arts, Lettres et Civilisations - Littérature, Savoirs et Culture Numérique (LSCN)', 'Master', 2, 2, 7);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Métiers de la mode', 'Licence Professionnelle', 2, 2, 8);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1 Finance Banque et assurance', 'Master', 2, 2, 9);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M2 Mathématiques et applications - Finance', 'Master', 2, 2, 9);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Actuariat', 'Master', 2, 2, 9);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Systèmes Audiovisuels Numériques', 'Licence Professionnelle', 6, 7, 10);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Administration de Réseaux Scéniques', 'Licence Professionnelle', 6, 7, 10);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Techniques du son et de l''image - Gestion de la production audiovisuelle', 'Licence Professionnelle', 2, 2, 10);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Métiers du multimédia et de l''internet (MMI)', 'DUT', 6, 7, 11);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Métiers de la Communication : chargé de communication des  collectivités territoriales et des associations', 'Licence Professionnelle', 2, 2, 11);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Métiers du Tourisme : commercialisation des produits touristiques - Nouvelles technologies de l''Information et de la Communication (NTIC)', 'Licence Professionnelle',2, 2, 11);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Sciences sociales - Communication des entreprises et médias sociaux', 'Master', 2, 2, 11);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('L3 Lettres Modernes Appliquées', 'Licence Générale', 2, 2, 12);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Métiers du livre : édition et commerce du livre - Fabrication du livre imprimé et numérique', 'Licence Professionnelle', 2, 2, 12);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('Métiers du livre : édition et commerce du livre - Fabrication du livre imprimé et numérique', 'Licence Professionnelle', 2, 2, 12);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Métiers du livre et de l''édition - Edition Livre papier et numérique ', 'Master', 2, 2, 12);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('L1 à L3 Langues, littératures et civilisations étrangères et régionales - Anglais ou Espagnol', 'Licence Générale', 2, 2, 13);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('L1&L2 Langues Etrangères appliquées - Anglais-Allemand ou Anglais-Espagnol', 'Licence Générale', 2, 2, 13);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('L3 Langues Etrangères appliquées - Anglais-Allemand ou Anglais-Espagnol Traduction spécialisée', 'Licence Générale', 2, 2, 13);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_domaine) VALUES ('M1&2 Traduction et interprétation - Traduction spécialisée', 'Master', 2, 2, 13);
+
+
+
+
+
