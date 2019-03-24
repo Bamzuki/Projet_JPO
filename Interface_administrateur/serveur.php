@@ -5,7 +5,12 @@
 function getListeNomObjets($nomTable){
   //Cette fonction renvoie une liste des noms des objets de la table rentrée en argument
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT nom FROM " . $nomTable;
+  if ($nomTable == "niveaux"){
+    $requete = "SELECT DISTINCT niveau FROM formations";
+  }
+  else {
+    $requete = "SELECT nom FROM " . $nomTable;
+  }
   $result = pg_query($link, $requete);
 
   if ($result) {
@@ -87,7 +92,7 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
 // Requêtes :
 
 if (isset($_GET['request']) && $_GET['request'] == "listeNomObjets" && isset($_GET['nomTable'])){
-  $nomTable = $_GET['nomtable'];
+  $nomTable = $_GET['nomTable'];
   echo getListeNomObjets($nomTable);
 }
 
@@ -144,7 +149,9 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '- Filières :</b>'."<br />";
   echo '- ' . getListeNomObjets("filieres") . '<br />' . '<br />';
   echo '- Bâtiments :</b>'."<br />";
-  echo '- ' . getListeNomObjets("batiments") . '<br />' . '<br />' . '<br />';
+  echo '- ' . getListeNomObjets("batiments") . '<br />' . '<br />';
+  echo '- Niveaux :</b>'."<br />";
+  echo '- ' . getListeNomObjets("niveaux") . '<br />' . '<br />' . '<br />';
 
   echo '<b>Test de "getListeEcoles" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeEcoles() . '<br />' . '<br />'. '<br />';
@@ -154,9 +161,6 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
 
   echo '<b>Test de "getListeFormations" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeFormations("%", "%", "%", "%") . '<br />' . '<br />'. '<br />';
-
-
 }
-
 
  ?>
