@@ -1,6 +1,6 @@
 <?php
 
-// Fonctions :
+// I - Fonctions :
 
 function getListeNomObjets($nomTable){
   //Cette fonction renvoie une liste des noms des objets de la table rentrée en argument
@@ -32,8 +32,28 @@ function getListeEcoles(){
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $ecole= '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "site":"' . $row[2] . '", "description":"' . $row[3] . '"}';
+      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "site":"' . $row[2] . '", "description":"' . $row[3] . '"}';
       $response = $response . $ecole . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+  return $response;
+}
+
+function getListeFilieres(){
+  //Cette fonction renvoie la liste des filieres
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "SELECT id, nom FROM filieres";
+  $result = pg_query($link, $requete);
+
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $filiere = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '"}';
+      $response = $response . $filiere . ', ';
     }
   }
   $response = substr($response, 0, -2) . ']';
@@ -87,9 +107,55 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
   return $response;
 }
 
+function saveEcole ($nom, $site, $description){
+  //Cette fonction enregistre une nouvelle école dans la base de données
+  $nom = str_replace("'", "''", $nom);
+  $description = str_replace("'", "''", $description);
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "INSERT INTO ecoles (nom, site, description) VALUES ('" . $nom . "', '" . $site . "', '" . $description . "')";
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+
+function saveBatiment ($nom, $fonction, $lat, $lng){
+  //Cette fonction enregistre un nouveau batiment dans la base de données
+  $nom = str_replace("'", "''", $nom);
+  $fonction = str_replace("'", "''", $fonction);
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('" . $nom . "', '" . $fonction . "', " . $lat . ", " . $lng . ")";
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+
+function saveFiliere ($nom){
+  //Cette fonction enregistre un nouveau batiment dans la base de données
+  $nom = str_replace("'", "''", $nom);
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "INSERT INTO filieres (nom) VALUES ('" . $nom . "')";
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
 
 
-// Requêtes :
+
+// II - Requêtes :
+
+// II.1 Requêtes GET :
 
 if (isset($_GET['request']) && $_GET['request'] == "listeNomObjets" && isset($_GET['nomTable'])){
   $nomTable = $_GET['nomTable'];
@@ -98,6 +164,10 @@ if (isset($_GET['request']) && $_GET['request'] == "listeNomObjets" && isset($_G
 
 if (isset($_GET['request']) && $_GET['request'] == "listeEcoles"){
   echo getListeEcoles();
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "listeFilieres"){
+  echo getListeFilieres();
 }
 
 if (isset($_GET['request']) && $_GET['request'] == "listeBatiments"){
@@ -138,8 +208,70 @@ if (isset($_GET['request']) && $_GET['request'] == "listeFormations"){
   echo getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtreFiliere);
 }
 
+// II.2 Requêtes SAVE :
+if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
+  if (isset($_GET['nom'])) {
+    $nom = $_GET['nom'];
+  }
+  else{
+    $nom = "";
+  }
+  if (isset($_GET['site'])) {
+    $site = $_GET['site'];
+  }
+  else{
+    $site = "";
+  }
+  if (isset($_GET['description'])) {
+    $description = $_GET['description'];
+  }
+  else{
+    $description = "";
+  }
+  echo saveEcole ($nom, $site, $description);
+}
 
-// Tests unitaires :
+if (isset($_GET['request']) && $_GET['request'] == "saveBatiment"){
+  if (isset($_GET['nom'])) {
+    $nom = $_GET['nom'];
+  }
+  else{
+    $nom = "";
+  }
+  if (isset($_GET['fonction'])) {
+    $fonction = $_GET['fonction'];
+  }
+  else{
+    $fonction = "";
+  }
+  if (isset($_GET['lat'])) {
+    $lat = $_GET['lat'];
+  }
+  else{
+    $lat = 0;
+  }
+  if (isset($_GET['lng'])) {
+    $lng = $_GET['lng'];
+  }
+  else{
+    $lng = 0;
+  }
+  echo saveBatiment ($nom, $fonction, $lat, $lng);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "saveFiliere"){
+  if (isset($_GET['nom'])) {
+    $nom = $_GET['nom'];
+  }
+  else{
+    $nom = "";
+  }
+  echo saveFiliere ($nom);
+}
+
+
+
+// III - Tests unitaires :
 
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
 
@@ -159,8 +291,20 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "getListeBatiments" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeBatiments("%") . '<br />' . '<br />'. '<br />';
 
+  echo '<b>Test de "getListeFilieres" :</b>' . '<br />' . '<br />';
+  echo '- ' . getListeFilieres() . '<br />' . '<br />'. '<br />';
+
   echo '<b>Test de "getListeFormations" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeFormations("%", "%", "%", "%") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "saveEcole" :</b>' . '<br />' . '<br />';
+  echo '- ' . saveEcole("ecoleTest", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "saveBatiment" :</b>' . '<br />' . '<br />';
+  echo '- ' . saveBatiment("batimentTest", "fonctionTest", 0, 0) . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "saveFiliere" :</b>' . '<br />' . '<br />';
+  echo '- ' . saveFiliere("filiereTest") . '<br />' . '<br />'. '<br />';
 }
 
  ?>

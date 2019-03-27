@@ -228,7 +228,7 @@ INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES (
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Management de la chaine du froid', 'Licence professionnelle', 5, 6, 21);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('M2 Transport, mobilités, réseaux - Transport, Mobilité', 'Master', 2, 2, 21);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Organisation et gestion des établissements hôteliers et de restauration - Restauration Collective et Commerciale', 'Licence professionnelle', 2, 2, 22);
-INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Organisation et gestion des établissements hôteliers et de restauration - Management International de l'Hôtellerie', 'Licence professionnelle', 2, 2, 22);
+INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Organisation et gestion des établissements hôteliers et de restauration - Management International de l''Hôtellerie', 'Licence professionnelle', 2, 2, 22);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Langues Etrangères appliquées - Anglais-Espagnol -  Tourisme ou Anglais-Allemand – Tourisme', 'Licence générale', 2, 2, 23);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Guide conférencier', 'Licence professionnelle', 2, 2, 23);
 INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('Métiers du Tourisme : commercialisation des produits touristiques - Nouvelles technologies de l''Information et de la Communication (NTIC)', 'Licence professionnelle', 2, 2, 23);
