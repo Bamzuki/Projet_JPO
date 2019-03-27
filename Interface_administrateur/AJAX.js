@@ -72,6 +72,27 @@ function getListeFormation(){
   var filtre_ecole     = document.getElementById("filtre-ecole").value;
   var filtre_batiment  = document.getElementById("filtre-batiment").value;
   var filtre_filiere   = document.getElementById("filtre-filiere").value;
+  var request = "request=listeFormations"
+  if (filtre_niveau != "Tous"){
+    request += "&&filtreNiveau=" + filtre_niveau;
+  }
+  if (filtre_ecole != "Toutes"){
+    request += "&&filtreEcole=" + filtre_ecole;
+  }
+  if (filtre_batiment != "Tous"){
+    request += "&&filtreBatiment=" + filtre_batiment;
+  }
+  if (filtre_niveau != "Toutes"){
+    request += "&&filtreFiliere=" + filtre_filiere;
+  }
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?'+request);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var listeFormations = JSON.parse(ajax.response);
+     }
+   });
+  ajax.send(request);
 }
 
 

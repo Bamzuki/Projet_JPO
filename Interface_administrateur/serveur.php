@@ -2,6 +2,46 @@
 
 // I - Fonctions :
 
+// I.1 Fonctions GET ID :
+
+function getIdEcole($nom){
+  //Cette fonction renvoie l'id d'une école depuis son nom
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "SELECT id FROM ecoles WHERE nom LIKE '" . $nom . "'";
+  $result = pg_query($link, $requete);
+  while ($row = pg_fetch_row($result)) {
+    $id_ecole = $row[0];
+    echo $id_ecole;
+    return $id_ecole;
+  }
+}
+
+function getIdBatiment($nom){
+  //Cette fonction renvoie l'id d'un bâtiment depuis son nom
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "SELECT id FROM batiments WHERE nom LIKE '" . $nom . "'";
+  $result = pg_query($link, $requete);
+  while ($row = pg_fetch_row($result)) {
+    $id_batiment = $row[0];
+    echo $id_batiment;
+    return $id_batiment;
+  }
+}
+
+function getIdFiliere($nom){
+  //Cette fonction renvoie l'id d'une filière depuis son nom
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "SELECT id FROM filieres WHERE nom LIKE '" . $nom . "'";
+  $result = pg_query($link, $requete);
+  while ($row = pg_fetch_row($result)) {
+    $id_filiere = $row[0];
+    echo $id_filiere;
+    return $id_filiere;
+  }
+}
+
+// I.2 Fonctions GET :
+
 function getListeNomObjets($nomTable){
   //Cette fonction renvoie une liste des noms des objets de la table rentrée en argument
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
@@ -142,6 +182,31 @@ function saveFiliere ($nom){
   $nom = str_replace("'", "''", $nom);
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
   $requete = "INSERT INTO filieres (nom) VALUES ('" . $nom . "')";
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+
+function saveFormation ($nom, $niveau, $ecole, $batiment, $filiere){
+  //Cette fonction enregistre une nouvelle formation dans la base de données
+
+  $nom      = str_replace("'", "''", $nom);
+  $niveau   = str_replace("'", "''", $niveau);
+  $ecole    = str_replace("'", "''", $ecole);
+  $batiment = str_replace("'", "''", $batiment);
+  $filiere  = str_replace("'", "''", $filiere);
+
+  // Détermination des id des objets
+  $id_ecole    = getIdEcole($ecole);
+  $id_batiment = getIdBatiment($batiment);
+  $id_filiere  = getIdFiliere($filiere);
+
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('" . $nom . "', '" . $niveau . "', " . $id_ecole . ", " . $id_batiment . ", " . $id_filiere . ")";
   $result = pg_query($link, $requete);
 
   if ($result){
@@ -305,6 +370,9 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
 
   echo '<b>Test de "saveFiliere" :</b>' . '<br />' . '<br />';
   echo '- ' . saveFiliere("filiereTest") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "saveFormation" :</b>' . '<br />' . '<br />';
+  echo '- ' . saveFormation("testFormation", "DUT", "ENSG-Géomatique", "ENSG", "Sport") . '<br />' . '<br />'. '<br />';
 }
 
  ?>
