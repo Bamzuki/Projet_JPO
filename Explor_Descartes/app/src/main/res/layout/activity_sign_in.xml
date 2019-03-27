@@ -57,7 +57,7 @@
     <Button
         android:id="@+id/button"
         android:layout_width="wrap_content"
-        android:layout_height="35"
+        android:layout_height="35dp"
         android:layout_margin="10dp"
         android:background="#608fc3"
         android:padding="5dp"
