@@ -34,31 +34,31 @@
             android:id="@+id/prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/prenom"
             android:inputType="textPersonName"
-            android:textSize="14sp" tools:targetApi="o"
-            android:autofillHints="" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/nom"
             android:inputType="textPersonName"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/pseudo"
             android:inputType="textPersonName"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/mail"
@@ -74,22 +74,22 @@
             android:id="@+id/mdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:selectAllOnFocus="false"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
 
         <EditText
             android:id="@+id/mdp_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/mdp_confirmation"
             android:inputType="textPassword"
-            android:textSize="14sp"
-            android:autofillHints="" />
+            android:textSize="14sp" />
 
     </LinearLayout>
 
