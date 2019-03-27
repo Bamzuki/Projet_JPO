@@ -11,7 +11,6 @@ function getIdEcole($nom){
   $result = pg_query($link, $requete);
   while ($row = pg_fetch_row($result)) {
     $id_ecole = $row[0];
-    echo $id_ecole;
     return $id_ecole;
   }
 }
@@ -23,7 +22,6 @@ function getIdBatiment($nom){
   $result = pg_query($link, $requete);
   while ($row = pg_fetch_row($result)) {
     $id_batiment = $row[0];
-    echo $id_batiment;
     return $id_batiment;
   }
 }
@@ -35,7 +33,6 @@ function getIdFiliere($nom){
   $result = pg_query($link, $requete);
   while ($row = pg_fetch_row($result)) {
     $id_filiere = $row[0];
-    echo $id_filiere;
     return $id_filiere;
   }
 }
@@ -147,6 +144,8 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
   return $response;
 }
 
+// I.3 Fonctions SAVE :
+
 function saveEcole ($nom, $site, $description){
   //Cette fonction enregistre une nouvelle école dans la base de données
   $nom = str_replace("'", "''", $nom);
@@ -216,6 +215,85 @@ function saveFormation ($nom, $niveau, $ecole, $batiment, $filiere){
   }
 }
 
+// I.4 Fonctions CHANGE :
+
+function changeEcole ($id, $nom, $site, $description){
+  //Cette fonction modifie une école déjà existante dans la base de données
+  $nom = str_replace("'", "''", $nom);
+  $description = str_replace("'", "''", $description);
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "UPDATE ecoles
+              SET nom = '" . $nom . "', site = '" . $site . "', description = '" . $description . "'
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
+
+function changeBatiment ($id, $nom, $fonction, $lat, $lng){
+  //Cette fonction modifie un batiment déjà existant dans la base de données
+  $nom = str_replace("'", "''", $nom);
+  $fonction = str_replace("'", "''", $fonction);
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "UPDATE batiments
+              SET nom = '" . $nom . "', fonction = '" . $fonction . "', lat = '" . $lat . "', lng = '" . $lng . "'
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
+
+function changeFiliere ($id, $nom){
+  //Cette fonction modifie une filière déjà existante dans la base de données
+  $nom = str_replace("'", "''", $nom);
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "UPDATE filieres
+              SET nom = '" . $nom . "'
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
+
+function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
+  //Cette fonction modifie une formation déjà existante dans la base de données
+  $nom      = str_replace("'", "''", $nom);
+  $niveau   = str_replace("'", "''", $niveau);
+  $ecole    = str_replace("'", "''", $ecole);
+  $batiment = str_replace("'", "''", $batiment);
+  $filiere  = str_replace("'", "''", $filiere);
+
+  // Détermination des id des objets
+  $id_ecole    = getIdEcole($ecole);
+  $id_batiment = getIdBatiment($batiment);
+  $id_filiere  = getIdFiliere($filiere);
+
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "UPDATE formations
+              SET nom = '" . $nom . "', niveau = '" . $niveau . "', id_ecole = '" . $id_ecole . "', id_batiment = '" . $id_batiment ."', id_filiere = '" . $id_filiere . "'
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
+
+
 
 
 // II - Requêtes :
@@ -274,65 +352,62 @@ if (isset($_GET['request']) && $_GET['request'] == "listeFormations"){
 }
 
 // II.2 Requêtes SAVE :
+
 if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
-  if (isset($_GET['nom'])) {
-    $nom = $_GET['nom'];
-  }
-  else{
-    $nom = "";
-  }
-  if (isset($_GET['site'])) {
-    $site = $_GET['site'];
-  }
-  else{
-    $site = "";
-  }
-  if (isset($_GET['description'])) {
-    $description = $_GET['description'];
-  }
-  else{
-    $description = "";
-  }
+  $nom         = $_GET['nom'];
+  $site        = $_GET['site'];
+  $description = $_GET['description'];
   echo saveEcole ($nom, $site, $description);
 }
 
 if (isset($_GET['request']) && $_GET['request'] == "saveBatiment"){
-  if (isset($_GET['nom'])) {
-    $nom = $_GET['nom'];
-  }
-  else{
-    $nom = "";
-  }
-  if (isset($_GET['fonction'])) {
-    $fonction = $_GET['fonction'];
-  }
-  else{
-    $fonction = "";
-  }
-  if (isset($_GET['lat'])) {
-    $lat = $_GET['lat'];
-  }
-  else{
-    $lat = 0;
-  }
-  if (isset($_GET['lng'])) {
-    $lng = $_GET['lng'];
-  }
-  else{
-    $lng = 0;
-  }
+  $nom      = $_GET['nom'];
+  $fonction = $_GET['fonction'];
+  $lat      = $_GET['lat'];
+  $lng      = $_GET['lng'];
   echo saveBatiment ($nom, $fonction, $lat, $lng);
 }
 
 if (isset($_GET['request']) && $_GET['request'] == "saveFiliere"){
-  if (isset($_GET['nom'])) {
-    $nom = $_GET['nom'];
-  }
-  else{
-    $nom = "";
-  }
+  $nom = $_GET['nom'];
   echo saveFiliere ($nom);
 }
+
+if (isset($_GET['request']) && $_GET['request'] == "saveFormation"){
+  $nom      = $_GET['nom'];
+  $niveau   = $_GET['niveau'];
+  $ecole    = $_GET['ecole'];
+  $batiment = $_GET['batiment'];
+  $filiere  = $_GET['filiere'];
+  echo saveFormation ($nom, $niveau, $ecole, $batiment, $filiere);
+}
+
+// II.3 Requêtes CHANGE :
+
+if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
+  $id          = $_GET['id'];
+  $nom         = $_GET['nom'];
+  $site        = $_GET['site'];
+  $description = $_GET['description'];
+  echo changeEcole ($id, $nom, $site, $description);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "changeBatiment"){
+  $id       = $_GET['id'];
+  $nom      = $_GET['nom'];
+  $fonction = $_GET['fonction'];
+  $lat      = $_GET['lat'];
+  $lng      = $_GET['lng'];
+  echo changeBatiment ($id, $nom, $fonction, $lat, $lng);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "changeFiliere"){
+  $id  = $_GET['id'];
+  $nom = $_GET['nom'];
+  echo changeFiliere ($id, $nom);
+}
+
+
 
 
 
@@ -373,6 +448,18 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
 
   echo '<b>Test de "saveFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . saveFormation("testFormation", "DUT", "ENSG-Géomatique", "ENSG", "Sport") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "changeEcole" :</b>' . '<br />' . '<br />';
+  echo '- ' . changeEcole(10, "ecoleTestModif", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "changeBatiment" :</b>' . '<br />' . '<br />';
+  echo '- ' . changeBatiment(9, "batimentTestModif", "fonctionTestModif", 1, 1) . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "changeFiliere" :</b>' . '<br />' . '<br />';
+  echo '- ' . changeFiliere(44, "filiereTestModif") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "changeFormation" :</b>' . '<br />' . '<br />';
+  echo '- ' . changeFormation(174, "formationTestModif", "niveauTestModif", "UPEM", "Copernic", "Agriculture, Bois") . '<br />' . '<br />'. '<br />';
 }
 
  ?>
