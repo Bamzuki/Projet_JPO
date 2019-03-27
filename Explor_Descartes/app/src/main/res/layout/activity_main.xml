@@ -10,7 +10,7 @@
     <LinearLayout
         android:id="@+id/entete"
         android:layout_width="match_parent"
-        android:layout_height="500dp"
+        android:layout_height="450dp"
         android:background="@drawable/fond"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
@@ -30,7 +30,7 @@
 
         <Space
             android:layout_width="match_parent"
-            android:layout_height="400dp" />
+            android:layout_height="350dp" />
 
         <LinearLayout
             android:id="@+id/connexion"
