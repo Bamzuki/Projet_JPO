@@ -15,7 +15,7 @@
     <string name="inscription_b">Accepter et s\'inscrire</string>
 
     <!-- Ressources relatives à activity_register-->
-    <string name="accord">En vous inscrivant vous acceptez les conditions générales d'utilisation et la politique de confidentialité de l'application.</string>
+    <string name="accord">En vous inscrivant vous acceptez les conditions générales d\'utilisation et la politique de confidentialité de l\'application.</string>
     <string name="prenom">Prénom (Facultatif)</string>
     <string name="mail">E-mail</string>
     <string name="nom">Nom (Facultatif)</string>
