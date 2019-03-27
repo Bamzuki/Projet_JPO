@@ -1,0 +1,59 @@
+<html lang="fr">
+
+
+
+<head>
+ <meta charset="UTF-8">
+  <title>Page Ecoles</title>
+  <script src="AJAX.js"></script>
+</head>
+
+
+<body>
+
+
+Tableau des écoles:<br>
+
+<br>
+
+
+
+
+Ajouter une école (nom,site,description):
+<form action="serveur.php" method="get">
+<input type="text" name="nom-ecole" value="Nom">
+<input type="text" name="site" value="Site">
+<input type="text" name="description" value="Description">
+<!-- <input type="submit" name="ajouter-formation" value="Ajouter"> -->
+</form>
+<button id="bouton-ecole"  onClick="AjouterEcole()"> Ajouter une école à la table </button>
+
+
+
+<br>
+
+
+
+
+
+<table  id="resultats_ecoles" border="1">
+<tr>
+<th> Nom </th> 
+<th> Site </th> 
+<th> Description </th> 
+</tr>
+</table>
+
+<br>
+<br>
+<br>
+
+
+
+
+</body>
+
+
+
+
+</html>

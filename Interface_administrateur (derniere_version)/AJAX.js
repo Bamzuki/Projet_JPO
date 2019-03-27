@@ -1,0 +1,262 @@
+var listeFormations = [];
+
+function getListeNomNiveaux(idSelectNiveau){
+  // Mise à jour de la liste des noms des niveaux depuis le serveur
+  var ajax = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=listeNomObjets&&nomTable=niveaux');
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var listeNomNiveaux = JSON.parse(ajax.response);
+     var select_niveau = document.getElementById(idSelectNiveau);
+	 var newOption = document.createElement("option");
+     newOption.value = '*';
+	 newOption.text = 'Tous';
+     select_niveau.appendChild(newOption);
+     for (var i = 0; i < listeNomNiveaux.length; i++){
+       var newOption = document.createElement("option");
+       newOption.value = listeNomNiveaux[i];
+	   newOption.text = listeNomNiveaux[i];
+       select_niveau.appendChild(newOption);
+     }
+	
+   });
+  ajax.send('request=listeNomObjets&&nomTable=niveaux');
+}
+
+function getListeNomEcoles(idSelectEcole){
+  // Mise à jour de la liste des noms des écoles depuis le serveur
+  var ajax = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=listeNomObjets&&nomTable=ecoles');
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var listeNomEcoles = JSON.parse(ajax.response);
+     var select_ecole = document.getElementById(idSelectEcole);
+	 var newOption = document.createElement("option");
+     newOption.value = '*';
+	 newOption.text = 'Toutes';
+     select_ecole.appendChild(newOption);
+     for (var i = 0; i < listeNomEcoles.length; i++){
+       var newOption = document.createElement("option");
+       newOption.value = listeNomEcoles[i];
+	   newOption.text = listeNomEcoles[i];
+       select_ecole.appendChild(newOption);
+	 }
+	
+   });
+  ajax.send('request=listeNomObjets&&nomTable=ecoles');
+}
+
+function getListeNomBatiments(idSelectBatiment){
+  // Mise à jour de la liste des noms des filieres depuis le serveur
+  var ajax = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=listeNomObjets&&nomTable=batiments');
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var listeNomBatiments = JSON.parse(ajax.response);
+     var select_batiment = document.getElementById(idSelectBatiment);
+	 var newOption = document.createElement("option");
+     newOption.value = '*';
+	 newOption.text = 'Tous';
+     select_batiment.appendChild(newOption);
+     for (var i = 0; i < listeNomBatiments.length; i++){
+       var newOption = document.createElement("option");
+       newOption.value = listeNomBatiments[i];
+	   newOption.text = listeNomBatiments[i];
+       select_batiment.appendChild(newOption);
+     }
+	
+   });
+  ajax.send('request=listeNomObjets&&nomTable=batiments');
+}
+
+function getListeNomFilieres(idSelectFiliere){
+  // Mise à jour de la liste des noms des filieres depuis le serveur
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=listeNomObjets&&nomTable=filieres');
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var listeNomFilieres = JSON.parse(ajax.response);
+     var select_filiere = document.getElementById(idSelectFiliere);
+	 var newOption = document.createElement("option");
+     newOption.value = '*';
+	 newOption.text = 'Toutes';
+     select_filiere.appendChild(newOption);
+     for (var i = 0; i < listeNomFilieres.length; i++){
+       var newOption = document.createElement("option");
+       newOption.value = listeNomFilieres[i];
+	   newOption.text = listeNomFilieres[i];
+       select_filiere.appendChild(newOption);
+     }
+	 
+   });
+  ajax.send('request=listeNomObjets&&nomTable=filieres');
+}
+
+
+
+
+
+function getListeFormation(){
+	
+  // Mise à jour de la liste des formations depuis le serveur en fonction des filtres choisis
+  var filtre_niveau    = document.getElementById("filtre-niveau").value;
+  var filtre_ecole     = document.getElementById("filtre-ecole").value;
+  var filtre_batiment  = document.getElementById("filtre-batiment").value;
+  var filtre_filiere   = document.getElementById("filtre-filiere").value;
+  var request = "request=listeFormations"
+  if (filtre_niveau != "*"){
+    request += "&&filtreNiveau=" + filtre_niveau;
+  }
+  if (filtre_ecole != "*"){
+    request += "&&filtreEcole=" + filtre_ecole;
+  }
+  if (filtre_batiment != "*"){
+    request += "&&filtreBatiment=" + filtre_batiment;
+  }
+  if (filtre_filiere != "*"){
+    request += "&&filtreFiliere=" + filtre_filiere;
+  }
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?'+request);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     listeFormations = JSON.parse(ajax.response);
+
+
+	 var select_formation=[];
+	 var ligne = ("<tr></tr>");
+	 ligne=ligne+("<th>" +"Formation" + "</th>");
+	 ligne=ligne+("<th>" +"Niveau d'étude" + "</th>");
+	 ligne=ligne+("<th>" +"Ecole" + "</th>");
+	 ligne=ligne+("<th>" +"Bâtiment" + "</th>");
+	 ligne=ligne+("<th>" +"Filiere" + "</th>");
+	 select_formation[0]=ligne;
+	 for (var i = 1; i < listeFormations.length; i++){
+	   var ligne = ("<tr></tr>");
+	   ligne=ligne+("<td>" + listeFormations[i].nom + "</td>");
+	   ligne=ligne+("<td>" + listeFormations[i].niveau + "</td>");
+	   ligne=ligne+("<td>" + listeFormations[i].ecole + "</td>");
+	   ligne=ligne+("<td>" + listeFormations[i].batiment + "</td>");
+	   ligne=ligne+("<td>" + listeFormations[i].filiere + "</td>");
+	   select_formation[i]=ligne;
+     }
+	 var results=document.getElementById("resultats_formations");
+	 results.innerHTML=select_formation;
+   });
+  ajax.send(request);
+		
+}
+
+function getListeEcole(){
+	
+  
+  var request = "request=listeEcoles"
+
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?'+request);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     listeEcoles = JSON.parse(ajax.response);
+
+
+	 var select_ecole=[];
+	 var ligne = ("<tr></tr>");
+	 ligne=ligne+("<th>" +"Nom" + "</th>");
+	 ligne=ligne+("<th>" +"Site" + "</th>");
+	 ligne=ligne+("<th>" +"Description" + "</th>");
+	 select_ecole[0]=ligne;
+	 for (var i = 1; i < listeEcoles.length; i++){
+	   var ligne = ("<tr></tr>");
+	   ligne=ligne+("<td>" + listeEcoles[i].nom + "</td>");
+	   ligne=ligne+("<td>" + listeEcoles[i].site + "</td>");
+	   ligne=ligne+("<td>" + listeEcoles[i].description + "</td>");
+	   select_ecole[i]=ligne;
+     }
+	 var results=document.getElementById("resultats_ecoles");
+	 results.innerHTML=select_ecole;
+   });
+  ajax.send(request);
+	
+}
+
+function getListeFiliere(){
+	
+
+  var request = "request=listeFilieres"
+
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?'+request);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     listeFilieres = JSON.parse(ajax.response);
+
+
+	 var select_filiere=[];
+	 var ligne = ("<tr></tr>");
+	 select_filiere[0]=ligne;
+	 for (var i = 1; i < listeFilieres.length; i++){
+	   var ligne = ("<tr></tr>");
+	   ligne=ligne+("<td>" + listeFilieres[i].nom + "</td>");
+	   select_filiere[i]=ligne;
+     }
+	 var results=document.getElementById("resultats_filieres");
+	 results.innerHTML=select_filiere;
+   });
+  ajax.send(request);
+	
+}
+
+
+function getListeBatiment(){
+	
+  
+  var filtre_fonction    = document.getElementById("filtre-fonction").value;
+
+  var request = "request=listeBatiments"
+  if (filtre_fonction != "*"){
+    request += "&&filtreFonction=" + filtre_fonction;
+  }
+  
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?'+request);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     listeBatiments = JSON.parse(ajax.response);
+
+
+	 var select_batiment=[];
+	 var ligne = ("<tr></tr>");
+	 ligne=ligne+("<th>" +"Nom" + "</th>");
+	 ligne=ligne+("<th>" +"Fonction" + "</th>");
+	 ligne=ligne+("<th>" +"Latitude" + "</th>");
+	 ligne=ligne+("<th>" +"Longitude" + "</th>");
+	 select_batiment[0]=ligne;
+	 for (var i = 1; i < listeBatiments.length; i++){
+	   var ligne = ("<tr></tr>");
+	   ligne=ligne+("<td>" + listeBatiments[i].nom + "</td>");
+	   ligne=ligne+("<td>" + listeBatiments[i].fonction + "</td>");
+	   ligne=ligne+("<td>" + listeBatiments[i].lat + "</td>");
+	   ligne=ligne+("<td>" + listeBatiments[i].lng + "</td>");
+	   select_batiment[i]=ligne;
+     }
+	 var results=document.getElementById("resultats_batiments");
+	 results.innerHTML=select_batiment;
+   });
+  ajax.send(request);
+	
+}
+
+
+
+
+
+// I - Chargement des listes des noms des différentes
+
+getListeNomNiveaux("filtre-niveau");
+getListeNomEcoles("filtre-ecole");
+getListeNomBatiments("filtre-batiment");
+getListeNomFilieres("filtre-filiere");
+
+getListeEcole();
+getListeFiliere();
+

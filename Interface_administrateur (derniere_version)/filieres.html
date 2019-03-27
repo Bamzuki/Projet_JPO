@@ -1,0 +1,45 @@
+<html lang="fr">
+
+
+
+<head>
+ <meta charset="UTF-8">
+  <title>Page Filières</title>
+  <script src="AJAX.js"></script>
+</head>
+
+
+<body>
+
+
+Tableau des filières:<br>
+
+<br>
+
+
+
+
+Ajouter une filière (nom):
+<form action="serveur.php" method="get">
+<input type="text" name="nom-filière" value="Nom">
+<!-- <input type="submit" name="ajouter-formation" value="Ajouter"> -->
+</form>
+<button id="bouton-filiere"  onClick="AjouterFiliere()"> Ajouter une filière à la table </button>
+
+<br>
+
+
+<table id="resultats_filieres" border="1">
+<tr>
+<th> Nom </th> 
+</tr>
+</table>
+
+
+
+</body>
+
+
+
+
+</html>
