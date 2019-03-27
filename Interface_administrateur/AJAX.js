@@ -95,6 +95,75 @@ function getListeFormation(){
   ajax.send(request);
 }
 
+function saveEcole(){
+  // Enregistrement d'une école dans la base de données
+
+  var input_nom         = document.getElementById("input-nom").value;
+  var input_site        = document.getElementById("input-site").value;
+  var input_description = document.getElementById("input-description").value;
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=saveEcole&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var response = JSON.parse(ajax.response);
+     console.log(response);
+     }
+   });
+  ajax.send('request=saveEcole&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
+}
+
+function saveBatiment(){
+  // Enregistrement d'un batiment dans la base de données
+
+  var input_nom      = document.getElementById("input-nom").value;
+  var input_fonction = document.getElementById("input-fonction").value;
+  var input_lat      = document.getElementById("input-lat").value;
+  var input_lng      = document.getElementById("input-lng").value;
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=saveBatiment&&nom=' + input_nom + '&&fonction=' + input_fonction + '&&lat=' + input_lat + '&&lng=' + input_lng);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var response = JSON.parse(ajax.response);
+     console.log(response);
+     }
+   });
+  ajax.send('request=saveBatiment&&nom=' + input_nom + '&&fonction=' + input_fonction + '&&lat=' + input_lat + '&&lng=' + input_lng);
+}
+
+function saveFiliere(){
+  // Enregistrement d'une filière dans la base de données
+
+  var input_nom = document.getElementById("input-nom").value;
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=saveFiliere&&nom=' + input_nom);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var response = JSON.parse(ajax.response);
+     console.log(response);
+     }
+   });
+  ajax.send('request=saveFiliere&&nom=' + input_nom);
+}
+
+function saveFormations(){
+  // Enregistrement d'une formations dans la base de données
+
+  var input_nom      = document.getElementById("input-nom").value;
+  var input_niveau   = document.getElementById("input-niveau").value;
+  var input_ecole    = document.getElementById("input-ecole").value;
+  var input_batiment = document.getElementById("input-batiment").value;
+  var input_filiere  = document.getElementById("input-filiere").value;
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=saveFormation&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&ecole=' + input_ecole + '&&batiment=' + input_batiment + '&&filiere=' + input_filiere);
+   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+   ajax.addEventListener('load',  function () {
+     var response = JSON.parse(ajax.response);
+     console.log(response);
+     }
+   });
+  ajax.send('request=saveFormation&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&ecole=' + input_ecole + '&&batiment=' + input_batiment + '&&filiere=' + input_filiere);
+
+
 
 // I - Chargement des listes des noms des différentes
 getListeNomNiveaux("filtre-niveau");
