@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="page_admin.css">
+  </head>
+  <body>
+
+    <div id="banierre">
+      <div id="logo"><img src="logo.png" alt="Logo non disponible"></div>
+      <h1>Admin'Descartes</h1>
+    </div>
+
+    <ul class="accordeon">
+
+      <li class="palier1">
+        <label for="menu1">Ajout de nouvelles données</label>
+        <input id="menu1" name="menu" type="checkbox" />
+        <ul class="palier2">
+          <li>
+            <label for="option1">Ajouter une école </label >
+            <input id="option1" name="option" type="radio" />
+            <ul>
+              <form action="serveur.php" method="get">
+              <input type="text" name="nom_école" value="Nom">
+              <input type="text" name="site" value="Adresse du site">
+              <input type="text" name="description" value="Description">
+              <input type="submit" name="ajouter-école" value="Ajouter">
+              </form>
+            </ul>
+          </li>
+          <li>
+            <label for="option2">Ajouter une filière</label>
+            <input id="option2" name="option" type="checkbox" />
+            <ul>
+              <form action="serveur.php" method="get">
+              <input type="text" name="nom-filière" value="Nom">
+              <input type="submit" name="ajouter-filière" value="Ajouter">
+              </form>
+            </ul>
+          </li>
+          <li>
+            <label for="option3">Ajouter un bâtiment</label>
+            <input id="option3" name="option" type="checkbox" />
+            <ul>
+              <form action="serveur.php" method="get">
+              <input type="text" name="nom-bâtiment" value="Nom">
+              <input type="text" name="fonction" value="Fonction">
+              <input type="text" name="latitude" value="Latitude">
+              <input type="text" name="longitude" value="Longitude">
+              <input type="submit" name="ajouter-bâtiment" value="Ajouter">
+              </form>
+            </ul>
+          </li>
+          <li>
+            <label for="option4">Ajouter une formation</label>
+            <input id="option4" name="option" type="checkbox" />
+            <ul>
+              <form action="serveur.php" method="get">
+              <input type="text" name="nom-formation" value="Nom">
+              <input type="text" name="niveau" value="Niveau">
+              <input type="text" name="id-école" value="Id Ecole">
+              <input type="text" name="id-bâtiment" value="Id Bâtiment">
+              <input type="text" name="id-domaine" value="Id Domaine">
+              <input type="submit" name="ajouter-formation" value="Ajouter">
+              </form>
+            </ul>
+          </li>
+        </ul>
+      </li>
+
+      <li class="palier1">
+      <label for="menu2">Modifier des données déjà existantes</label><input id="menu2" name="menu" type="checkbox" />
+      <ul class="palier2">
+        <li>
+          <label for="option1">Mettre à jour les informations sur une école</label>
+          <input id="option1" name="option" type="checkbox" />
+          <ul>
+            <form action="page.php" method="get">
+            Nom:
+            <select name="form-nom-école">
+            </select>
+            </form>
+          </ul>
+        </li>
+        <li>
+          <label for="option2">Mettre à jour les informations sur une filière</label>
+          <input id="option2" name="option" type="checkbox" />
+          <ul>
+
+          </ul>
+        </li>
+        <li>
+          <label for="option3">Mettre à jour les informations sur un bâtiment</label>
+          <input id="option3" name="option" type="checkbox" />
+          <ul>
+
+          </ul>
+        </li>
+        <li>
+          <label for="option4">Mettre à jour les informations sur une formation</label>
+          <input id="option4" name="option" type="checkbox" />
+          <ul>
+
+          </ul>
+        </li>
+      </ul>
+    </li>
+    </ul>
+
+</body>
+
+</html>
