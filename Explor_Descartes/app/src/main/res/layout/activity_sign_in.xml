@@ -39,6 +39,8 @@
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp" />
 
         <EditText
@@ -50,6 +52,8 @@
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:selectAllOnFocus="false"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp" />
 
     </LinearLayout>

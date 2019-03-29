@@ -34,6 +34,8 @@
             android:id="@+id/prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:ems="10"
             android:hint="@string/prenom"
             android:inputType="textPersonName"
@@ -47,6 +49,8 @@
             android:ems="10"
             android:hint="@string/nom"
             android:inputType="textPersonName"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
 
@@ -57,6 +61,8 @@
             android:ems="10"
             android:hint="@string/pseudo"
             android:inputType="textPersonName"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
 
@@ -67,6 +73,8 @@
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
 
@@ -78,6 +86,8 @@
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:selectAllOnFocus="false"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
 
@@ -88,6 +98,8 @@
             android:ems="10"
             android:hint="@string/mdp_confirmation"
             android:inputType="textPassword"
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
 
