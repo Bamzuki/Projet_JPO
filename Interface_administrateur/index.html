@@ -1,9 +1,37 @@
-<input class="Bouton Ecoles"
-       type="button"
-       value="BDD Ecoles"
-	   OnClick="window.location.href='http://127.0.0.1:8080/edsa-JPO/Interface_administrateur/page_admin.html'">
-	   
-<input class="Bouton Visiteurs"
-       type="button"
-       value="BDD Visiteurs"
-	   OnClick="window.location.href='http://127.0.0.1:8080/edsa-JPO/Interface_administrateur/donnees_visiteurs.html'">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Admin'Descartes</title>
+    <link rel="stylesheet" href="style.css">
+  </head>
+
+  <body>
+    <div id="banierre">
+      <div id="logo"><img src="logo.png" alt="Logo non disponible"></div>
+      <h1>Admin'Descartes</h1>
+    </div>
+
+    <div id="boutons">
+      <div id="ecoles">
+        <p> Accès à la base de données écoles: </p>
+        <input id="bouton"
+              class="Bouton Ecoles"
+              type="button"
+              value="BDD Ecoles"
+        	   OnClick="window.location.href='page_admin.html'">
+      </div>
+
+      <div id="visiteurs">
+        <p> Accès à la base de données visiteurs: </p>
+        <input id="bouton"
+              class="Bouton Visiteurs"
+              type="button"
+              value="BDD Visiteurs"
+        	   OnClick="window.location.href='donnees_visiteurs.html'">
+      </div>
+
+    </div>
+
+  </body>
+</html>
