@@ -45,6 +45,9 @@ function getListeNomObjets($nomTable){
   if ($nomTable == "niveaux"){
     $requete = "SELECT DISTINCT niveau FROM formations";
   }
+  else if ($nomTable == "fonctions"){
+    $requete = "SELECT DISTINCT fonction FROM batiments";
+  }
   else {
     $requete = "SELECT nom FROM " . $nomTable;
   }
@@ -293,6 +296,63 @@ function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
   }
 }
 
+// I.5 Fonctions DELETE :
+
+function deleteEcole ($id){
+  //Cette fonction supprime une école dans la base de données
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "DELETE FROM ecoles
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
+
+function deleteBatiment ($id){
+  //Cette fonction supprime un batiment dans la base de données
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "DELETE FROM batiments
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
+
+function deleteFiliere ($id){
+  //Cette fonction supprime une filiere dans la base de données
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "DELETE FROM filieres
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
+
+function deleteFormation ($id){
+  //Cette fonction supprime une formation dans la base de données
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "DELETE FROM formations
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
 
 
 
@@ -407,6 +467,37 @@ if (isset($_GET['request']) && $_GET['request'] == "changeFiliere"){
   echo changeFiliere ($id, $nom);
 }
 
+if (isset($_GET['request']) && $_GET['request'] == "changeFormation"){
+  $id       = $_GET['id'];
+  $nom      = $_GET['nom'];
+  $niveau   = $_GET['niveau'];
+  $ecole    = $_GET['ecole'];
+  $batiment = $_GET['batiment'];
+  $filiere  = $_GET['filiere'];
+  echo changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere);
+}
+
+// II.4 Requêtes DELETE :
+
+if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
+  $id  = $_GET['id'];
+  echo changeEcole ($id);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "deleteBatiment"){
+  $id  = $_GET['id'];
+  echo changeBatiment ($id);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "deleteFiliere"){
+  $id  = $_GET['id'];
+  echo changeFiliere ($id);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "deleteFormation"){
+  $id  = $_GET['id'];
+  echo changeFormation ($id);
+}
 
 
 
@@ -423,7 +514,9 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '- Bâtiments :</b>'."<br />";
   echo '- ' . getListeNomObjets("batiments") . '<br />' . '<br />';
   echo '- Niveaux :</b>'."<br />";
-  echo '- ' . getListeNomObjets("niveaux") . '<br />' . '<br />' . '<br />';
+  echo '- ' . getListeNomObjets("niveaux") . '<br />' . '<br />';
+  echo '- Fonctions :</b>'."<br />";
+  echo '- ' . getListeNomObjets("fonctions") . '<br />' . '<br />' . '<br />';
 
   echo '<b>Test de "getListeEcoles" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeEcoles() . '<br />' . '<br />'. '<br />';
@@ -460,6 +553,18 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
 
   echo '<b>Test de "changeFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . changeFormation(174, "formationTestModif", "niveauTestModif", "UPEM", "Copernic", "Agriculture, Bois") . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "deleteEcole" :</b>' . '<br />' . '<br />';
+  echo '- ' . deleteEcole(10) . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "deleteBatiment" :</b>' . '<br />' . '<br />';
+  echo '- ' . deleteBatiment(9) . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "deleteFiliere" :</b>' . '<br />' . '<br />';
+  echo '- ' . deleteFiliere(44) . '<br />' . '<br />'. '<br />';
+
+  echo '<b>Test de "deleteFormation" :</b>' . '<br />' . '<br />';
+  echo '- ' . deleteFormation(174) . '<br />' . '<br />'. '<br />';
 }
 
  ?>
