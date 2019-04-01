@@ -35,7 +35,12 @@
             android:id="@+id/prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
+=======
             android:autofillHints=""
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
             android:ems="10"
             android:hint="@string/prenom"
             android:inputType="textPersonName"
@@ -52,9 +57,16 @@
             android:ems="10"
             android:hint="@string/nom"
             android:inputType="textPersonName"
+<<<<<<< HEAD
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:autofillHints="" />
+=======
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/pseudo"
@@ -64,9 +76,16 @@
             android:ems="10"
             android:hint="@string/pseudo"
             android:inputType="textPersonName"
+<<<<<<< HEAD
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:autofillHints="" />
+=======
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/mail"
@@ -76,9 +95,16 @@
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
+<<<<<<< HEAD
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:autofillHints="" />
+=======
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/mdp"
@@ -89,9 +115,16 @@
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:selectAllOnFocus="false"
+<<<<<<< HEAD
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:autofillHints="" />
+=======
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/mdp_confirm"
@@ -101,9 +134,16 @@
             android:ems="10"
             android:hint="@string/mdp_confirmation"
             android:inputType="textPassword"
+<<<<<<< HEAD
+            android:text="@string/classiqueI"
+            android:textColor="@android:color/black"
+            android:textSize="14sp"
+            android:autofillHints="" />
+=======
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
     </LinearLayout>
 

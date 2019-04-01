@@ -18,9 +18,9 @@
         <label for="menu1">Ajout de nouvelles données</label>
         <input id="menu1" name="menu" type="checkbox" />
         <ul class="palier2">
+
           <li>
-            <label for="option1">Ajouter une école </label >
-            <input id="option1" name="option" type="radio" />
+            <label>Ajouter une école </label >
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" name="nom_école" value="Nom">
@@ -30,9 +30,9 @@
               </form>
             </ul>
           </li>
+
           <li>
-            <label for="option2">Ajouter une filière</label>
-            <input id="option2" name="option" type="checkbox" />
+            <label>Ajouter une filière</label>
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" name="nom-filière" value="Nom">
@@ -40,9 +40,9 @@
               </form>
             </ul>
           </li>
+
           <li>
-            <label for="option3">Ajouter un bâtiment</label>
-            <input id="option3" name="option" type="checkbox" />
+            <label>Ajouter un bâtiment</label>
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" name="nom-bâtiment" value="Nom">
@@ -53,9 +53,9 @@
               </form>
             </ul>
           </li>
+
           <li>
-            <label for="option4">Ajouter une formation</label>
-            <input id="option4" name="option" type="checkbox" />
+            <label>Ajouter une formation</label>
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" name="nom-formation" value="Nom">
@@ -73,36 +73,69 @@
       <li class="palier1">
       <label for="menu2">Modifier des données déjà existantes</label><input id="menu2" name="menu" type="checkbox" />
       <ul class="palier2">
+
         <li>
-          <label for="option1">Mettre à jour les informations sur une école</label>
-          <input id="option1" name="option" type="checkbox" />
+          <label>Mettre à jour les informations sur une école</label>
           <ul>
             <form action="page.php" method="get">
-            Nom:
-            <select name="form-nom-école">
-            </select>
+              Nom:<select name="form-nom-école"></select>
             </form>
+            <table border="1">
+            <th> Nom </th>
+            <th> Site </th>
+            <th> Description </th>
+            </table>
           </ul>
         </li>
-        <li>
-          <label for="option2">Mettre à jour les informations sur une filière</label>
-          <input id="option2" name="option" type="checkbox" />
-          <ul>
 
+        <li>
+          <label>Mettre à jour les informations sur une filière</label>
+          <ul>
+            <form action="page.php" method="get">
+            Nom: <select name="form-nom-filière"></select>
+            </form>
+
+            <table border="1">
+            <th> Nom </th>
+            </table>
           </ul>
         </li>
-        <li>
-          <label for="option3">Mettre à jour les informations sur un bâtiment</label>
-          <input id="option3" name="option" type="checkbox" />
-          <ul>
 
+        <li>
+          <label>Mettre à jour les informations sur un bâtiment</label>
+          <ul>
+            <form action="page.php" method="get">
+            Nom: <select name="form-nom-bâtiment"></select>
+            Fonction: <select name="form-fonction"></select>
+            </form>
+
+            <table border="1">
+            <th> Nom </th>
+            <th> Fonction </th>
+            <th> Latitude </th>
+            <th> Longitude </th>
+            </table>
           </ul>
         </li>
-        <li>
-          <label for="option4">Mettre à jour les informations sur une formation</label>
-          <input id="option4" name="option" type="checkbox" />
-          <ul>
 
+        <li>
+          <label>Mettre à jour les informations sur une formation</label>
+          <ul>
+            <form action="page.php" method="get">
+            Nom:<select name="form-nom-formation"></select>
+            Niveau:<select name="form-niveau"></select>
+            Ecole: <select name="form-école"></select>
+            Bâtiment: <select name="form-bâtiment"></select>
+            Domaine: <select name="form-domaine"></select>
+            </form>
+
+            <table border="1">
+            <th> Nom </th>
+            <th> niveau </th>
+            <th> Ecole </th>
+            <th> Domaine </th>
+            <th> Bâtiment </th>
+            </table>
           </ul>
         </li>
       </ul>
