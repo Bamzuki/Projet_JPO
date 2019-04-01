@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".RegisterActivity">
 
     <TextView
@@ -34,74 +35,115 @@
             android:id="@+id/prenom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
+=======
+            android:autofillHints=""
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
             android:ems="10"
             android:hint="@string/prenom"
             android:inputType="textPersonName"
-            android:textSize="14sp" tools:targetApi="o"
-            android:autofillHints="" />
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="14sp"
+            tools:targetApi="o" />
 
         <EditText
             android:id="@+id/nom"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/nom"
             android:inputType="textPersonName"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/pseudo"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/pseudo"
             android:inputType="textPersonName"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/mail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/mdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:selectAllOnFocus="false"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
         <EditText
             android:id="@+id/mdp_confirm"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:autofillHints=""
             android:ems="10"
             android:hint="@string/mdp_confirmation"
             android:inputType="textPassword"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
             android:textSize="14sp"
             android:autofillHints="" />
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+            android:textSize="14sp" />
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
 
     </LinearLayout>
 
@@ -220,8 +262,7 @@
             android:textAlignment="center"
             android:textColor="@android:color/black"
             app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/description" />
+            app:layout_constraintRight_toRightOf="parent"/>
 
         <Button
             android:id="@+id/connexionB"

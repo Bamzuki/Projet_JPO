@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@android:color/white"
     tools:context=".SignInActivity">
 
     <TextView
@@ -39,21 +40,31 @@
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
             android:textSize="14sp" />
 
         <EditText
             android:id="@+id/mdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints=""
+            android:autofillHints="azer"
             android:ems="10"
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:selectAllOnFocus="false"
+<<<<<<< HEAD
             android:text="@string/classiqueI"
             android:textColor="@android:color/black"
+=======
+            android:textColor="@android:color/black"
+            android:textColorHint="@android:color/black"
+>>>>>>> 9ab55957d7741c445618274bce4ce6b4ed1157bc
             android:textSize="14sp" />
 
     </LinearLayout>
@@ -65,7 +76,7 @@
         android:layout_margin="10dp"
         android:background="#608fc3"
         android:padding="5dp"
-        android:text="Button"
+        android:text="Connexion"
         android:textColor="@android:color/white"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
