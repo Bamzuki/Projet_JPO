@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-    <link rel="stylesheet" href="page_admin.css">
+    <link rel="stylesheet" href="page_admin2.css">
 	<script src="AJAX.js"></script>
   </head>
   <body>
@@ -13,15 +13,16 @@
       <h1>Admin'Descartes</h1>
     </div>
 
-    <ul class="accordeon">
+	<ul id='corps'>
+       <li id="menu">
 
-      <li class="palier1">
         <label for="menu1">Ajout de nouvelles données</label>
         <input id="menu1" name="menu" type="checkbox" />
-        <ul class="palier2">
+
+        <ul id="sousmenu">
 
           <li>
-            <label>Ajouter une école </label >
+            <p>Ajouter une école </p>
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" id="input_ecole" value="Nom">
@@ -29,12 +30,11 @@
               <input type="text" id="input_description" value="Description">
               </form>
 			  <button id="bouton-ecole"  onClick="saveEcole()"> Ajouter une école à la table </button>
-
             </ul>
           </li>
 
           <li>
-            <label>Ajouter une filière</label>
+            <p>Ajouter une filière</p>
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" id="input_filiere" value="Nom">
@@ -59,7 +59,7 @@
           </li>
 
           <li>
-            <label>Ajouter une formation</label>
+            <p>Ajouter une formation</p>
             <ul>
               <form action="serveur.php" method="get">
               <input type="text" id="input_formation" value="Nom">
@@ -70,19 +70,18 @@
               </form>
 			  <button id="bouton-formation"  onClick="saveFormation()"> Ajouter une formation à la table </button>
 
-            </ul>
+              </ul>
           </li>
         </ul>
-      </li>
 
-      <li class="palier1">
-      <label for="menu2">Modifier des données déjà existantes</label><input id="menu2" name="menu" type="checkbox" />
-      <ul class="palier2">
+        <label for="menu2">Modifier des données déjà existantes</label>
+        <input id="menu2" name="menu" type="checkbox" />
 
-        <li>
-          <label>Mettre à jour les informations sur une école</label>
-          <ul>
-           
+        <ul id="sousmenu">
+
+          <li>
+            <p>Mettre à jour les informations sur une école</p>
+            <ul>
             <table id="resultats_ecoles" border="1">
             <th> Nom </th>
             <th> Site </th>
@@ -92,7 +91,7 @@
         </li>
 
         <li>
-          <label>Mettre à jour les informations sur une filière</label>
+          <p>Mettre à jour les informations sur une filière</p>
           <ul>
          
 
@@ -103,7 +102,7 @@
         </li>
 
         <li>
-          <label>Mettre à jour les informations sur un bâtiment</label>
+          <p>Mettre à jour les informations sur un bâtiment</p>
           <ul>
             <form action="serveur.php" method="get">
             Fonction: <select id="filtre-fonction"></select>
@@ -121,7 +120,7 @@
         </li>
 
         <li>
-          <label>Mettre à jour les informations sur une formation</label>
+          <p>Mettre à jour les informations sur une formation</p>
           <ul>
             <form action="serveur.php" method="get">
             Niveau:<select id="filtre-niveau"></select>
