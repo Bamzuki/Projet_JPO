@@ -125,9 +125,9 @@ function getListeFormation(){
 	
   // Mise à jour de la liste des formations depuis le serveur en fonction des filtres choisis
   var filtre_niveau    = document.getElementById("filtre-niveau").value;
-  var filtre_ecole     = document.getElementById("filtre-ecole").value;
-  var filtre_batiment  = document.getElementById("filtre-batiment").value;
-  var filtre_filiere   = document.getElementById("filtre-filiere").value;
+  var filtre_ecole     = document.getElementById("filtre-ecole2").value;
+  var filtre_batiment  = document.getElementById("filtre-batiment2").value;
+  var filtre_filiere   = document.getElementById("filtre-filiere2").value;
   var request = "request=listeFormations"
   if (filtre_niveau != "*"){
     request += "&&filtreNiveau=" + filtre_niveau;
@@ -276,14 +276,14 @@ function getListeBatiment(){
 function saveEcole(){
   // Enregistrement d'une école dans la base de données
 
-  var input_nom         = document.getElementById("input-nom").value;
-  var input_site        = document.getElementById("input-site").value;
-  var input_description = document.getElementById("input-description").value;
+  var input_nom         = document.getElementById("input_ecole").value;
+  var input_site        = document.getElementById("input_site").value;
+  var input_description = document.getElementById("input_description").value;
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=saveEcole&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
    ajax.addEventListener('load',  function () {
-     var response = JSON.parse(ajax.response);
+     var response = ajax.response;
      console.log(response);
      
    });
@@ -293,15 +293,15 @@ function saveEcole(){
 function saveBatiment(){
   // Enregistrement d'un batiment dans la base de données
 
-  var input_nom      = document.getElementById("input-nom").value;
-  var input_fonction = document.getElementById("input-fonction").value;
-  var input_lat      = document.getElementById("input-lat").value;
-  var input_lng      = document.getElementById("input-lng").value;
+  var input_nom      = document.getElementById("input_batiment").value;
+  var input_fonction = document.getElementById("input_fonction").value;
+  var input_lat      = document.getElementById("input_latitude").value;
+  var input_lng      = document.getElementById("input_longitude").value;
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=saveBatiment&&nom=' + input_nom + '&&fonction=' + input_fonction + '&&lat=' + input_lat + '&&lng=' + input_lng);
    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
    ajax.addEventListener('load',  function () {
-     var response = JSON.parse(ajax.response);
+     var response = ajax.response;
      console.log(response);
      
    });
@@ -311,31 +311,31 @@ function saveBatiment(){
 function saveFiliere(){
   // Enregistrement d'une filière dans la base de données
 
-  var input_nom = document.getElementById("input-nom").value;
+  var input_nom = document.getElementById("input_filiere").value;
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=saveFiliere&&nom=' + input_nom);
    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
    ajax.addEventListener('load',  function () {
-     var response = JSON.parse(ajax.response);
+     var response = ajax.response;
      console.log(response);
      
    });
   ajax.send('request=saveFiliere&&nom=' + input_nom);
 }
 
-function saveFormations(){
+function saveFormation(){
   // Enregistrement d'une formations dans la base de données
 
-  var input_nom      = document.getElementById("input-nom").value;
-  var input_niveau   = document.getElementById("input-niveau").value;
-  var input_ecole    = document.getElementById("input-ecole").value;
-  var input_batiment = document.getElementById("input-batiment").value;
-  var input_filiere  = document.getElementById("input-filiere").value;
+  var input_nom      = document.getElementById("input_formation").value;
+  var input_niveau   = document.getElementById("input_niveau").value;
+  var input_ecole    = document.getElementById("filtre-ecole1").value;
+  var input_batiment = document.getElementById("filtre-batiment1").value;
+  var input_filiere  = document.getElementById("filtre-filiere1").value;
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=saveFormation&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&ecole=' + input_ecole + '&&batiment=' + input_batiment + '&&filiere=' + input_filiere);
    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
    ajax.addEventListener('load',  function () {
-     var response = JSON.parse(ajax.response);
+     var response = ajax.response;
      console.log(response);
      
    });
@@ -345,9 +345,12 @@ function saveFormations(){
 
 // I - Chargement des listes des noms des différentes
 getListeNomNiveaux("filtre-niveau");
-getListeNomEcoles("filtre-ecole");
-getListeNomBatiments("filtre-batiment");
-getListeNomFilieres("filtre-filiere");
+getListeNomEcoles("filtre-ecole1");
+getListeNomBatiments("filtre-batiment1");
+getListeNomFilieres("filtre-filiere1");
+getListeNomEcoles("filtre-ecole2");
+getListeNomBatiments("filtre-batiment2");
+getListeNomFilieres("filtre-filiere2");
 getListeNomFonctions("filtre-fonction");
 getListeEcole();
 getListeFiliere();
