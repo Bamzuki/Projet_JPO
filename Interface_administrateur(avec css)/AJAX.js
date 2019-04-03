@@ -21,7 +21,7 @@ function getListeNomNiveaux(idSelectNiveau){
 	   newOption.text = listeNomNiveaux[i];
        select_niveau.appendChild(newOption);
      }
-	
+
    });
   ajax.send('request=listeNomObjets&&nomTable=niveaux');
 }
@@ -44,7 +44,7 @@ function getListeNomEcoles(idSelectEcole){
 	   newOption.text = listeNomEcoles[i];
        select_ecole.appendChild(newOption);
 	 }
-	
+
    });
   ajax.send('request=listeNomObjets&&nomTable=ecoles');
 }
@@ -67,7 +67,7 @@ function getListeNomBatiments(idSelectBatiment){
 	   newOption.text = listeNomBatiments[i];
        select_batiment.appendChild(newOption);
      }
-	
+
    });
   ajax.send('request=listeNomObjets&&nomTable=batiments');
 }
@@ -90,7 +90,7 @@ function getListeNomFilieres(idSelectFiliere){
 	   newOption.text = listeNomFilieres[i];
        select_filiere.appendChild(newOption);
      }
-	 
+
    });
   ajax.send('request=listeNomObjets&&nomTable=filieres');
 }
@@ -113,7 +113,7 @@ function getListeNomFonctions(idSelectFonction){
 	   newOption.text = listeNomFonctions[i];
        select_fonction.appendChild(newOption);
      }
-	 
+
    });
   ajax.send('request=listeNomObjets&&nomTable=filieres');
 }
@@ -122,7 +122,7 @@ function getListeNomFonctions(idSelectFonction){
 
 
 function getListeFormation(){
-	
+
   // Mise à jour de la liste des formations depuis le serveur en fonction des filtres choisis
   var filtre_niveau    = document.getElementById("filtre-niveau").value;
   var filtre_ecole     = document.getElementById("filtre-ecole2").value;
@@ -145,37 +145,50 @@ function getListeFormation(){
   ajax.open('GET', 'serveur.php/?'+request);
    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
    ajax.addEventListener('load',  function () {
+     // Récupération des données :
      listeFormations = JSON.parse(ajax.response);
 
+     // Remplissage du tableau
+     var tableau = document.getElementById("resultats_formations");
 
-	 var select_formation=[];
-	 var ligne = ("<tr></tr>");
-	 ligne=ligne+("<th>" +"Formation" + "</th>");
-	 ligne=ligne+("<th>" +"Niveau d'étude" + "</th>");
-	 ligne=ligne+("<th>" +"Ecole" + "</th>");
-	 ligne=ligne+("<th>" +"Bâtiment" + "</th>");
-	 ligne=ligne+("<th>" +"Filiere" + "</th>");
-	 select_formation[0]=ligne;
-	 for (var i = 1; i < listeFormations.length; i++){
-	   var ligne = ("<tr></tr>");
-	   ligne=ligne+("<td>" + listeFormations[i].nom + "</td>");
-	   ligne=ligne+("<td>" + listeFormations[i].niveau + "</td>");
-	   ligne=ligne+("<td>" + listeFormations[i].ecole + "</td>");
-	   ligne=ligne+("<td>" + listeFormations[i].batiment + "</td>");
-	   ligne=ligne+("<td>" + listeFormations[i].filiere + "</td>");
-	   select_formation[i]=ligne;
+     var ligne;
+     var element;
+
+	   for (var i = 0; i < listeFormations.length; i++){
+	      ligne = document.createElement("tr");
+        element = document.createElement("td");
+        element.innerHTML = listeFormations[i].nom;
+        ligne.appendChild(element);
+        element = document.createElement("td");
+        element.innerHTML = listeFormations[i].niveau;
+        ligne.appendChild(element);
+        element = document.createElement("td");
+        element.innerHTML = listeFormations[i].ecole;
+        ligne.appendChild(element);
+        element = document.createElement("td");
+        element.innerHTML = listeFormations[i].batiment;
+        ligne.appendChild(element);
+        element = document.createElement("td");
+        element.innerHTML = listeFormations[i].filiere;
+        ligne.appendChild(element);
+        boutonModifier = document.createElement("button");
+        boutonModifier.innerHTML = "<img src='boutons/modifier.png' alt='Oups !'>";
+        ligne.appendChild(boutonModifier);
+        boutonSupprimer = document.createElement("button");
+        boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' alt='Oups !'>";
+        ligne.appendChild(boutonSupprimer);
+
+        tableau.appendChild(ligne);
      }
-	 var results=document.getElementById("resultats_formations");
-	 results.innerHTML=select_formation;
    });
   ajax.send(request);
-		
+
 }
 
 
 function getListeEcole(){
-	
-  
+
+
   var request = "request=listeEcoles"
 
   var ajax = new XMLHttpRequest()
@@ -202,11 +215,11 @@ function getListeEcole(){
 	 results.innerHTML=select_ecole;
    });
   ajax.send(request);
-	
+
 }
 
 function getListeFiliere(){
-	
+
 
   var request = "request=listeFilieres"
 
@@ -229,20 +242,20 @@ function getListeFiliere(){
 	 results.innerHTML=select_filiere;
    });
   ajax.send(request);
-	
+
 }
 
 
 function getListeBatiment(){
-	
-  
+
+
   var filtre_fonction    = document.getElementById("filtre-fonction").value;
 
   var request = "request=listeBatiments"
   if (filtre_fonction != "*"){
     request += "&&filtreFonction=" + filtre_fonction;
   }
-  
+
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?'+request);
    ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -269,7 +282,7 @@ function getListeBatiment(){
 	 results.innerHTML=select_batiment;
    });
   ajax.send(request);
-	
+
 }
 
 
@@ -285,7 +298,7 @@ function saveEcole(){
    ajax.addEventListener('load',  function () {
      var response = ajax.response;
      console.log(response);
-     
+
    });
   ajax.send('request=saveEcole&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
 }
@@ -303,7 +316,7 @@ function saveBatiment(){
    ajax.addEventListener('load',  function () {
      var response = ajax.response;
      console.log(response);
-     
+
    });
   ajax.send('request=saveBatiment&&nom=' + input_nom + '&&fonction=' + input_fonction + '&&lat=' + input_lat + '&&lng=' + input_lng);
 }
@@ -318,7 +331,7 @@ function saveFiliere(){
    ajax.addEventListener('load',  function () {
      var response = ajax.response;
      console.log(response);
-     
+
    });
   ajax.send('request=saveFiliere&&nom=' + input_nom);
 }
@@ -337,7 +350,7 @@ function saveFormation(){
    ajax.addEventListener('load',  function () {
      var response = ajax.response;
      console.log(response);
-     
+
    });
 
   ajax.send('request=saveFormation&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&ecole=' + input_ecole + '&&batiment=' + input_batiment + '&&filiere=' + input_filiere);
