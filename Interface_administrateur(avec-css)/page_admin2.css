@@ -1,0 +1,148 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#banierre {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(179, 181, 193);
+}
+
+#logo {
+  width: 15%;
+  height: auto;
+  margin: 2%;
+}
+
+#logo img {
+  width: 100%;
+  height: auto;
+}
+
+#banierre h1 {
+  color: white;
+  margin: auto;
+  font-size: 7.5vw;
+  text-align: center;
+}
+
+#corps {
+  width: 100%;
+  overflow: hidden;
+  background: white;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+}
+
+#menu li {
+  display: block;
+}
+
+label {
+  width: 100%;
+  cursor: pointer;
+  display: flex;
+  font-size: 2.5vw;
+  color: white;
+  padding: 1%;
+  overflow: hidden;
+  background: rgb(53, 53, 140);
+  border-bottom: 1px solid black;
+}
+
+#menu input[type="radio"],
+#menu input[type="checkbox"] {
+  display: none;
+}
+
+#sousmenu {
+  width: 98%;
+  padding: 0;
+  overflow: hidden;
+}
+
+#sousmenu li {
+  cursor: pointer;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+}
+
+#sousmenu p {
+  background: rgba(53, 53, 140, 0.8);
+  font-size: 2vw;
+  color: white;
+  padding: 1%;
+}
+
+input:checked + #sousmenu li {
+  height: 3%;
+  opacity: 1;
+  font-size: 5vw;
+}
+
+.sousmenu1 ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sousmenu2 ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#option {
+  padding: 1% 0 1% 0;
+  font-size: 1.5vw;
+  width: 100%;
+}
+
+table {
+  width: 95%;
+  text-align: center;
+  border: solid 2px black;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: thin solid black;
+}
+
+.valider {
+  width: 3%;
+  border-color: inherit;
+  background-color: inherit;
+  border: none;
+}
+
+.valider img {
+  width: 100%;
+}
+
+.modifier, .supprimer {
+  width: 40%;
+  background-color: inherit;
+  border-color: inherit;
+  border: none;
+}
+
+.modifier img , .supprimer img{
+  width: 100%;
+}
