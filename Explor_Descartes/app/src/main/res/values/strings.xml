@@ -33,6 +33,12 @@
     <string name="classiqueC">Connexion classique :</string>
     <string name="title_activity_settings">Settings</string>
 
+    <!-- Ressources relatives à activity_navigation-->
+    <string name="access_token" translatable="false">pk.eyJ1IjoiZGVwYXVsaXNodWdvIiwiYSI6ImNqdHI5bjM5aTBjeG8zeWw4Nm5uNXFwbDcifQ.EsWiJlDgHixCg318wbfR4A</string>
+    <string name="user_location_permission_explanation">EXPLANATION_HERE</string>
+    <string name="user_location_permission_not_granted">Localisation non permise</string>
+
+
     <!-- Ressources relatives aux réglages -->
 
     <!-- Example General settings -->
