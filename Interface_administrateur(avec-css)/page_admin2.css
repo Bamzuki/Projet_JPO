@@ -114,19 +114,35 @@ input:checked + #sousmenu li {
   width: 100%;
 }
 
-
-.table {
+table {
   width: 95%;
   text-align: center;
+  border: solid 2px black;
+  border-collapse: collapse;
 }
 
-.bouton {
-  width: 5%;
+th, td {
+  border: thin solid black;
+}
+
+.valider {
+  width: 3%;
+  border-color: inherit;
+  background-color: inherit;
   border: none;
-  background-color: white;
-  color: white;
 }
 
-.bouton img {
+.valider img {
+  width: 100%;
+}
+
+.modifier, .supprimer {
+  width: 40%;
+  background-color: inherit;
+  border-color: inherit;
+  border: none;
+}
+
+.modifier img , .supprimer img{
   width: 100%;
 }
