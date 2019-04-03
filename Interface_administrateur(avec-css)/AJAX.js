@@ -156,6 +156,7 @@ function getListeFormation(){
 
 	   for (var i = 0; i < listeFormations.length; i++){
 	      ligne = document.createElement("tr");
+        ligne.setAttribute("id", i);
         element = document.createElement("td");
         element.innerHTML = listeFormations[i].nom;
         ligne.appendChild(element);
@@ -171,12 +172,18 @@ function getListeFormation(){
         element = document.createElement("td");
         element.innerHTML = listeFormations[i].filiere;
         ligne.appendChild(element);
+        element = document.createElement("td");
         boutonModifier = document.createElement("button");
+        boutonModifier.setAttribute("class", "modifier");
         boutonModifier.innerHTML = "<img src='boutons/modifier.png' alt='Oups !'>";
-        ligne.appendChild(boutonModifier);
+        element.appendChild(boutonModifier);
+        ligne.appendChild(element);
+        element = document.createElement("td");
         boutonSupprimer = document.createElement("button");
+        boutonSupprimer.setAttribute("class", "supprimer");
         boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' alt='Oups !'>";
-        ligne.appendChild(boutonSupprimer);
+        element.appendChild(boutonSupprimer);
+        ligne.appendChild(element);
 
         tableau.appendChild(ligne);
      }
