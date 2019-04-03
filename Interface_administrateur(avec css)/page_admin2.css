@@ -95,16 +95,38 @@ input:checked + #sousmenu li {
   font-size: 5vw;
 }
 
-#sousmenu ul {
-  padding: 1% 0 1% 0;
-  font-size: 1.5vw;
-  width: 100%;
+.sousmenu1 ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.sousmenu2 ul {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#sousmenu table {
+#option {
+  padding: 1% 0 1% 0;
+  font-size: 1.5vw;
+  width: 100%;
+}
+
+
+.table {
   width: 95%;
   text-align: center;
+}
+
+.bouton {
+  width: 5%;
+  border: none;
+  background-color: white;
+  color: white;
+}
+
+.bouton img {
+  width: 100%;
 }
