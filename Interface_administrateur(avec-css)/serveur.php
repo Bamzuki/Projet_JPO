@@ -66,7 +66,7 @@ function getListeNomObjets($nomTable){
 function getListeEcoles(){
   //Cette fonction renvoie la liste des ecoles
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT id, nom, site, description FROM ecoles";
+  $requete = "SELECT id, nom, site, description FROM ecoles ORDER BY id";
   $result = pg_query($link, $requete);
 
   if ($result) {
@@ -86,7 +86,7 @@ function getListeEcoles(){
 function getListeFilieres(){
   //Cette fonction renvoie la liste des filieres
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT id, nom FROM filieres";
+  $requete = "SELECT id, nom FROM filieres ORDER BY id";
   $result = pg_query($link, $requete);
 
   if ($result) {
@@ -106,7 +106,7 @@ function getListeFilieres(){
 function getListeBatiments($filtreFonction){
   //Cette fonction renvoie la liste des bâtiments
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT id, nom, fonction, lat, lng FROM batiments WHERE fonction LIKE '" . $filtreFonction . "'";
+  $requete = "SELECT id, nom, fonction, lat, lng FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
   $result = pg_query($link, $requete);
 
   if ($result) {
@@ -130,7 +130,7 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
   FROM formations AS f LEFT JOIN ecoles ON f.id_ecole = ecoles.id
   LEFT JOIN batiments ON f.id_batiment = batiments.id
   LEFT JOIN filieres ON f.id_filiere = filieres.id
-  WHERE f.niveau LIKE '" . $filtreNiveau . "' AND ecoles.nom LIKE '" . $filtreEcole . "' AND batiments.nom LIKE '" . $filtreBatiment . "' AND filieres.nom LIKE '" . $filtreFiliere . "'";
+  WHERE f.niveau LIKE '" . $filtreNiveau . "' AND ecoles.nom LIKE '" . $filtreEcole . "' AND batiments.nom LIKE '" . $filtreBatiment . "' AND filieres.nom LIKE '" . $filtreFiliere . "' ORDER BY f.id";
   $result = pg_query($link, $requete);
 
   if ($result) {
