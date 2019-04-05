@@ -21,12 +21,16 @@
         <item name="android:background">@color/black_overlay</item>
     </style>
 
-    <style name="explor_descartes" parent="explor_descartes" >
+    <style name="explor_descartes" parent="explor_descartes">
         <item name="colorPrimary">@color/bleu_bouton</item>
         <item name="android:statusBarColor">@color/bleu_bouton</item>
         <item name="android:navigationBarColor">@android:color/background_dark</item>
     </style>
 
     <style name="theme" parent="Theme.AppCompat.NoActionBar" />
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
 
 </resources>
