@@ -14,79 +14,30 @@
     </div>
 
 	<ul id='corps'>
-       <li id="menu">
+    <li id="menu">
 
-        <label for="menu1">Ajout de nouvelles données</label>
-        <input id="menu1" name="menu" type="checkbox" />
+      <label for="ecoles"> Ecoles</label>
+      <input id="ecoles" name="menu" type="radio" />
 
-        <ul id="sousmenu" class="sousmenu1">
+      <ul id="sousmenu">
 
-          <li>
-            <p>Ajouter une école </p>
-            <ul id="option">
-              <form action="serveur.php" method="get">
-              <input type="text" id="input_ecole" placeholder="Nom">
-              <input type="text" id="input_site" placeholder="Adresse du site">
-              <input type="text" id="input_description" placeholder="Description">
-              </form>
+        <li>
+          <p>Ajouter une école </p>
+          <ul id="option" class="option1">
+            <form action="serveur.php" method="get">
+            <input type="text" id="input_ecole" placeholder="Nom">
+            <input type="text" id="input_site" placeholder="Adresse du site">
+            <input type="text" id="input_description" placeholder="Description">
+            </form>
 
-              <button class="valider" id="bouton-ecole"  onClick="saveEcole()"> <img src="boutons/valider.png" alt="Ajouter une école à la table"> </button>
+            <button class="valider" id="bouton-ecole"  onClick="saveEcole()"> <img src="boutons/valider.png" alt="Ajouter une école à la table"> </button>
 
-            </ul>
-          </li>
+          </ul>
+        </li>
 
-          <li>
-            <p>Ajouter une filière</p>
-            <ul id="option">
-              <form action="serveur.php" method="get">
-              <input type="text" id="input_filiere" placeholder="Nom">
-              </form>
-
-              <button class="valider" id="bouton-filiere"  onClick="saveFiliere()"> <img src="boutons/valider.png" alt="Ajouter une filière à la table"> </button>
-
-            </ul>
-          </li>
-
-          <li>
-            <p>Ajouter un bâtiment</p>
-            <ul id="option">
-              <form action="serveur.php" method="get">
-              <input type="text" id="input_batiment" placeholder="Nom">
-              <input type="text" id="input_fonction" placeholder="Fonction">
-              <input type="text" id="input_latitude" placeholder="Latitude">
-              <input type="text" id="input_longitude" placeholder="Longitude">
-              </form>
-
-              <button class="valider" id="bouton-batiment"  onClick="saveBatiment()"> <img src="boutons/valider.png" alt="Ajouter un bâtiment à la table"> </button>
-
-            </ul>
-          </li>
-
-          <li>
-            <p>Ajouter une formation</p>
-            <ul id="option">
-              <form action="serveur.php" method="get">
-              <input type="text" id="input_formation" placeholder="Nom">
-              <input type="text" id="input_niveau" placeholder="Niveau">
-			        Ecole: <select id="filtre-ecole1"></select>
-			        Bâtiment: <select id="filtre-batiment1"></select>
-			        Filière: <select id="filtre-filiere1"></select>
-              </form>
-
-              <button class="valider" id="bouton-formation"  onClick="saveFormation()"> <img src="boutons/valider.png" alt="Ajouter une formation à la table">  </button>
-
-              </ul>
-          </li>
-        </ul>
-
-        <label for="menu2">Modifier des données déjà existantes</label>
-        <input id="menu2" name="menu" type="checkbox" />
-
-        <ul id="sousmenu" class="sousmenu2">
-
-          <li>
-            <p>Mettre à jour les informations sur une école</p>
-            <ul id="option">
+        <li>
+          <p>Mettre à jour les informations sur une école</p>
+          <ul id="option" class="option2">
             <table id="resultats_ecoles" border="1">
             <th> Nom </th>
             <th> Site </th>
@@ -95,25 +46,64 @@
           </ul>
         </li>
 
+      </ul>
+
+      <label for="filieres"> Filières </label>
+      <input id="filieres" name="menu" type="radio" />
+
+      <ul id="sousmenu">
+
+        <li>
+          <p>Ajouter une filière</p>
+          <ul id="option" class="option1">
+            <form action="serveur.php" method="get">
+            <input type="text" id="input_filiere" placeholder="Nom">
+            </form>
+
+            <button class="valider" id="bouton-filiere"  onClick="saveFiliere()"> <img src="boutons/valider.png" alt="Ajouter une filière à la table"> </button>
+
+          </ul>
+        </li>
+
         <li>
           <p>Mettre à jour les informations sur une filière</p>
-          <ul>
-
-
+          <ul id="option" class="option2">
             <table  id="resultats_filieres" border="1">
             <th> Nom </th>
             </table>
           </ul>
         </li>
 
+      </ul>
+
+      <label for="batiments"> Batiments </label>
+      <input id="batiments" name="menu" type="radio" />
+
+      <ul id="sousmenu">
+
+        <li>
+          <p>Ajouter un bâtiment</p>
+          <ul id="option" class="option1">
+            <form action="serveur.php" method="get">
+            <input type="text" id="input_batiment" placeholder="Nom">
+            <input type="text" id="input_fonction" placeholder="Fonction">
+            <input type="text" id="input_latitude" placeholder="Latitude">
+            <input type="text" id="input_longitude" placeholder="Longitude">
+            </form>
+
+            <button class="valider" id="bouton-batiment"  onClick="saveBatiment()"> <img src="boutons/valider.png" alt="Ajouter un bâtiment à la table"> </button>
+
+          </ul>
+        </li>
+
         <li>
           <p>Mettre à jour les informations sur un bâtiment</p>
-          <ul id="option">
+          <ul id="option" class="option2">
             <form action="serveur.php" method="get">
             Fonction: <select id="filtre-fonction"></select>
             </form>
 
-			      <button id="bouton-batiments"  onClick="getListeBatiment()"> Afficher la table des bâtiments </button>
+            <button id="bouton-batiments"  onClick="getListeBatiment()"> Afficher la table des bâtiments </button>
 
             <table id="resultats_batiments" border="1">
             <th> Nom </th>
@@ -124,33 +114,59 @@
           </ul>
         </li>
 
+      </ul>
+
+      <label for="formations"> Formations </label>
+      <input id="formations" name="menu" type="radio" />
+
+      <ul id="sousmenu">
+
         <li>
-          <p>Mettre à jour les informations sur une formation</p>
-          <ul id="option">
+          <p>Ajouter une formation</p>
+          <ul id="option" class="option1">
             <form action="serveur.php" method="get">
-            Niveau:<select id="filtre-niveau"></select>
-            Ecole: <select id="filtre-ecole2"></select>
-            Bâtiment: <select id="filtre-batiment2"></select>
-			      Filière: <select id="filtre-filiere2"></select>
+            <input type="text" id="input_formation" placeholder="Nom">
+            <input type="text" id="input_niveau" placeholder="Niveau">
+            Ecole: <select id="filtre-ecole1"></select>
+            Bâtiment: <select id="filtre-batiment1"></select>
+            Filière: <select id="filtre-filiere1"></select>
             </form>
 
-			      <button id="bouton-formation"  onClick="getListeFormation()"> Afficher la table des formations </button>
+            <button class="valider" id="bouton-formation"  onClick="saveFormation()"> <img src="boutons/valider.png" alt="Ajouter une formation à la table">  </button>
 
-            <table id="resultats_formations" border="1">
-              <tr>
-                <th> Formation </th>
-                <th> Niveau d'étude </th>
-                <th> Ecole </th>
-                <th> Batiment </th>
-                <th> Filière </th>
-                <th> Modifier </th>
-                <th> Supprimer </th>
-              </tr>
-            </table>
-          </ul>
-        </li>
-      </ul>
-    </li>
-  </ul>
-</body>
+            </ul>
+          </li>
+
+          <li>
+            <p>Mettre à jour les informations sur une formation</p>
+            <ul id="option" class="option2">
+              <form action="serveur.php" method="get">
+              Niveau:<select id="filtre-niveau"></select>
+              Ecole: <select id="filtre-ecole2"></select>
+              Bâtiment: <select id="filtre-batiment2"></select>
+  			      Filière: <select id="filtre-filiere2"></select>
+              </form>
+
+  			      <button id="bouton-formation"  onClick="getListeFormation()"> Afficher la table des formations </button>
+
+              <table id="resultats_formations" border="1">
+                <tr>
+                  <th> Formation </th>
+                  <th> Niveau d'étude </th>
+                  <th> Ecole </th>
+                  <th> Batiment </th>
+                  <th> Filière </th>
+                  <th> Modifier </th>
+                  <th> Supprimer </th>
+                </tr>
+              </table>
+            </ul>
+          </li>
+
+        </ul>
+
+      </li>
+    </ul>
+
+  </body>
 </html>

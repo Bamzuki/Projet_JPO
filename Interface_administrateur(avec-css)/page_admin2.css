@@ -95,14 +95,14 @@ input:checked + #sousmenu li {
   font-size: 5vw;
 }
 
-.sousmenu1 ul {
+.option1 {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.sousmenu2 ul {
+.option2 {
   display: flex;
   flex-direction: column;
   align-items: center;
