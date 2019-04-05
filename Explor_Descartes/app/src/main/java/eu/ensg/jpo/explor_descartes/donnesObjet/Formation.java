@@ -1,21 +1,17 @@
-package eu.ensg.jpo.donnesObjet;
+package eu.ensg.jpo.explor_descartes.donnesObjet;
 
-import java.util.Date;
-
-public class Evenement extends DataBaseObject{
+public class Formation extends DataBaseObject {
 
     private String nom;
-    private Date debut;
-    private Date fin;
+    private String niveau;
     private Ecole ecole;
     private Batiment batiment;
     private Filiere filiere;
 
-    public Evenement(int id, String nom, Date debut, Date fin, Ecole ecole, Batiment batiment, Filiere filiere) {
+    public Formation(int id, String nom, String niveau, Ecole ecole, Batiment batiment, Filiere filiere) {
         super(id);
         this.nom = nom;
-        this.debut = debut;
-        this.fin = fin;
+        this.niveau = niveau;
         this.ecole = ecole;
         this.batiment = batiment;
         this.filiere = filiere;
@@ -29,20 +25,12 @@ public class Evenement extends DataBaseObject{
         this.nom = nom;
     }
 
-    public Date getDebut() {
-        return debut;
+    public String getNiveau() {
+        return niveau;
     }
 
-    public void setDebut(Date debut) {
-        this.debut = debut;
-    }
-
-    public Date getFin() {
-        return fin;
-    }
-
-    public void setFin(Date fin) {
-        this.fin = fin;
+    public void setNiveau(String niveau) {
+        this.niveau = niveau;
     }
 
     public Ecole getEcole() {

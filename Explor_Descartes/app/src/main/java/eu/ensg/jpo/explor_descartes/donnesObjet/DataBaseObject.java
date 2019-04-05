@@ -1,4 +1,4 @@
-package eu.ensg.jpo.donnesObjet;
+package eu.ensg.jpo.explor_descartes.donnesObjet;
 
 public abstract class DataBaseObject {
 
