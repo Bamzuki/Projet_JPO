@@ -38,6 +38,8 @@
     <string name="user_location_permission_explanation">EXPLANATION_HERE</string>
     <string name="user_location_permission_not_granted">Localisation non permise</string>
 
+    <!-- Ressources relatives à la connexion à la base de données-->
+    <string name="url_bdd_ecoles">jdbc:postgresql://82.229.248.34:5432</string>
 
     <!-- Ressources relatives aux réglages -->
 
@@ -110,6 +112,7 @@
     <string name="pref_ringtone_silent">Silencieux</string>
 
     <string name="pref_title_vibrate">Vibreur</string>
+    <string name="title_activity_accueil">AccueilActivity</string>
 
 
 </resources>
