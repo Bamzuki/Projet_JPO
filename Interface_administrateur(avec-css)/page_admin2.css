@@ -95,14 +95,14 @@ input:checked + #sousmenu li {
   font-size: 5vw;
 }
 
-.option1 {
+.sousmenu1 ul {
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
 }
 
-.option2 {
+.sousmenu2 ul {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -114,35 +114,19 @@ input:checked + #sousmenu li {
   width: 100%;
 }
 
-table {
+
+.table {
   width: 95%;
   text-align: center;
-  border: solid 2px black;
-  border-collapse: collapse;
 }
 
-th, td {
-  border: thin solid black;
-}
-
-.valider {
-  width: 3%;
-  border-color: inherit;
-  background-color: inherit;
+.bouton {
+  width: 5%;
   border: none;
+  background-color: white;
+  color: white;
 }
 
-.valider img {
-  width: 100%;
-}
-
-.modifier, .supprimer {
-  width: 40%;
-  background-color: inherit;
-  border-color: inherit;
-  border: none;
-}
-
-.modifier img , .supprimer img{
+.bouton img {
   width: 100%;
 }
