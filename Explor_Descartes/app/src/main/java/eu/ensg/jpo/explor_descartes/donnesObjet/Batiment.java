@@ -7,7 +7,7 @@ public class Batiment extends DataBaseObject{
     private float lat;
     private float lng;
 
-    Batiment(int id, String nom, String fonction, float lat, float lng) {
+    public Batiment(int id, String nom, String fonction, float lat, float lng) {
         super(id);
         this.nom = nom;
         this.fonction = fonction;

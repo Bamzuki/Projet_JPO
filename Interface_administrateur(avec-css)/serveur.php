@@ -147,6 +147,20 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
   return $response;
 }
 
+function getBatimentById($id){
+  //Cette fonction renvoie la liste des bâtiments
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "SELECT id, nom, fonction, lat, lng FROM batiments WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . '}';
+    }
+  }
+  return $batiment;
+}
+
+
 // I.3 Fonctions SAVE :
 
 function saveEcole ($nom, $site, $description){
@@ -409,6 +423,11 @@ if (isset($_GET['request']) && $_GET['request'] == "listeFormations"){
     $filtreFiliere = "%";
   }
   echo getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtreFiliere);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "batiment"){
+  $id = $_GET['id'];
+  echo getBatimentById($id);
 }
 
 // II.2 Requêtes SAVE :

@@ -19,6 +19,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 // Classes needed to handle location permissions
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
+
+import java.util.ArrayList;
 import java.util.List;
 
 // Classes needed to add the location engine
@@ -33,6 +35,12 @@ import java.lang.ref.WeakReference;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+
+import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
+import eu.ensg.jpo.explor_descartes.donneesAcces.BddEcoles;
+import eu.ensg.jpo.explor_descartes.donneesAcces.FiliereDAO;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Filiere;
 
 public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener{
 
@@ -62,6 +70,12 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
+
+        // Acces a la base de donnees
+        BatimentDAO batimentDAO = new BatimentDAO("https://82.229.248.34/serveur.php/");
+        Batiment batiment = batimentDAO.findById(1);
+        Toast.makeText(this, batiment.getNom() + "" , Toast.LENGTH_SHORT).show();
+
     }
 
     @Override
