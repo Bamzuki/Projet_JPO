@@ -48,7 +48,7 @@ body {
 label {
   width: 98%;
   overflow: hidden;
-  background: rgba(53, 53, 140, 0.8);
+  background: rgb(53, 53, 140);
   font-size: 2vw;
   color: white;
   padding: 1%;
