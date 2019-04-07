@@ -1,60 +1,53 @@
-<html lang="fr">
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Données visiteurs</title>
+    <link rel="stylesheet" href="donnees_visiteurs.css">
+  </head>
+  <body>
+    <div id="banierre">
+      <a href="index.html" id="logo"><img src="logo.png" alt="Logo non disponible"></a>
+      <h1>Admin'Descartes</h1>
+    </div>
 
+    <ul id="corps">
 
+      <label for="profils"> Consulter les profils des visiteurs </label>
+      <input id="profils" name="menu" type="radio" />
 
-<head>
- <meta charset="UTF-8">
-  <title>Page données visiteurs</title>
-</head>
+      <ul id="option">
 
+        <form action="page.php" method="get">
+          Niveau: <select name="niveau"></select>
+          Filière: <select name="filière"></select>
+        </form>
 
-<body>
+        <table border="1">
+          <th> nom </th>
+          <th> niveau </th>
+          <th> filière </th>
+        </table>
 
+      </ul>
 
-Consulter les données des visiteurs de la JPO:
-<br>
-<br>
-<br>
-Recherche sur le profil des visiteurs:
+      <label for="reponses"> Consulter les réponses au questionnaire </label>
+      <input id="reponses" name="menu" type="radio" />
 
-<form action="page.php" method="get">
+      <ul id="option">
 
-Niveau:
-<select name="niveau">
+        <table border="1">
+          <th> Question 1 </th>
+          <th> Question 2 </th>
+          <th> Question 3 </th>
+          <th> Question 4 </th>
+          <th> Question 5 </th>
+          <th> Question 6 </th>
+          <th> Question 7 </th>
+        </table>
 
-</select>
+      </ul>
 
-Filière:
-<select name="filière">
+    </ul>
 
-</select>
-
-</form>
-
-<table border="1">
-<th> nom </th> 
-<th> mot de passe </th> 
-<th> niveau </th> 
-<th> filière </th> 
-</table>
-
-
-<br>
-<br>
-<br>
-
-Réponses au questionnaire:
-<table border="1">
-<th> Question 1 </th> 
-<th> Question 2 </th> 
-<th> Question 3 </th>
-<th> Question 4 </th> 
-<th> Question 5 </th> 
-<th> Question 6 </th> 
-<th> Question 7 </th> 
-</table>
-
-
-</body>
-
-</html>
+  </body>
