@@ -1,5 +1,9 @@
 package eu.ensg.jpo.explor_descartes.donnesObjet;
 
+import com.mapbox.mapboxsdk.annotations.MarkerOptions;
+import com.mapbox.mapboxsdk.geometry.LatLng;
+import com.mapbox.mapboxsdk.maps.MapboxMap;
+
 public class Batiment extends DataBaseObject{
 
     private String nom;
@@ -14,6 +18,12 @@ public class Batiment extends DataBaseObject{
         this.lat = lat;
         this.lng = lng;
 
+    }
+
+    public void afficherSurCarte (MapboxMap mapboxMap){
+        mapboxMap.addMarker(new MarkerOptions()
+                .position(new LatLng(this.lat, this.lng))
+                .title(this.nom));
     }
 
     public String getNom() {

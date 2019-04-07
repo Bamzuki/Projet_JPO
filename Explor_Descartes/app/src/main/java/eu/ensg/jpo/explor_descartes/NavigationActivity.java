@@ -55,6 +55,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
     // Variables needed to listen to location updates
     private MainActivityLocationCallback callback = new MainActivityLocationCallback(this);
+    private ArrayList<Batiment> listeBatiment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,9 +73,12 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mapView.getMapAsync(this);
 
         // Acces a la base de donnees
-        BatimentDAO batimentDAO = new BatimentDAO("https://82.229.248.34/serveur.php/");
-        Batiment batiment = batimentDAO.findById(1);
-        Toast.makeText(this, batiment.getNom() + "" , Toast.LENGTH_SHORT).show();
+        BatimentDAO batimentDAO = new BatimentDAO("http://82.229.248.34/serveur.php/");
+        batimentDAO.chargerBatiment(this);
+        //Batiment batiment = batimentDAO.findById(1);
+        //Toast.makeText(this, batiment.getNom() + "" , Toast.LENGTH_SHORT).show();
+        //ArrayList<Batiment> listeBatiment = batimentDAO.getListeBatiment();
+        //Toast.makeText(this, listeBatiment.get(0).getNom() + "" , Toast.LENGTH_SHORT).show();
 
     }
 
@@ -89,6 +93,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                         enableLocationComponent(style);
                     }
                 });
+        for (Batiment batiment : this.listeBatiment){
+            batiment.afficherSurCarte(this.mapboxMap);
+        }
     }
 
     /**
@@ -262,5 +269,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+    public void setListeBatiment(ArrayList<Batiment> listeBatiment) {
+        this.listeBatiment = listeBatiment;
     }
 }

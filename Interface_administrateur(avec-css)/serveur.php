@@ -106,13 +106,17 @@ function getListeFilieres(){
 function getListeBatiments($filtreFonction){
   //Cette fonction renvoie la liste des bâtiments
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT id, nom, fonction, lat, lng FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
+  $requete = "SELECT id, nom, fonction, lat, lng, ST_AsGeoJSON(geometrie) FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
   $result = pg_query($link, $requete);
 
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . '}';
+      if ($row[5] == null){
+        // Géométrie non renseignée
+        $row[5] = "{}";
+      }
+      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . ', "geometrie":' . $row[5] . '}';
       $response = $response . $batiment . ', ';
     }
   }
