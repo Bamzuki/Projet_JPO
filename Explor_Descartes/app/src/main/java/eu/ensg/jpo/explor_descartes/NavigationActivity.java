@@ -72,13 +72,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        // Acces a la base de donnees
+        // Chargement des batiments depuis la base de donnees
         BatimentDAO batimentDAO = new BatimentDAO("http://82.229.248.34/serveur.php/");
         batimentDAO.chargerBatiment(this);
-        //Batiment batiment = batimentDAO.findById(1);
-        //Toast.makeText(this, batiment.getNom() + "" , Toast.LENGTH_SHORT).show();
-        //ArrayList<Batiment> listeBatiment = batimentDAO.getListeBatiment();
-        //Toast.makeText(this, listeBatiment.get(0).getNom() + "" , Toast.LENGTH_SHORT).show();
 
     }
 
@@ -93,9 +89,15 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                         enableLocationComponent(style);
                     }
                 });
+
+        for (int i = 0; i<1000000000; i++){
+            i *= i;
+        }
+
         for (Batiment batiment : this.listeBatiment){
             batiment.afficherSurCarte(this.mapboxMap);
         }
+
     }
 
     /**
@@ -273,5 +275,9 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     public void setListeBatiment(ArrayList<Batiment> listeBatiment) {
         this.listeBatiment = listeBatiment;
+    }
+
+    public MapboxMap getMapboxMap() {
+        return mapboxMap;
     }
 }
