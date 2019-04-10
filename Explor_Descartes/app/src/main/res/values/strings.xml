@@ -12,15 +12,14 @@
     <string name="upem">UPEM</string>
     <string name="upe">UPE</string>
     <string name="pvm">PVM</string>
-    <string name="connexion_Facebook">Se coonecter avec Facebook</string>
-    <string name="connexion_google">Se connecter avec Google</string>
-    <string name="connexion_Instagram">Se connecter avec Instagram</string>
-    <string name="connexion_Email">Se connecter avec un e-mail</string>
     <string name="nom_appli">Explor\'Descartes</string>
     <string name="ignorerT">Vous ne souhaitez pas vous identifier ?</string>
     <string name="ignorerB">Continuer sans se connecter</string>
     <string name="ou">ou</string>
     <string name="logo">logo</string>
+    <string name="inscriptionT">Vous n\'avez pas encore de compte ?</string>
+    <string name="InscriptionB">Inscrivez-vous</string>
+    <string name="connexion_mode">Se connecter avec :</string>
 
     <!-- Ressources relatives à activity_register-->
     <string name="accord">En vous inscrivant vous acceptez les conditions générales d\'utilisation et la politique de confidentialité de l\'application.</string>
@@ -120,8 +119,6 @@
     <string name="pref_ringtone_silent">Silencieux</string>
 
     <string name="pref_title_vibrate">Vibreur</string>
-    <string name="inscriptionT">Vous n\'avez pas encore de compte ?</string>
-    <string name="InscriptionB">Inscrivez-vous</string>
 
 
 </resources>
