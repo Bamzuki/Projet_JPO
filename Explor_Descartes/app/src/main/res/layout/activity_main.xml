@@ -55,7 +55,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="sans-serif"
             android:gravity="center"
-            android:text="Se connecter avec :"
+            android:text="@string/connexion_mode"
             android:textColor="@android:color/black" />
 
         <LinearLayout
@@ -105,7 +105,8 @@
         android:layout_height="wrap_content"
         android:background="@color/colorAccent"
         android:fontFamily="sans-serif"
-        android:text="Continuer sans se connecter"
+        android:padding="10dp"
+        android:text="@string/ignorerB"
         app:layout_constraintBottom_toTopOf="@+id/inscription"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -121,7 +122,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connexionB">
+        app:layout_constraintTop_toBottomOf="@+id/ignorer">
 
         <TextView
             android:id="@+id/inscriptionT"
@@ -164,7 +165,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/cfa"
-                app:srcCompat="@drawable/CFA" />
+                app:srcCompat="@drawable/Cfa" />
 
             <ImageView
                 android:id="@+id/compagnon"
@@ -172,7 +173,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/compagnon"
-                app:srcCompat="@drawable/compagnons" />
+                app:srcCompat="@drawable/COMPAGNONS" />
 
             <ImageView
                 android:id="@+id/EAVT"
@@ -196,7 +197,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/esiee"
-                app:srcCompat="@drawable/ESIEE" />
+                app:srcCompat="@drawable/esiie" />
 
             <ImageView
                 android:id="@+id/ESO"
@@ -204,7 +205,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/eso"
-                app:srcCompat="@drawable/ESO" />
+                app:srcCompat="@drawable/eso" />
 
             <ImageView
                 android:id="@+id/UPEM"
@@ -227,7 +228,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/pvm"
-                app:srcCompat="@drawable/PVM" />
+                app:srcCompat="@drawable/AggloPVM" />
 
             <ImageView
                 android:id="@+id/UPE"
