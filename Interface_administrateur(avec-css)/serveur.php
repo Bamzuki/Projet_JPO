@@ -407,27 +407,27 @@ if (isset($_GET['request']) && $_GET['request'] == "changeFormation"){
   $id       = $_GET['id'];
   $nom      = $_GET['nom'];
   $niveau   = $_GET['niveau'];
-  $ecole    = $_GET['ecole'];
-  $batiment = $_GET['batiment'];
-  $filiere  = $_GET['filiere'];
+  $ecole    = $_GET['id_ecole'];
+  $batiment = $_GET['id_batiment'];
+  $filiere  = $_GET['id_filiere'];
   echo changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere);
 }
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];
-  echo changeEcole ($id);
+  echo deleteEcole ($id);
 }
 if (isset($_GET['request']) && $_GET['request'] == "deleteBatiment"){
   $id  = $_GET['id'];
-  echo changeBatiment ($id);
+  echo deleteBatiment ($id);
 }
 if (isset($_GET['request']) && $_GET['request'] == "deleteFiliere"){
   $id  = $_GET['id'];
-  echo changeFiliere ($id);
+  echo deleteFiliere ($id);
 }
 if (isset($_GET['request']) && $_GET['request'] == "deleteFormation"){
   $id  = $_GET['id'];
-  echo changeFormation ($id);
+  echo deleteFormation ($id);
 }
 // III - Tests unitaires :
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){

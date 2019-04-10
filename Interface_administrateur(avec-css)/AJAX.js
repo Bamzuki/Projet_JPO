@@ -202,9 +202,9 @@ function getListeFormation(){
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonSupprimer = document.createElement("button");
-      boutonSupprimer.setAttribute("id", "supprimer-formation");
+      boutonSupprimer.setAttribute("id", "supprimer-formation"+i);
       boutonSupprimer.setAttribute("class", "supprimer_formation")
-      boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' alt='Oups !'>";
+      boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteFormation("+i+")' alt='Oups !'>";
       element.appendChild(boutonSupprimer);
       ligne.appendChild(element);
 
@@ -270,7 +270,7 @@ function getListeEcole(){
       ligne.appendChild(element);
       element                   = document.createElement("td");
       boutonSupprimer           = document.createElement("button");
-      boutonSupprimer.setAttribute("id", "supprimer-ecole");
+      boutonSupprimer.setAttribute("id", "supprimer-ecole"+i);
       boutonSupprimer.setAttribute("class", "supprimer_ecole");
       boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteEcole(" + i + ") 'alt='Oups !'>";
       element.appendChild(boutonSupprimer);
@@ -325,9 +325,9 @@ function getListeFiliere(){
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonSupprimer = document.createElement("button");
-      boutonSupprimer.setAttribute("id", "supprimer-filiere");
+      boutonSupprimer.setAttribute("id", "supprimer-filiere"+i);
       boutonSupprimer.setAttribute("class", "supprimer_filiere");
-      boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' alt='Oups !'>";
+      boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteFiliere("+i+")' alt='Oups !'>";
       element.appendChild(boutonSupprimer);
       ligne.appendChild(element);
 
@@ -393,13 +393,13 @@ function getListeBatiment(){
       element = document.createElement("td");
       boutonModifier = document.createElement("button");
       boutonModifier.setAttribute("id", "bouton-modifier-batiment" + i);
-      boutonModifier.setAttribute("class", "supprimer_batiment")
+      boutonModifier.setAttribute("class", "modifier_batiment")
       boutonModifier.innerHTML = "<img src='boutons/modifier.png' onClick='changeBatiment(" + i + ")' alt='Oups !'>";
       element.appendChild(boutonModifier);
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonSupprimer = document.createElement("button");
-      boutonSupprimer.setAttribute("id", "supprimer-batiment");
+      boutonSupprimer.setAttribute("id", "supprimer-batiment"+i);
       boutonSupprimer.setAttribute("class", "supprimer_batiment");
       boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteBatiment(" + i + ")' alt='Oups !'>";
       element.appendChild(boutonSupprimer);
@@ -585,7 +585,7 @@ function validechangeEcole(i){
   var bouton_valider        = papi.children[3];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-ecole" + i + "' class='modifier_ecole'  onClick='changeEcole(" + i + ")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[4];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-ecole' class='supprimer_ecole' > <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-ecole"+i+"' class='supprimer_ecole' > <img src='boutons/supprimer.png' onClick='deleteEcole(" + i + ")' alt='Oups'> </button>"
 }
 
 
@@ -609,7 +609,7 @@ function annulechangeEcole(i){
   var bouton_valider=papi.children[3];
   bouton_valider.innerHTML="<button  id='bouton-modifier-ecole" + i + "' class='modifier_ecole'  onClick='changeEcole("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler=papi.children[4];
-  bouton_annuler.innerHTML="<button  id='supprimer-ecole' class='supprimer_ecole' > <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML="<button  id='supprimer-ecole"+i+"' class='supprimer_ecole' > <img src='boutons/supprimer.png' onClick='deleteEcole(" + i + ")' alt='Oups'> </button>"
 }
 
 
@@ -722,7 +722,7 @@ function annulechangeBatiment(i){
   var bouton_valider        = papi.children[4];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-batiment" + i + "' class='modifier_batiment'  onClick='changeBatiment("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[5];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-batiment' class='supprimer_batiment' > <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-batiment"+i+"' class='supprimer_batiment' > <img src='boutons/supprimer.png' onClick='deleteBatiment(" + i + ")' alt='Oups'> </button>"
 }
 
 
@@ -778,7 +778,7 @@ function validechangeFiliere(i){
   var bouton_valider        = papi.children[1];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-filiere" + i + "' class='modifier_filiere' onClick='changeFiliere(" + i + ")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[2];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-filiere' class='supprimer_filiere' > <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-filiere"+i+"' class='supprimer_filiere' > <img src='boutons/supprimer.png' onClick='deleteFiliere(" + i + ")' alt='Oups'> </button>"
 }
 
 
@@ -796,7 +796,7 @@ function annulechangeFiliere(i){
   var bouton_valider        = papi.children[1];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-filiere" + i + "' class='modifier_filiere'  onClick='changeFiliere("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[2];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-filiere' class='supprimer_filiere'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-filiere"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteFiliere(" + i + ")' alt='Oups'> </button>"
 }
 
 
@@ -810,17 +810,20 @@ function changeFormation(i){
   var niveau            = papi.children[1];
   niveau.innerHTML      = "<input id='modif_niveau_formation" + i + "' placeholder='"+listeFormations[i].niveau+"'>";
   var id_ecole          = papi.children[2];
-  id_ecole.innerHTML    = "<input id='modif_id_ecole_formation" + i + "' placeholder='"+listeFormations[i].id_ecole+"'>";
+  id_ecole.innerHTML    = "<select id='modif_id_ecole_formation" + i + "'></select>";
+  getListeNomEcoles("modif_id_ecole_formation" + i + "");
   var id_batiment       = papi.children[3];
-  id_batiment.innerHTML = "<input id='modif_id_batiment_formation" + i + "' placeholder='"+listeFormations[i].id_batiment+"'>";
+  id_batiment.innerHTML = "<select id='modif_id_batiment_formation" + i + "'></select>";
+  getListeNomBatiments("modif_id_batiment_formation" + i + "");
   var id_filiere        = papi.children[4];
-  id_filiere.innerHTML  = "<input id='modif_id_filiere_formation" + i +"' placeholder='"+listeFormations[i].id_filiere+"'>";
+  id_filiere.innerHTML  = "<select id='modif_id_filiere_formation" + i + "'></select>";
+  getListeNomFilieres("modif_id_filiere_formation" + i + "");
 
   //on met en place les deux nouveaux boutons
   var bouton_valider         = papi.children[5];
   bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-formation" + i + "' class='modifier_formation'  onClick='validechangeFormation("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
   var bouton_annuler         = papi.children[6];
-  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-formation" + i + "' class='supprimer_formation onClick='annulechangeFormation("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-formation" + i + "' class='supprimer_formation' onClick='annulechangeFormation("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
 
 
@@ -833,10 +836,15 @@ function validechangeFormation(i){
   var input_id     = listeFormations[i].id;
 
   var input_nom         = document.getElementById("modif_nom_formation" + i + "").value;
+  console.log(input_nom);
   var input_niveau      = document.getElementById("modif_niveau_formation" + i + "").value;
+  console.log(input_niveau);
   var input_id_ecole    = document.getElementById("modif_id_ecole_formation" + i + "").value;
+  console.log(input_id_ecole);
   var input_id_batiment = document.getElementById("modif_id_batiment_formation" + i + "").value;
+  console.log(input_id_batiment);
   var input_id_filiere  = document.getElementById("modif_id_filiere_formation" + i + "").value;
+  console.log(input_id_filiere);
 
   if(input_nom == ""){
     // input_nom= listeEcoles[input_id].nom;
@@ -850,17 +858,17 @@ function validechangeFormation(i){
   }
 
 
-  if(input_id_ecole == ""){
+  if(input_id_ecole == "*"){
     // input_description=listeEcoles[input_id].description;
     input_id_ecole = listeFormations[i].input_id_ecole;
   }
 
-  if(input_id_batiment == ""){
+  if(input_id_batiment == "*"){
     // input_description=listeEcoles[input_id].description;
     input_id_batiment = listeFormations[i].input_id_batiment;
   }
 
-  if(input_id_filiere == ""){
+  if(input_id_filiere == "*"){
     // input_description=listeEcoles[input_id].description;
     input_id_filiere = listeFormations[i].input_id_filiere;
   }
@@ -872,9 +880,10 @@ function validechangeFormation(i){
   ajax.addEventListener('load',  function () {
     var response = ajax.response;
     getListeFormation();
+	console.log(response);
   });
 
-  ajax.send('request=changeEcole&&id=' + input_id + '&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&id_ecole=' + input_id_ecole + '&&id_batiment=' + input_id_batiment + '&&id_filiere=' + input_id_filiere );
+  ajax.send('request=changeFormation&&id=' + input_id + '&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&id_ecole=' + input_id_ecole + '&&id_batiment=' + input_id_batiment + '&&id_filiere=' + input_id_filiere );
 
   // on change de nouveau la ligne (normalement avec le changement)
   //boucle qui retransforme la ligne
@@ -894,7 +903,7 @@ function validechangeFormation(i){
   var bouton_valider        = papi.children[5];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-formation" + i + "' class='modifier_formation'  onClick='changeFormation("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-formation' class='supprimer_formation' > <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-formation"+i+"' class='supprimer_formation' > <img src='boutons/supprimer.png' onClick='deleteFormation(" + i + ")'alt='Oups'> </button>"
 }
 
 
@@ -920,7 +929,7 @@ function annulechangeFormation(i){
   var bouton_valider        = papi.children[5];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-formation" + i + "' class='modifier_formation' onClick='changeFormation("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-formation' class='supprimer_formation'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-formation"+i+"' class='supprimer_formation'> <img src='boutons/supprimer.png' onClick='deleteFormation(" + i + ")'alt='Oups'> </button>"
 }
 
 
@@ -934,6 +943,7 @@ function deleteBatiment(i) {
     console.log(input_id);
     var response = ajax.response;
     getListeBatiment();
+	console.log(response);
   });
 
   ajax.send('request=deleteBatiment&&id=' + input_id );
@@ -950,9 +960,71 @@ function deleteEcole(i) {
     console.log(input_id);
     var response = ajax.response;
     getListeEcole();
+	console.log(response);
   });
 
   ajax.send('request=deleteEcole&&id=' + input_id );
+}
+
+
+function deleteFiliere(i) {
+  // Suppression d'un batiment dans la base de données
+  
+  // getListeFormation();
+  // var request = "request=listeFormations&&filtreFiliere=" + listeFilieres[i].nom;
+  // console.log(request);
+ 
+  // var ajax = new XMLHttpRequest()
+  // ajax.open('GET', 'serveur.php/?'+request);
+  // ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  // ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    // listeFormations = JSON.parse(ajax.response);
+    // console.log(listeFormations);
+  // });
+  
+  
+  
+  
+  
+
+  // var taille=listeFormations.length;
+  // console.log(taille);
+  // if(taille!=0){
+	  // alert("Attention");
+	  // return("fini");
+  // };
+  
+  
+  var input_id  = listeFilieres[i].id;
+  var ajax      = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=deleteFiliere&&id=' + input_id );
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    console.log(input_id);
+    var response = ajax.response;
+    getListeFiliere();
+	console.log(response);
+  });
+
+  ajax.send('request=deleteFiliere&&id=' + input_id );
+}
+
+
+function deleteFormation(i) {
+  // Suppression d'un batiment dans la base de données
+  var input_id  = listeFormations[i].id;
+  var ajax      = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=deleteFormation&&id=' + input_id );
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    console.log(input_id);
+    var response = ajax.response;
+    getListeFormation();
+	console.log(response);
+  });
+
+  ajax.send('request=deleteFormation&&id=' + input_id );
 }
 
 
