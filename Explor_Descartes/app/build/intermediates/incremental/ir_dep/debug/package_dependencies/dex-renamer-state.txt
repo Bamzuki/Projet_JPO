@@ -1,0 +1,4 @@
+#Wed Apr 10 13:10:29 CEST 2019
+base.0=/host/Documents/JPO/Projet_JPO/Explor_Descartes/app/build/intermediates/transforms/dexMerger/debug/10
+path.0=classes.dex
+renamed.0=classes.dex
