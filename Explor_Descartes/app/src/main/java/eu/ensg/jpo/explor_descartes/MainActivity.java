@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
 import android.view.View;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -15,7 +16,7 @@ import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button connexionB;
+    ImageButton connexionB;
     Button inscriptionB;
     Button ignorerB;
 
@@ -58,9 +59,9 @@ public class MainActivity extends AppCompatActivity {
 
         // I - Instanciation des objets Java représentant les composants graphiques
 
-        connexionB   = (Button)findViewById(R.id.connexionB);
-        inscriptionB = (Button)findViewById(R.id.inscriptionB);
-        ignorerB     = (Button)findViewById(R.id.ignorerB);
+        ignorerB     = findViewById(R.id.ignorerB);
+        connexionB   = findViewById(R.id.connexionB);
+        inscriptionB = findViewById(R.id.inscriptionB);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
@@ -84,6 +85,7 @@ public class MainActivity extends AppCompatActivity {
                 MainActivity.this.openAccueilActivity();
             }
         });
+
 
     }
 

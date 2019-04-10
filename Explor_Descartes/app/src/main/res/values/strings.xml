@@ -46,9 +46,10 @@
     <string name="user_location_permission_not_granted">Localisation non permise</string>
 
     <!-- Ressources relatives à la connexion à la base de données-->
-    <string name="url_bdd_ecoles">jdbc:postgresql://82.229.248.34:5432</string>
+    <string name="url_serveur_ecoles">http://82.229.248.34/serveur.php/</string>
 
     <!-- Ressources relatives aux réglages -->
+    <string name="title_activity_settings">Settings</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>
