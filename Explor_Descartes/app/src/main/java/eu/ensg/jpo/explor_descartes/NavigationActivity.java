@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 // Classes needed to initialize the map
+import com.google.gson.JsonObject;
 import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -41,6 +42,7 @@ import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
@@ -197,13 +199,11 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
         List<Feature> featureList = new ArrayList<Feature>();
         for (int i = 1; i <= ListeObjets.listeBatiment.size(); i++) {
-            featureList.addAll(mapboxMap.queryRenderedFeatures(rectF, "batiment"+i));
-        }
-        if (featureList.size() > 0) {
-            Feature featureClicked = featureList.get(0);
-            //featureClicked.getProperty("id");
-            NavigationActivity.this.openEcoleActivity(ListeObjets.listeEcole.get(0));
-            return true;
+            if (mapboxMap.queryRenderedFeatures(rectF, "batiment"+i).size() > 0){
+                Toast.makeText(this, i + "", Toast.LENGTH_LONG).show();
+                //NavigationActivity.this.openEcoleActivity(ListeObjets.listeEcole.get(0));
+                return true;
+            }
         }
         return false;
     }
