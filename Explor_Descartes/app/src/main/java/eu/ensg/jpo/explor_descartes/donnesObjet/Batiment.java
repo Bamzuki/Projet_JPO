@@ -44,11 +44,9 @@ public class Batiment extends DataBaseObject{
                 .title(this.nom));
          */
         if (!geometrie.toString().equals("{}")) {
-            System.out.println(geometrie.toString());
             GeoJsonSource polygon = new GeoJsonSource("polygon"+this.id, geometrie.toString());
             style.addSource(polygon);
             FillLayer layerBatiment = new FillLayer("batiment"+this.id, "polygon"+this.id).withProperties(fillOpacity(0.5f), fillColor("blue"));
-            layerBatiment.withProperties(textField("geometry"));
             style.addLayer(layerBatiment);
         }
 
