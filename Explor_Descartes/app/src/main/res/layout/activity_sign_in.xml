@@ -5,19 +5,35 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@android:color/white"
+    app:layout_constraintBottom_toBottomOf="@+id/inscription"
+    app:layout_constraintLeft_toLeftOf="parent"
+    app:layout_constraintRight_toRightOf="parent"
+    app:layout_constraintTop_toTopOf="parent"
     tools:context=".SignInActivity">
+
+    <ImageView
+        android:id="@+id/logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/logo"
+        android:cropToPadding="false"
+        app:layout_constraintBottom_toTopOf="@+id/classiqueC"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@mipmap/ic_launcher_foreground" />
 
     <TextView
         android:id="@+id/classiqueC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="75dp"
-        android:text="@string/classiqueC"
+        android:text="@string/connexion_mail"
         android:textColor="@android:color/black"
         android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/formulaireC"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/logo" />
 
     <LinearLayout
         android:id="@+id/formulaireC"
@@ -28,6 +44,7 @@
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
+        app:layout_constraintBottom_toTopOf="@+id/connexionB"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classiqueC">
@@ -37,24 +54,28 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
+            android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
-            android:text="@string/classiqueI"
+            android:padding="5dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp"
+            android:visibility="visible" />
 
         <EditText
             android:id="@+id/mdp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:autofillHints="azer"
+            android:autofillHints=""
+            android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/mdp"
             android:inputType="textPassword"
+            android:padding="5dp"
+            android:layout_marginTop="3dp"
             android:selectAllOnFocus="false"
-            android:text="@string/classiqueI"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
@@ -62,85 +83,18 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/connexionB"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_margin="10dp"
-        android:background="#608fc3"
+        android:background="@color/colorAccent"
         android:padding="5dp"
-        android:text="Connexion"
+        android:text="@string/connexion"
         android:textColor="@android:color/white"
+        app:layout_constraintBottom_toTopOf="@+id/inscription"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formulaireC" />
-
-    <View
-        android:id="@+id/divider3"
-        android:layout_width="0dp"
-        android:layout_height="2dp"
-        android:layout_margin="20dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:layout_weight="1"
-        android:background="#608fc3"
-        app:layout_constraintBottom_toTopOf="@+id/alternativesT"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button" />
-
-    <TextView
-        android:id="@+id/alternativesT"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:layout_weight="1"
-        android:text="@string/alternativeC"
-        android:textAlignment="center"
-        android:textColor="@android:color/black"
-        android:textSize="18sp"
-        app:layout_constraintBottom_toTopOf="@+id/alternatives"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent" />
-
-    <LinearLayout
-        android:id="@+id/alternatives"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="75dp"
-        android:gravity="center_horizontal"
-        android:orientation="horizontal"
-        app:layout_constraintBottom_toTopOf="@+id/inscription"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
-
-        <ImageButton
-            android:id="@+id/facebook"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:contentDescription="@string/facebookT"
-            app:srcCompat="@drawable/facebook" />
-
-        <ImageButton
-            android:id="@+id/instagram"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:contentDescription="@string/instagramT"
-            app:srcCompat="@drawable/instagram" />
-
-        <ImageButton
-            android:id="@+id/google"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:background="@android:color/background_light"
-            android:contentDescription="@string/googleT"
-            app:srcCompat="@drawable/google" />
-
-    </LinearLayout>
 
     <LinearLayout
         android:id="@+id/inscription"
@@ -149,8 +103,10 @@
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent">
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/connexionB">
 
         <TextView
             android:id="@+id/inscriptionT"
@@ -165,9 +121,9 @@
             style="@style/Widget.AppCompat.Button.Borderless"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/inscriptionB"
+            android:text="@string/InscriptionB"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="#608fc3"
+            android:textColor="@color/colorAccent"
             android:textStyle="bold" />
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -14,6 +14,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.NavigationActivity;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import okhttp3.Call;
@@ -64,7 +65,7 @@ public class BatimentDAO extends BddEcolesDAO<Batiment>  {
 
 
 
-    public void chargerBatiment(final NavigationActivity activity) {
+    public void chargerBatiment() {
         // Construction de la requete
         String url = this.urlServeur + "?request=listeBatiments";
         Request request = new Request.Builder().url(url).build();
@@ -77,13 +78,32 @@ public class BatimentDAO extends BddEcolesDAO<Batiment>  {
                 System.out.println(response.body());
                 Type listType = new TypeToken<ArrayList<Batiment>>(){}.getType();
                 ArrayList<Batiment> listeBatiment = new Gson().fromJson(response.body().string(), listType);
-                activity.setListeBatiment(listeBatiment);
+                ListeObjets.listeBatiment = listeBatiment;
             }
 
             public void onFailure(Call call, IOException e) {
                 System.out.println("Echec de la connection !");
             }
         });
+
+    }
+
+    public ArrayList<Batiment> getListeBatiment() {
+        // Construction de la requete
+        String url = this.urlServeur + "?request=listeBatiments";
+        Request request = new Request.Builder().url(url).build();
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        ArrayList<Batiment> listeBatiment = null;
+        try (Response response = client.newCall(request).execute()) {
+            System.out.println("Connexion etablie avec succes !");
+            Type listType = new TypeToken<ArrayList<Batiment>>(){}.getType();
+            listeBatiment = new Gson().fromJson(response.body().string(), listType);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.out.println("Echec de la connection !");
+        }
+        return listeBatiment;
 
     }
 

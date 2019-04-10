@@ -1,16 +1,19 @@
 package eu.ensg.jpo.explor_descartes.donnesObjet;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonObject;
 import com.mapbox.geojson.Geometry;
 import com.mapbox.geojson.Polygon;
 import com.mapbox.geojson.gson.GeometryGeoJson;
 import com.mapbox.mapboxsdk.annotations.MarkerOptions;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
+import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
 
 public class Batiment extends DataBaseObject{
@@ -19,9 +22,9 @@ public class Batiment extends DataBaseObject{
     private String fonction;
     private float lat;
     private float lng;
-    private Gson geometrie;
+    private JsonObject geometrie;
 
-    public Batiment(int id, String nom, String fonction, float lat, float lng, Gson geometrie) {
+    public Batiment(int id, String nom, String fonction, float lat, float lng, JsonObject geometrie) {
         super(id);
         this.nom = nom;
         this.fonction = fonction;
@@ -30,12 +33,19 @@ public class Batiment extends DataBaseObject{
         this.geometrie = geometrie;
     }
 
-    public void afficherSurCarte (MapboxMap mapboxMap){
+    public void afficherSurCarte (Style style){
+        /**
         mapboxMap.addMarker(new MarkerOptions()
                 .position(new LatLng(this.lat, this.lng))
                 .title(this.nom));
-        GeoJsonSource polygon = new GeoJsonSource("polygon"+this.id, geometrie.toString());
-        mapboxMap.getStyle().addLayer((new FillLayer("layer"+this.id, "polygon"+this.id).withProperties(fillOpacity(0.5f))));
+         */
+        if (!geometrie.toString().equals("{}")) {
+            System.out.println(geometrie.toString());
+            GeoJsonSource polygon = new GeoJsonSource("polygon"+this.id, geometrie.toString());
+            style.addSource(polygon);
+            style.addLayer((new FillLayer("batiment"+this.id, "polygon"+this.id).withProperties(fillOpacity(0.5f), fillColor("blue"))));
+        }
+
     }
 
     public String getNom() {

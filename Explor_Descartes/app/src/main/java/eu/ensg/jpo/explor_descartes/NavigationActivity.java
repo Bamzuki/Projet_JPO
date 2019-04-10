@@ -35,6 +35,8 @@ import java.lang.ref.WeakReference;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.style.layers.Property;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.BddEcoles;
@@ -55,7 +57,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
     // Variables needed to listen to location updates
     private MainActivityLocationCallback callback = new MainActivityLocationCallback(this);
-    private ArrayList<Batiment> listeBatiment;
+    private ArrayList<Batiment> listeBatiment = new ArrayList<Batiment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,10 +74,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        // Chargement des batiments depuis la base de donnees
-        BatimentDAO batimentDAO = new BatimentDAO("http://82.229.248.34/serveur.php/");
-        batimentDAO.chargerBatiment(this);
-
     }
 
     @Override
@@ -87,18 +85,20 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         enableLocationComponent(style);
+                        style.getLayer("poi-label").setProperties(PropertyFactory.visibility(Property.NONE));
+                        // Affichage des batiments depuis la base de donnees
+                        ArrayList<Batiment> listeBatiment = ListeObjets.listeBatiment;
+                        System.out.println(listeBatiment.size());
+                        for (Batiment batiment : listeBatiment){
+                            batiment.afficherSurCarte(style);
+                        }
+
                     }
                 });
 
-        for (int i = 0; i<1000000000; i++){
-            i *= i;
-        }
-
-        for (Batiment batiment : this.listeBatiment){
-            batiment.afficherSurCarte(this.mapboxMap);
-        }
 
     }
+
 
     /**
      * Initialize the Maps SDK's LocationComponent
@@ -271,6 +271,10 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     protected void onSaveInstanceState(Bundle outState) {
         super.onSaveInstanceState(outState);
         mapView.onSaveInstanceState(outState);
+    }
+
+    public ArrayList<Batiment> getListeBatiment() {
+        return listeBatiment;
     }
 
     public void setListeBatiment(ArrayList<Batiment> listeBatiment) {
