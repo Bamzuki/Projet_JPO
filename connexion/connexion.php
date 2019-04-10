@@ -2,20 +2,23 @@
 
 
 
-function connexion($nom,$pseudo){
-	$link = pg_connect("host=localhost port=5432 dbname=tutilisateurs user=postgres password=postgres");
+function connexion($nom,$mdp){
+	$link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
 	$requete = "SELECT * FROM utilisateurs WHERE nom LIKE '" . $nom . "'";
 	$result = pg_query($link, $requete);
-	if($result.pseudo==$pseudo){
+	
+	while ($row = pg_fetch_row($result)) {
+    $password = $row[2];
+	$administrateur = $row[3];
+    }
+	if($password==$mdp){
 		echo("Connexion réussie");
-		if($result.admin=="True"){
+		if($administrateur=="t"){
 			return("True");
-		};
-		else(){
+		}else{
 			return("False");
 		};
-	};
-	else(){
+	}else{
 		echo("Connexion refusée");
 	};
 	
@@ -25,10 +28,10 @@ function connexion($nom,$pseudo){
 
 
 
-if (isset($_GET['request']) && $_GET['request'] == "connexion"){
+if (isset($_GET['request'])){
   $nom         = $_GET['nom'];
-  $pseudo        = $_GET['pseudo'];
-  echo connexion ($nom, $pseudo);
+  $mdp       = $_GET['mdp'];
+  echo connexion ($nom, $mdp);
 }
 
 
