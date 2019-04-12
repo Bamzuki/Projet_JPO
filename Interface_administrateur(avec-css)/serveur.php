@@ -95,8 +95,8 @@ function getListeFilieres(){
 }
 function getListeBatiments($filtreFonction){
   //Cette fonction renvoie la liste des bâtiments
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT id, nom, fonction, lat, lng, ST_AsGeoJSON(geometrie) FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
+  global $link;
+  $requete = "SELECT id, nom, fonction, lat, lng, id_ecole, ST_AsGeoJSON(geometrie) FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
@@ -105,7 +105,7 @@ function getListeBatiments($filtreFonction){
         // Géométrie non renseignée
         $row[5] = "{}";
       }
-      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . ', "geometrie":' . $row[5] . '}';
+      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . ', "id_ecole":' . $row[5] .', "geometrie":' . $row[6] . '}';
       $response = $response . $batiment . ', ';
     }
   }
