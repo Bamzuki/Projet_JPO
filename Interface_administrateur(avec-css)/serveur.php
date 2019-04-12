@@ -1,9 +1,12 @@
 <?php
+// O - Variables globales
+$link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+
 // I - Fonctions :
 // I.1 Fonctions GET ID :
 function getIdEcole($nom){
   //Cette fonction renvoie l'id d'une école depuis son nom
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "SELECT id FROM ecoles WHERE nom LIKE '" . $nom . "'";
   $result = pg_query($link, $requete);
   while ($row = pg_fetch_row($result)) {
@@ -13,7 +16,7 @@ function getIdEcole($nom){
 }
 function getIdBatiment($nom){
   //Cette fonction renvoie l'id d'un bâtiment depuis son nom
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "SELECT id FROM batiments WHERE nom LIKE '" . $nom . "'";
   $result = pg_query($link, $requete);
   while ($row = pg_fetch_row($result)) {
@@ -23,7 +26,7 @@ function getIdBatiment($nom){
 }
 function getIdFiliere($nom){
   //Cette fonction renvoie l'id d'une filière depuis son nom
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "SELECT id FROM filieres WHERE nom LIKE '" . $nom . "'";
   $result = pg_query($link, $requete);
   while ($row = pg_fetch_row($result)) {
@@ -34,7 +37,7 @@ function getIdFiliere($nom){
 // I.2 Fonctions GET :
 function getListeNomObjets($nomTable){
   //Cette fonction renvoie une liste des noms des objets de la table rentrée en argument
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   if ($nomTable == "niveaux"){
     $requete = "SELECT DISTINCT niveau FROM formations";
   }
@@ -56,7 +59,7 @@ function getListeNomObjets($nomTable){
 }
 function getListeEcoles(){
   //Cette fonction renvoie la liste des ecoles
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "SELECT id, nom, site, description FROM ecoles ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
@@ -74,7 +77,7 @@ function getListeEcoles(){
 }
 function getListeFilieres(){
   //Cette fonction renvoie la liste des filieres
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "SELECT id, nom FROM filieres ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
@@ -92,8 +95,8 @@ function getListeFilieres(){
 }
 function getListeBatiments($filtreFonction){
   //Cette fonction renvoie la liste des bâtiments
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
-  $requete = "SELECT id, nom, fonction, lat, lng, ST_AsGeoJSON(geometrie) FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
+  global $link;
+  $requete = "SELECT id, nom, fonction, lat, lng, id_ecole, ST_AsGeoJSON(geometrie) FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
@@ -102,7 +105,7 @@ function getListeBatiments($filtreFonction){
         // Géométrie non renseignée
         $row[5] = "{}";
       }
-      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . ', "geometrie":' . $row[5] . '}';
+      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . ', "id_ecole":' . $row[5] .', "geometrie":' . $row[6] . '}';
       $response = $response . $batiment . ', ';
     }
   }
@@ -114,7 +117,7 @@ function getListeBatiments($filtreFonction){
 }
 function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtreFiliere){
   //Cette fonction renvoie la liste des formations
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "SELECT f.id, f.nom, f.niveau, ecoles.nom, batiments.nom, filieres.nom
   FROM formations AS f LEFT JOIN ecoles ON f.id_ecole = ecoles.id
   LEFT JOIN batiments ON f.id_batiment = batiments.id
@@ -154,7 +157,7 @@ function saveEcole ($nom, $site, $description){
   //Cette fonction enregistre une nouvelle école dans la base de données
   $nom = str_replace("'", "''", $nom);
   $description = str_replace("'", "''", $description);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "INSERT INTO ecoles (nom, site, description) VALUES ('" . $nom . "', '" . $site . "', '" . $description . "')";
   $result = pg_query($link, $requete);
   if ($result){
@@ -167,7 +170,7 @@ function saveBatiment ($nom, $fonction, $lat, $lng){
   //Cette fonction enregistre un nouveau batiment dans la base de données
   $nom = str_replace("'", "''", $nom);
   $fonction = str_replace("'", "''", $fonction);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "INSERT INTO batiments (nom, fonction, lat, lng) VALUES ('" . $nom . "', '" . $fonction . "', " . $lat . ", " . $lng . ")";
   $result = pg_query($link, $requete);
   if ($result){
@@ -179,7 +182,7 @@ function saveBatiment ($nom, $fonction, $lat, $lng){
 function saveFiliere ($nom){
   //Cette fonction enregistre un nouveau batiment dans la base de données
   $nom = str_replace("'", "''", $nom);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "INSERT INTO filieres (nom) VALUES ('" . $nom . "')";
   $result = pg_query($link, $requete);
   if ($result){
@@ -199,7 +202,7 @@ function saveFormation ($nom, $niveau, $ecole, $batiment, $filiere){
   $id_ecole    = getIdEcole($ecole);
   $id_batiment = getIdBatiment($batiment);
   $id_filiere  = getIdFiliere($filiere);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('" . $nom . "', '" . $niveau . "', " . $id_ecole . ", " . $id_batiment . ", " . $id_filiere . ")";
   $result = pg_query($link, $requete);
   if ($result){
@@ -213,7 +216,7 @@ function changeEcole ($id, $nom, $site, $description){
   //Cette fonction modifie une école déjà existante dans la base de données
   $nom = str_replace("'", "''", $nom);
   $description = str_replace("'", "''", $description);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "UPDATE ecoles
               SET nom = '" . $nom . "', site = '" . $site . "', description = '" . $description . "'
               WHERE id=" . $id;
@@ -228,7 +231,7 @@ function changeBatiment ($id, $nom, $fonction, $lat, $lng){
   //Cette fonction modifie un batiment déjà existant dans la base de données
   $nom = str_replace("'", "''", $nom);
   $fonction = str_replace("'", "''", $fonction);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "UPDATE batiments
               SET nom = '" . $nom . "', fonction = '" . $fonction . "', lat = '" . $lat . "', lng = '" . $lng . "'
               WHERE id=" . $id;
@@ -242,7 +245,7 @@ function changeBatiment ($id, $nom, $fonction, $lat, $lng){
 function changeFiliere ($id, $nom){
   //Cette fonction modifie une filière déjà existante dans la base de données
   $nom = str_replace("'", "''", $nom);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "UPDATE filieres
               SET nom = '" . $nom . "'
               WHERE id=" . $id;
@@ -264,7 +267,7 @@ function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
   $id_ecole    = getIdEcole($ecole);
   $id_batiment = getIdBatiment($batiment);
   $id_filiere  = getIdFiliere($filiere);
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "UPDATE formations
               SET nom = '" . $nom . "', niveau = '" . $niveau . "', id_ecole = '" . $id_ecole . "', id_batiment = '" . $id_batiment ."', id_filiere = '" . $id_filiere . "'
               WHERE id=" . $id;
@@ -278,7 +281,7 @@ function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
 // I.5 Fonctions DELETE :
 function deleteEcole ($id){
   //Cette fonction supprime une école dans la base de données
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "DELETE FROM ecoles
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
@@ -290,11 +293,11 @@ function deleteEcole ($id){
 }
 function deleteBatiment ($id){
   //Cette fonction supprime un batiment dans la base de données
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "DELETE FROM batiments
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
-  if ($result){
+  if (true){
     return "Suppression réussie !";
   }else{
     return "La suppression a échouée";
@@ -302,7 +305,7 @@ function deleteBatiment ($id){
 }
 function deleteFiliere ($id){
   //Cette fonction supprime une filiere dans la base de données
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "DELETE FROM filieres
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
@@ -314,7 +317,7 @@ function deleteFiliere ($id){
 }
 function deleteFormation ($id){
   //Cette fonction supprime une formation dans la base de données
-  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  global $link;
   $requete = "DELETE FROM formations
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
@@ -429,27 +432,27 @@ if (isset($_GET['request']) && $_GET['request'] == "changeFormation"){
   $id       = $_GET['id'];
   $nom      = $_GET['nom'];
   $niveau   = $_GET['niveau'];
-  $ecole    = $_GET['ecole'];
-  $batiment = $_GET['batiment'];
-  $filiere  = $_GET['filiere'];
+  $ecole    = $_GET['id_ecole'];
+  $batiment = $_GET['id_batiment'];
+  $filiere  = $_GET['id_filiere'];
   echo changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere);
 }
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];
-  echo changeEcole ($id);
+  echo deleteEcole ($id);
 }
 if (isset($_GET['request']) && $_GET['request'] == "deleteBatiment"){
   $id  = $_GET['id'];
-  echo changeBatiment ($id);
+  echo deleteBatiment ($id);
 }
 if (isset($_GET['request']) && $_GET['request'] == "deleteFiliere"){
   $id  = $_GET['id'];
-  echo changeFiliere ($id);
+  echo deleteFiliere ($id);
 }
 if (isset($_GET['request']) && $_GET['request'] == "deleteFormation"){
   $id  = $_GET['id'];
-  echo changeFormation ($id);
+  echo deleteFormation ($id);
 }
 // III - Tests unitaires :
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){

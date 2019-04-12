@@ -1,6 +1,9 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.graphics.PointF;
+import android.graphics.RectF;
 import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
@@ -9,7 +12,10 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 // Classes needed to initialize the map
+import com.google.gson.JsonObject;
+import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxsdk.Mapbox;
+import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponentOptions;
 import com.mapbox.mapboxsdk.maps.MapView;
 import com.mapbox.mapboxsdk.maps.MapboxMap;
@@ -35,14 +41,19 @@ import java.lang.ref.WeakReference;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.style.layers.FillLayer;
+import com.mapbox.mapboxsdk.style.layers.Layer;
+import com.mapbox.mapboxsdk.style.layers.Property;
+import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.BddEcoles;
 import eu.ensg.jpo.explor_descartes.donneesAcces.FiliereDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Filiere;
 
-public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener{
+public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
 
     // Variables needed to initialize a map
     private MapboxMap mapboxMap;
@@ -55,7 +66,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
     private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
     // Variables needed to listen to location updates
     private MainActivityLocationCallback callback = new MainActivityLocationCallback(this);
-    private ArrayList<Batiment> listeBatiment;
+    private ArrayList<Batiment> listeBatiment = new ArrayList<Batiment>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -72,14 +83,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
-        // Acces a la base de donnees
-        BatimentDAO batimentDAO = new BatimentDAO("http://82.229.248.34/serveur.php/");
-        batimentDAO.chargerBatiment(this);
-        //Batiment batiment = batimentDAO.findById(1);
-        //Toast.makeText(this, batiment.getNom() + "" , Toast.LENGTH_SHORT).show();
-        //ArrayList<Batiment> listeBatiment = batimentDAO.getListeBatiment();
-        //Toast.makeText(this, listeBatiment.get(0).getNom() + "" , Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
@@ -91,11 +94,19 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
                     @Override
                     public void onStyleLoaded(@NonNull Style style) {
                         enableLocationComponent(style);
+                        style.getLayer("poi-label").setProperties(PropertyFactory.visibility(Property.NONE));
+                        // Affichage des batiments depuis la base de donnees
+                        ArrayList<Batiment> listeBatiment = ListeObjets.listeBatiment;
+                        System.out.println(listeBatiment.size());
+                        for (Batiment batiment : listeBatiment){
+                            batiment.afficherSurCarte(style);
+                        }
+                        // Ajout des listener
+                        mapboxMap.addOnMapClickListener(NavigationActivity.this);
                     }
                 });
-        for (Batiment batiment : this.listeBatiment){
-            batiment.afficherSurCarte(this.mapboxMap);
-        }
+
+
     }
 
     /**
@@ -171,6 +182,32 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             finish();
         }
     }
+
+    private void openEcoleActivity(Ecole ecole) {
+
+        // Create intent
+        Intent intent = new Intent(this, EcoleActivity.class);
+
+        // Start activity
+        startActivity(intent);
+    }
+
+    // Ajout de listener sur les batiments
+    @Override
+    public boolean onMapClick(@NonNull LatLng point) {
+        PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
+        RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
+        List<Feature> featureList = new ArrayList<Feature>();
+        for (int i = 1; i <= ListeObjets.listeBatiment.size(); i++) {
+            if (mapboxMap.queryRenderedFeatures(rectF, "batiment"+i).size() > 0){
+                Toast.makeText(this, i + "", Toast.LENGTH_LONG).show();
+                //NavigationActivity.this.openEcoleActivity(ListeObjets.listeEcole.get(0));
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     private static class MainActivityLocationCallback
             implements LocationEngineCallback<LocationEngineResult> {
@@ -271,7 +308,15 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         mapView.onSaveInstanceState(outState);
     }
 
+    public ArrayList<Batiment> getListeBatiment() {
+        return listeBatiment;
+    }
+
     public void setListeBatiment(ArrayList<Batiment> listeBatiment) {
         this.listeBatiment = listeBatiment;
+    }
+
+    public MapboxMap getMapboxMap() {
+        return mapboxMap;
     }
 }
