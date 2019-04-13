@@ -14,4 +14,13 @@ public final class ListeObjets {
     public static ArrayList<Formation> listeFormation = new ArrayList<Formation>();
     public static ArrayList<Evenement> listeEvenement = new ArrayList<Evenement>();
 
+    public static Ecole getEcoleById(int id){
+        for (Ecole ecole : listeEcole){
+            if (ecole.getId() == id){
+                return ecole;
+            }
+        }
+        return null;
+    }
+
 }
