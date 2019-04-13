@@ -198,9 +198,10 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
         RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
         List<Feature> featureList = new ArrayList<Feature>();
-        for (int i = 1; i <= ListeObjets.listeBatiment.size(); i++) {
-            if (mapboxMap.queryRenderedFeatures(rectF, "batiment"+i).size() > 0){
-                Toast.makeText(this, i + "", Toast.LENGTH_LONG).show();
+        for (Batiment batiment : ListeObjets.listeBatiment) {
+            if (mapboxMap.queryRenderedFeatures(rectF, "batiment"+batiment.getId()).size() > 0){
+                int idEcole = batiment.getIdEcole();
+                Toast.makeText(this, idEcole + "", Toast.LENGTH_LONG).show();
                 //NavigationActivity.this.openEcoleActivity(ListeObjets.listeEcole.get(0));
                 return true;
             }

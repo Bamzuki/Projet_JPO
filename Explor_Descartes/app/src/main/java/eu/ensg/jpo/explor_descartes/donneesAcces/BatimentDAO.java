@@ -75,10 +75,10 @@ public class BatimentDAO extends BddEcolesDAO<Batiment>  {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
-                System.out.println(response.body());
                 Type listType = new TypeToken<ArrayList<Batiment>>(){}.getType();
                 ArrayList<Batiment> listeBatiment = new Gson().fromJson(response.body().string(), listType);
                 ListeObjets.listeBatiment = listeBatiment;
+
             }
 
             public void onFailure(Call call, IOException e) {
