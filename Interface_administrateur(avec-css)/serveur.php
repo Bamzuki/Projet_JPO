@@ -142,15 +142,15 @@ function getListeUtilisateurs($filtreAdmin){
   //Cette fonction renvoie la liste des utilisateurs
   global $link;
   if ($filtreAdmin != null){
-	  $requete = "SELECT id, prenom, nom, pseudo, email FROM utilisateurs WHERE admin=" . $filtreAdmin ." ORDER BY id";
+	  $requete = "SELECT id, prenom, nom, pseudo, email,admin FROM utilisateurs WHERE admin=" . $filtreAdmin ." ORDER BY id";
   }else{
-	  $requete = "SELECT id, prenom, nom, pseudo, email FROM utilisateurs ORDER BY id";
+	  $requete = "SELECT id, prenom, nom, pseudo, email,admin FROM utilisateurs ORDER BY id";
   }
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . ', "nom":"' . $row[2] . ', "pseudo":"' . $row[3] . ', "email":"' . $row[4] . ', "admin":' . $row[5] .'}';
+      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . '", "nom":"' . $row[2] . '", "pseudo":"' . $row[3] . '", "email":"' . $row[4] . '", "admin":"' . $row[5] .'"}';
       $response = $response . $utilisateur . ', ';
     }
   }
@@ -158,6 +158,7 @@ function getListeUtilisateurs($filtreAdmin){
   if (strlen($response) < 2){
     $response ="[]";
   }
+  
   return $response;
 }
 
@@ -241,8 +242,9 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
   $pseudo   = str_replace("'", "''", $pseudo);
   $email    = str_replace("'", "''", $email);
   $mdp      = str_replace("'", "''", $mdp);
+  $admin    = str_replace("'", "''", $admin);
   global $link;
-  $requete = "INSERT INTO utilisateurs (prenom, nom, pseudo, email, mdp, admin) VALUES ('" . $prenom . "', '" . $nom . "', '" . $pseudo . "', '" . $email . "', '" . $mdp . "', " . $admin . ")";
+  $requete = "INSERT INTO utilisateurs (prenom, nom, pseudo, email, mdp, admin) VALUES ('" . $prenom . "', '" . $nom . "', '" . $pseudo . "', '" . $email . "', '" . $mdp . "', '" . $admin . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -326,8 +328,8 @@ function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
   $mdp      = str_replace("'", "''", $mdp);
   global $link;
   $requete = "UPDATE utilisateurs
-              SET prenom = '" . $prenom . "', nom = '" . $nom . "', pseudo = '" . $pseudo . "', email = '" . $email . "', mdp = '" . $mdp . "', admin = '" . $damin . 
-             "WHERE id=" . $id;
+              SET prenom = '" . $prenom . "', nom = '" . $nom . "', pseudo = '" . $pseudo . "', email = '" . $email . "', mdp = '" . $mdp . "', admin = '" . $admin ."'
+             WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
     return "Modification réussie !";
@@ -533,7 +535,7 @@ if (isset($_GET['request']) && $_GET['request'] == "changeUtilisateur"){
   $mdp      = $_GET['mdp'];
   $admin    = $_GET['admin'];
   echo changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin);
-  
+} 
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];

@@ -30,56 +30,35 @@ body {
   text-align: center;
 }
 
-#corps {
-  width: 100%;
-  overflow: hidden;
-  background: white;
-  padding: 0;
+#boutons {
   display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#ecoles {
+  display: flex;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
-}
-
-#corps input[type="radio"],
-#corps input[type="checkbox"] {
-  display: none;
-}
-
-label {
-  width: 98%;
-  overflow: hidden;
-  background: rgb(53, 53, 140);
   font-size: 2vw;
-  color: white;
-  padding: 1%;
 }
 
-#option {
-  cursor: pointer;
-  overflow: hidden;
-  height: 0;
-  opacity: 0;
-  transition: all 0.25s ease-in-out;
-}
-
-input:checked + #option {
-  height: 3%;
-  opacity: 1;
-  padding: 1% 0 1% 0;
-  font-size: 1.5vw;
-  width: 100%;
+#visiteurs {
   display: flex;
+  justify-content: space-around;
   flex-direction: column;
   align-items: center;
+  font-size: 2vw;
 }
 
-table {
-  width: 95%;
-  text-align: center;
-  border: solid 2px black;
-  border-collapse: collapse;
-}
-
-th, td {
-  border: thin solid black;
+#bouton {
+  width:50%;
+  padding: 2% 2%;
+  color: white;
+  background-color: rgb(53, 53, 140);
+  outline:none;
+  text-align:center;
+  font-weight: bold;
+  font-size: 1.25vw;
 }

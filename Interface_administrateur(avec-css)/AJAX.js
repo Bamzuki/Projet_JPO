@@ -2,6 +2,7 @@ var listeFormations = [];
 var listeFilieres = [];
 var listeBatiments = [];
 var listeEcoles = [];
+var listeUtilisateurs=[];
 
 function getListeNomNiveaux(idSelectNiveau){
   // Mise à jour de la liste des noms des niveaux depuis le serveur
@@ -412,6 +413,91 @@ function getListeBatiment(){
 }
 
 
+function getListeUtilisateur(){
+  var request = "request=listeUtilisateurs";
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    listeUtilisateurs = JSON.parse(ajax.response);
+
+    // Remplissage du tableau
+    var tableau = document.getElementById("resultats_utilisateurs");
+    tableau.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Prenom";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Nom";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "pseudo";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "email";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "mdp";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "admin";
+    ligne.appendChild(element);
+	element = document.createElement("td");
+    element.innerHTML = "Modifier";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Supprimer";
+    ligne.appendChild(element);
+
+    tableau.appendChild(ligne);
+
+
+    for (var i = 0; i < listeUtilisateurs.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeUtilisateurs[i].prenom;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeUtilisateurs[i].nom;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeUtilisateurs[i].pseudo;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeUtilisateurs[i].email;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeUtilisateurs[i].mdp;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeUtilisateurs[i].admin;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      boutonModifier = document.createElement("button");
+      boutonModifier.setAttribute("id", "bouton-modifier-utilisateur" + i);
+      boutonModifier.setAttribute("class", "modifier_utilisateur")
+      boutonModifier.innerHTML = "<img src='boutons/modifier.png' onClick='changeUtilisateur(" + i + ")' alt='Oups !'>";
+      element.appendChild(boutonModifier);
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      boutonSupprimer = document.createElement("button");
+      boutonSupprimer.setAttribute("id", "supprimer-utilisateur"+i);
+      boutonSupprimer.setAttribute("class", "supprimer_utilisateur");
+      boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")' alt='Oups !'>";
+      element.appendChild(boutonSupprimer);
+      ligne.appendChild(element);
+
+      tableau.appendChild(ligne);
+    }
+  });
+  ajax.send(request);
+}
+
 function saveEcole(){
   // Enregistrement d'une école dans la base de données
   var input_nom         = document.getElementById("input_ecole").value;
@@ -507,6 +593,27 @@ function saveFormation(){
   });
   ajax.send('request=saveFormation&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&ecole=' + input_ecole + '&&batiment=' + input_batiment + '&&filiere=' + input_filiere);
 }
+
+function saveUtilisateur(){
+  // Enregistrement d'une formations dans la base de données
+  var input_prenom_utilisateur      = document.getElementById("input_prenom_utilisateur").value;
+  var input_nom_utilisateur  = document.getElementById("input_nom_utilisateur").value;
+  var input_pseudo    = document.getElementById("input_pseudo").value;
+  var input_email = document.getElementById("input_email").value;
+  var input_mdp = document.getElementById("input_mdp").value;
+   var input_admin  = document.getElementById("input_admin").value;
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=saveUtilisateur&&prenom=' + input_prenom_utilisateur + '&&nom=' + input_nom_utilisateur + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    var response = ajax.response;
+    console.log(response);
+	getListeUtilisateur();
+  });
+  ajax.send('request=saveUtilisateur&&prenom=' + input_prenom_utilisateur + '&&nom=' + input_nom_utilisateur + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin);
+} 
+
+
 
 
 function changeEcole(i){
@@ -932,6 +1039,159 @@ function annulechangeFormation(i){
   bouton_annuler.innerHTML  = "<button  id='supprimer-formation"+i+"' class='supprimer_formation'> <img src='boutons/supprimer.png' onClick='deleteFormation(" + i + ")'alt='Oups'> </button>"
 }
 
+function changeUtilisateur(i){
+  bouton  = document.getElementById("bouton-modifier-utilisateur"+i);
+  //boucle qui transforme la ligne
+  var papa              = bouton.parentNode;
+  var papi              = papa.parentNode;
+  var prenom               = papi.children[0];
+  prenom.innerHTML         = "<input id='modif_prenom_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].prenom+"'>";
+  var nom           = papi.children[1];
+  nom.innerHTML      = "<input id='modif_nom_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].nom+"'>";
+  var pseudo         = papi.children[2];
+  pseudo.innerHTML    = "<input id='modif_pseudo_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].pseudo+"'>";
+  var email      = papi.children[3];
+  email.innerHTML = "<input id='modif_email_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].email+"'>";
+  var mdp        = papi.children[4];
+  mdp.innerHTML  = "<input id='modif_mdp_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].mdp+"'>";
+  var admin        = papi.children[5];
+ admin.innerHTML  = "<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")''>";
+
+
+
+  //on met en place les deux nouveaux boutons
+  var bouton_valider         = papi.children[6];
+  bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-utilisateur" + i + "' class='modifier_utilisateur'  onClick='validechangeUtilisateur("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
+  var bouton_annuler         = papi.children[7];
+  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-utilisateur" + i + "' class='supprimer_utilisateur' onClick='annulechangeUtilisateur("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+ }
+
+ function check_admin(i){
+  bouton  = document.getElementById("bouton-valider-modifications-utilisateur"+i);
+  var papa               = bouton.parentNode;
+  var papi               = papa.parentNode;
+  var admin        = papi.children[5];
+  admin.value="t"
+
+ }
+
+function validechangeUtilisateur(i){
+
+  bouton    = document.getElementById("bouton-valider-modifications-utilisateur" + i);
+  var papa  = bouton.parentNode;
+  var papi  = papa.parentNode;
+
+  var input_id     = listeUtilisateurs[i].id;
+
+  var input_prenom         = document.getElementById("modif_prenom_utilisateur" + i + "").value;
+  var input_nom      = document.getElementById("modif_nom_utilisateur" + i + "").value;
+  var input_pseudo    = document.getElementById("modif_pseudo_utilisateur" + i + "").value;
+  var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
+  var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
+  var input_admin  =  document.getElementById("modif_admin_utilisateur" + i + "").value;
+ 
+
+
+  if(input_prenom == ""){
+    // input_nom= listeEcoles[input_id].nom;
+    input_prenom = listeUtilisateurs[i].prenom;
+  }
+
+
+  if(input_nom == ""){
+    // input_site=listeEcoles[input_id].site;
+    input_nom = listeUtilisateurs[i].nom;
+  }
+
+
+  if(input_pseudo == ""){
+    // input_description=listeEcoles[input_id].description;
+    input_pseudo = listeUtilisateurs[i].pseudo;
+  }
+
+  if(input_email == ""){
+    // input_description=listeEcoles[input_id].description;
+    input_email = listeUtilisateurs[i].email;
+  }
+
+  if(input_mdp == ""){
+    // input_description=listeEcoles[input_id].description;
+    input_mdp = listeUtilisateurs[i].mdp;
+  }
+  
+  if(input_admin == ""){
+    // input_description=listeEcoles[input_id].description;
+    input_admin = listeUtilisateurs[i].admin;
+  }
+
+  var ajax = new XMLHttpRequest();
+
+  ajax.open('GET', 'serveur.php/?request=changeUtilisateur&&id=' + input_id + '&&prenom=' + input_prenom + '&&nom=' + input_nom + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin );
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    var response = ajax.response;
+    getListeUtilisateur();
+	console.log(response);
+  });
+
+  ajax.send('request=changeUtilisateur&&id=' + input_id + '&&prenom=' + input_prenom + '&&nom=' + input_nom + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin  );
+  
+  // on change de nouveau la ligne (normalement avec le changement)
+  //boucle qui retransforme la ligne
+
+ 
+  getListeUtilisateur();
+  //boucle qui transforme la ligne
+  var papa               = bouton.parentNode;
+  var papi               = papa.parentNode;
+  var prenom                = papi.children[0];
+  prenom.innerHTML          = listeUtilisateurs[i].prenom;
+  var nom             = papi.children[1];
+  nom.innerHTML       = listeUtilisateurs[i].nom;
+  var pseudo           = papi.children[2];
+  pseudo.innerHTML     = listeUtilisateurs[i].pseudo;
+  var email        = papi.children[3];
+  email.innerHTML  = listeUtilisateurs[i].email;
+  var mdp         = papi.children[4];
+  mdp.innerHTML   = listeUtilisateurs[i].mdp;
+  var admin       = papi.children[5];
+  admin.innerHTML   = listeUtilisateurs[i].admin;
+
+  //on met en place les deux nouveaux boutons
+  var bouton_valider        = papi.children[6];
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_utilisateur' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  var bouton_annuler        = papi.children[7];
+  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_utilisateur'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
+}
+
+
+function annulechangeUtilisateur(i){
+  //on refait la fonction de changement à l'envers
+  bouton  = document.getElementById("bouton-valider-modifications-utilisateur"+i);
+  getListeUtilisateur();
+  //boucle qui transforme la ligne
+  var papa               = bouton.parentNode;
+  var papi               = papa.parentNode;
+  var prenom                = papi.children[0];
+  prenom.innerHTML          = listeUtilisateurs[i].prenom;
+  var nom             = papi.children[1];
+  nom.innerHTML       = listeUtilisateurs[i].nom;
+  var pseudo           = papi.children[2];
+  pseudo.innerHTML     = listeUtilisateurs[i].pseudo;
+  var email        = papi.children[3];
+  email.innerHTML  = listeUtilisateurs[i].email;
+  var mdp         = papi.children[4];
+  mdp.innerHTML   = listeUtilisateurs[i].mdp;
+  var admin       = papi.children[5];
+  admin.innerHTML   = listeUtilisateurs[i].admin;
+
+  //on met en place les deux nouveaux boutons
+  var bouton_valider        = papi.children[6];
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_utilisateur' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  var bouton_annuler        = papi.children[7];
+  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_utilisateur'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
+}
+
 
 function deleteBatiment(i) {
   // Suppression d'un batiment dans la base de données
@@ -1028,6 +1288,25 @@ function deleteFormation(i) {
 }
 
 
+
+function deleteUtilisateur(i) {
+  // Suppression d'un batiment dans la base de données
+  var input_id  = listeUtilisateurs[i].id;
+  var ajax      = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=deleteUtilisateur&&id=' + input_id );
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    console.log(input_id);
+    var response = ajax.response;
+    getListeUtilisateur();
+	console.log(response);
+  });
+
+  ajax.send('request=deleteUtilisateur&&id=' + input_id );
+}
+
+
+
 // I - Chargement des listes des noms des différentes
 getListeNomNiveaux("filtre-niveau");
 getListeNomEcoles("filtre-ecole1");
@@ -1039,3 +1318,4 @@ getListeNomFilieres("filtre-filiere2");
 getListeNomFonctions("filtre-fonction");
 getListeEcole();
 getListeFiliere();
+getListeUtilisateur();
