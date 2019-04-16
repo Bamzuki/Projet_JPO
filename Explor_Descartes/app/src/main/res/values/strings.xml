@@ -2,17 +2,24 @@
     <string name="app_name">Explor_Descartes</string>
 
     <!-- Ressources relatives à activity_main-->
+    <string name="title_activity_accueil">AccueilActivity</string>
+    <string name="cfa">cfa</string>
+    <string name="compagnon">compagnon</string>
+    <string name="esiee">ESIEE</string>
+    <string name="ensg">ENSG</string>
+    <string name="eso">ESO</string>
+    <string name="eavt">EAVT</string>
+    <string name="upem">UPEM</string>
+    <string name="upe">UPE</string>
+    <string name="pvm">PVM</string>
     <string name="nom_appli">Explor\'Descartes</string>
-    <string name="description">Inscrivez-vous pour programmer votre journée porte ouverte dès maintenant.</string>
-    <string name="connexionT">Vous avez déjà un compte ? </string>
-    <string name="inscriptionT">Vous n\'avez pas encore de compte ? </string>
-    <string name="connexionB">Connectez-vous</string>
-    <string name="inscriptionB">Inscrivez-vous</string>
     <string name="ignorerT">Vous ne souhaitez pas vous identifier ?</string>
-    <string name="title_activity_login">Sign in</string>
-    <string name="ignorerB">Acceder directement au contenu</string>
+    <string name="ignorerB">Continuer sans se connecter</string>
     <string name="ou">ou</string>
-    <string name="inscription_b">Accepter et s\'inscrire</string>
+    <string name="logo">logo</string>
+    <string name="inscriptionT">Vous n\'avez pas encore de compte ?</string>
+    <string name="InscriptionB">Inscrivez-vous</string>
+    <string name="connexion_mode">Se connecter avec :</string>
 
     <!-- Ressources relatives à activity_register-->
     <string name="accord">En vous inscrivant vous acceptez les conditions générales d\'utilisation et la politique de confidentialité de l\'application.</string>
@@ -20,20 +27,29 @@
     <string name="mail">E-mail</string>
     <string name="nom">Nom (Facultatif)</string>
     <string name="pseudo">Pseudo</string>
-    <string name="alternativeI">Inscription via un réseau social :</string>
-    <string name="classiqueI">Inscription classique :</string>
-    <string name="facebookT">Connexion via facebook</string>
-    <string name="instagramT">Connexion via Instagram</string>
-    <string name="googleT">Descripion via Google</string>
     <string name="mdp">Mot de passe</string>
     <string name="mdp_confirmation">Confirmation du mot de passe</string>
+    <string name="inscription_mail">Inscription avec un e-mail :</string>
+    <string name="inscription_b">Accepter et s\'inscrire</string>
+    <string name="connexionT">Vous avez déjà un compte ?</string>
+    <string name="connexionB">Connectez-vous</string>
 
-    <!-- Ressources relatives à activity_register-->
-    <string name="alternativeC">Connexion via un réseau social :</string>
-    <string name="classiqueC">Connexion classique :</string>
-    <string name="title_activity_settings">Settings</string>
+
+    <!-- Ressources relatives à activity_sign_in-->
+    <string name="connexion_mail">Connexion avec un e-mail :</string>
+    <string name="connexion">Connexion</string>
+
+
+    <!-- Ressources relatives à activity_navigation-->
+    <string name="access_token" translatable="false">pk.eyJ1IjoiZGVwYXVsaXNodWdvIiwiYSI6ImNqdHI5bjM5aTBjeG8zeWw4Nm5uNXFwbDcifQ.EsWiJlDgHixCg318wbfR4A</string>
+    <string name="user_location_permission_explanation">EXPLANATION_HERE</string>
+    <string name="user_location_permission_not_granted">Localisation non permise</string>
+
+    <!-- Ressources relatives à la connexion à la base de données-->
+    <string name="url_serveur_ecoles">http://82.229.248.34/serveur.php/</string>
 
     <!-- Ressources relatives aux réglages -->
+    <string name="title_activity_settings">Settings</string>
 
     <!-- Example General settings -->
     <string name="pref_header_general">General</string>

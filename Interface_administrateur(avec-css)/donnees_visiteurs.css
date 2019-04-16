@@ -1,0 +1,85 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#banierre {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(179, 181, 193);
+}
+
+#logo {
+  width: 15%;
+  height: auto;
+  margin: 2%;
+}
+
+#logo img {
+  width: 100%;
+  height: auto;
+}
+
+#banierre h1 {
+  color: white;
+  margin: auto;
+  font-size: 7.5vw;
+  text-align: center;
+}
+
+#corps {
+  width: 100%;
+  overflow: hidden;
+  background: white;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#corps input[type="radio"],
+#corps input[type="checkbox"] {
+  display: none;
+}
+
+label {
+  width: 98%;
+  overflow: hidden;
+  background: rgb(53, 53, 140);
+  font-size: 2vw;
+  color: white;
+  padding: 1%;
+}
+
+#option {
+  cursor: pointer;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+}
+
+input:checked + #option {
+  height: 3%;
+  opacity: 1;
+  padding: 1% 0 1% 0;
+  font-size: 1.5vw;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+table {
+  width: 95%;
+  text-align: center;
+  border: solid 2px black;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: thin solid black;
+}

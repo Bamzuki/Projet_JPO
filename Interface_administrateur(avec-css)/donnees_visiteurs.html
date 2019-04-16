@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Données visiteurs</title>
+    <link rel="stylesheet" href="donnees_visiteurs.css">
+  </head>
+  <body>
+    <div id="banierre">
+      <a href="index.html" id="logo"><img src="logo.png" alt="Logo non disponible"></a>
+      <h1>Admin'Descartes</h1>
+    </div>
+
+    <ul id="corps">
+
+      <label for="profils"> Consulter les profils des visiteurs </label>
+      <input id="profils" name="menu" type="radio" />
+
+      <ul id="option">
+
+        <form action="page.php" method="get">
+          Niveau: <select name="niveau"></select>
+          Filière: <select name="filière"></select>
+        </form>
+
+        <table border="1">
+          <th> nom </th>
+          <th> niveau </th>
+          <th> filière </th>
+        </table>
+
+      </ul>
+
+      <label for="reponses"> Consulter les réponses au questionnaire </label>
+      <input id="reponses" name="menu" type="radio" />
+
+      <ul id="option">
+
+        <table border="1">
+          <th> Question 1 </th>
+          <th> Question 2 </th>
+          <th> Question 3 </th>
+          <th> Question 4 </th>
+          <th> Question 5 </th>
+          <th> Question 6 </th>
+          <th> Question 7 </th>
+        </table>
+
+      </ul>
+
+    </ul>
+
+  </body>
