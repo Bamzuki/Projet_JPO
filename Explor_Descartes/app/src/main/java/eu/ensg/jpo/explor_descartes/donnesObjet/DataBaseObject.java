@@ -8,4 +8,7 @@ public abstract class DataBaseObject {
         this.id = id;
     }
 
+    public int getId() {
+        return id;
+    }
 }

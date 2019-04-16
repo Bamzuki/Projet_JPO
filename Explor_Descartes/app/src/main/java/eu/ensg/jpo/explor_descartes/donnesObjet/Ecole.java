@@ -5,12 +5,14 @@ import java.net.URL;
 public class Ecole extends DataBaseObject{
 
     private String nom;
-    private URL site;
+    private String adresse;
+    private String site;
     private String description;
 
-    public Ecole(int id, String nom, URL site, String description) {
+    public Ecole(int id, String nom, String adresse, String site, String description) {
         super(id);
         this.nom = nom;
+        this.adresse = adresse;
         this.site = site;
         this.description = description;
     }
@@ -23,11 +25,19 @@ public class Ecole extends DataBaseObject{
         this.nom = nom;
     }
 
-    public URL getSite() {
+    public String getAdresse() {
+        return adresse;
+    }
+
+    public void setAdresse(String adresse) {
+        this.adresse = adresse;
+    }
+
+    public String getSite() {
         return site;
     }
 
-    public void setSite(URL site) {
+    public void setSite(String site) {
         this.site = site;
     }
 

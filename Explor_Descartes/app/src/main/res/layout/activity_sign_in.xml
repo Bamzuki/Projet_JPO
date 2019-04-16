@@ -44,7 +44,7 @@
         android:orientation="vertical"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        app:layout_constraintBottom_toTopOf="@+id/connexionB"
+        app:layout_constraintBottom_toTopOf="@+id/email"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/classiqueC">
@@ -83,7 +83,7 @@
     </LinearLayout>
 
     <Button
-        android:id="@+id/connexionB"
+        android:id="@+id/email"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_margin="10dp"
@@ -106,7 +106,7 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/connexionB">
+        app:layout_constraintTop_toBottomOf="@+id/email">
 
         <TextView
             android:id="@+id/inscriptionT"

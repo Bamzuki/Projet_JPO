@@ -27,7 +27,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // I - Instanciation des objets Java représentant les composants graphiques
 
-        connexionB   = (Button)findViewById(R.id.connexionB);
+        connexionB   = (Button)findViewById(R.id.email);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 

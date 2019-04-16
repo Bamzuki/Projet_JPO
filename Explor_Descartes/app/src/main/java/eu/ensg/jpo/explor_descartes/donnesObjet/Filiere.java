@@ -4,7 +4,7 @@ public class Filiere extends DataBaseObject {
 
     private String nom;
 
-    Filiere(int id, String nom) {
+    public Filiere(int id, String nom) {
         super(id);
         this.nom = nom;
     }

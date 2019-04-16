@@ -11,7 +11,7 @@ import eu.ensg.jpo.explor_descartes.R;
 public class BddEcoles {
 
     private static Connection connection = null;
-    private static String url = "jdbc:postgresql://82.229.248.34:5432";
+    private static String url = "jdbc:postgresql://82.229.248.34:5432/test-JPO";
     private static final String user = "postgres";
     private static final String passwd = "postgres";
 
@@ -23,12 +23,13 @@ public class BddEcoles {
                 System.out.println("Connexion etablie avec succes !");
             }
             catch(Exception e){
-                    e.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+                e.printStackTrace(); // pour gerer les erreurs (pas de pilote, base inexistante, etc.)
+                System.out.println("La connexion n'a pas pu être établie.");
             }
             finally{
-                    if(connection != null){
-                        connection.close(); // toujours fermer les differentes ressources quand il n’y en as plus besoin
-                    }
+                if(connection != null){
+                    connection.close(); // toujours fermer les differentes ressources quand il n’y en as plus besoin
+                }
             }
         }
         return connection;
