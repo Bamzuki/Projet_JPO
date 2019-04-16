@@ -49,7 +49,7 @@
         app:layout_constraintTop_toBottomOf="@+id/classiqueI">
 
         <EditText
-            android:id="@+id/prenom"
+            android:id="@+id/prenomET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:autofillHints=""
@@ -64,78 +64,78 @@
             tools:targetApi="o" />
 
         <EditText
-            android:id="@+id/nom"
+            android:id="@+id/nomET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:autofillHints=""
             android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/nom"
             android:inputType="textPersonName"
             android:padding="5dp"
-            android:layout_marginTop="3dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/pseudo"
+            android:id="@+id/pseudoET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:autofillHints=""
             android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/pseudo"
             android:inputType="textPersonName"
             android:padding="5dp"
-            android:layout_marginTop="3dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/mail"
+            android:id="@+id/mailET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:autofillHints=""
             android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/mail"
             android:inputType="textEmailAddress"
             android:padding="5dp"
-            android:layout_marginTop="3dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
 
 
         <EditText
-            android:id="@+id/mdp"
+            android:id="@+id/mdpET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:autofillHints=""
             android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/mdp"
             android:inputType="textPassword"
             android:padding="5dp"
-            android:layout_marginTop="3dp"
             android:selectAllOnFocus="false"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
 
         <EditText
-            android:id="@+id/mdp_confirm"
+            android:id="@+id/mdp_confirmET"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="3dp"
             android:autofillHints=""
             android:background="@drawable/rectangle"
             android:ems="10"
             android:hint="@string/mdp_confirmation"
             android:inputType="textPassword"
             android:padding="5dp"
-            android:layout_marginTop="3dp"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp" />
@@ -153,13 +153,13 @@
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/black"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/validation"
+        app:layout_constraintBottom_toTopOf="@+id/validationB"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formulaireC" />
 
     <Button
-        android:id="@+id/validation"
+        android:id="@+id/validationB"
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="10dp"
@@ -183,7 +183,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/validation">
+        app:layout_constraintTop_toBottomOf="@+id/validationB">
 
         <TextView
             android:id="@+id/connexionT"

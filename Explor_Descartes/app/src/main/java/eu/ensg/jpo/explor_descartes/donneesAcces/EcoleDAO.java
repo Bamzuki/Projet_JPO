@@ -21,18 +21,18 @@ public class EcoleDAO extends BddEcolesDAO<Ecole>{
     }
 
     @Override
-    public Ecole create(Ecole Ecole) {
-        return null;
+    public void create(Ecole Ecole) {
+        return;
     }
 
     @Override
-    public boolean delete(Ecole Ecole) {
-        return false;
+    public void delete(Ecole Ecole) {
+        return;
     }
 
     @Override
-    public boolean update(Ecole Ecole) {
-        return false;
+    public void update(Ecole Ecole) {
+        return;
     }
 
     public void chargerEcole() {
