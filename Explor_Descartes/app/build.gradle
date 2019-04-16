@@ -31,4 +31,5 @@ dependencies {
     implementation 'com.mapbox.mapboxsdk:mapbox-android-sdk:7.2.0'
     implementation 'com.squareup.okhttp3:okhttp:3.12.1'
     implementation 'com.google.code.gson:gson:2.6.2'
+    implementation 'com.sun.mail:javax.mail:1.6.2'
 }

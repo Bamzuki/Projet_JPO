@@ -2,9 +2,6 @@ package eu.ensg.jpo.explor_descartes.donnesObjet;
 
 public class Visiteur extends DataBaseObject{
 
-
-
-
     private String prenom;
     private String nom;
     private String pseudo;
@@ -14,6 +11,15 @@ public class Visiteur extends DataBaseObject{
 
     public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
         super(id);
+        this.prenom = prenom;
+        this.nom = nom;
+        this.pseudo = pseudo;
+        this.email = email;
+        this.mdp = mdp;
+        this.admin = admin;
+    }
+    public Visiteur(String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
+        super(0);
         this.prenom = prenom;
         this.nom = nom;
         this.pseudo = pseudo;

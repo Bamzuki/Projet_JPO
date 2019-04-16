@@ -21,18 +21,18 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
     }
 
     @Override
-    public Formation create(Formation Formation) {
-        return null;
+    public void create(Formation Formation) {
+        return;
     }
 
     @Override
-    public boolean delete(Formation Formation) {
-        return false;
+    public void delete(Formation Formation) {
+        return;
     }
 
     @Override
-    public boolean update(Formation Formation) {
-        return false;
+    public void update(Formation Formation) {
+        return;
     }
 
     public void chargerFormation() {
