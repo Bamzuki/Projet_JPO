@@ -45,6 +45,15 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    private void openAccueilActivity() {
+
+        // Create intent
+        Intent intent = new Intent(this, AccueilActivity.class);
+
+        // Start activity
+        startActivity(intent);
+    }
+
     private void inscription() {
 
         // Récupération des valeurs entrées :
@@ -79,9 +88,14 @@ public class RegisterActivity extends AppCompatActivity {
 
         // Enregistrement dans la base de données :
         String urlServeur = getString(R.string.url_serveur_ecoles);
-        Visiteur newVisiteur = new Visiteur(prenom, nom, pseudo, mail, mdp, false);
+        try {
+            Visiteur newVisiteur = new Visiteur(prenom, nom, pseudo, mail, SHA.encode(mdp), false);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
         //visiteurDAO.create(newVisiteur);
+        openAccueilActivity();
 
     }
 
