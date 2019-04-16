@@ -1,5 +1,9 @@
 ﻿CREATE TABLE Visiteur
 (
-    pseudo VARCHAR(100),
-    email VARCHAR(100)
+    nom VARCHAR(100),
+    mdp VARCHAR(100),
+	admin boolean
+	
 )
+
+INSERT INTO utilisateurs (nom,mdp,admin) VALUES ('Lucas','Tacito','TRUE');
