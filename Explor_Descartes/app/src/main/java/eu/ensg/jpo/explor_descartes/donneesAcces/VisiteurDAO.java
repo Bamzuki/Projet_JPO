@@ -87,5 +87,6 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
     public void getVisiteurByEmailAndMdp(String pseudo, String mdp) {
         return;
     }
+
 }
 
