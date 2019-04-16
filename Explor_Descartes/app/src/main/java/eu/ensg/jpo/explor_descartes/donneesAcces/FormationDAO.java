@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 
+import eu.ensg.jpo.explor_descartes.EcoleActivity;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Formation;
 import okhttp3.Call;
@@ -21,18 +22,18 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
     }
 
     @Override
-    public Formation create(Formation Formation) {
-        return null;
+    public void create(Formation Formation) {
+        return;
     }
 
     @Override
-    public boolean delete(Formation Formation) {
-        return false;
+    public void delete(Formation Formation) {
+        return;
     }
 
     @Override
-    public boolean update(Formation Formation) {
-        return false;
+    public void update(Formation Formation) {
+        return;
     }
 
     public void chargerFormation() {
@@ -56,5 +57,28 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
             }
         });
 
+    }
+
+    public void afficherFromation(EcoleActivity activity){
+        // Construction de la requete
+        String url = this.urlServeur + "?request=listeFormations";
+        String donnees = "&&filtreEcole="; //+ activity.getEcole().getNom();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                Type listType = new TypeToken<ArrayList<Formation>>(){}.getType();
+                ArrayList<Formation> listeFormation = new Gson().fromJson(response.body().string(), listType);
+                // A compléter ici ! (listeFormation contient toutes les formations de l'ecole choisie.
+                // Ne t'énerves pas si ça ne marche, ça peut provenir de mon code !
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
     }
 }

@@ -4,11 +4,11 @@ public class Formation extends DataBaseObject {
 
     private String nom;
     private String niveau;
-    private Ecole ecole;
-    private Batiment batiment;
-    private Filiere filiere;
+    private String ecole;
+    private String batiment;
+    private String filiere;
 
-    public Formation(int id, String nom, String niveau, Ecole ecole, Batiment batiment, Filiere filiere) {
+    public Formation(int id, String nom, String niveau, String ecole, String batiment, String filiere) {
         super(id);
         this.nom = nom;
         this.niveau = niveau;
@@ -33,27 +33,27 @@ public class Formation extends DataBaseObject {
         this.niveau = niveau;
     }
 
-    public Ecole getEcole() {
+    public String getEcole() {
         return ecole;
     }
 
-    public void setEcole(Ecole ecole) {
+    public void setEcole(String ecole) {
         this.ecole = ecole;
     }
 
-    public Batiment getBatiment() {
+    public String getBatiment() {
         return batiment;
     }
 
-    public void setBatiment(Batiment batiment) {
+    public void setBatiment(String batiment) {
         this.batiment = batiment;
     }
 
-    public Filiere getFiliere() {
+    public String getFiliere() {
         return filiere;
     }
 
-    public void setFiliere(Filiere filiere) {
+    public void setFiliere(String filiere) {
         this.filiere = filiere;
     }
 

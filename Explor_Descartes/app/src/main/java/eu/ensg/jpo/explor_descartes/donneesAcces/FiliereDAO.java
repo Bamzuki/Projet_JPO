@@ -1,10 +1,5 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-
 import eu.ensg.jpo.explor_descartes.donnesObjet.Filiere;
 
 public class FiliereDAO extends BddEcolesDAO<Filiere> {
@@ -14,18 +9,18 @@ public class FiliereDAO extends BddEcolesDAO<Filiere> {
     }
 
     @Override
-    public Filiere create(Filiere filiere) {
-        return null;
+    public void create(Filiere filiere) {
+        return;
     }
 
     @Override
-    public boolean delete(Filiere filiere) {
-        return false;
+    public void delete(Filiere filiere) {
+        return;
     }
 
     @Override
-    public boolean update(Filiere filiere) {
-        return false;
+    public void update(Filiere filiere) {
+        return;
     }
 
     /**
