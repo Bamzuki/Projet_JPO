@@ -1,9 +1,13 @@
 <?php
+
 // O - Variables globales
+
 $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
 
 // I - Fonctions :
-// I.1 Fonctions GET ID :
+
+// I.1 Fonctions intermédiaires :
+
 function getIdEcole($nom){
   //Cette fonction renvoie l'id d'une école depuis son nom
   global $link;
@@ -14,6 +18,7 @@ function getIdEcole($nom){
     return $id_ecole;
   }
 }
+
 function getIdBatiment($nom){
   //Cette fonction renvoie l'id d'un bâtiment depuis son nom
   global $link;
@@ -24,6 +29,7 @@ function getIdBatiment($nom){
     return $id_batiment;
   }
 }
+
 function getIdFiliere($nom){
   //Cette fonction renvoie l'id d'une filière depuis son nom
   global $link;
@@ -34,6 +40,20 @@ function getIdFiliere($nom){
     return $id_filiere;
   }
 }
+
+function getListeIdFavoris($idUtilisateur){
+  //Cette fonction renvoie la liste des id des favoris d'un utilisateur
+  global $link;
+  $requete = "SELECT idFavoris FROM favoris WHERE idUtilisateur=" . $idUtilisateur;
+  $result = pg_query($link, $requete);
+  $listeIdFavoris = array()
+  while ($row = pg_fetch_row($result)) {
+    $listeIdFavoris[] = $row[0];
+  }
+  return $listeIdFavoris;
+}
+  
+	
 // I.2 Fonctions GET :
 function getListeNomObjets($nomTable){
   //Cette fonction renvoie une liste des noms des objets de la table rentrée en argument
@@ -160,6 +180,27 @@ function getListeUtilisateurs($filtreAdmin){
   }
   
   return $response;
+}
+
+function getLastUtilisateur(){
+  //Cette fonction renvoie le dernier utilisateur créé
+  global $link;
+  $requete = "SELECT id, prenom, nom, pseudo, email FROM utilisateurs WHERE id=MAX(id)";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+	  $id = $row[0]
+      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . ', "nom":"' . $row[2] . ', "pseudo":"' . $row[3] . ', "email":"' . $row[4] . ', "admin":' . $row[5] .', "listeFavoris"=';
+    }
+    
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+  return $response;
+  
 }
 
 function getBatimentById($id){
