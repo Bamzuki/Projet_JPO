@@ -32,14 +32,27 @@
             <input type="text" id="input_pseudo" placeholder="Pseudo">
             <input type="text" id="input_email" placeholder="Email">
 			<input type="text" id="input_mdp" placeholder="Mdp">
-            <input type="text" id="input_admin" placeholder="Admin">
+            <select id="input_admin">
+			<option value="true">Administrateur</option>
+            <option value="false">Visiteur</option>
+			</select>
           </form>
 
-          <button class="valider" id="bouton-utilisateur"  onClick="saveUtilisateur()"> <img src="boutons/valider.png" alt="Ajouter un utilisateur à la table"> </button>
+          <button class="valider" id="bouton-utilisateur1"  onClick="saveUtilisateur()"> <img src="boutons/valider.png" alt="Ajouter un utilisateur à la table"> </button>
 
        
         </ul>
       </li>
+	  
+	   <form action="serveur.php" method="get">
+            Filtre utilisateur: <select id="filtre-admin">
+			<option value="*">Tous</option>
+			<option value="true">Admin</option>
+			<option value="false">Visiteurs</option>
+			</select>
+          </form>
+		  Sélectionner un type d'utilisateur
+		  <button class="get" id="bouton-utilisateur2"  onClick="getListeUtilisateur()"> <img src="boutons/valider.png" alt="Ajouter un utilisateur à la table"> </button>
 
         <table id="resultats_utilisateurs" border="1">
           <th> id </th>

@@ -97,6 +97,32 @@ function getListeNomFilieres(idSelectFiliere){
 }
 
 
+// function getListeNomAdmin(idSelectFiliere){
+
+  // var ajax = new XMLHttpRequest()
+  // ajax.open('GET', 'serveur.php/?request=listeNomObjets&&nomTable=filieres');
+  // ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  // ajax.addEventListener('load',  function () {
+    // var listeNomFilieres = JSON.parse(ajax.response);
+    // var select_filiere = document.getElementById(idSelectFiliere);
+    // var newOption = document.createElement("option");
+    // newOption.value = '*';
+    // newOption.text = 'Toutes';
+    // select_filiere.appendChild(newOption);
+    // for (var i = 0; i < listeNomFilieres.length; i++){
+      // var newOption = document.createElement("option");
+      // newOption.value = listeNomFilieres[i];
+      // newOption.text = listeNomFilieres[i];
+      // select_filiere.appendChild(newOption);
+      // }
+    // });
+    // ajax.send('request=listeNomObjets&&nomTable=filieres');
+// }
+
+
+
+
+
 function getListeNomFonctions(idSelectFonction){
   // Mise à jour de la liste des noms des fonctions depuis le serveur
   var ajax = new XMLHttpRequest()
@@ -414,7 +440,13 @@ function getListeBatiment(){
 
 
 function getListeUtilisateur(){
-  var request = "request=listeUtilisateurs";
+  var filtre_admin   = document.getElementById("filtre-admin").value;
+  console.log(filtre_admin);
+  var request = "request=listeUtilisateurs"
+  if (filtre_admin != "*"){
+    request += "&&filtreAdmin=" + filtre_admin;
+  }
+ 
   var ajax    = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?'+request);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -1055,8 +1087,9 @@ function changeUtilisateur(i){
   var mdp        = papi.children[4];
   mdp.innerHTML  = "<input id='modif_mdp_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].mdp+"'>";
   var admin        = papi.children[5];
- admin.innerHTML  = "<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")''>";
-
+  admin.innerHTML  = "<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")'  '>";
+  admin.checked='false';
+  console.log(admin.checked);
 
 
   //on met en place les deux nouveaux boutons
@@ -1071,8 +1104,20 @@ function changeUtilisateur(i){
   var papa               = bouton.parentNode;
   var papi               = papa.parentNode;
   var admin        = papi.children[5];
-  admin.value="t"
 
+  if(admin.checked=='false'){
+  admin.innerHTML="<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='t' onclick='check_admin("+i+")' checked='true''>";
+  admin.checked='true';
+  admin.value='t';
+  console.log(admin.value);
+  }else{
+    admin.innerHTML="<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")' '>";
+	admin.value='f';
+	admin.checked='false';
+    console.log(admin.value); 
+  }
+  
+  
  }
 
 function validechangeUtilisateur(i){
@@ -1089,7 +1134,7 @@ function validechangeUtilisateur(i){
   var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
   var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
   var input_admin  =  document.getElementById("modif_admin_utilisateur" + i + "").value;
- 
+  console.log(input_admin);
 
 
   if(input_prenom == ""){
@@ -1319,3 +1364,4 @@ getListeNomFonctions("filtre-fonction");
 getListeEcole();
 getListeFiliere();
 getListeUtilisateur();
+
