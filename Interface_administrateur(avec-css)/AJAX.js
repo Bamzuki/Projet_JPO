@@ -457,9 +457,6 @@ function getListeUtilisateur(){
     element.innerHTML = "email";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "mdp";
-    ligne.appendChild(element);
-    element = document.createElement("td");
     element.innerHTML = "admin";
     ligne.appendChild(element);
 	element = document.createElement("td");
@@ -486,9 +483,6 @@ function getListeUtilisateur(){
       ligne.appendChild(element);
       element = document.createElement("td");
       element.innerHTML = listeUtilisateurs[i].email;
-      ligne.appendChild(element);
-	  element = document.createElement("td");
-      element.innerHTML = listeUtilisateurs[i].mdp;
       ligne.appendChild(element);
 	  element = document.createElement("td");
       element.innerHTML = listeUtilisateurs[i].admin;
@@ -1164,18 +1158,17 @@ function changeUtilisateur(i){
   pseudo.innerHTML    = "<input id='modif_pseudo_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].pseudo+"'>";
   var email      = papi.children[3];
   email.innerHTML = "<input id='modif_email_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].email+"'>";
-  var mdp        = papi.children[4];
-  mdp.innerHTML  = "<input id='modif_mdp_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].mdp+"'>";
-  var admin        = papi.children[5];
-  admin.innerHTML  = "<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")'  '>";
+  var admin        = papi.children[4];
+  admin.innerHTML  = "<select id='modif_admin_utilisateur" + i + "'><option value='t'>Oui</option><option value='f'>Non</option></select>";
   admin.checked='false';
   console.log(admin.checked);
+  console.log(admin);
 
 
   //on met en place les deux nouveaux boutons
-  var bouton_valider         = papi.children[6];
+  var bouton_valider         = papi.children[5];
   bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-utilisateur" + i + "' class='modifier_filiere'  onClick='validechangeUtilisateur("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
-  var bouton_annuler         = papi.children[7];
+  var bouton_annuler         = papi.children[6];
   bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-utilisateur" + i + "' class='supprimer_filiere' onClick='annulechangeUtilisateur("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
 
@@ -1212,7 +1205,7 @@ function validechangeUtilisateur(i){
   var input_nom      = document.getElementById("modif_nom_utilisateur" + i + "").value;
   var input_pseudo    = document.getElementById("modif_pseudo_utilisateur" + i + "").value;
   var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
-  var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
+  // var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
   var input_admin  =  document.getElementById("modif_admin_utilisateur" + i + "").value;
   console.log(input_admin);
 
@@ -1239,10 +1232,10 @@ function validechangeUtilisateur(i){
     input_email = listeUtilisateurs[i].email;
   }
 
-  if(input_mdp == ""){
-    // input_description=listeEcoles[input_id].description;
-    input_mdp = listeUtilisateurs[i].mdp;
-  }
+  // if(input_mdp == ""){
+
+    // input_mdp = listeUtilisateurs[i].mdp;
+  // }
   
   if(input_admin == ""){
     // input_description=listeEcoles[input_id].description;

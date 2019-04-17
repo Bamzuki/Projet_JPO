@@ -30,35 +30,114 @@ body {
   text-align: center;
 }
 
-#boutons {
+#menu {
   display: flex;
-  justify-content: space-around;
-  flex-direction: row;
-}
-
-#ecoles {
-  display: flex;
-  justify-content: space-around;
   flex-direction: column;
   align-items: center;
-  font-size: 2vw;
+  overflow: hidden;
+  width: 95%;
+  background: white;
 }
 
-#visiteurs {
+#menu li {
+  display: block;
+}
+
+label {
+  width: 100%;
+  cursor: pointer;
   display: flex;
-  justify-content: space-around;
-  flex-direction: column;
-  align-items: center;
-  font-size: 2vw;
-}
-
-#bouton {
-  width:50%;
-  padding: 2% 2%;
+  font-size: 2.5vw;
   color: white;
-  background-color: rgb(53, 53, 140);
-  outline:none;
-  text-align:center;
-  font-weight: bold;
-  font-size: 1.25vw;
+  padding: 1%;
+  overflow: hidden;
+  background: rgb(53, 53, 140);
+  border-bottom: 1px solid black;
+}
+
+#menu input[type="radio"],
+#menu input[type="checkbox"] {
+  display: none;
+}
+
+#sousmenu {
+  width: 98%;
+  padding: 0;
+  overflow: hidden;
+}
+
+#sousmenu li {
+  cursor: pointer;
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+  transition: all 0.25s ease-in-out;
+}
+
+#sousmenu p {
+  background: rgba(53, 53, 140, 0.8);
+  font-size: 2vw;
+  color: white;
+  padding: 1%;
+}
+
+#sousmenu h5 {
+  text-align: center;
+}
+
+input:checked + #sousmenu li {
+  height: 3%;
+  opacity: 1;
+}
+
+.option1 {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.option2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#option {
+  padding: 1% 0 1% 0;
+  font-size: 1.5vw;
+  width: 100%;
+}
+
+table {
+  width: 95%;
+  text-align: center;
+  border: solid 2px black;
+  border-collapse: collapse;
+}
+
+th, td {
+  border: thin solid black;
+}
+
+.valider {
+  width: 3%;
+  border-color: inherit;
+  background-color: inherit;
+  border: none;
+}
+
+.valider img {
+  width: 100%;
+}
+
+.modifier_batiment, .supprimer_batiment, .modifier_ecole, .supprimer_ecole, .modifier_formation, .supprimer_formation, .modifier_filiere, .supprimer_filiere {
+  width: 3vw;
+  background-color: inherit;
+  border-color: inherit;
+  border: none;
+}
+
+.modifier_batiment img, .supprimer_batiment img, .modifier_ecole img, .supprimer_ecole img, .modifier_formation img, .supprimer_formation img, .modifier_filiere img, .supprimer_filiere img {
+  width: 100%;
 }
