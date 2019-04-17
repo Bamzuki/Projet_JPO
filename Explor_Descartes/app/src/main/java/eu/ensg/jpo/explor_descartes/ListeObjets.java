@@ -1,7 +1,6 @@
 package eu.ensg.jpo.explor_descartes;
 
 import java.util.ArrayList;
-
 import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
@@ -14,7 +13,7 @@ public final class ListeObjets {
     public static ArrayList<Ecole> listeEcole = new ArrayList<Ecole>();
     public static ArrayList<Formation> listeFormation = new ArrayList<Formation>();
     public static ArrayList<Evenement> listeEvenement = new ArrayList<Evenement>();
-
+    public static Ecole ecoleSelectionnee = null;
     public static Visiteur visiteur = null;
 
     public static Ecole getEcoleById(int id){

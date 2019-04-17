@@ -7,11 +7,8 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 
-import java.util.ArrayList;
-
 import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EcoleDAO;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 
 
 public class MainActivity extends AppCompatActivity {
