@@ -53,7 +53,7 @@ function getListeIdFavoris($idUtilisateur){
   return $listeIdFavoris;
 }
 
-fucntion getEvenementById($idFavoris){
+function getEvenementById($idFavoris){
   //Cette fonction renvoie l'évènement correspondant à l'identifiant
   global $link;
   $requete = "SELECT id, nom, debut, fin, id_ecole, id_batiment FROM evenements ORDER BY id";
@@ -171,6 +171,29 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
   return $response;
 }
 
+function getListeEvenements($filtreEcole, $filtreBatiment){
+  //Cette fonction renvoie la liste des evenements
+  global $link;
+  $requete = "SELECT e.id, e.nom, e.debut, e.fin, ecoles.nom, batiments.nom
+  FROM evenements AS e LEFT JOIN ecoles ON e.id_ecole = ecoles.id
+  LEFT JOIN batiments ON e.id_batiment = batiments.id
+  WHERE ecoles.nom LIKE '" . $filtreEcole . "' AND batiments.nom LIKE '" . $filtreBatiment . "' ORDER BY f.id";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $evenement = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "debut":"' . $row[2] . '", "fin":"' . $row[3]. '", "ecole":"' . $row[4] . '", "batiment":"' . $row[5] . '"}';
+      $response = $response . $evenement . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+  return $response;
+}
+
+
 function getListeUtilisateurs($filtreAdmin){
   //Cette fonction renvoie la liste des utilisateurs
   global $link;
@@ -198,26 +221,27 @@ function getListeUtilisateurs($filtreAdmin){
 function getLastUtilisateur(){
   //Cette fonction renvoie le dernier utilisateur créé
   global $link;
-  $requete = "SELECT id, prenom, nom, pseudo, email FROM utilisateurs WHERE id=MAX(id)";
+  $requete = "SELECT id, prenom, nom, pseudo, email, mdp, admin FROM utilisateurs ORDER BY id DESC";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
 	    $id = $row[0];
-      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . ', "nom":"' . $row[2] . ', "pseudo":"' . $row[3] . ', "email":"' . $row[4] . ', "admin":' . $row[5] .', "listeFavoris"=';
-      $listeIdFavoris = getListeIdFavoris();
-      foreach ($listeIdFavoris as $i => $idFavoris) {
-
+      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . '", "nom":"' . $row[2] . '", "pseudo":"' . $row[3] . '", "email":"' . $row[4] . '", "mdp":"' . $row[5] . '", "admin":"' . $row[6] . '", "listeFavoris":';
+      $listeIdFavoris = getListeIdFavoris($id);
+      $liste = "[";
+      if (count($listeIdFavoris) == 0){
+        $liste = "[]";
+      }else {
+        foreach ($listeIdFavoris as $i => $idFavoris) {
+          $liste = $liste . $idFavoris . ", ";
+        }
+        $liste = substr($liste, 0, -2) . ']';
       }
+      $utilisateur = $utilisateur . $liste . "}";
+      return $utilisateur;
     }
-
   }
-  $response = substr($response, 0, -2) . ']';
-  if (strlen($response) < 2){
-    $response ="[]";
-  }
-  return $response;
-
 }
 
 function getBatimentById($id){
@@ -661,5 +685,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "deleteFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . deleteFormation(174) . '<br />' . '<br />'. '<br />';
 }
+
+echo getListeEvenements("%", "%");
 
  ?>
