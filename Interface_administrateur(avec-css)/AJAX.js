@@ -1318,9 +1318,9 @@ function changeEvenement(i){
   var nom               = papi.children[0];
   nom.innerHTML         = "<input id='modif_nom_evenement" + i + "' placeholder='"+listeEvenements[i].nom+"'>";
   var debut          = papi.children[1];
-  debut.innerHTML      = "<input type='time' id='modif_debut_evenement" + i + "'>";
+  debut.innerHTML      = "<input type='time' id='modif_temps_debut_evenement" + i + "'><input type='date' id='modif_date_debut_evenement" + i + "'>";
   var fin         = papi.children[2];
-  fin.innerHTML    = "<input type='time' id='modif_fin_evenement"+i+"'>";
+  fin.innerHTML    = "<input type='time' id='modif_temps_fin_evenement"+i+"'><input type='date' id='modif_date_fin_evenement" + i + "'>";
   var id_ecole      = papi.children[3];
   id_ecole.innerHTML = "<select id='modif_id_ecole_evenement" + i + "'></select>";
   getListeNomEcoles("modif_id_ecole_evenement" + i + "");
@@ -1347,8 +1347,10 @@ function validechangeEvenement(i){
   var input_id     = listeEvenements[i].id;
 
   var input_nom         = document.getElementById("modif_nom_evenement" + i + "").value;
-  var input_debut      = document.getElementById("modif_debut_evenement" + i + "").value;
-  var input_fin    = document.getElementById("modif_fin_evenement" + i + "").value;
+  var input_date_debut      = document.getElementById("modif_date_debut_evenement" + i + "").value;
+  var input_date_fin    = document.getElementById("modif_date_fin_evenement" + i + "").value;
+  var input_temps_debut      = document.getElementById("modif_temps_debut_evenement" + i + "").value;
+  var input_temps_fin    = document.getElementById("modif_temps_fin_evenement" + i + "").value;
   var input_ecole = document.getElementById("modif_id_ecole_evenement" + i + "").value;
   var input_batiment  = document.getElementById("modif_id_batiment_evenement" + i + "").value;
 
@@ -1360,16 +1362,16 @@ function validechangeEvenement(i){
   }
 
 
-  if(input_debut == ""){
-    // input_site=listeEcoles[input_id].site;
-    input_debut = listeEvenements[i].debut;
-  }
+  // if(input_debut == ""){
+   
+    // input_debut = listeEvenements[i].debut;
+  // }
 
 
-  if(input_fin == ""){
-    // input_description=listeEcoles[input_id].description;
-    input_fin = listeEvenements[i].fin;
-  }
+  // if(input_fin == ""){
+    
+    // input_fin = listeEvenements[i].fin;
+  // }
 
   if(input_ecole == ""){
     // input_description=listeEcoles[input_id].description;
@@ -1385,7 +1387,7 @@ function validechangeEvenement(i){
 
   var ajax = new XMLHttpRequest();
 
-  ajax.open('GET', 'serveur.php/?request=changeEvenement&&id=' + input_id + '&&nom=' + input_nom + '&&debut=' + input_debut + '&&fin=' + input_fin + '&&id_ecole=' + input_ecole + '&&id_batiment=' + input_batiment );
+  ajax.open('GET', 'serveur.php/?request=changeEvenement&&id=' + input_id + '&&nom=' + input_nom + '&&debut=' + input_date_debut +" "+ input_temps_debut +'&&fin=' + input_date_fin +" "+input_temps_fin +'&&id_ecole=' + input_ecole + '&&id_batiment=' + input_batiment );
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.addEventListener('load',  function () {
     var response = ajax.response;
