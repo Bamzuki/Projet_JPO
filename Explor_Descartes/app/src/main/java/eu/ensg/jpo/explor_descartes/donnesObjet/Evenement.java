@@ -7,18 +7,16 @@ public class Evenement extends DataBaseObject{
     private String nom;
     private Date debut;
     private Date fin;
-    private Ecole ecole;
-    private Batiment batiment;
-    private Filiere filiere;
+    private String ecole;
+    private String batiment;
 
-    public Evenement(int id, String nom, Date debut, Date fin, Ecole ecole, Batiment batiment, Filiere filiere) {
+    public Evenement(int id, String nom, Date debut, Date fin, String ecole, String batiment) {
         super(id);
         this.nom = nom;
         this.debut = debut;
         this.fin = fin;
         this.ecole = ecole;
         this.batiment = batiment;
-        this.filiere = filiere;
     }
 
     public String getNom() {
@@ -45,28 +43,20 @@ public class Evenement extends DataBaseObject{
         this.fin = fin;
     }
 
-    public Ecole getEcole() {
+    public String getEcole() {
         return ecole;
     }
 
-    public void setEcole(Ecole ecole) {
+    public void setEcole(String ecole) {
         this.ecole = ecole;
     }
 
-    public Batiment getBatiment() {
+    public String getBatiment() {
         return batiment;
     }
 
-    public void setBatiment(Batiment batiment) {
+    public void setBatiment(String batiment) {
         this.batiment = batiment;
-    }
-
-    public Filiere getFiliere() {
-        return filiere;
-    }
-
-    public void setFiliere(Filiere filiere) {
-        this.filiere = filiere;
     }
 
 }
