@@ -12,6 +12,7 @@
         android:icon="@mipmap/icone_lancement"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/icone_lancement_round"
+        android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity android:name=".EcoleActivity"></activity>

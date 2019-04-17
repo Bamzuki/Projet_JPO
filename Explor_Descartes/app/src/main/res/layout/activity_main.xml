@@ -71,6 +71,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/white"
+                android:contentDescription="@string/facebook"
                 app:srcCompat="@drawable/facebook" />
 
             <ImageButton
@@ -79,14 +80,16 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/white"
+                android:contentDescription="@string/instagram"
                 app:srcCompat="@drawable/instagram" />
 
             <ImageButton
-                android:id="@+id/imageButton3"
+                android:id="@+id/google"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/white"
+                android:contentDescription="@string/google"
                 app:srcCompat="@drawable/google" />
 
             <ImageButton
@@ -95,6 +98,7 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@android:color/white"
+                android:contentDescription="@string/email"
                 app:srcCompat="@drawable/email" />
         </LinearLayout>
     </LinearLayout>
@@ -181,7 +185,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/eavt"
-                app:srcCompat="@drawable/esiie" />
+                app:srcCompat="@drawable/eavt" />
 
             <ImageView
                 android:id="@+id/ENSG"

@@ -99,29 +99,35 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
-                Visiteur visiteur = new Gson().fromJson(response.body().string(), Visiteur.class);
-                //Identifiants incorrects
-                if (visiteur == null){
-                    Toast.makeText(activity, "Identifiants incorrects" , Toast.LENGTH_LONG).show();
-                    activity.getMdpET().getText().clear();
-                    return;
-                }
-                //Identifiants corrects
-                else{
-                    ListeObjets.visiteur = visiteur;
-                    Toast.makeText(activity, "Bonjour " + visiteur.getPseudo() + " !", Toast.LENGTH_LONG).show();
-                    activity.openAccueilActivity();
-                }
-
+                final Visiteur visiteur = new Gson().fromJson(response.body().string(), Visiteur.class);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        //Identifiants incorrects
+                        if (visiteur == null){
+                            Toast.makeText(activity, "Identifiants incorrects" , Toast.LENGTH_LONG).show();
+                            activity.getMdpET().getText().clear();
+                        }
+                        //Identifiants corrects
+                        else{
+                            ListeObjets.visiteur = visiteur;
+                            Toast.makeText(activity, "Bonjour " + visiteur.getPseudo() + " !", Toast.LENGTH_LONG).show();
+                            activity.openAccueilActivity();
+                        }
+                    }
+                });
             }
 
             public void onFailure(Call call, IOException e) {
                 System.out.println("Echec de la connection !");
-                Toast.makeText(activity, "Problème de connexion au serveur..." , Toast.LENGTH_LONG).show();
-                return;
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Problème de connexion au serveur..." , Toast.LENGTH_LONG).show();
+                    }
+                });
             }
         });
-        return;
     }
 
     public void getLastVisiteur(){

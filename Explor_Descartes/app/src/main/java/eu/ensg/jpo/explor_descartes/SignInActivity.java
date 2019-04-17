@@ -32,7 +32,6 @@ public class SignInActivity extends AppCompatActivity {
         String urlServeur = getString(R.string.url_serveur_ecoles);
         VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
         visiteurDAO.getVisiteurByEmailAndMdp(this, mail, mdp);
-        openAccueilActivity();
 
     }
 
@@ -89,3 +88,4 @@ public class SignInActivity extends AppCompatActivity {
     }
 
 }
+
