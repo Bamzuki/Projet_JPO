@@ -44,16 +44,29 @@ function getIdFiliere($nom){
 function getListeIdFavoris($idUtilisateur){
   //Cette fonction renvoie la liste des id des favoris d'un utilisateur
   global $link;
-  $requete = "SELECT idFavoris FROM favoris WHERE idUtilisateur=" . $idUtilisateur;
+  $requete = "SELECT id_favoris FROM favoris WHERE id_utilisateur=" . $idUtilisateur;
   $result = pg_query($link, $requete);
-  $listeIdFavoris = array()
+  $listeIdFavoris = array();
   while ($row = pg_fetch_row($result)) {
     $listeIdFavoris[] = $row[0];
   }
   return $listeIdFavoris;
 }
-  
-	
+
+fucntion getEvenementById($idFavoris){
+  //Cette fonction renvoie l'évènement correspondant à l'identifiant
+  global $link;
+  $requete = "SELECT id, nom, debut, fin, id_ecole, id_batiment FROM evenements ORDER BY id";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      $evenement = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "debut":"' . $row[2] . '", "fin":"' . $row[3] . '", "id_ecole":' . $row[4] . ', "id_batiment":' . $row[5] . '"}';
+    }
+    return $evenement;
+  }
+}
+
+
 // I.2 Fonctions GET :
 function getListeNomObjets($nomTable){
   //Cette fonction renvoie une liste des noms des objets de la table rentrée en argument
@@ -178,7 +191,7 @@ function getListeUtilisateurs($filtreAdmin){
   if (strlen($response) < 2){
     $response ="[]";
   }
-  
+
   return $response;
 }
 
@@ -190,17 +203,21 @@ function getLastUtilisateur(){
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-	  $id = $row[0]
+	    $id = $row[0];
       $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . ', "nom":"' . $row[2] . ', "pseudo":"' . $row[3] . ', "email":"' . $row[4] . ', "admin":' . $row[5] .', "listeFavoris"=';
+      $listeIdFavoris = getListeIdFavoris();
+      foreach ($listeIdFavoris as $i => $idFavoris) {
+
+      }
     }
-    
+
   }
   $response = substr($response, 0, -2) . ']';
   if (strlen($response) < 2){
     $response ="[]";
   }
   return $response;
-  
+
 }
 
 function getBatimentById($id){
@@ -576,7 +593,7 @@ if (isset($_GET['request']) && $_GET['request'] == "changeUtilisateur"){
   $mdp      = $_GET['mdp'];
   $admin    = $_GET['admin'];
   echo changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin);
-} 
+}
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];
@@ -644,7 +661,5 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "deleteFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . deleteFormation(174) . '<br />' . '<br />'. '<br />';
 }
-
-
 
  ?>
