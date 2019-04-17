@@ -14,8 +14,7 @@ public final class ListeObjets {
     public static ArrayList<Formation> listeFormation = new ArrayList<Formation>();
     public static ArrayList<Evenement> listeEvenement = new ArrayList<Evenement>();
     public static Ecole ecoleSelectionnee = null;
-    public static ArrayList<Visiteur> listeVisiteur= new ArrayList<Visiteur>();
-
+    public static Visiteur visiteur = null;
 
     public static Ecole getEcoleById(int id){
         for (Ecole ecole : listeEcole){

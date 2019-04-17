@@ -64,6 +64,7 @@
         <ul id="option" class="option1">
           <form action="serveur.php" method="get">
             <input type="text" id="input_ecole" placeholder="Nom">
+			<input type="text" id="input_adresse" placeholder="	Adresse de l'école">
             <input type="text" id="input_site" placeholder="Adresse du site">
             <input type="text" id="input_description" placeholder="Description">
           </form>
@@ -78,6 +79,7 @@
         <ul id="option" class="option2">
           <table id="resultats_ecoles" border="1">
             <th> Nom </th>
+			<th> Adresse </th>
             <th> Site </th>
             <th> Description </th>
           </table>
@@ -157,7 +159,64 @@
           </ul>
         </li>
 
-      </ul>
+		
+		
+	</ul>	
+		
+		
+		
+	<label for="evenements"> Evenements </label>
+    <input id="evenements" name="menu" type="radio" />
+
+    <ul id="sousmenu">
+
+		
+		
+		<li>
+        <p>Ajouter un Evènement</p>
+        <ul id="option" class="option1">
+          <form action="serveur.php" method="get">
+            <input type="text" id="input_evenement" placeholder="Nom">
+			Date de l'évènement:<input type="date" id="input_date" >
+            Heure de début<input type="time" id="input_debut" >
+			Heure de fin<input type="time" id="input_fin" >
+            Ecole: <select id="filtre-ecole3"></select>
+            Bâtiment: <select id="filtre-batiment3"></select>
+          </form>
+
+          <button class="valider" id="bouton-evenement"  onClick="saveEvenement()"> <img src="boutons/valider.png" alt="Ajouter un évènement à la table">  </button>
+
+          </ul>
+        </li>
+		
+		
+		
+		
+		
+		  <li>
+          <p>Mettre à jour les informations sur un événement</p>
+          <ul id="option" class="option2">
+            <form action="serveur.php" method="get">
+              Ecole: <select id="filtre-ecole4"></select>
+              Bâtiment: <select id="filtre-batiment4"></select>
+            </form>
+
+			      <button id="bouton-evenement"  onClick="getListeEvenement()"> Afficher la table des événements </button>
+
+            <table id="resultats_evenements" border="1">
+              <th> Nom </th>
+              <th> Début </th>
+              <th> Fin </th>
+              <th> Ecole </th>
+              <th> Bâtiment </th>
+            </table>
+          </ul>
+        </li>
+		
+	    
+		
+		
+    </ul>
 
     </ul>
 
