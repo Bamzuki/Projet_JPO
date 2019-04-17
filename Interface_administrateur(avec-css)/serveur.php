@@ -96,12 +96,16 @@ function getListeFilieres(){
 function getListeBatiments($filtreFonction){
   //Cette fonction renvoie la liste des bâtiments
   global $link;
-  $requete = "SELECT id, nom, fonction, lat, lng FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
+  $requete = "SELECT id, nom, fonction, lat, lng, id_ecole, ST_AsGeoJSON(geometrie) FROM batiments WHERE fonction LIKE '" . $filtreFonction . "' ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . '}';
+      if ($row[5] == null){
+        // Géométrie non renseignée
+        $row[5] = "{}";
+      }
+      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . ', "id_ecole":' . $row[5] .', "geometrie":' . $row[6] . '}';
       $response = $response . $batiment . ', ';
     }
   }
@@ -133,6 +137,45 @@ function getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtr
   }
   return $response;
 }
+
+function getListeUtilisateurs($filtreAdmin){
+  //Cette fonction renvoie la liste des utilisateurs
+  global $link;
+  if ($filtreAdmin != null){
+	  $requete = "SELECT id, prenom, nom, pseudo, email,admin FROM utilisateurs WHERE admin=" . $filtreAdmin ." ORDER BY id";
+  }else{
+	  $requete = "SELECT id, prenom, nom, pseudo, email,admin FROM utilisateurs ORDER BY id";
+  }
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . '", "nom":"' . $row[2] . '", "pseudo":"' . $row[3] . '", "email":"' . $row[4] . '", "admin":"' . $row[5] .'"}';
+      $response = $response . $utilisateur . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+  
+  return $response;
+}
+
+function getBatimentById($id){
+  //Cette fonction renvoie la liste des bâtiments
+  $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
+  $requete = "SELECT id, nom, fonction, lat, lng FROM batiments WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      $batiment = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "fonction":"' . $row[2] . '", "lat":' . $row[3] . ', "lng":' . $row[4] . '}';
+    }
+  }
+  return $batiment;
+}
+
+
 // I.3 Fonctions SAVE :
 function saveEcole ($nom, $site, $description){
   //Cette fonction enregistre une nouvelle école dans la base de données
@@ -185,6 +228,23 @@ function saveFormation ($nom, $niveau, $ecole, $batiment, $filiere){
   $id_filiere  = getIdFiliere($filiere);
   global $link;
   $requete = "INSERT INTO formations (nom, niveau, id_ecole, id_batiment, id_filiere) VALUES ('" . $nom . "', '" . $niveau . "', " . $id_ecole . ", " . $id_batiment . ", " . $id_filiere . ")";
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
+  //Cette fonction enregistre un nouvel utilisateur dans la base de données
+  $prenom   = str_replace("'", "''", $prenom);
+  $nom      = str_replace("'", "''", $nom);
+  $pseudo   = str_replace("'", "''", $pseudo);
+  $email    = str_replace("'", "''", $email);
+  $mdp      = str_replace("'", "''", $mdp);
+  $admin    = str_replace("'", "''", $admin);
+  global $link;
+  $requete = "INSERT INTO utilisateurs (prenom, nom, pseudo, email, mdp, admin) VALUES ('" . $prenom . "', '" . $nom . "', '" . $pseudo . "', '" . $email . "', '" . $mdp . "', '" . $admin . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -259,6 +319,24 @@ function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
     return "La modification a échouée";
   }
 }
+function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
+  //Cette fonction modifie un utilisateur déjà existant dans la base de données
+  $prenom   = str_replace("'", "''", $prenom);
+  $nom      = str_replace("'", "''", $nom);
+  $pseudo   = str_replace("'", "''", $pseudo);
+  $email    = str_replace("'", "''", $email);
+  $mdp      = str_replace("'", "''", $mdp);
+  global $link;
+  $requete = "UPDATE utilisateurs
+              SET prenom = '" . $prenom . "', nom = '" . $nom . "', pseudo = '" . $pseudo . "', email = '" . $email . "', mdp = '" . $mdp . "', admin = '" . $admin ."'
+             WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
 // I.5 Fonctions DELETE :
 function deleteEcole ($id){
   //Cette fonction supprime une école dans la base de données
@@ -300,6 +378,18 @@ function deleteFormation ($id){
   //Cette fonction supprime une formation dans la base de données
   global $link;
   $requete = "DELETE FROM formations
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
+function deleteUtilisateur ($id){
+  //Cette fonction supprime un utlisateru dans la base de données
+  global $link;
+  $requete = "DELETE FROM utilisateurs
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
@@ -356,6 +446,21 @@ if (isset($_GET['request']) && $_GET['request'] == "listeFormations"){
   }
   echo getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtreFiliere);
 }
+if (isset($_GET['request']) && $_GET['request'] == "listeUtilisateurs"){
+  if (isset($_GET['filtreAdmin'])) {
+    $filtreAdmin = $_GET['filtreAdmin'];
+  }
+  else {
+    $filtreAdmin = null;
+  }
+  echo getListeUtilisateurs($filtreAdmin);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "batiment"){
+  $id = $_GET['id'];
+  echo getBatimentById($id);
+}
+
 // II.2 Requêtes SAVE :
 if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
   $nom         = $_GET['nom'];
@@ -381,6 +486,15 @@ if (isset($_GET['request']) && $_GET['request'] == "saveFormation"){
   $batiment = $_GET['batiment'];
   $filiere  = $_GET['filiere'];
   echo saveFormation ($nom, $niveau, $ecole, $batiment, $filiere);
+}
+if (isset($_GET['request']) && $_GET['request'] == "saveUtilisateur"){
+  $prenom   = $_GET['prenom'];
+  $nom      = $_GET['nom'];
+  $pseudo   = $_GET['pseudo'];
+  $email    = $_GET['email'];
+  $mdp      = $_GET['mdp'];
+  $admin    = $_GET['admin'];
+  echo saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin);
 }
 // II.3 Requêtes CHANGE :
 if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
@@ -412,6 +526,16 @@ if (isset($_GET['request']) && $_GET['request'] == "changeFormation"){
   $filiere  = $_GET['id_filiere'];
   echo changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere);
 }
+if (isset($_GET['request']) && $_GET['request'] == "changeUtilisateur"){
+  $id       = $_GET['id'];
+  $prenom   = $_GET['prenom'];
+  $nom      = $_GET['nom'];
+  $pseudo   = $_GET['pseudo'];
+  $email    = $_GET['email'];
+  $mdp      = $_GET['mdp'];
+  $admin    = $_GET['admin'];
+  echo changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin);
+} 
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];
@@ -428,6 +552,10 @@ if (isset($_GET['request']) && $_GET['request'] == "deleteFiliere"){
 if (isset($_GET['request']) && $_GET['request'] == "deleteFormation"){
   $id  = $_GET['id'];
   echo deleteFormation ($id);
+}
+if (isset($_GET['request']) && $_GET['request'] == "deleteUtilisateur"){
+  $id  = $_GET['id'];
+  echo deleteUtilisateur ($id);
 }
 // III - Tests unitaires :
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
@@ -475,4 +603,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "deleteFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . deleteFormation(174) . '<br />' . '<br />'. '<br />';
 }
+
+
+
  ?>

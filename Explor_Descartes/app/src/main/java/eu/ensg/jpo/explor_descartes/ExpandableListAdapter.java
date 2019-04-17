@@ -89,4 +89,16 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
     public boolean isChildSelectable(int groupPosition, int childPosition) {
         return true;
     }
+
+    public Context getContext() { return context; }
+
+    public void setContext(Context context) { this.context = context; }
+
+    public List<String> getListDataHeader() { return listDataHeader; }
+
+    public void setListDataHeader(List<String> listDataHeader) { this.listDataHeader = listDataHeader; }
+
+    public HashMap<String, List<String>> getListHashMap() { return listHashMap; }
+
+    public void setListHashMap(HashMap<String, List<String>> listHashMap) { this.listHashMap = listHashMap; }
 }

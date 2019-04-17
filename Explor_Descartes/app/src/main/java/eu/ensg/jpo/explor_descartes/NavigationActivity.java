@@ -188,6 +188,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         // Create intent
         Intent intent = new Intent(this, EcoleActivity.class);
         ListeObjets.ecoleSelectionnee = ecole;
+
         // Start activity
         startActivity(intent);
     }

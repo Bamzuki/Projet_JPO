@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         // I - Instanciation des objets Java représentant les composants graphiques
 
         ignorerB     = findViewById(R.id.ignorerB);
-        connexionB   = findViewById(R.id.email);
+        connexionB   = findViewById(R.id.connexionB);
         inscriptionB = findViewById(R.id.inscriptionB);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java

@@ -4,29 +4,50 @@
     <meta charset="utf-8">
     <title> Données visiteurs</title>
     <link rel="stylesheet" href="donnees_visiteurs.css">
+	 <script src="AJAX.js"></script>
   </head>
+  
+  
   <body>
     <div id="banierre">
       <a href="index.html" id="logo"><img src="logo.png" alt="Logo non disponible"></a>
       <h1>Admin'Descartes</h1>
     </div>
 
-    <ul id="corps">
+    <ul id="menu">
 
       <label for="profils"> Consulter les profils des visiteurs </label>
       <input id="profils" name="menu" type="radio" />
 
-      <ul id="option">
+    <ul id="sousmenu">
 
-        <form action="page.php" method="get">
-          Niveau: <select name="niveau"></select>
-          Filière: <select name="filière"></select>
-        </form>
+      <li>
+	
+		
+        <p>Ajouter un utilisateur</p>
+        <ul id="option" class="option1">
+          <form action="serveur.php" method="get">
+            <input type="text" id="input_prenom_utilisateur" placeholder="Prénom">
+            <input type="text" id="input_nom_utilisateur" placeholder="Nom">
+            <input type="text" id="input_pseudo" placeholder="Pseudo">
+            <input type="text" id="input_email" placeholder="Email">
+			<input type="text" id="input_mdp" placeholder="Mdp">
+            <input type="text" id="input_admin" placeholder="Admin">
+          </form>
 
-        <table border="1">
-          <th> nom </th>
-          <th> niveau </th>
-          <th> filière </th>
+          <button class="valider" id="bouton-utilisateur"  onClick="saveUtilisateur()"> <img src="boutons/valider.png" alt="Ajouter un utilisateur à la table"> </button>
+
+       
+        </ul>
+      </li>
+
+        <table id="resultats_utilisateurs" border="1">
+          <th> id </th>
+          <th> prénom </th>
+          <th> pseudo </th>
+		  <th> email </th>
+          <th> mdp </th>
+          <th> admin </th>
         </table>
 
       </ul>
@@ -49,5 +70,9 @@
       </ul>
 
     </ul>
+ </ul>
+
+
+	
 
   </body>

@@ -21,18 +21,18 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
     }
 
     @Override
-    public Evenement create(Evenement Evenement) {
-        return null;
+    public void create(Evenement Evenement) {
+        return;
     }
 
     @Override
-    public boolean delete(Evenement Evenement) {
-        return false;
+    public void delete(Evenement Evenement) {
+        return;
     }
 
     @Override
-    public boolean update(Evenement Evenement) {
-        return false;
+    public void update(Evenement Evenement) {
+        return;
     }
 
     public void chargerEvenement() {
