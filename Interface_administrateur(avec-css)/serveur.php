@@ -316,7 +316,7 @@ function saveEcole ($nom, $adresse, $site, $description){
   $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
-  $requete = "INSERT INTO ecoles (nom, adress, site, description) VALUES ('" . $nom . "', '" $adresse . "', '" . $site . "', '" . $description . "')";
+  $requete = "INSERT INTO ecoles (nom, adresse, site, description) VALUES ('" . $nom . "', '" . $adresse . "', '" . $site . "', '" . $description . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -758,7 +758,5 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "deleteFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . deleteFormation(174) . '<br />' . '<br />'. '<br />';
 }
-
-echo getListeEvenements("%", "%");
 
  ?>
