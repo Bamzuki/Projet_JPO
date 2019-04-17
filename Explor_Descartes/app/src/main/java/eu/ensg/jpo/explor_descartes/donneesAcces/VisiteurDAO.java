@@ -100,6 +100,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 System.out.println("Connexion etablie avec succes !");
                 Visiteur visiteur = new Gson().fromJson(response.body().string(), Visiteur.class);
                 ListeObjets.visiteur = visiteur;
+                System.out.println("Bonjour" + ListeObjets.visiteur.getPseudo());
                 //Toast.makeText(getActivity(), response.body().string() , Toast.LENGTH_LONG).show();
             }
 
