@@ -64,6 +64,7 @@
         <ul id="option" class="option1">
           <form action="serveur.php" method="get">
             <input type="text" id="input_ecole" placeholder="Nom">
+			<input type="text" id="input_adresse" placeholder="	Adresse de l'école">
             <input type="text" id="input_site" placeholder="Adresse du site">
             <input type="text" id="input_description" placeholder="Description">
           </form>
@@ -78,6 +79,7 @@
         <ul id="option" class="option2">
           <table id="resultats_ecoles" border="1">
             <th> Nom </th>
+			<th> Adresse </th>
             <th> Site </th>
             <th> Description </th>
           </table>
@@ -199,7 +201,7 @@
               Bâtiment: <select id="filtre-batiment4"></select>
             </form>
 
-			      <button id="bouton-evenement"  onClick="getListeEvenement()"> Afficher la table des formations </button>
+			      <button id="bouton-evenement"  onClick="getListeEvenement()"> Afficher la table des événements </button>
 
             <table id="resultats_evenements" border="1">
               <th> Nom </th>

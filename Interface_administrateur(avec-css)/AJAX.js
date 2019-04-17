@@ -239,6 +239,9 @@ function getListeEcole(){
     element           = document.createElement("td");
     element.innerHTML = "Nom";
     ligne.appendChild(element);
+	element           = document.createElement("td");
+    element.innerHTML = "Adresse";
+    ligne.appendChild(element);
     element           = document.createElement("td");
     element.innerHTML = "Site";
     ligne.appendChild(element);
@@ -259,6 +262,9 @@ function getListeEcole(){
       ligne.setAttribute("id", i);
       element                   = document.createElement("td");
       element.innerHTML         = listeEcoles[i].nom;
+      ligne.appendChild(element);
+	  element                   = document.createElement("td");
+      element.innerHTML         = listeEcoles[i].adresse;
       ligne.appendChild(element);
       element                   = document.createElement("td");
       element.innerHTML         = listeEcoles[i].site;
@@ -595,16 +601,17 @@ function getListeEvenement(){
 function saveEcole(){
   // Enregistrement d'une école dans la base de données
   var input_nom         = document.getElementById("input_ecole").value;
+  var input_adresse        = document.getElementById("input_adresse").value;
   var input_site        = document.getElementById("input_site").value;
   var input_description = document.getElementById("input_description").value;
   var ajax = new XMLHttpRequest();
-  ajax.open('GET', 'serveur.php/?request=saveEcole&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
+  ajax.open('GET', 'serveur.php/?request=saveEcole&&nom=' + input_nom + '&&adresse=' + input_adresse +  '&&site=' + input_site + '&&description=' + input_description);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.addEventListener('load',  function () {
      var response = ajax.response;
      console.log(response);
   });
-  ajax.send('request=saveEcole&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
+  ajax.send('request=saveEcole&&nom=' + input_nom + '&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description);
 
   //Ajout d'une nouvelle ligne dans la table
   var id                    = listeEcoles.length + 1;
@@ -714,15 +721,17 @@ function changeEcole(i){
   var papi              = papa.parentNode;
   var nom               = papi.children[0];
   nom.innerHTML         = "<input id='modif_nom_ecole" + i + "' placeholder='"+listeEcoles[i].nom+"'>";
-  var site              = papi.children[1];
+  var adresse              = papi.children[1];
+  adresse.innerHTML         = "<input id='modif_adresse_ecole" + i + "' placeholder='"+listeEcoles[i].adresse+"'>";
+  var site              = papi.children[2];
   site.innerHTML        = "<input id='modif_site_ecole" + i + "' placeholder='"+listeEcoles[i].site+"'>";
-  var description       = papi.children[2];
+  var description       = papi.children[3];
   description.innerHTML = "<input id='modif_description_ecole" + i + "' placeholder='"+listeEcoles[i].description+"'>";
 
   //Mise en place les deux nouveaux boutons
-  var bouton_valider        = papi.children[3];
+  var bouton_valider        = papi.children[4];
   bouton_valider.innerHTML  = "<button  id='bouton-valider-modifications-ecole" + i + "' class='modifier_ecole' onClick='validechangeEcole(" + i + ")'> <img src='boutons/valider.png' alt='Oups'> </button>"
-  var bouton_annuler        = papi.children[4];
+  var bouton_annuler        = papi.children[5];
   bouton_annuler.innerHTML  = "<button  id='bouton-annuler-modifications-ecole" + i + "' class='supprimer_ecole' onClick='annulechangeEcole(" + i + ")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
 }
 
@@ -732,19 +741,22 @@ function validechangeEcole(i){
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
   var input_id          = listeEcoles[i].id;
-  console.log(listeEcoles);
   var input_nom         = document.getElementById("modif_nom_ecole" + i + "").value;
-  console.log(input_nom);
+  var input_adresse     = document.getElementById("modif_adresse_ecole" + i + "").value;
   var input_site        = document.getElementById("modif_site_ecole" + i + "").value;
-  console.log(input_site);
   var input_description = document.getElementById("modif_description_ecole" + i + "").value;
-  console.log(input_description);
+
 
   if(input_nom == ""){
     // input_nom= listeEcoles[input_id].nom;
     input_nom= listeEcoles[i].nom;
   }
-
+  
+  if(input_adresse == ""){
+    // input_nom= listeEcoles[input_id].nom;
+    input_adresse= listeEcoles[i].adresse;
+  }
+  
   if(input_site == ""){
 	  // input_site=listeEcoles[input_id].site;
 	  input_site= listeEcoles[i].site;
@@ -756,7 +768,7 @@ function validechangeEcole(i){
   }
 
   var ajax = new XMLHttpRequest()
-  ajax.open('GET', 'serveur.php/?request=changeEcole&&id=' + input_id +'&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description );
+  ajax.open('GET', 'serveur.php/?request=changeEcole&&id=' + input_id +'&&nom=' + input_nom +'&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description );
 	ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
 	ajax.addEventListener('load',  function () {
 		var response = ajax.response;
@@ -765,21 +777,23 @@ function validechangeEcole(i){
 
    });
 
-  ajax.send('request=changeEcole&&id=' + input_id + '&&nom=' + input_nom + '&&site=' + input_site + '&&description=' + input_description);
+  ajax.send('request=changeEcole&&id=' + input_id + '&&nom=' + input_nom +'&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description);
 
   // on change de nouveau la ligne (normalement avec le changement)
   //boucle qui retransforme la ligne
   var nom                 = papi.children[0];
   nom.innerHTML           = listeEcoles[i].nom;
-  var site                = papi.children[1];
+  var adresse             = papi.children[1];
+  adresse.innerHTML       = listeEcoles[i].adresse;
+  var site                = papi.children[2];
   site.innerHTML          = listeEcoles[i].site;
-  var description         = papi.children[2];
+  var description         = papi.children[3];
   description.innerHTML   = listeEcoles[i].description;
 
   //on remet en place les deux anciens boutons
-  var bouton_valider        = papi.children[3];
+  var bouton_valider        = papi.children[4];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-ecole" + i + "' class='modifier_ecole'  onClick='changeEcole(" + i + ")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
-  var bouton_annuler        = papi.children[4];
+  var bouton_annuler        = papi.children[5];
   bouton_annuler.innerHTML  = "<button  id='supprimer-ecole"+i+"' class='supprimer_ecole' > <img src='boutons/supprimer.png' onClick='deleteEcole(" + i + ")' alt='Oups'> </button>"
 }
 
@@ -795,15 +809,17 @@ function annulechangeEcole(i){
   var papi=papa.parentNode;
   var nom=papi.children[0];
   nom.innerHTML=listeEcoles[i].nom;
-  var site=papi.children[1];
+  var adresse=papi.children[1];
+  adresse.innerHTML=listeEcoles[i].adresse;
+  var site=papi.children[2];
   site.innerHTML=listeEcoles[i].site;
-  var description=papi.children[2];
+  var description=papi.children[3];
   description.innerHTML=listeEcoles[i].description;
 
   //on met en place les deux nouveaux boutons
-  var bouton_valider=papi.children[3];
+  var bouton_valider=papi.children[4];
   bouton_valider.innerHTML="<button  id='bouton-modifier-ecole" + i + "' class='modifier_ecole'  onClick='changeEcole("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
-  var bouton_annuler=papi.children[4];
+  var bouton_annuler=papi.children[5];
   bouton_annuler.innerHTML="<button  id='supprimer-ecole"+i+"' class='supprimer_ecole' > <img src='boutons/supprimer.png' onClick='deleteEcole(" + i + ")' alt='Oups'> </button>"
 }
 
