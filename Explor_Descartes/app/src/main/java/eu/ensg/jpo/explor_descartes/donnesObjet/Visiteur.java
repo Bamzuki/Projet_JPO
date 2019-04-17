@@ -1,5 +1,7 @@
 package eu.ensg.jpo.explor_descartes.donnesObjet;
 
+import java.util.ArrayList;
+
 public class Visiteur extends DataBaseObject{
 
     private String prenom;
@@ -8,6 +10,7 @@ public class Visiteur extends DataBaseObject{
     private String email;
     private String mdp;
     private Boolean admin;
+    private ArrayList<Evenement> listeFavoris;
 
     public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
         super(id);
@@ -17,7 +20,9 @@ public class Visiteur extends DataBaseObject{
         this.email = email;
         this.mdp = mdp;
         this.admin = admin;
+        this.listeFavoris = new ArrayList<Evenement>();
     }
+
     public Visiteur(String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
         super(0);
         this.prenom = prenom;
@@ -26,7 +31,21 @@ public class Visiteur extends DataBaseObject{
         this.email = email;
         this.mdp = mdp;
         this.admin = admin;
+        this.listeFavoris = new ArrayList<Evenement>();
     }
+
+    public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin, ArrayList<Evenement> listeFavoris) {
+        super(id);
+        this.prenom = prenom;
+        this.nom = nom;
+        this.pseudo = pseudo;
+        this.email = email;
+        this.mdp = mdp;
+        this.admin = admin;
+        this.listeFavoris = listeFavoris;
+    }
+
+
 
     public String getPrenom() {
         return prenom;
@@ -76,4 +95,11 @@ public class Visiteur extends DataBaseObject{
         this.admin = admin;
     }
 
+    public ArrayList<Evenement> getListeFavoris() {
+        return listeFavoris;
+    }
+
+    public void setListeFavoris(ArrayList<Evenement> listeFavoris) {
+        this.listeFavoris = listeFavoris;
+    }
 }
