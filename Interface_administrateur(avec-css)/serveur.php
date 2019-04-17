@@ -93,12 +93,12 @@ function getListeNomObjets($nomTable){
 function getListeEcoles(){
   //Cette fonction renvoie la liste des ecoles
   global $link;
-  $requete = "SELECT id, nom, site, description FROM ecoles ORDER BY id";
+  $requete = "SELECT id, nom, adresse, site, description FROM ecoles ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "site":"' . $row[2] . '", "description":"' . $row[3] . '"}';
+      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "adresse":"' . $row[2] . '", "site":"' . $row[3] . '", "description":"' . $row[4] . '"}';
       $response = $response . $ecole . ', ';
     }
   }
@@ -177,7 +177,7 @@ function getListeEvenements($filtreEcole, $filtreBatiment){
   $requete = "SELECT e.id, e.nom, e.debut, e.fin, ecoles.nom, batiments.nom
   FROM evenements AS e LEFT JOIN ecoles ON e.id_ecole = ecoles.id
   LEFT JOIN batiments ON e.id_batiment = batiments.id
-  WHERE ecoles.nom LIKE '" . $filtreEcole . "' AND batiments.nom LIKE '" . $filtreBatiment . "' ORDER BY f.id";
+  WHERE ecoles.nom LIKE '" . $filtreEcole . "' AND batiments.nom LIKE '" . $filtreBatiment . "' ORDER BY e.id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
@@ -192,7 +192,6 @@ function getListeEvenements($filtreEcole, $filtreBatiment){
   }
   return $response;
 }
-
 
 function getListeUtilisateurs($filtreAdmin){
   //Cette fonction renvoie la liste des utilisateurs
@@ -244,6 +243,58 @@ function getLastUtilisateur(){
   }
 }
 
+function getUtilisateurByMailAndMdp($mail, $mdp){
+  //Cette fonction renvoie l'utilisateur à partir de son mail et de son mdp
+  global $link;
+  $requete = "SELECT id, prenom, nom, pseudo, email, mdp, admin FROM utilisateurs WHERE mail=" . $mail . ' AND mdp=' . $mdp;
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+	    $id = $row[0];
+      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . '", "nom":"' . $row[2] . '", "pseudo":"' . $row[3] . '", "email":"' . $row[4] . '", "mdp":"' . $row[5] . '", "admin":"' . $row[6] . '", "listeFavoris":';
+      $listeIdFavoris = getListeIdFavoris($id);
+      $liste = "[";
+      if (count($listeIdFavoris) == 0){
+        $liste = "[]";
+      }else {
+        foreach ($listeIdFavoris as $i => $idFavoris) {
+          $liste = $liste . $idFavoris . ", ";
+        }
+        $liste = substr($liste, 0, -2) . ']';
+      }
+      $utilisateur = $utilisateur . $liste . "}";
+      return $utilisateur;
+    }
+  }
+}
+
+function getUtilisateurByPseudoAndMdp($pseudo, $mdp){
+  //Cette fonction renvoie l'utilisateur à partir de son mail et de son mdp
+  global $link;
+  $requete = "SELECT id, prenom, nom, pseudo, email, mdp, admin FROM utilisateurs WHERE pseudo=" . $pseudo . ' AND mdp=' . $mdp;
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+	    $id = $row[0];
+      $utilisateur = '{"id":' . $row[0] . ', "prenom":"' . $row[1] . '", "nom":"' . $row[2] . '", "pseudo":"' . $row[3] . '", "email":"' . $row[4] . '", "mdp":"' . $row[5] . '", "admin":"' . $row[6] . '", "listeFavoris":';
+      $listeIdFavoris = getListeIdFavoris($id);
+      $liste = "[";
+      if (count($listeIdFavoris) == 0){
+        $liste = "[]";
+      }else {
+        foreach ($listeIdFavoris as $i => $idFavoris) {
+          $liste = $liste . $idFavoris . ", ";
+        }
+        $liste = substr($liste, 0, -2) . ']';
+      }
+      $utilisateur = $utilisateur . $liste . "}";
+      return $utilisateur;
+    }
+  }
+}
+
 function getBatimentById($id){
   //Cette fonction renvoie la liste des bâtiments
   $link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
@@ -259,12 +310,13 @@ function getBatimentById($id){
 
 
 // I.3 Fonctions SAVE :
-function saveEcole ($nom, $site, $description){
+function saveEcole ($nom, $adresse, $site, $description){
   //Cette fonction enregistre une nouvelle école dans la base de données
   $nom = str_replace("'", "''", $nom);
+  $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
-  $requete = "INSERT INTO ecoles (nom, site, description) VALUES ('" . $nom . "', '" . $site . "', '" . $description . "')";
+  $requete = "INSERT INTO ecoles (nom, adress, site, description) VALUES ('" . $nom . "', '" $adresse . "', '" . $site . "', '" . $description . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -335,13 +387,14 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
   }
 }
 // I.4 Fonctions CHANGE :
-function changeEcole ($id, $nom, $site, $description){
+function changeEcole ($id, $nom, $adresse, $site, $description){
   //Cette fonction modifie une école déjà existante dans la base de données
   $nom = str_replace("'", "''", $nom);
+  $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
   $requete = "UPDATE ecoles
-              SET nom = '" . $nom . "', site = '" . $site . "', description = '" . $description . "'
+              SET nom = '" . $nom . "', adresse = '" . $adresse . "', site = '" . $site . "', description = '" . $description . "'
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
@@ -501,6 +554,7 @@ if (isset($_GET['request']) && $_GET['request'] == "listeBatiments"){
   }
   echo getListeBatiments($filtreFonction);
 }
+
 if (isset($_GET['request']) && $_GET['request'] == "listeFormations"){
   if (isset($_GET['filtreNiveau'])) {
     $filtreNiveau = $_GET['filtreNiveau'];
@@ -528,6 +582,23 @@ if (isset($_GET['request']) && $_GET['request'] == "listeFormations"){
   }
   echo getListeFormations($filtreNiveau, $filtreEcole, $filtreBatiment, $filtreFiliere);
 }
+
+if (isset($_GET['request']) && $_GET['request'] == "listeEvenements"){
+  if (isset($_GET['filtreEcole'])) {
+    $filtreEcole = $_GET['filtreEcole'];
+  }
+  else {
+    $filtreEcole = "%";
+  }
+  if (isset($_GET['filtreBatiment'])) {
+    $filtreBatiment = $_GET['filtreBatiment'];
+  }
+  else {
+    $filtreBatiment = "%";
+  }
+  echo getListeEvenements($filtreEcole, $filtreBatiment);
+}
+
 if (isset($_GET['request']) && $_GET['request'] == "listeUtilisateurs"){
   if (isset($_GET['filtreAdmin'])) {
     $filtreAdmin = $_GET['filtreAdmin'];
@@ -546,9 +617,10 @@ if (isset($_GET['request']) && $_GET['request'] == "batiment"){
 // II.2 Requêtes SAVE :
 if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
   $nom         = $_GET['nom'];
+  $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
-  echo saveEcole ($nom, $site, $description);
+  echo saveEcole ($nom, $adresse, $site, $description);
 }
 if (isset($_GET['request']) && $_GET['request'] == "saveBatiment"){
   $nom      = $_GET['nom'];
@@ -582,9 +654,10 @@ if (isset($_GET['request']) && $_GET['request'] == "saveUtilisateur"){
 if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
   $id          = $_GET['id'];
   $nom         = $_GET['nom'];
+  $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
-  echo changeEcole ($id, $nom, $site, $description);
+  echo changeEcole ($id, $nom, $adresse, $site, $description);
 }
 if (isset($_GET['request']) && $_GET['request'] == "changeBatiment"){
   $id       = $_GET['id'];
@@ -661,7 +734,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "getListeFormations" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeFormations("%", "%", "%", "%") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveEcole" :</b>' . '<br />' . '<br />';
-  echo '- ' . saveEcole("ecoleTest", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
+  echo '- ' . saveEcole("ecoleTest", "test adresse", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveBatiment" :</b>' . '<br />' . '<br />';
   echo '- ' . saveBatiment("batimentTest", "fonctionTest", 0, 0) . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveFiliere" :</b>' . '<br />' . '<br />';
@@ -669,7 +742,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "saveFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . saveFormation("testFormation", "DUT", "ENSG-Géomatique", "ENSG", "Sport") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeEcole" :</b>' . '<br />' . '<br />';
-  echo '- ' . changeEcole(10, "ecoleTestModif", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
+  echo '- ' . changeEcole(10, "ecoleTestModif", "testadresse", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeBatiment" :</b>' . '<br />' . '<br />';
   echo '- ' . changeBatiment(9, "batimentTestModif", "fonctionTestModif", 1, 1) . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeFiliere" :</b>' . '<br />' . '<br />';
