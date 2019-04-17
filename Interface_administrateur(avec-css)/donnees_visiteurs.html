@@ -14,16 +14,14 @@
       <h1>Admin'Descartes</h1>
     </div>
 
-    <ul id="menu">
+    <ul id='menu'>
 
       <label for="profils"> Consulter les profils des visiteurs </label>
       <input id="profils" name="menu" type="radio" />
 
     <ul id="sousmenu">
-
-      <li>
 	
-		
+		 <li>
         <p>Ajouter un utilisateur</p>
         <ul id="option" class="option1">
           <form action="serveur.php" method="get">
@@ -39,11 +37,14 @@
           </form>
 
           <button class="valider" id="bouton-utilisateur1"  onClick="saveUtilisateur()"> <img src="boutons/valider.png" alt="Ajouter un utilisateur à la table"> </button>
-
+        
+		</ul>
+		</li>
        
-        </ul>
-      </li>
-	  
+   
+	  <li>
+        <p>Mettre à jour un utilisateur</p>
+        <ul id="option" class="option2">
 	   <form action="serveur.php" method="get">
             Filtre utilisateur: <select id="filtre-admin">
 			<option value="*">Tous</option>
@@ -63,13 +64,23 @@
           <th> admin </th>
         </table>
 
-      </ul>
-
+		</ul>
+		</li>
+		
+		
+    </ul>
+       
+	   
+	   
       <label for="reponses"> Consulter les réponses au questionnaire </label>
       <input id="reponses" name="menu" type="radio" />
 
-      <ul id="option">
+    <ul id="sousmenu">
 
+	<li>
+        <p>Réponses au questionnaire</p>
+        <ul id="option" class="option1">
+	
         <table border="1">
           <th> Question 1 </th>
           <th> Question 2 </th>
@@ -79,13 +90,14 @@
           <th> Question 6 </th>
           <th> Question 7 </th>
         </table>
-
-      </ul>
+		
+	</ul>	
+	</li>
+	
+	
+    </ul>
 
     </ul>
- </ul>
-
-
 	
 
   </body>
