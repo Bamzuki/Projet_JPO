@@ -6,14 +6,16 @@ import java.util.List;
 public class Ecole extends DataBaseObject{
 
     private String nom;
+    private String image;
     private String adresse;
     private String site;
     private String description;
     private List<Formation> formations;
 
-    public Ecole(int id, String nom, String adresse, String site, String description) {
+    public Ecole(int id, String image, String nom, String adresse, String site, String description) {
         super(id);
         this.nom = nom;
+        this.image = image;
         this.adresse = adresse;
         this.site = site;
         this.description = description;
@@ -25,6 +27,14 @@ public class Ecole extends DataBaseObject{
 
     public void setNom(String nom) {
         this.nom = nom;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 
     public String getAdresse() { return adresse; }
