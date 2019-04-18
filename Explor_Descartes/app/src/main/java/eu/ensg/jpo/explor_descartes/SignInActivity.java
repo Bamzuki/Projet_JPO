@@ -21,6 +21,7 @@ public class SignInActivity extends AppCompatActivity {
         // Récupération des valeurs entrées :
         String mail = mailET.getText().toString();
         String mdp  = mdpET.getText().toString();
+
         try {
             mdp = SHA.encode(mdp);
         } catch (Exception e) {
@@ -30,12 +31,11 @@ public class SignInActivity extends AppCompatActivity {
         // Enregistrement dans la base de données :
         String urlServeur = getString(R.string.url_serveur_ecoles);
         VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-        visiteurDAO.getVisiteurByEmailAndMdp(mail, mdp);
-        openAccueilActivity();
+        visiteurDAO.getVisiteurByEmailAndMdp(this, mail, mdp);
 
     }
 
-    private void openRegisterActivity() {
+    public void openRegisterActivity() {
 
         // Create intent
         Intent intent = new Intent(this, RegisterActivity.class);
@@ -44,7 +44,7 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openAccueilActivity() {
+    public void openAccueilActivity() {
 
         // Create intent
         Intent intent = new Intent(this, AccueilActivity.class);
@@ -82,4 +82,10 @@ public class SignInActivity extends AppCompatActivity {
         });
 
     }
+
+    public EditText getMdpET() {
+        return mdpET;
+    }
+
 }
+

@@ -457,9 +457,6 @@ function getListeUtilisateur(){
     element.innerHTML = "email";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "mdp";
-    ligne.appendChild(element);
-    element = document.createElement("td");
     element.innerHTML = "admin";
     ligne.appendChild(element);
 	element = document.createElement("td");
@@ -488,22 +485,19 @@ function getListeUtilisateur(){
       element.innerHTML = listeUtilisateurs[i].email;
       ligne.appendChild(element);
 	  element = document.createElement("td");
-      element.innerHTML = listeUtilisateurs[i].mdp;
-      ligne.appendChild(element);
-	  element = document.createElement("td");
       element.innerHTML = listeUtilisateurs[i].admin;
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonModifier = document.createElement("button");
       boutonModifier.setAttribute("id", "bouton-modifier-utilisateur" + i);
-      boutonModifier.setAttribute("class", "modifier_utilisateur")
+      boutonModifier.setAttribute("class", "modifier_filiere")
       boutonModifier.innerHTML = "<img src='boutons/modifier.png' onClick='changeUtilisateur(" + i + ")' alt='Oups !'>";
       element.appendChild(boutonModifier);
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonSupprimer = document.createElement("button");
       boutonSupprimer.setAttribute("id", "supprimer-utilisateur"+i);
-      boutonSupprimer.setAttribute("class", "supprimer_utilisateur");
+      boutonSupprimer.setAttribute("class", "supprimer_filiere");
       boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")' alt='Oups !'>";
       element.appendChild(boutonSupprimer);
       ligne.appendChild(element);
@@ -518,12 +512,14 @@ function getListeUtilisateur(){
 function getListeEvenement(){
   var filtre_ecole  = document.getElementById("filtre-ecole4").value;
   var filtre_batiment   = document.getElementById("filtre-batiment4").value;
+  console.log(filtre_ecole);
+  console.log(filtre_batiment);
   var request = "request=listeEvenements"
   if (filtre_ecole != "*"){
-    request += "&&filtreEcoleEvenement=" + filtre_ecole;
+    request += "&&filtreEcole=" + filtre_ecole;
   }
   if (filtre_batiment != "*"){
-    request += "&&filtreBatimentEvenement=" + filtre_batiment;
+    request += "&&filtreBatiment=" + filtre_batiment;
   }
  
   var ajax    = new XMLHttpRequest();
@@ -554,7 +550,13 @@ function getListeEvenement(){
     element = document.createElement("td");
     element.innerHTML = "Batiment";
     ligne.appendChild(element);
-    
+    element = document.createElement("td");
+    element.innerHTML = "Modifier";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Supprimer";
+    ligne.appendChild(element);
+
 
     tableau.appendChild(ligne);
 
@@ -572,22 +574,22 @@ function getListeEvenement(){
       element.innerHTML = listeEvenements[i].fin;
       ligne.appendChild(element);
       element = document.createElement("td");
-      element.innerHTML = listeEvenements[i].id_ecole;
+      element.innerHTML = listeEvenements[i].ecole;
       ligne.appendChild(element);
 	  element = document.createElement("td");
-      element.innerHTML = listeEvenements[i].id_batiment;
+      element.innerHTML = listeEvenements[i].batiment;
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonModifier = document.createElement("button");
       boutonModifier.setAttribute("id", "bouton-modifier-evenement" + i);
-      boutonModifier.setAttribute("class", "modifier_evenement")
+      boutonModifier.setAttribute("class", "modifier_batiment")
       boutonModifier.innerHTML = "<img src='boutons/modifier.png' onClick='changeEvenement(" + i + ")' alt='Oups !'>";
       element.appendChild(boutonModifier);
       ligne.appendChild(element);
       element = document.createElement("td");
       boutonSupprimer = document.createElement("button");
       boutonSupprimer.setAttribute("id", "supprimer-evenement"+i);
-      boutonSupprimer.setAttribute("class", "supprimer_evenement");
+      boutonSupprimer.setAttribute("class", "supprimer_batiment");
       boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteEvenement(" + i + ")' alt='Oups !'>";
       element.appendChild(boutonSupprimer);
       ligne.appendChild(element);
@@ -698,7 +700,7 @@ function saveEvenement(){
   var input_ecole_evenement = document.getElementById("filtre-ecole3").value;
   var input_batiment_evenement = document.getElementById("filtre-batiment3").value;
   var ajax = new XMLHttpRequest()
-  ajax.open('GET', 'serveur.php/?request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&email=' + input_email + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement);
+  ajax.open('GET', 'serveur.php/?request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement +" "+input_debut_evenement + '&&fin=' + input_date_evenement +" "+ input_fin_evenement +  '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.addEventListener('load',  function () {
     var response = ajax.response;
@@ -706,7 +708,7 @@ function saveEvenement(){
 	getListeEvenement();
   });
   
-  ajax.send('request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&email=' + input_email + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement)
+  ajax.send('request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement)
   } 
   
 
@@ -1156,19 +1158,18 @@ function changeUtilisateur(i){
   pseudo.innerHTML    = "<input id='modif_pseudo_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].pseudo+"'>";
   var email      = papi.children[3];
   email.innerHTML = "<input id='modif_email_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].email+"'>";
-  var mdp        = papi.children[4];
-  mdp.innerHTML  = "<input id='modif_mdp_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].mdp+"'>";
-  var admin        = papi.children[5];
-  admin.innerHTML  = "<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")'  '>";
+  var admin        = papi.children[4];
+  admin.innerHTML  = "<select id='modif_admin_utilisateur" + i + "'><option value='t'>Oui</option><option value='f'>Non</option></select>";
   admin.checked='false';
   console.log(admin.checked);
+  console.log(admin);
 
 
   //on met en place les deux nouveaux boutons
-  var bouton_valider         = papi.children[6];
-  bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-utilisateur" + i + "' class='modifier_utilisateur'  onClick='validechangeUtilisateur("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
-  var bouton_annuler         = papi.children[7];
-  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-utilisateur" + i + "' class='supprimer_utilisateur' onClick='annulechangeUtilisateur("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  var bouton_valider         = papi.children[5];
+  bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-utilisateur" + i + "' class='modifier_filiere'  onClick='validechangeUtilisateur("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
+  var bouton_annuler         = papi.children[6];
+  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-utilisateur" + i + "' class='supprimer_filiere' onClick='annulechangeUtilisateur("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
 
  function check_admin(i){
@@ -1204,7 +1205,7 @@ function validechangeUtilisateur(i){
   var input_nom      = document.getElementById("modif_nom_utilisateur" + i + "").value;
   var input_pseudo    = document.getElementById("modif_pseudo_utilisateur" + i + "").value;
   var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
-  var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
+  // var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
   var input_admin  =  document.getElementById("modif_admin_utilisateur" + i + "").value;
   console.log(input_admin);
 
@@ -1231,10 +1232,10 @@ function validechangeUtilisateur(i){
     input_email = listeUtilisateurs[i].email;
   }
 
-  if(input_mdp == ""){
-    // input_description=listeEcoles[input_id].description;
-    input_mdp = listeUtilisateurs[i].mdp;
-  }
+  // if(input_mdp == ""){
+
+    // input_mdp = listeUtilisateurs[i].mdp;
+  // }
   
   if(input_admin == ""){
     // input_description=listeEcoles[input_id].description;
@@ -1276,9 +1277,9 @@ function validechangeUtilisateur(i){
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[6];
-  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_utilisateur' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_filiere' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[7];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_utilisateur'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
 }
 
 
@@ -1304,9 +1305,9 @@ function annulechangeUtilisateur(i){
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[6];
-  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_utilisateur' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_filiere' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[7];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_utilisateur'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
 }
 
 function changeEvenement(i){
@@ -1316,10 +1317,10 @@ function changeEvenement(i){
   var papi              = papa.parentNode;
   var nom               = papi.children[0];
   nom.innerHTML         = "<input id='modif_nom_evenement" + i + "' placeholder='"+listeEvenements[i].nom+"'>";
-  var nom           = papi.children[1];
-  nom.innerHTML      = "<input id='modif_debut_evenement" + i + "' placeholder='"+listeEvenements[i].debut+"'>";
-  var pseudo         = papi.children[2];
-  pseudo.innerHTML    = "<input id='modif_fin_evenement" + i + "' placeholder='"+listeEvenements[i].fin+"'>";
+  var debut          = papi.children[1];
+  debut.innerHTML      = "<input type='time' id='modif_temps_debut_evenement" + i + "'><input type='date' id='modif_date_debut_evenement" + i + "'>";
+  var fin         = papi.children[2];
+  fin.innerHTML    = "<input type='time' id='modif_temps_fin_evenement"+i+"'><input type='date' id='modif_date_fin_evenement" + i + "'>";
   var id_ecole      = papi.children[3];
   id_ecole.innerHTML = "<select id='modif_id_ecole_evenement" + i + "'></select>";
   getListeNomEcoles("modif_id_ecole_evenement" + i + "");
@@ -1330,9 +1331,9 @@ function changeEvenement(i){
 
   //on met en place les deux nouveaux boutons
   var bouton_valider         = papi.children[5];
-  bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-evenement" + i + "' class='modifier_evenement'  onClick='validechangeEvenement("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
+  bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-evenement" + i + "' class='modifier_filiere'  onClick='validechangeEvenement("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
   var bouton_annuler         = papi.children[6];
-  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-evenement" + i + "' class='supprimer_evenement' onClick='annulechangeEvenement("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-evenement" + i + "' class='supprimer_filiere' onClick='annulechangeEvenement("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
 
  
@@ -1346,8 +1347,10 @@ function validechangeEvenement(i){
   var input_id     = listeEvenements[i].id;
 
   var input_nom         = document.getElementById("modif_nom_evenement" + i + "").value;
-  var input_debut      = document.getElementById("modif_debut_evenement" + i + "").value;
-  var input_fin    = document.getElementById("modif_fin_evenement" + i + "").value;
+  var input_date_debut      = document.getElementById("modif_date_debut_evenement" + i + "").value;
+  var input_date_fin    = document.getElementById("modif_date_fin_evenement" + i + "").value;
+  var input_temps_debut      = document.getElementById("modif_temps_debut_evenement" + i + "").value;
+  var input_temps_fin    = document.getElementById("modif_temps_fin_evenement" + i + "").value;
   var input_ecole = document.getElementById("modif_id_ecole_evenement" + i + "").value;
   var input_batiment  = document.getElementById("modif_id_batiment_evenement" + i + "").value;
 
@@ -1359,16 +1362,16 @@ function validechangeEvenement(i){
   }
 
 
-  if(input_debut == ""){
-    // input_site=listeEcoles[input_id].site;
-    input_debut = listeEvenements[i].debut;
-  }
+  // if(input_debut == ""){
+   
+    // input_debut = listeEvenements[i].debut;
+  // }
 
 
-  if(input_fin == ""){
-    // input_description=listeEcoles[input_id].description;
-    input_fin = listeEvenements[i].fin;
-  }
+  // if(input_fin == ""){
+    
+    // input_fin = listeEvenements[i].fin;
+  // }
 
   if(input_ecole == ""){
     // input_description=listeEcoles[input_id].description;
@@ -1384,7 +1387,7 @@ function validechangeEvenement(i){
 
   var ajax = new XMLHttpRequest();
 
-  ajax.open('GET', 'serveur.php/?request=changeEvenement&&id=' + input_id + '&&nom=' + input_nom + '&&debut=' + input_debut + '&&fin=' + input_fin + '&&id_ecole=' + input_ecole + '&&id_batiment=' + input_batiment );
+  ajax.open('GET', 'serveur.php/?request=changeEvenement&&id=' + input_id + '&&nom=' + input_nom + '&&debut=' + input_date_debut +" "+ input_temps_debut +'&&fin=' + input_date_fin +" "+input_temps_fin +'&&id_ecole=' + input_ecole + '&&id_batiment=' + input_batiment );
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.addEventListener('load',  function () {
     var response = ajax.response;
@@ -1415,9 +1418,9 @@ function validechangeEvenement(i){
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[5];
-  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_utilisateur' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_filiere' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_utilisateur'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-utilisateur"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteUtilisateur(" + i + ")'alt='Oups'> </button>"
 }
 
 
@@ -1435,16 +1438,16 @@ function annulechangeEvenement(i){
   var fin           = papi.children[2];
   fin.innerHTML     = listeEvenements[i].fin;
   var id_ecole        = papi.children[3];
-  id_ecole.innerHTML  = listeUtilisateurs[i].id_ecole;
+  id_ecole.innerHTML  = listeEvenements[i].id_ecole;
   var id_batiment         = papi.children[4];
-  id_batiment.innerHTML   = listeUtilisateurs[i].id_batiment;
+  id_batiment.innerHTML   = listeEvenements[i].id_batiment;
 
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[5];
-  bouton_valider.innerHTML  = "<button  id='bouton-modifier-evenement" + i + "' class='modifier_evenement' onClick='changeEvenement("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-evenement" + i + "' class='modifier_filiere' onClick='changeEvenement("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
-  bouton_annuler.innerHTML  = "<button  id='supprimer-evenement"+i+"' class='supprimer_evenement'> <img src='boutons/supprimer.png' onClick='deleteEvenement(" + i + ")'alt='Oups'> </button>"
+  bouton_annuler.innerHTML  = "<button  id='supprimer-evenement"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteEvenement(" + i + ")'alt='Oups'> </button>"
 }
 
 

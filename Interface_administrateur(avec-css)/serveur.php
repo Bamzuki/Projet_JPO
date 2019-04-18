@@ -386,6 +386,30 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
     return "La sauvegarde a échouée";
   }
 }
+
+function saveEvenement ($nom, $debut, $fin, $id_ecole, $id_batiment){
+  //Cette fonction enregistre un nouvel utilisateur dans la base de données
+  $nom   = str_replace("'", "''", $nom);
+  $debut     = str_replace("'", "''", $debut);
+  $fin   = str_replace("'", "''", $fin);
+  $id_ecole    = str_replace("'", "''", $id_ecole);
+  $id_batiment      = str_replace("'", "''", $id_batiment);
+  
+  $ecole    = getIdEcole($id_ecole);
+  $batiment = getIdBatiment($id_batiment);
+
+  
+  global $link;
+  $requete = "INSERT INTO evenements (nom, debut, fin, id_ecole, id_batiment) VALUES ('" . $nom . "', '" . $debut . "', '" . $fin . "', '" . $ecole . "', '" . $batiment . "')";
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+
+
 // I.4 Fonctions CHANGE :
 function changeEcole ($id, $nom, $adresse, $site, $description){
   //Cette fonction modifie une école déjà existante dans la base de données
@@ -446,6 +470,28 @@ function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
   global $link;
   $requete = "UPDATE formations
               SET nom = '" . $nom . "', niveau = '" . $niveau . "', id_ecole = '" . $id_ecole . "', id_batiment = '" . $id_batiment ."', id_filiere = '" . $id_filiere . "'
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
+function changeEvenement ($id, $nom, $debut, $fin, $id_ecole, $id_batiment){
+  //Cette fonction modifie une formation déjà existante dans la base de données
+  $nom      = str_replace("'", "''", $nom);
+  $debut  = str_replace("'", "''", $debut);
+  $fin    = str_replace("'", "''", $fin);
+  $id_ecole = str_replace("'", "''", $id_ecole);
+  $id_batiment  = str_replace("'", "''", $id_batiment);
+  // Détermination des id des objets
+  $ecole    = getIdEcole($id_ecole);
+  $batiment = getIdBatiment($id_batiment);
+
+  global $link;
+  $requete = "UPDATE evenements
+              SET nom = '" . $nom . "', debut = '" . $debut . "', fin = '" . $fin . "', id_ecole = '" . $ecole . "', id_batiment = '" . $batiment ."'
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
@@ -525,6 +571,18 @@ function deleteUtilisateur ($id){
   //Cette fonction supprime un utlisateru dans la base de données
   global $link;
   $requete = "DELETE FROM utilisateurs
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
+function deleteEvenement ($id){
+  //Cette fonction supprime un utlisateru dans la base de données
+  global $link;
+  $requete = "DELETE FROM evenements
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
@@ -650,6 +708,15 @@ if (isset($_GET['request']) && $_GET['request'] == "saveUtilisateur"){
   $admin    = $_GET['admin'];
   echo saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin);
 }
+
+if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
+  $nom   = $_GET['nom'];
+  $debut      = $_GET['debut'];
+  $fin  = $_GET['fin'];
+  $id_ecole    = $_GET['id_ecole'];
+  $id_batiment     = $_GET['id_batiment'];
+  echo saveEvenement($nom, $debut, $fin, $id_ecole, $id_batiment);
+}
 // II.3 Requêtes CHANGE :
 if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
   $id          = $_GET['id'];
@@ -691,6 +758,15 @@ if (isset($_GET['request']) && $_GET['request'] == "changeUtilisateur"){
   $admin    = $_GET['admin'];
   echo changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin);
 }
+if (isset($_GET['request']) && $_GET['request'] == "changeEvenement"){
+  $id       = $_GET['id'];
+  $nom   = $_GET['nom'];
+  $debut     = $_GET['debut'];
+  $fin   = $_GET['fin'];
+  $id_ecole    = $_GET['id_ecole'];
+  $id_batiment      = $_GET['id_batiment'];
+  echo changeEvenement ($id, $nom, $debut, $fin, $id_ecole, $id_batiment);
+}
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];
@@ -711,6 +787,10 @@ if (isset($_GET['request']) && $_GET['request'] == "deleteFormation"){
 if (isset($_GET['request']) && $_GET['request'] == "deleteUtilisateur"){
   $id  = $_GET['id'];
   echo deleteUtilisateur ($id);
+}
+if (isset($_GET['request']) && $_GET['request'] == "deleteEvenement"){
+  $id  = $_GET['id'];
+  echo deleteEvenement ($id);
 }
 // III - Tests unitaires :
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
