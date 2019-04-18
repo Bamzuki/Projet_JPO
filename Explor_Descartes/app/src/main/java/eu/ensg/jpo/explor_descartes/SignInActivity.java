@@ -31,7 +31,7 @@ public class SignInActivity extends AppCompatActivity {
         // Enregistrement dans la base de données :
         String urlServeur = getString(R.string.url_serveur_ecoles);
         VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-        visiteurDAO.getVisiteurByEmailAndMdp(this, mail, mdp);
+        visiteurDAO.connexionBdd(this, mail, mdp);
 
     }
 

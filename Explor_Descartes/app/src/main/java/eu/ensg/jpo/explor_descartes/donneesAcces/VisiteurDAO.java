@@ -7,6 +7,7 @@ import com.google.gson.Gson;
 import java.io.IOException;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
+import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import okhttp3.Call;
@@ -22,25 +23,6 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     @Override
     public void create(Visiteur newVisiteur) {
-        // Construction de la requete
-        String url = this.urlServeur + "?request=saveUtilisateur";
-        String donnees = "&&prenom=" + newVisiteur.getPrenom() + "&&nom=" + newVisiteur.getNom() + "&&pseudo=" + newVisiteur.getPseudo() + "&&email=" + newVisiteur.getEmail() + "&&mdp=" + newVisiteur.getMdp() + "&&admin=" + newVisiteur.getAdmin();
-        url = url + donnees;
-        Request request = new Request.Builder().url(url).build();
-        // Envoi de la requete
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
-                getLastVisiteur();
-                //Toast.makeText(getActivity(), response.body().string() , Toast.LENGTH_LONG).show();
-
-            }
-
-            public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connection !");
-            }
-        });
         return;
     }
 
@@ -88,12 +70,14 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         return;
     }
 
-    public void getVisiteurByEmailAndMdp(final SignInActivity activity, String MailOrPseudo, String mdp) {
+    public void connexionBdd(final SignInActivity activity, String mailOrPseudo, String mdp) {
+
         // Construction de la requete
-        String url = this.urlServeur + "?request=utilisateurByEmailAndMdp";
-        String donnees = "&&mailOrPseudo=" + MailOrPseudo + "&&mdp=" + mdp;
+        String url = this.urlServeur + "?request=connexion";
+        String donnees = "&&mail=" + mailOrPseudo + "&&mdp=" + mdp;
         url = url + donnees;
         Request request = new Request.Builder().url(url).build();
+
         // Envoi de la requete
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
@@ -103,11 +87,13 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+
                         //Identifiants incorrects
                         if (visiteur == null){
                             Toast.makeText(activity, "Identifiants incorrects" , Toast.LENGTH_LONG).show();
                             activity.getMdpET().getText().clear();
                         }
+
                         //Identifiants corrects
                         else{
                             ListeObjets.visiteur = visiteur;
@@ -130,6 +116,64 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         });
     }
 
+    public void firstConnexionBdd(final RegisterActivity activity, Visiteur newVisteur) {
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=connexion";
+        String donnees = "&&mail=" + newVisteur.getEmail() + "&&mdp=" + newVisteur.getMdp();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                final Visiteur visiteur = new Gson().fromJson(response.body().string(), Visiteur.class);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ListeObjets.visiteur = visiteur;
+                        Toast.makeText(activity, "Inscription réussie !", Toast.LENGTH_LONG).show();
+                        activity.openAccueilActivity();
+                    }
+                });
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Problème de connexion au serveur..." , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+    }
+
+    public void inscriptionBdd(final RegisterActivity activity, final Visiteur newVisiteur){
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=saveUtilisateur";
+        String donnees = "&&prenom=" + newVisiteur.getPrenom() + "&&nom=" + newVisiteur.getNom() + "&&pseudo=" + newVisiteur.getPseudo() + "&&email=" + newVisiteur.getEmail() + "&&mdp=" + newVisiteur.getMdp() + "&&admin=" + newVisiteur.getAdmin();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                firstConnexionBdd(activity, newVisiteur);
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+    }
+/**
     public void getLastVisiteur(){
         // Construction de la requete
         String url = this.urlServeur + "?request=lastUtilisateur";
@@ -151,6 +195,5 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         return;
 
     }
-
+*/
 }
-
