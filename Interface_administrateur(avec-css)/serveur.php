@@ -119,12 +119,12 @@ function getListeNomObjets($nomTable){
 function getListeEcoles(){
   //Cette fonction renvoie la liste des ecoles
   global $link;
-  $requete = "SELECT id, nom, adresse, site, description FROM ecoles ORDER BY id";
+  $requete = "SELECT id, nom, image, adresse, site, description FROM ecoles ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "adresse":"' . $row[2] . '", "site":"' . $row[3] . '", "description":"' . $row[4] . '"}';
+      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "image":"' . $row[2] .'", "adresse":"' . $row[3] . '", "site":"' . $row[4] . '", "description":"' . $row[5] . '"}';
       $response = $response . $ecole . ', ';
     }
   }
@@ -336,13 +336,14 @@ function getBatimentById($id){
 
 
 // I.3 Fonctions SAVE :
-function saveEcole ($nom, $adresse, $site, $description){
+function saveEcole ($nom, $image, $adresse, $site, $description){
   //Cette fonction enregistre une nouvelle école dans la base de données
   $nom = str_replace("'", "''", $nom);
+  $image = str_replace("'", "''", $image);
   $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
-  $requete = "INSERT INTO ecoles (nom, adresse, site, description) VALUES ('" . $nom . "', '" . $adresse . "', '" . $site . "', '" . $description . "')";
+  $requete = "INSERT INTO ecoles (nom, image, adresse, site, description) VALUES ('" . $nom . "', '" . $image . "', '" . $adresse . "', '" . $site . "', '" . $description . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -439,9 +440,10 @@ function saveEvenement ($nom, $debut, $fin, $ecole, $batiment){
 
 
 // I.4 Fonctions CHANGE :
-function changeEcole ($id, $nom, $adresse, $site, $description){
+function changeEcole ($id, $nom, $image, $adresse, $site, $description){
   //Cette fonction modifie une école déjà existante dans la base de données
   $nom = str_replace("'", "''", $nom);
+  $image = str_replace("'", "''", $image);
   $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
@@ -709,10 +711,11 @@ if (isset($_GET['request']) && $_GET['request'] == "connexion"){
 // II.2 Requêtes SAVE :
 if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
   $nom         = $_GET['nom'];
+  $image       = $_GET['image'];
   $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
-  echo saveEcole ($nom, $adresse, $site, $description);
+  echo saveEcole ($nom, $image, $adresse, $site, $description);
 }
 
 if (isset($_GET['request']) && $_GET['request'] == "saveBatiment"){
@@ -759,6 +762,7 @@ if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
 if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
   $id          = $_GET['id'];
   $nom         = $_GET['nom'];
+  $image       = $_GET['image'];
   $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
@@ -852,7 +856,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "getListeFormations" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeFormations("%", "%", "%", "%") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveEcole" :</b>' . '<br />' . '<br />';
-  echo '- ' . saveEcole("ecoleTest", "test adresse", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
+  echo '- ' . saveEcole("ecoleTest", "testImage.jpg", "test adresse", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveBatiment" :</b>' . '<br />' . '<br />';
   echo '- ' . saveBatiment("batimentTest", "fonctionTest", 0, 0) . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveFiliere" :</b>' . '<br />' . '<br />';
@@ -860,7 +864,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "saveFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . saveFormation("testFormation", "DUT", "ENSG-Géomatique", "ENSG", "Sport") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeEcole" :</b>' . '<br />' . '<br />';
-  echo '- ' . changeEcole(10, "ecoleTestModif", "testadresse", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
+  echo '- ' . changeEcole(10, "ecoleTestModif", "testImageModif.jpg", "testadresse", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeBatiment" :</b>' . '<br />' . '<br />';
   echo '- ' . changeBatiment(9, "batimentTestModif", "fonctionTestModif", 1, 1) . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeFiliere" :</b>' . '<br />' . '<br />';
