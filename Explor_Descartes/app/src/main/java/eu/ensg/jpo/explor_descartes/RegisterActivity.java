@@ -132,4 +132,12 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
+    public EditText getPseudoET() {
+        return pseudoET;
+    }
+
+    public EditText getMailET() {
+        return mailET;
+    }
 }

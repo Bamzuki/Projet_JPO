@@ -165,7 +165,31 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
-                firstConnexionBdd(activity, newVisiteur);
+                // Pseudo déjà utilisé
+                if (response.body().string().equals("Pseudo déjà utilisé !")){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "Pseudo déjà utilisé !" , Toast.LENGTH_LONG).show();
+                            activity.getPseudoET().getText().clear();
+                        }
+                    });
+                }
+                // Email déjà utilisé
+                else if (response.body().string().equals("Email déjà utilisé !")){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "Email déjà utilisé !" , Toast.LENGTH_LONG).show();
+                            activity.getMailET().getText().clear();
+                        }
+                    });
+                }
+                // Pseudo et email corrects
+                else{
+                    firstConnexionBdd(activity, newVisiteur);
+                }
+
             }
 
             public void onFailure(Call call, IOException e) {
@@ -173,27 +197,5 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
             }
         });
     }
-/**
-    public void getLastVisiteur(){
-        // Construction de la requete
-        String url = this.urlServeur + "?request=lastUtilisateur";
-        Request request = new Request.Builder().url(url).build();
-        // Envoi de la requete
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
-                Visiteur lastVisiteur = new Gson().fromJson(response.body().string(), Visiteur.class);
-                ListeObjets.visiteur = lastVisiteur;
-                //Toast.makeText(getActivity(), response.body().string() , Toast.LENGTH_LONG).show();
-            }
 
-            public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connection !");
-            }
-        });
-        return;
-
-    }
-*/
 }
