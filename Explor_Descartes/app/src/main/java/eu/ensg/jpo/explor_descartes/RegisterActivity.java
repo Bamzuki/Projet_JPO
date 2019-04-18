@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         String prenom = prenomET.getText().toString();
         String nom = nomET.getText().toString();
         String pseudo = pseudoET.getText().toString();
-        String mail = mailET.getText().toString();
+        String mail = mailET.getText().toString().toLowerCase();
         String mdp = mdpET.getText().toString();
         String mdp_confirm = mdp_confirmET.getText().toString();
 

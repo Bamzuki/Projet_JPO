@@ -165,8 +165,9 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
+                String reponseBdd = response.body().string();
                 // Pseudo déjà utilisé
-                if (response.body().string().equals("Pseudo déjà utilisé !")){
+                if (reponseBdd.equals("Pseudo déjà utilisé !")){
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -176,7 +177,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                     });
                 }
                 // Email déjà utilisé
-                else if (response.body().string().equals("Email déjà utilisé !")){
+                else if (reponseBdd.equals("Email déjà utilisé !")){
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
