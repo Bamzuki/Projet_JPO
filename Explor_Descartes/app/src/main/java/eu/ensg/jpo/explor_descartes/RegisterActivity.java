@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         return result;
     }
 
-    private void openSignInActivity() {
+    public void openSignInActivity() {
 
         // Create intent
         Intent intent = new Intent(this, SignInActivity.class);
@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openAccueilActivity() {
+    public void openAccueilActivity() {
 
         // Create intent
         Intent intent = new Intent(this, AccueilActivity.class);
@@ -90,12 +90,11 @@ public class RegisterActivity extends AppCompatActivity {
         String urlServeur = getString(R.string.url_serveur_ecoles);
         try {
             Visiteur newVisiteur = new Visiteur(prenom, nom, pseudo, mail, SHA.encode(mdp), false);
+            VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
+            visiteurDAO.inscriptionBdd(this, newVisiteur);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-        //visiteurDAO.create(newVisiteur);
-        openAccueilActivity();
 
     }
 
