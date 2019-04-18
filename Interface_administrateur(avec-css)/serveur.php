@@ -66,6 +66,32 @@ function getEvenementById($idFavoris){
   }
 }
 
+function newPseudo($pseudo){
+  //Cette fonction renvoie true si le pseudo n'est pas déjà présent dans la base de données et false dans le cas contraire
+  global $link;
+  $requete = "SELECT id FROM utilisateurs WHERE pseudo LIKE '" . $pseudo . "'";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      return false;
+    }
+    return true;
+  }
+}
+
+function newMail($mail){
+  //Cette fonction renvoie true si le mail n'est pas déjà présent dans la base de données et false dans le cas contraire
+  global $link;
+  $requete = "SELECT id FROM utilisateurs WHERE email LIKE '" . $mail . "'";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      return false;
+    }
+    return true;
+  }
+}
+
 
 // I.2 Fonctions GET :
 function getListeNomObjets($nomTable){
@@ -376,6 +402,15 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
   $pseudo   = str_replace("'", "''", $pseudo);
   $email    = str_replace("'", "''", $email);
   $mdp      = str_replace("'", "''", $mdp);
+
+  // Vérification des nouveaux identifiants
+  if (!newPseudo($pseudo)){
+    return "Pseudo déjà utilisé !";
+  }
+  if (!newMail($email)){
+    return "Email déjà utilisé !";
+  }
+
   global $link;
   $requete = "INSERT INTO utilisateurs (prenom, nom, pseudo, email, mdp, admin) VALUES ('" . $prenom . "', '" . $nom . "', '" . $pseudo . "', '" . $email . "', '" . $mdp . "', '" . $admin . "')";
   $result = pg_query($link, $requete);
