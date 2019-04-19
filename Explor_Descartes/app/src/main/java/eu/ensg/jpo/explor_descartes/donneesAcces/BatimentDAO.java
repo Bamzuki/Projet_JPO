@@ -1,21 +1,13 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
-import android.app.Activity;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
-import eu.ensg.jpo.explor_descartes.NavigationActivity;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -29,18 +21,18 @@ public class BatimentDAO extends BddEcolesDAO<Batiment>  {
     }
 
     @Override
-    public Batiment create(Batiment batiment) {
-        return null;
+    public void create(Batiment batiment) {
+        return;
     }
 
     @Override
-    public boolean delete(Batiment batiment) {
-        return false;
+    public void delete(Batiment batiment) {
+        return;
     }
 
     @Override
-    public boolean update(Batiment batiment) {
-        return false;
+    public void update(Batiment batiment) {
+        return;
     }
 
 

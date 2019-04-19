@@ -1,13 +1,21 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
+import android.view.View;
+import android.widget.ExpandableListView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
+import eu.ensg.jpo.explor_descartes.EcoleActivity;
+import eu.ensg.jpo.explor_descartes.ExpandableListAdapter;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
+import eu.ensg.jpo.explor_descartes.R;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -21,18 +29,18 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
     }
 
     @Override
-    public Evenement create(Evenement Evenement) {
-        return null;
+    public void create(Evenement Evenement) {
+        return;
     }
 
     @Override
-    public boolean delete(Evenement Evenement) {
-        return false;
+    public void delete(Evenement Evenement) {
+        return;
     }
 
     @Override
-    public boolean update(Evenement Evenement) {
-        return false;
+    public void update(Evenement Evenement) {
+        return;
     }
 
     public void chargerEvenement() {
@@ -56,5 +64,60 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
             }
         });
 
+    }
+
+    public void afficherEvenement(final EcoleActivity activity) {
+        // Construction de la requete
+        String url = this.urlServeur + "?request=listeEvenements";
+        String donnees = "&&filtreEcole=" + activity.getEcole().getNom();
+        url = url + donnees;
+        final Request request = new Request.Builder().url(url).build();
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("afficherEvenement : Connexion etablie avec succes !");
+                Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
+                ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
+
+                final ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.liste_extensions);
+
+                List<String> listDataHeader = activity.getListDataHeader();
+                HashMap<String, List<String>> listHashMap = activity.getListHashMap();
+                ArrayList<String> evenements = new ArrayList<>();
+
+                listDataHeader.add("Evénements");
+
+                for (Evenement evenement : listeEvenement) {
+                    evenements.add(evenement.getNom());
+                }
+
+                listHashMap.put(listDataHeader.get(listDataHeader.size()-1), evenements);
+
+                final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
+                System.out.print("listAdapter: " + listAdapter);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        listView.setAdapter(listAdapter);
+                        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+
+                            @Override
+                            public boolean onGroupClick(ExpandableListView parent, View v,
+                                                        int groupPosition, long id) {
+                                activity.setListViewHeight(parent, groupPosition);
+                                return false;
+                            }
+                        });
+                    }
+                });
+
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connexion !");
+            }
+        });
     }
 }

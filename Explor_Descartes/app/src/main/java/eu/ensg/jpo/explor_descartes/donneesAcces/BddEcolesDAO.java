@@ -12,10 +12,10 @@ public abstract class BddEcolesDAO<T> {
         this.urlServeur = urlServeur;
     }
 
-    public abstract T create(T obj);
+    public abstract void create(T obj);
 
-    public abstract boolean update(T obj);
+    public abstract void update(T obj);
 
-    public abstract boolean delete(T obj);
+    public abstract void delete(T obj);
 
 }

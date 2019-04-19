@@ -187,6 +187,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
         // Create intent
         Intent intent = new Intent(this, EcoleActivity.class);
+        ListeObjets.ecoleSelectionnee = ecole;
 
         // Start activity
         startActivity(intent);
@@ -202,7 +203,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
             if (mapboxMap.queryRenderedFeatures(rectF, "batiment"+batiment.getId()).size() > 0){
                 int idEcole = batiment.getIdEcole();
                 Toast.makeText(this, idEcole + "", Toast.LENGTH_LONG).show();
-                //NavigationActivity.this.openEcoleActivity(ListeObjets.listeEcole.get(0));
+                NavigationActivity.this.openEcoleActivity(ListeObjets.getEcoleById(idEcole));
                 return true;
             }
         }
