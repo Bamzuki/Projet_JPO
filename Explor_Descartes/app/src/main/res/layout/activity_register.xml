@@ -26,7 +26,7 @@
     <TextView
         android:id="@+id/classiqueI"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="24dp"
         android:text="@string/inscription_mail"
         android:textColor="@android:color/black"
         android:textSize="18sp"
@@ -145,7 +145,7 @@
     <TextView
         android:id="@+id/accord"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="55dp"
         android:paddingLeft="10dp"
         android:paddingRight="10dp"
         android:text="@string/accord"
@@ -154,6 +154,7 @@
         android:textColor="@android:color/black"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/validationB"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/formulaireC" />
@@ -161,7 +162,7 @@
     <Button
         android:id="@+id/validationB"
         android:layout_width="wrap_content"
-        android:layout_height="35dp"
+        android:layout_height="32dp"
         android:layout_marginTop="10dp"
         android:background="@color/colorAccent"
         android:fontFamily="sans-serif"
@@ -177,7 +178,7 @@
     <LinearLayout
         android:id="@+id/connexion"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="51dp"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"

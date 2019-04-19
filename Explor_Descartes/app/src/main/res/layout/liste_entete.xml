@@ -1,3 +1,20 @@
+<<<<<<< HEAD
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@color/colorAccent"
+    android:padding="8dp">
+
+    <TextView
+        android:id="@+id/titre_entete"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="?android:attr/expandableListPreferredItemPaddingLeft"
+        android:textColor="@android:color/white"
+        android:textSize="16dip" />
+=======
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
@@ -14,4 +31,5 @@
         android:paddingTop="5dp"
         android:textColor="@android:color/white"
         android:textSize="16dip" />
+>>>>>>> da15f66a63e66a76d32c747c387c8337550bb115
 </LinearLayout>
