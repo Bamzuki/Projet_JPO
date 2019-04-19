@@ -66,6 +66,32 @@ function getEvenementById($idFavoris){
   }
 }
 
+function newPseudo($pseudo){
+  //Cette fonction renvoie true si le pseudo n'est pas déjà présent dans la base de données et false dans le cas contraire
+  global $link;
+  $requete = "SELECT id FROM utilisateurs WHERE pseudo LIKE '" . $pseudo . "'";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      return false;
+    }
+    return true;
+  }
+}
+
+function newMail($mail){
+  //Cette fonction renvoie true si le mail n'est pas déjà présent dans la base de données et false dans le cas contraire
+  global $link;
+  $requete = "SELECT id FROM utilisateurs WHERE email LIKE '" . $mail . "'";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    while ($row = pg_fetch_row($result)) {
+      return false;
+    }
+    return true;
+  }
+}
+
 
 // I.2 Fonctions GET :
 function getListeNomObjets($nomTable){
@@ -93,12 +119,12 @@ function getListeNomObjets($nomTable){
 function getListeEcoles(){
   //Cette fonction renvoie la liste des ecoles
   global $link;
-  $requete = "SELECT id, nom, adresse, site, description FROM ecoles ORDER BY id";
+  $requete = "SELECT id, nom, image, adresse, site, description FROM ecoles ORDER BY id";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "adresse":"' . $row[2] . '", "site":"' . $row[3] . '", "description":"' . $row[4] . '"}';
+      $ecole = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "image":"' . $row[2] .'", "adresse":"' . $row[3] . '", "site":"' . $row[4] . '", "description":"' . $row[5] . '"}';
       $response = $response . $ecole . ', ';
     }
   }
@@ -244,9 +270,9 @@ function getLastUtilisateur(){
 }
 
 function getUtilisateurByMailAndMdp($mail, $mdp){
-  //Cette fonction renvoie l'utilisateur à partir de son mail et de son mdp
+  //Cette fonction renvoie l'utilisateur à partir de son email ou son pseudo et de son mot de passe
   global $link;
-  $requete = "SELECT id, prenom, nom, pseudo, email, mdp, admin FROM utilisateurs WHERE mail=" . $mail . ' AND mdp=' . $mdp;
+  $requete = "SELECT id, prenom, nom, pseudo, email, mdp, admin FROM utilisateurs WHERE (email LIKE '" . $mail . "' OR pseudo LIKE '" . $mail . "') AND mdp='" . $mdp . "'";
   $result = pg_query($link, $requete);
   if ($result) {
     $response = '[';
@@ -310,13 +336,14 @@ function getBatimentById($id){
 
 
 // I.3 Fonctions SAVE :
-function saveEcole ($nom, $adresse, $site, $description){
+function saveEcole ($nom, $image, $adresse, $site, $description){
   //Cette fonction enregistre une nouvelle école dans la base de données
   $nom = str_replace("'", "''", $nom);
+  $image = str_replace("'", "''", $image);
   $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
-  $requete = "INSERT INTO ecoles (nom, adresse, site, description) VALUES ('" . $nom . "', '" . $adresse . "', '" . $site . "', '" . $description . "')";
+  $requete = "INSERT INTO ecoles (nom, image, adresse, site, description) VALUES ('" . $nom . "', '" . $image . "', '" . $adresse . "', '" . $site . "', '" . $description . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -376,7 +403,15 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
   $pseudo   = str_replace("'", "''", $pseudo);
   $email    = str_replace("'", "''", $email);
   $mdp      = str_replace("'", "''", $mdp);
-  $admin    = str_replace("'", "''", $admin);
+
+  // Vérification des nouveaux identifiants
+  if (!newPseudo($pseudo)){
+    return "Pseudo déjà utilisé !";
+  }
+  if (!newMail($email)){
+    return "Email déjà utilisé !";
+  }
+
   global $link;
   $requete = "INSERT INTO utilisateurs (prenom, nom, pseudo, email, mdp, admin) VALUES ('" . $prenom . "', '" . $nom . "', '" . $pseudo . "', '" . $email . "', '" . $mdp . "', '" . $admin . "')";
   $result = pg_query($link, $requete);
@@ -387,20 +422,14 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
   }
 }
 
-function saveEvenement ($nom, $debut, $fin, $id_ecole, $id_batiment){
+function saveEvenement ($nom, $debut, $fin, $ecole, $batiment){
   //Cette fonction enregistre un nouvel utilisateur dans la base de données
-  $nom   = str_replace("'", "''", $nom);
-  $debut     = str_replace("'", "''", $debut);
-  $fin   = str_replace("'", "''", $fin);
-  $id_ecole    = str_replace("'", "''", $id_ecole);
-  $id_batiment      = str_replace("'", "''", $id_batiment);
-  
-  $ecole    = getIdEcole($id_ecole);
-  $batiment = getIdBatiment($id_batiment);
-
-  
+  $nom = str_replace("'", "''", $nom);
+  // Détermination des id des objets
+  $id_ecole    = getIdEcole($ecole);
+  $id_batiment = getIdBatiment($batiment);
   global $link;
-  $requete = "INSERT INTO evenements (nom, debut, fin, id_ecole, id_batiment) VALUES ('" . $nom . "', '" . $debut . "', '" . $fin . "', '" . $ecole . "', '" . $batiment . "')";
+  $requete = "INSERT INTO evenements (nom, debut, fin, id_ecole, id_batiment) VALUES ('" . $nom . "', '" . $debut . "', '" . $fin . "', '" . $id_ecole . "', '" . $id_batiment . "')";
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -411,9 +440,10 @@ function saveEvenement ($nom, $debut, $fin, $id_ecole, $id_batiment){
 
 
 // I.4 Fonctions CHANGE :
-function changeEcole ($id, $nom, $adresse, $site, $description){
+function changeEcole ($id, $nom, $image, $adresse, $site, $description){
   //Cette fonction modifie une école déjà existante dans la base de données
   $nom = str_replace("'", "''", $nom);
+  $image = str_replace("'", "''", $image);
   $adresse = str_replace("'", "''", $adresse);
   $description = str_replace("'", "''", $description);
   global $link;
@@ -672,14 +702,22 @@ if (isset($_GET['request']) && $_GET['request'] == "batiment"){
   echo getBatimentById($id);
 }
 
+if (isset($_GET['request']) && $_GET['request'] == "connexion"){
+  $mail = $_GET['mail'];
+  $mdp  = $_GET['mdp'];
+  echo getUtilisateurByMailAndMdp($mail, $mdp);
+}
+
 // II.2 Requêtes SAVE :
 if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
   $nom         = $_GET['nom'];
+  $image       = $_GET['image'];
   $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
-  echo saveEcole ($nom, $adresse, $site, $description);
+  echo saveEcole ($nom, $image, $adresse, $site, $description);
 }
+
 if (isset($_GET['request']) && $_GET['request'] == "saveBatiment"){
   $nom      = $_GET['nom'];
   $fonction = $_GET['fonction'];
@@ -687,10 +725,12 @@ if (isset($_GET['request']) && $_GET['request'] == "saveBatiment"){
   $lng      = $_GET['lng'];
   echo saveBatiment ($nom, $fonction, $lat, $lng);
 }
+
 if (isset($_GET['request']) && $_GET['request'] == "saveFiliere"){
   $nom = $_GET['nom'];
   echo saveFiliere ($nom);
 }
+
 if (isset($_GET['request']) && $_GET['request'] == "saveFormation"){
   $nom      = $_GET['nom'];
   $niveau   = $_GET['niveau'];
@@ -699,6 +739,7 @@ if (isset($_GET['request']) && $_GET['request'] == "saveFormation"){
   $filiere  = $_GET['filiere'];
   echo saveFormation ($nom, $niveau, $ecole, $batiment, $filiere);
 }
+
 if (isset($_GET['request']) && $_GET['request'] == "saveUtilisateur"){
   $prenom   = $_GET['prenom'];
   $nom      = $_GET['nom'];
@@ -721,6 +762,7 @@ if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
 if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
   $id          = $_GET['id'];
   $nom         = $_GET['nom'];
+  $image       = $_GET['image'];
   $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
@@ -814,7 +856,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "getListeFormations" :</b>' . '<br />' . '<br />';
   echo '- ' . getListeFormations("%", "%", "%", "%") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveEcole" :</b>' . '<br />' . '<br />';
-  echo '- ' . saveEcole("ecoleTest", "test adresse", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
+  echo '- ' . saveEcole("ecoleTest", "testImage.jpg", "test adresse", "www.test-site.com", "descriptionTest") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveBatiment" :</b>' . '<br />' . '<br />';
   echo '- ' . saveBatiment("batimentTest", "fonctionTest", 0, 0) . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "saveFiliere" :</b>' . '<br />' . '<br />';
@@ -822,7 +864,7 @@ if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "saveFormation" :</b>' . '<br />' . '<br />';
   echo '- ' . saveFormation("testFormation", "DUT", "ENSG-Géomatique", "ENSG", "Sport") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeEcole" :</b>' . '<br />' . '<br />';
-  echo '- ' . changeEcole(10, "ecoleTestModif", "testadresse", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
+  echo '- ' . changeEcole(10, "ecoleTestModif", "testImageModif.jpg", "testadresse", "www.test-site-modif.com", "descriptionTestModif") . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeBatiment" :</b>' . '<br />' . '<br />';
   echo '- ' . changeBatiment(9, "batimentTestModif", "fonctionTestModif", 1, 1) . '<br />' . '<br />'. '<br />';
   echo '<b>Test de "changeFiliere" :</b>' . '<br />' . '<br />';

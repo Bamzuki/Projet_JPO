@@ -36,7 +36,7 @@ public class RegisterActivity extends AppCompatActivity {
         return result;
     }
 
-    private void openSignInActivity() {
+    public void openSignInActivity() {
 
         // Create intent
         Intent intent = new Intent(this, SignInActivity.class);
@@ -45,7 +45,7 @@ public class RegisterActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void openAccueilActivity() {
+    public void openAccueilActivity() {
 
         // Create intent
         Intent intent = new Intent(this, AccueilActivity.class);
@@ -60,7 +60,7 @@ public class RegisterActivity extends AppCompatActivity {
         String prenom = prenomET.getText().toString();
         String nom = nomET.getText().toString();
         String pseudo = pseudoET.getText().toString();
-        String mail = mailET.getText().toString();
+        String mail = mailET.getText().toString().toLowerCase();
         String mdp = mdpET.getText().toString();
         String mdp_confirm = mdp_confirmET.getText().toString();
 
@@ -90,12 +90,11 @@ public class RegisterActivity extends AppCompatActivity {
         String urlServeur = getString(R.string.url_serveur_ecoles);
         try {
             Visiteur newVisiteur = new Visiteur(prenom, nom, pseudo, mail, SHA.encode(mdp), false);
+            VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
+            visiteurDAO.inscriptionBdd(this, newVisiteur);
         } catch (Exception e) {
             e.printStackTrace();
         }
-        VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-        //visiteurDAO.create(newVisiteur);
-        openAccueilActivity();
 
     }
 
@@ -132,5 +131,13 @@ public class RegisterActivity extends AppCompatActivity {
                 RegisterActivity.this.inscription();
             }
         });
+    }
+
+    public EditText getPseudoET() {
+        return pseudoET;
+    }
+
+    public EditText getMailET() {
+        return mailET;
     }
 }
