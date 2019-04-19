@@ -1,0 +1,515 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 619 652" style="enable-background:new 0 0 619 652;" xml:space="preserve">
+<style type="text/css">
+	.st0{opacity:0.2;fill:#C0C0C0;enable-background:new    ;}
+	.st1{fill:#FFFFFF;}
+	.st2{fill:none;stroke:#000000;stroke-miterlimit:10;}
+	.st3{font-family:'Arial-BoldMT';}
+	.st4{font-size:13px;}
+	.st5{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-dasharray:3;}
+	.st6{fill:none;}
+	.st7{font-family:'ArialMT';}
+	.st8{font-size:12px;}
+	.st9{fill:none;stroke:#000000;stroke-miterlimit:10;stroke-dasharray:3.0391,3.0391;}
+</style>
+<g>
+	<g>
+		<g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M55,313h221v205H55"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M55,313l10-10h221l-10,10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M286,303l-10,10v205l10-10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M48,306h221v205H48"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M48,306l10-10h221l-10,10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M279,296l-10,10v205l10-10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M48,306h221v205H48V306"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M48,306l10-10h221l-10,10H48"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M279,296l-10,10v205l10-10V296"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 75.522 325.5)" class="st3 st4">Serveur de base de données</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="105" y="359" class="st0" width="125.2" height="50"/>
+					</g>
+					<g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<rect x="98" y="352" class="st1" width="125.2" height="50"/>
+						</g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<path class="st2" d="M98,352h125.2v50H98V352z"/>
+						</g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<rect x="88" y="359" class="st1" width="20" height="10"/>
+						</g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<path class="st2" d="M88,359h20v10H88V359z"/>
+						</g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<rect x="88" y="379" class="st1" width="20" height="10"/>
+						</g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<path class="st2" d="M88,379h20v10H88V379z"/>
+						</g>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 141.75 371.5)" class="st3 st4">Base de</text>
+						<text transform="matrix(1 0 0 1 117.2988 384.5)" class="st3 st4">données Visiteur</text>
+						<text transform="matrix(1 0 0 1 130.1941 397.5)" class="st3 st4">PostgreSQL</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="105" y="431" class="st0" width="126" height="50"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="98" y="424" class="st1" width="126" height="50"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M98,424h126v50H98V424z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="88" y="431" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M88,431h20v10H88V431z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="88" y="451" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M88,451h20v10H88V451z"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 142.1487 443.5)" class="st3 st4">Base de</text>
+						<text transform="matrix(1 0 0 1 119.7446 456.5)" class="st3 st4">données Écoles</text>
+						<text transform="matrix(1 0 0 1 130.5928 469.5)" class="st3 st4">PostgreSQL</text>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st1" d="M272.9,143.1c0-7.8,6.2-14.1,13.8-14.1s13.8,6.3,13.8,14.1s-6.2,14.1-13.8,14.1S272.9,150.9,272.9,143.1z"
+						/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M272.9,143.1c0-7.8,6.2-14.1,13.8-14.1s13.8,6.3,13.8,14.1s-6.2,14.1-13.8,14.1S272.9,150.9,272.9,143.1z"
+						/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M286.7,157.2v27.5"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M272.1,167.6h29.3"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M286.7,184.8L266.4,213"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M286.7,184.8L307,213"/>
+				</g>
+			</g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<g>
+					<text transform="matrix(1 0 0 1 244.8259 233.5)" class="st3 st4">Administrateur</text>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st0" d="M439,145h141v93H439"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st0" d="M439,145l10-10h141l-10,10"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st0" d="M590,135l-10,10v93l10-10"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st1" d="M432,138h141v93H432"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st1" d="M432,138l10-10h141l-10,10"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st1" d="M583,128l-10,10v93l10-10"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M432,138h141v93H432V138"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M432,138l10-10h141l-10,10H432"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M583,128l-10,10v93l10-10V128"/>
+				</g>
+			</g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<g>
+					<text transform="matrix(1 0 0 1 456.5129 157.5)" class="st3 st4">Navigateur Web</text>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M383,313h260v212H383"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M383,313l10-10h260l-10,10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M653,303l-10,10v212l10-10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M376,306h260v212H376"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M376,306l10-10h260l-10,10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M646,296l-10,10v212l10-10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M376,306h260v212H376V306"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M376,306l10-10h260l-10,10H376"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M646,296l-10,10v212l10-10V296"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 468.687 325.5)" class="st3 st4">Serveur Web</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="441" y="359" class="st0" width="182" height="44"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="434" y="352" class="st1" width="182" height="44"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M434,352h182v44H434V352z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="424" y="359" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M424,359h20v10h-20V359z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="424" y="379" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M424,379h20v10h-20V379z"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 460.9788 371.5)" class="st3 st4">Couche de présentation</text>
+						<text transform="matrix(1 0 0 1 466.0696 384.5)" class="st3 st4">HTML CSS Javascript</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="449" y="439" class="st0" width="134" height="44"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="442" y="432" class="st1" width="134" height="44"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M442,432h134v44H442V432z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="432" y="439" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M432,439h20v10h-20V439z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="432" y="459" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M432,459h20v10h-20V459z"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 463.771 451.5)" class="st3 st4">Interface base de</text>
+						<text transform="matrix(1 0 0 1 473.8892 464.5)" class="st3 st4">données PHP</text>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g transform="translate(-38,-118) scale(1,1)">
+			<path class="st2" d="M281,405l94,1"/>
+		</g>
+		<g>
+			<g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st1" d="M258.3,631.3c0-7.9,6.3-14.3,14-14.3s14,6.4,14,14.3s-6.3,14.3-14,14.3S258.3,639.2,258.3,631.3z"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M258.3,631.3c0-7.9,6.3-14.3,14-14.3s14,6.4,14,14.3s-6.3,14.3-14,14.3S258.3,639.2,258.3,631.3z"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M272.3,645.6v27.8"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M257.5,656h29.6"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M272.3,673.4L251.7,702"/>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<path class="st2" d="M272.3,673.4l20.6,28.6"/>
+				</g>
+			</g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<g>
+					<text transform="matrix(1 0 0 1 243.3882 722.5)" class="st3 st4">Utilisateur</text>
+				</g>
+			</g>
+		</g>
+		<g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M423,601h172.2v165H423"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M423,601l10-10h172.2l-10,10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st0" d="M605.2,591l-10,10v165l10-10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M416,594h172.2v165H416"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M416,594l10-10h172.2l-10,10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st1" d="M598.2,584l-10,10v165l10-10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M416,594h172.2v165H416V594"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M416,594l10-10h172.2l-10,10H416"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M598.2,584l-10,10v165l10-10V584"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 446.5969 613.5)" class="st3 st4">Application Android</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="449" y="631" class="st0" width="98.4" height="44"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="442" y="624" class="st1" width="98.4" height="44"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M442,624h98.4v44H442V624z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="432" y="631" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M432,631h20v10h-20V631z"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="432" y="651" class="st1" width="20" height="10"/>
+					</g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<path class="st2" d="M432,651h20v10h-20V651z"/>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 482.135 643.5)" class="st3 st4">DAO</text>
+					</g>
+				</g>
+			</g>
+			<g>
+				<g>
+					<g transform="translate(-38,-118) scale(1,1)">
+						<rect x="449" y="703" class="st0" width="98.4" height="44"/>
+					</g>
+					<g>
+						<g transform="translate(-38,-118) scale(1,1)">
+							<rect x="442" y="696" class="st1" width="98.4" height="44"/>
+						</g>
+						<g>
+							<g transform="translate(-38,-118) scale(1,1)">
+								<path class="st2" d="M442,696h98.4v44H442V696z"/>
+							</g>
+							<g>
+								<g transform="translate(-38,-118) scale(1,1)">
+									<rect x="432" y="703" class="st1" width="20" height="10"/>
+								</g>
+								<g transform="translate(-38,-118) scale(1,1)">
+									<path class="st2" d="M432,703h20v10h-20V703z"/>
+								</g>
+								<g transform="translate(-38,-118) scale(1,1)">
+									<rect x="432" y="723" class="st1" width="20" height="10"/>
+								</g>
+								<g transform="translate(-38,-118) scale(1,1)">
+									<path class="st2" d="M432,723h20v10h-20V723z"/>
+								</g>
+							</g>
+						</g>
+					</g>
+				</g>
+				<g transform="translate(-38,-118) scale(1,1)">
+					<g>
+						<text transform="matrix(1 0 0 1 477.4346 715.5)" class="st3 st4">Objets</text>
+					</g>
+				</g>
+			</g>
+		</g>
+		<g transform="translate(-38,-118) scale(1,1)">
+			<path class="st2" d="M509,520l-1,63"/>
+		</g>
+		<g transform="translate(-38,-118) scale(1,1)">
+			<path class="st2" d="M509,233l1,62"/>
+		</g>
+		<g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<path class="st5" d="M541,647l83,1l-8-192l-39-1"/>
+			</g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<path class="st2" d="M587.3,451.1L577,455l10.1,4.5"/>
+			</g>
+		</g>
+		<g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<path class="st5" d="M431,453l-206-3"/>
+			</g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<path class="st2" d="M235.2,445.9L225,450l10.1,4.4"/>
+			</g>
+		</g>
+		<g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<path class="st5" d="M464,431l-96-55l-144,1"/>
+			</g>
+			<g transform="translate(-38,-118) scale(1,1)">
+				<path class="st2" d="M234.1,372.7L224,377l10.2,4.1"/>
+			</g>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st2" x1="476.3" y1="279.2" x2="476.7" y2="312.8"/>
+		<g>
+			<path d="M471.6,286.1c0.2,0.1,0.5,0.1,0.7-0.2l4-6.5l4.2,6.4c0.2,0.2,0.5,0.3,0.7,0.1c0.2-0.2,0.3-0.5,0.1-0.7l-4.6-7.1
+				c-0.1-0.1-0.3-0.2-0.4-0.2c-0.2,0-0.3,0.1-0.4,0.2l-4.5,7.2c-0.1,0.1-0.1,0.2-0.1,0.3C471.4,285.8,471.5,286,471.6,286.1z"/>
+		</g>
+		<g>
+			<path d="M471.8,306c0.2-0.2,0.5-0.1,0.7,0.1l4.2,6.4l4-6.5c0.1-0.2,0.5-0.3,0.7-0.2c0.2,0.1,0.3,0.5,0.2,0.7l-4.5,7.2
+				c-0.1,0.1-0.2,0.2-0.4,0.2c-0.2,0-0.3-0.1-0.4-0.2l-4.6-7.1c-0.1-0.1-0.1-0.2-0.1-0.3C471.6,306.3,471.6,306.1,471.8,306z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st2" x1="458.3" y1="551.2" x2="458.3" y2="576.8"/>
+		<g>
+			<path d="M453.5,558c0.2,0.1,0.5,0.1,0.7-0.2l4.1-6.4l4.1,6.5c0.1,0.2,0.5,0.3,0.7,0.2s0.3-0.5,0.2-0.7l-4.5-7.1
+				c-0.1-0.1-0.3-0.2-0.4-0.2s-0.3,0.1-0.4,0.2l-4.5,7.1c-0.1,0.1-0.1,0.2-0.1,0.3C453.3,557.8,453.4,557.9,453.5,558z"/>
+		</g>
+		<g>
+			<path d="M453.5,570c0.2-0.1,0.5-0.1,0.7,0.2l4.1,6.5l4.1-6.4c0.1-0.2,0.5-0.3,0.7-0.2s0.3,0.5,0.2,0.7l-4.5,7.1
+				c-0.1,0.1-0.3,0.2-0.4,0.2s-0.3-0.1-0.4-0.2l-4.5-7.1c-0.1-0.1-0.1-0.2-0.1-0.3C453.3,570.2,453.3,570,453.5,570z"/>
+		</g>
+	</g>
+</g>
+<rect x="482.7" y="138.4" class="st6" width="29.2" height="10.6"/>
+<text transform="matrix(1 0 0 1 482.6699 146.874)" class="st7 st8">HTTP</text>
+<rect x="275.4" y="271" class="st6" width="34.1" height="10.6"/>
+<text transform="matrix(1 0 0 1 275.4093 279.5201)" class="st7 st8">TCP/IP</text>
+<rect x="429.4" y="430" class="st6" width="34.1" height="10.6"/>
+<text transform="matrix(1 0 0 1 429.4093 438.5201)" class="st7 st8">TCP/IP</text>
+<g>
+	<g>
+		<line class="st2" x1="263.8" y1="550" x2="376.8" y2="550"/>
+		<g>
+			<path d="M370,554.8c-0.1-0.2-0.1-0.5,0.2-0.7l6.5-4.1l-6.5-4.1c-0.2-0.1-0.3-0.5-0.2-0.7s0.5-0.3,0.7-0.2l7.1,4.5
+				c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4l-7.1,4.5c-0.1,0.1-0.2,0.1-0.3,0.1C370.2,555,370.1,554.9,370,554.8z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st2" x1="280.8" y1="63" x2="393.8" y2="63"/>
+		<g>
+			<path d="M387,67.8c-0.1-0.2-0.1-0.5,0.2-0.7l6.5-4.1l-6.5-4.1c-0.2-0.1-0.3-0.5-0.2-0.7c0.1-0.2,0.5-0.3,0.7-0.2l7.1,4.5
+				c0.1,0.1,0.2,0.3,0.2,0.4s-0.1,0.3-0.2,0.4l-7.1,4.5c-0.1,0.1-0.2,0.1-0.3,0.1C387.2,68,387.1,67.9,387,67.8z"/>
+		</g>
+	</g>
+</g>
+<g>
+	<g>
+		<line class="st2" x1="529.7" y1="82.2" x2="529.6" y2="83.7"/>
+		<line class="st9" x1="529.6" y1="86.7" x2="527.5" y2="231"/>
+		<line class="st2" x1="527.5" y1="232.6" x2="527.5" y2="234.1"/>
+		<g>
+			<path d="M522.8,227.2c0.2-0.1,0.5-0.1,0.7,0.2l4,6.5l4.2-6.4c0.2-0.2,0.5-0.3,0.7-0.1c0.2,0.2,0.3,0.5,0.1,0.7l-4.6,7
+				c-0.1,0.1-0.3,0.2-0.4,0.2c-0.2,0-0.3-0.1-0.4-0.2l-4.4-7.2c-0.1-0.1-0.1-0.2-0.1-0.3C522.5,227.4,522.6,227.3,522.8,227.2z"/>
+		</g>
+	</g>
+</g>
+</svg>
