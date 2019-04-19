@@ -5,12 +5,12 @@ import java.util.Date;
 public class Evenement extends DataBaseObject{
 
     private String nom;
-    private Date debut;
-    private Date fin;
+    private String debut;
+    private String fin;
     private String ecole;
     private String batiment;
 
-    public Evenement(int id, String nom, Date debut, Date fin, String ecole, String batiment) {
+    public Evenement(int id, String nom, String debut, String fin, String ecole, String batiment) {
         super(id);
         this.nom = nom;
         this.debut = debut;
@@ -27,19 +27,19 @@ public class Evenement extends DataBaseObject{
         this.nom = nom;
     }
 
-    public Date getDebut() {
+    public String getDebut() {
         return debut;
     }
 
-    public void setDebut(Date debut) {
+    public void setDebut(String debut) {
         this.debut = debut;
     }
 
-    public Date getFin() {
+    public String getFin() {
         return fin;
     }
 
-    public void setFin(Date fin) {
+    public void setFin(String fin) {
         this.fin = fin;
     }
 
