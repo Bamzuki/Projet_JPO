@@ -10,7 +10,7 @@ public class Visiteur extends DataBaseObject{
     private String email;
     private String mdp;
     private Boolean admin;
-    private ArrayList<Evenement> listeFavoris;
+    private ArrayList<Integer> listeFavoris;
 
     public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
         super(id);
@@ -20,7 +20,7 @@ public class Visiteur extends DataBaseObject{
         this.email = email;
         this.mdp = mdp;
         this.admin = admin;
-        this.listeFavoris = new ArrayList<Evenement>();
+        this.listeFavoris = new ArrayList<Integer>();
     }
 
     public Visiteur(String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
@@ -31,10 +31,10 @@ public class Visiteur extends DataBaseObject{
         this.email = email;
         this.mdp = mdp;
         this.admin = admin;
-        this.listeFavoris = new ArrayList<Evenement>();
+        this.listeFavoris = new ArrayList<Integer>();
     }
 
-    public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin, ArrayList<Evenement> listeFavoris) {
+    public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin, ArrayList<Integer> listeFavoris) {
         super(id);
         this.prenom = prenom;
         this.nom = nom;
@@ -95,11 +95,11 @@ public class Visiteur extends DataBaseObject{
         this.admin = admin;
     }
 
-    public ArrayList<Evenement> getListeFavoris() {
+    public ArrayList<Integer> getListeFavoris() {
         return listeFavoris;
     }
 
-    public void setListeFavoris(ArrayList<Evenement> listeFavoris) {
+    public void setListeFavoris(ArrayList<Integer> listeFavoris) {
         this.listeFavoris = listeFavoris;
     }
 }

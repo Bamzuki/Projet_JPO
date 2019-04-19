@@ -1,5 +1,6 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
+import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -198,5 +199,74 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
             }
         });
     }
+
+    public void ajouterFavori(final AppCompatActivity activity, Visiteur visiteur, int idFavoris){
+
+        // I - Ajout du favori sur l'application
+        ListeObjets.visiteur.getListeFavoris().add(idFavoris);
+
+        // II - Ajout du favori dans la BDD
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=ajouterFavoris";
+        String donnees = "&&idUtilisateur=" + visiteur.getId() + "&&idFavoris=" + idFavoris;
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Favoris ajouté !" , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+
+
+    }
+
+    public void supprimerFavori(final AppCompatActivity activity, Visiteur visiteur, int idFavoris){
+
+        // I - Suppression du favori sur l'application
+        ListeObjets.visiteur.getListeFavoris().remove(idFavoris);
+
+        // II - Suppression du favori dans la BDD
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=supprimerFavoris";
+        String donnees = "&&idUtilisateur=" + visiteur.getId() + "&&idFavoris=" + idFavoris;
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Favori supprimer !" , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+
+
+    }
+
 
 }
