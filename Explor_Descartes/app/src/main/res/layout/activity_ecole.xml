@@ -34,6 +34,7 @@
             android:id="@+id/imageEcole"
             android:layout_width="match_parent"
             android:layout_height="300dp"
+            android:adjustViewBounds="true"
             android:background="@android:color/white"
             android:contentDescription="@string/imageEcole"
             android:padding="15dp"
@@ -41,8 +42,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/nomEcole"
-            app:srcCompat="@android:color/black"
-            android:adjustViewBounds="true"/>
+            app:srcCompat="@android:color/black" />
 
         <LinearLayout
             android:id="@+id/infoEcole"
@@ -71,10 +71,10 @@
                     android:layout_width="2dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:adjustViewBounds="true"
                     android:background="@android:color/white"
                     android:contentDescription="@string/pointeur"
-                    app:srcCompat="@drawable/pointeur"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@drawable/pointeur" />
 
                 <TextView
                     android:id="@+id/adresseEcole"
@@ -101,10 +101,10 @@
                     android:layout_width="2dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
+                    android:adjustViewBounds="true"
                     android:background="@android:color/white"
                     android:contentDescription="@string/web"
-                    app:srcCompat="@drawable/web"
-                    android:adjustViewBounds="true"/>
+                    app:srcCompat="@drawable/web" />
 
                 <TextView
                     android:id="@+id/siteEcole"
@@ -117,6 +117,36 @@
                     android:textColor="@android:color/black" />
             </LinearLayout>
 
+            <LinearLayout
+                android:id="@+id/description"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/descriptif"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:paddingTop="5dp"
+                    android:paddingBottom="5dp"
+                    android:text="@string/descriptif"
+                    android:textAllCaps="false"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold|italic" />
+
+                <TextView
+                    android:id="@+id/descriptionEcole"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/white"
+                    android:gravity="center"
+                    android:text="@string/descriptionEcole"
+                    android:textColor="@android:color/black" />
+            </LinearLayout>
+
         </LinearLayout>
 
         <LinearLayout
@@ -126,10 +156,7 @@
             android:background="@android:color/white"
             android:gravity="start"
             android:orientation="vertical"
-            android:paddingLeft="15dp"
-            android:paddingTop="15dp"
-            android:paddingRight="15dp"
-            android:paddingBottom="15dp"
+            android:padding="15dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
@@ -138,8 +165,8 @@
             <ExpandableListView
                 android:id="@+id/liste_extensions"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></ExpandableListView>
+                android:layout_height="match_parent"
+                android:scrollbars="none"/>
         </LinearLayout>
 
     </LinearLayout>

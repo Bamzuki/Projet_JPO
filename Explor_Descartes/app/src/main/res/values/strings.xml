@@ -130,6 +130,8 @@
     <string name="siteEcole">Site de l\'école</string>
     <string name="pointeur">pointeur</string>
     <string name="adresseEcole">Adresse de l\'école</string>
+    <string name="descriptionEcole">Description de l\'école</string>
+    <string name="descriptif">Quelques mots sur l\'école</string>
 
 
 </resources>
