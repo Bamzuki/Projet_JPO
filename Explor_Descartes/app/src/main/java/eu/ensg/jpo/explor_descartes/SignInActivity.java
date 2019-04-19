@@ -25,11 +25,9 @@ public class SignInActivity extends AppCompatActivity {
         setContentView(R.layout.activity_sign_in);
 
         // I - Instanciation des objets Java représentant les composants graphiques
-
         inscriptionB = (Button)findViewById(R.id.inscriptionB);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
-
         inscriptionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

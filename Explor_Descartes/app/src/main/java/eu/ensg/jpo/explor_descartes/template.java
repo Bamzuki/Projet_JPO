@@ -22,7 +22,6 @@ import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
 
-import eu.ensg.jpo.explor_descartes.Menu.CustomAdapter;
 import eu.ensg.jpo.explor_descartes.Menu.FavorisFragment;
 import eu.ensg.jpo.explor_descartes.Menu.Menu;
 import eu.ensg.jpo.explor_descartes.Menu.NotificationsFragment;
@@ -37,11 +36,7 @@ public class template extends AppCompatActivity {
     private GridView gv;
     private LinearLayout drawer_right;
     private ListView drawer_left;
-    private CustomAdapter cl1;
-    private int img[];
 
-    private String name[];
-    private String ecoles;
     private String menulist[];
     private String menul;
     private Context con = this;
@@ -50,12 +45,14 @@ public class template extends AppCompatActivity {
     private ViewPager viewPager;
 
     private Menu menuc = new Menu(con);
+    private int layoutResID;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_accueil);
+        llayout();
+        setContentView(layoutResID);
 
         // Instanciation des variables de Layout
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -159,6 +156,7 @@ public class template extends AppCompatActivity {
         final ArrayAdapter<String> adapterLeft = new ArrayAdapter<>(this, R.layout.textcenter, R.id.textItem, menulist);
         drawer_left.setAdapter(adapterLeft);
         drawer_left.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            // Menu
             public void onItemClick(AdapterView<?> parent, View view, int pos, long id) {
                 if (pos == 1) {
                     menuc.openAccueilActivity();
@@ -166,19 +164,22 @@ public class template extends AppCompatActivity {
                 if (pos == 2) {
                     menuc.openNavigationActivity();
                 }
-                /*if (pos == 3) {
+                if (pos == 3) {
                     menuc.openPlanningActivity();
-                }*/
+                }
                 if (pos == 4) {
                     menuc.openSettingsActivity();
                 }
             }
         });
-
         View headerView = getLayoutInflater().inflate(R.layout.listview_header, null);
         drawer_left.addHeaderView(headerView);
     }
 
-    protected void contentTemp() {
+    protected void contentTemp() {}
+    protected void llayout(){}
+
+    public void setLayout(int newLayout){
+        this.layoutResID = newLayout;
     }
 }

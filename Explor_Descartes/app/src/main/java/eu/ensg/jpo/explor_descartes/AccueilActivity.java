@@ -2,6 +2,7 @@ package eu.ensg.jpo.explor_descartes;
 
 import android.content.Context;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.GridView;
 
 import java.util.Arrays;
@@ -15,6 +16,8 @@ public class AccueilActivity extends template {
     private Context contt=this;
     private CustomAdapter cl1;
     private GridView gv;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,5 +38,10 @@ public class AccueilActivity extends template {
 
         cl1=new CustomAdapter(name,contt,img);
         gv.setAdapter(cl1);
+    }
+
+    @Override
+    protected void llayout(){
+        setLayout(R.layout.activity_accueil);
     }
 }
