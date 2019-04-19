@@ -240,6 +240,9 @@ function getListeEcole(){
     element.innerHTML = "Nom";
     ligne.appendChild(element);
 	element           = document.createElement("td");
+    element.innerHTML = "Image";
+    ligne.appendChild(element);
+	element           = document.createElement("td");
     element.innerHTML = "Adresse";
     ligne.appendChild(element);
     element           = document.createElement("td");
@@ -262,6 +265,9 @@ function getListeEcole(){
       ligne.setAttribute("id", i);
       element                   = document.createElement("td");
       element.innerHTML         = listeEcoles[i].nom;
+      ligne.appendChild(element);
+	  element                   = document.createElement("td");
+      element.innerHTML         = "<img src='image_ecole/"+listeEcoles[i].image+"' width='150' height='150' alt='Image Ecole'  >"
       ligne.appendChild(element);
 	  element                   = document.createElement("td");
       element.innerHTML         = listeEcoles[i].adresse;
@@ -601,19 +607,23 @@ function getListeEvenement(){
 }
 
 function saveEcole(){
+	
+ 
   // Enregistrement d'une école dans la base de données
   var input_nom         = document.getElementById("input_ecole").value;
+  var input_image       = document.getElementById("fileselect").value;
+  console.log(input_image);
   var input_adresse        = document.getElementById("input_adresse").value;
   var input_site        = document.getElementById("input_site").value;
   var input_description = document.getElementById("input_description").value;
-  var ajax = new XMLHttpRequest();
-  ajax.open('GET', 'serveur.php/?request=saveEcole&&nom=' + input_nom + '&&adresse=' + input_adresse +  '&&site=' + input_site + '&&description=' + input_description);
-  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  ajax.addEventListener('load',  function () {
-     var response = ajax.response;
-     console.log(response);
-  });
-  ajax.send('request=saveEcole&&nom=' + input_nom + '&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description);
+  // var ajax = new XMLHttpRequest();
+  // ajax.open('GET', 'serveur.php/?request=saveEcole&&nom=' + input_nom + '&&image=' + input_image + '&&adresse=' + input_adresse +  '&&site=' + input_site + '&&description=' + input_description);
+  // ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  // ajax.addEventListener('load',  function () {
+     // var response = ajax.response;
+     // console.log(response);
+  // });
+  // ajax.send('request=saveEcole&&nom=' + input_nom + '&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description);
 
   //Ajout d'une nouvelle ligne dans la table
   var id                    = listeEcoles.length + 1;
