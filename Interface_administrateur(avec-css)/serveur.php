@@ -219,6 +219,30 @@ function getListeEvenements($filtreEcole, $filtreBatiment){
   return $response;
 }
 
+function getListeFavoris($idUtilisateur){
+  //Cette fonction renvoie la liste des favoris d'un utilisateur
+  global $link;
+  $requete = "SELECT e.id, e.nom, e.debut, e.fin, ecoles.nom, batiments.nom
+  FROM evenements AS e
+  LEFT JOIN favoris ON e.id=favoris.id_favoris
+  LEFT JOIN ecoles ON e.id_ecole = ecoles.id
+  LEFT JOIN batiments ON e.id_batiment = batiments.id
+  WHERE favoris.id_utilisateur=" . $idUtilisateur;
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $evenement = '{"id":' . $row[0] . ', "nom":"' . $row[1] . '", "debut":"' . $row[2] . '", "fin":"' . $row[3]. '", "ecole":"' . $row[4] . '", "batiment":"' . $row[5] . '"}';
+      $response = $response . $evenement . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+  return $response;
+}
+
 function getListeUtilisateurs($filtreAdmin){
   //Cette fonction renvoie la liste des utilisateurs
   global $link;
@@ -621,6 +645,29 @@ function deleteEvenement ($id){
     return "La suppression a échouée";
   }
 }
+
+// I.6 Fonctions application :
+
+function ajouterFavori($idUtilisateur, $idFavoris){
+  // Ajoute un favori dans la table favoris
+  global $link;
+  $requete = "INSERT INTO favoris (id_utilisateur, id_favoris) VALUES (" . $idUtilisateur . "," . $idFavoris .")";
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Ajout du favori réussi !";
+  }
+}
+
+function supprimerFavori($idUtilisateur, $idFavoris){
+  // Supprime un favori dans la table favoris
+  global $link;
+  $requete = "DELETE FROM favoris WHERE id_utilisateur=" . $idUtilisateur . " AND id_favoris=" . $idFavoris;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Suppression du favori réussi !";
+  }
+}
+
 // II - Requêtes :
 // II.1 Requêtes GET :
 if (isset($_GET['request']) && $_GET['request'] == "listeNomObjets" && isset($_GET['nomTable'])){
@@ -685,6 +732,11 @@ if (isset($_GET['request']) && $_GET['request'] == "listeEvenements"){
     $filtreBatiment = "%";
   }
   echo getListeEvenements($filtreEcole, $filtreBatiment);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "listeFavoris"){
+  $idUtilisateur = $_GET['idUtilisateur'];
+  echo getListeFavoris($idUtilisateur);
 }
 
 if (isset($_GET['request']) && $_GET['request'] == "listeUtilisateurs"){
@@ -834,6 +886,20 @@ if (isset($_GET['request']) && $_GET['request'] == "deleteEvenement"){
   $id  = $_GET['id'];
   echo deleteEvenement ($id);
 }
+
+// II.5 Requêtes application :
+if (isset($_GET['request']) && $_GET['request'] == "ajouterFavori"){
+  $idUtilisateur = $_GET['idUtilisateur'];
+  $idFavoris     = $_GET['idFavoris'];
+  echo ajouterFavori($idUtilisateur, $idFavoris);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "supprimerFavori"){
+  $idUtilisateur = $_GET['idUtilisateur'];
+  $idFavoris     = $_GET['idFavoris'];
+  echo supprimerFavori($idUtilisateur, $idFavoris);
+}
+
 // III - Tests unitaires :
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
   echo '<b>Test de "getListeNomObjets" :</b>' . '<br />' . '<br />';
