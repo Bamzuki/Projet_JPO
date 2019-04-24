@@ -13,14 +13,15 @@
     <include layout="@layout/app_bar"/>
 
     <!--Grid contenant les images des établissements-->
-    <GridView
-        android:id="@+id/main_grid"
+    <TextView
+        android:id="@+id/textPlanning"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:numColumns="2"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="2dp"/>
+        android:text="Planning"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:textColor="#000"
+        android:textAlignment="center"/>
 
     <!--Menu des activités (à gauche)-->
     <ListView

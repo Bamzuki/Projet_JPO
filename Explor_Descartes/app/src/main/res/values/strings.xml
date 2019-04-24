@@ -133,6 +133,8 @@
     <string name="descriptionEcole">Description de l\'école</string>
     <string name="descriptif">Quelques mots sur l\'école</string>
     <string name="favori">Mettre en favori</string>
+    <string name="title_activity_planning">PlanningActivity</string>
+    <string name="title_activity_template">template</string>
 
 
 </resources>
