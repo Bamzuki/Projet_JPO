@@ -38,7 +38,7 @@ public class MainActivity extends AppCompatActivity {
     private void openAccueilActivity() {
 
         // Create intent
-        Intent intent = new Intent(this, NavigationActivity.class);
+        Intent intent = new Intent(this, AccueilActivity.class);
 
         // Start activity
         startActivity(intent);
