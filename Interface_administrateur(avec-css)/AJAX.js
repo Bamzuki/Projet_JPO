@@ -4,6 +4,7 @@ var listeBatiments = [];
 var listeEcoles = [];
 var listeUtilisateurs=[];
 var listeEvenements=[];
+var listeFAQ=[];
 
 function getListeNomNiveaux(idSelectNiveau){
   // Mise à jour de la liste des noms des niveaux depuis le serveur
@@ -600,6 +601,128 @@ function getListeEvenement(){
   ajax.send(request);
 }
 
+function getListeFAQ_admin(){
+  console.log("FAQ");
+  var request = "request=listeFAQ"
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    listeFAQ = JSON.parse(ajax.response);
+
+    // Remplissage du tableau
+    var tableau1 = document.getElementById("resultats_FAQ_admin");
+    tableau1.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Question";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Réponse";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Modifier";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Supprimer";
+    ligne.appendChild(element);
+
+
+    tableau1.appendChild(ligne);
+	
+	
+
+
+
+    for (var i = 0; i < listeFAQ.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeFAQ[i].question;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeFAQ[i].reponse;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      boutonModifier = document.createElement("button");
+      boutonModifier.setAttribute("id", "bouton-modifier-FAQ" + i);
+      boutonModifier.setAttribute("class", "modifier_batiment")
+      boutonModifier.innerHTML = "<img src='boutons/modifier.png' onClick='changeFAQ(" + i + ")' alt='Oups !'>";
+      element.appendChild(boutonModifier);
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      boutonSupprimer = document.createElement("button");
+      boutonSupprimer.setAttribute("id", "supprimer-FAQ"+i);
+      boutonSupprimer.setAttribute("class", "supprimer_batiment");
+      boutonSupprimer.innerHTML = "<img src='boutons/supprimer.png' onClick='deleteFAQ(" + i + ")' alt='Oups !'>";
+      element.appendChild(boutonSupprimer);
+      ligne.appendChild(element);
+
+      tableau1.appendChild(ligne);
+    }
+	
+	
+	
+	
+  });
+  ajax.send(request);
+}
+
+function getListeFAQ_client(){
+  console.log("FAQ");
+  var request = "request=listeFAQ"
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    listeFAQ = JSON.parse(ajax.response);
+
+  
+	
+	var tableau2 = document.getElementById("resultats_FAQ_client");
+    tableau2.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Question";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Réponse";
+    ligne.appendChild(element);
+
+
+
+    tableau2.appendChild(ligne);
+
+
+
+	
+	
+    for (var i = 0; i < listeFAQ.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeFAQ[i].question;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeFAQ[i].reponse;
+      ligne.appendChild(element);
+
+      tableau2.appendChild(ligne);
+    }
+	
+	
+  });
+  ajax.send(request);
+}
+
+
+
 function saveEcole(){
   // Enregistrement d'une école dans la base de données
   var input_nom         = document.getElementById("input_ecole").value;
@@ -709,6 +832,24 @@ function saveEvenement(){
   });
   
   ajax.send('request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement)
+  } 
+  
+  
+  
+function saveFAQ(){
+  // Enregistrement d'une formations dans la base de données
+  var input_question    = document.getElementById("input_question").value;
+  var input_reponse    =document.getElementById("input_reponse").value;
+  var ajax = new XMLHttpRequest()
+  ajax.open('GET', 'serveur.php/?request=saveFAQ&&question=' + input_question + '&&reponse=' + input_reponse);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    var response = ajax.response;
+    console.log(response);
+	getListeFAQ_admin();
+  });
+  
+  ajax.send('request=saveFAQ&&question=' + input_question + '&&reponse=' + input_reponse);
   } 
   
 
@@ -1451,6 +1592,122 @@ function annulechangeEvenement(i){
 }
 
 
+
+
+function changeFAQ(i){
+  bouton  = document.getElementById("bouton-modifier-FAQ"+i);
+  //boucle qui transforme la ligne
+  var papa              = bouton.parentNode;
+  var papi              = papa.parentNode;
+  var question               = papi.children[0];
+  question.innerHTML         = "<input id='modif_question_FAQ" + i + "' placeholder='"+listeFAQ[i].question+"'>";
+  var reponse          = papi.children[1];
+  reponse.innerHTML      = "<input id='modif_reponse_FAQ" + i + "' placeholder='"+listeFAQ[i].reponse+"'>";
+  
+
+  //on met en place les deux nouveaux boutons
+  var bouton_valider         = papi.children[2];
+  bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-FAQ" + i + "' class='modifier_filiere'  onClick='validechangeFAQ("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
+  var bouton_annuler         = papi.children[3];
+  bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-FAQ" + i + "' class='supprimer_filiere' onClick='annulechangeFAQ("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
+ }
+
+ 
+
+function validechangeFAQ(i){
+
+  bouton    = document.getElementById("bouton-valider-modifications-FAQ" + i);
+  var papa  = bouton.parentNode;
+  var papi  = papa.parentNode;
+
+  var input_id     = listeFAQ[i].id;
+
+  var input_question         = document.getElementById("modif_question_FAQ" + i + "").value;
+  var input_reponse      = document.getElementById("modif_reponse_FAQ" + i + "").value;
+
+
+
+
+  if(input_question == ""){
+    // input_nom= listeEcoles[input_id].nom;
+    input_question = listeFAQ[i].question;
+  }
+
+
+  // if(input_debut == ""){
+   
+    // input_debut = listeEvenements[i].debut;
+  // }
+
+
+  // if(input_fin == ""){
+    
+    // input_fin = listeEvenements[i].fin;
+  // }
+
+  if(input_reponse == ""){
+    // input_description=listeEcoles[input_id].description;
+    input_reponse = listeFAQ[i].reponse;
+  }
+
+
+
+  var ajax = new XMLHttpRequest();
+
+  ajax.open('GET', 'serveur.php/?request=changeFAQ&&id=' + input_id + '&&question=' + input_question + '&&reponse=' + input_reponse );
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    var response = ajax.response;
+    getListeFAQ_admin();
+	console.log(response);
+  });
+
+  ajax.send('request=changeFAQ&&id=' + input_id + '&&question=' + input_question + '&&reponse=' + input_reponse );
+  // on change de nouveau la ligne (normalement avec le changement)
+  //boucle qui retransforme la ligne
+
+ 
+  getListeFAQ_admin();
+  //boucle qui transforme la ligne
+  var papa               = bouton.parentNode;
+  var papi               = papa.parentNode;
+  var question               = papi.children[0];
+  question.innerHTML          = listeFAQ[i].question;
+  var reponse             = papi.children[1];
+  reponse.innerHTML       = listeFAQ[i].reponse;
+  
+
+
+  //on met en place les deux nouveaux boutons
+  var bouton_valider        = papi.children[2];
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-FAQ" + i + "' class='modifier_filiere' onClick='changeFAQ("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  var bouton_annuler        = papi.children[3];
+  bouton_annuler.innerHTML  = "<button  id='supprimer-FAQ"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteFAQ(" + i + ")'alt='Oups'> </button>"
+}
+
+
+function annulechangeFAQ(i){
+  //on refait la fonction de changement à l'envers
+  bouton  = document.getElementById("bouton-valider-modifications-evenement"+i);
+  getListeEvenement();
+  //boucle qui transforme la ligne
+  var papa               = bouton.parentNode;
+  var papi               = papa.parentNode;
+  var question                = papi.children[0];
+  question.innerHTML          = listeFAQ[i].question;
+  var reponse            = papi.children[1];
+  reponse.innerHTML       = listeFAQ[i].reponse;
+  
+
+
+  //on met en place les deux nouveaux boutons
+  var bouton_valider        = papi.children[2];
+  bouton_valider.innerHTML  = "<button  id='bouton-modifier-FAQ" + i + "' class='modifier_filiere' onClick='changeFAQ("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
+  var bouton_annuler        = papi.children[3];
+  bouton_annuler.innerHTML  = "<button  id='supprimer-FAQ"+i+"' class='supprimer_filiere'> <img src='boutons/supprimer.png' onClick='deleteFAQ(" + i + ")'alt='Oups'> </button>"
+}
+
+
 function deleteBatiment(i) {
   // Suppression d'un batiment dans la base de données
   var input_id  = listeBatiments[i].id;
@@ -1555,9 +1812,27 @@ function deleteEvenement(i) {
   ajax.send('request=deleteEvenement&&id=' + input_id );
 }
 
+function deleteFAQ(i) {
+  // Suppression d'un batiment dans la base de données
+  var input_id  = listeFAQ[i].id;
+  var ajax      = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=deleteFAQ&&id=' + input_id );
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    console.log(input_id);
+    var response = ajax.response;
+    getListeFAQ_admin();
+	console.log(response);
+  });
+
+  ajax.send('request=deleteFAQ&&id=' + input_id );
+}
+
 
 
 // I - Chargement des listes des noms des différentes
+getListeFAQ_admin();
+getListeFAQ_client();
 getListeNomNiveaux("filtre-niveau");
 getListeNomEcoles("filtre-ecole1");
 getListeNomBatiments("filtre-batiment1");
@@ -1573,4 +1848,5 @@ getListeNomFonctions("filtre-fonction");
 getListeEcole();
 getListeFiliere();
 getListeUtilisateur();
+
 

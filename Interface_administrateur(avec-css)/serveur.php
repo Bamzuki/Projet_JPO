@@ -243,6 +243,26 @@ function getListeUtilisateurs($filtreAdmin){
   return $response;
 }
 
+function getListeFAQ(){
+  //Cette fonction renvoie la liste des utilisateurs
+  global $link;
+  $requete = "SELECT id, question, reponse FROM faq";
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $utilisateur = '{"id":' . $row[0] . ', "question":"' . $row[1] . '", "reponse":"' . $row[2] . '"}';
+      $response = $response . $utilisateur . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+
+  return $response;
+}
+
 function getLastUtilisateur(){
   //Cette fonction renvoie le dernier utilisateur créé
   global $link;
@@ -438,6 +458,20 @@ function saveEvenement ($nom, $debut, $fin, $ecole, $batiment){
   }
 }
 
+function saveFAQ ($question,$reponse){
+  //Cette fonction enregistre un nouveau batiment dans la base de données
+  $question = str_replace("'", "''", $question);
+  $reponse = str_replace("'", "''", $reponse);
+  global $link;
+  $requete = "INSERT INTO faq (question,reponse) VALUES ('" . $question . "','" . $reponse . "')";
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+
 
 // I.4 Fonctions CHANGE :
 function changeEcole ($id, $nom, $image, $adresse, $site, $description){
@@ -548,6 +582,26 @@ function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
     return "La modification a échouée";
   }
 }
+
+
+function changeFAQ ($id, $question, $reponse){
+  //Cette fonction modifie une formation déjà existante dans la base de données
+  $question      = str_replace("'", "''", $question);
+  $reponse   = str_replace("'", "''", $reponse);
+
+  global $link;
+  $requete = "UPDATE faq
+              SET question = '" . $question . "', reponse = '" . $reponse . "'
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Modification réussie !";
+  }else{
+    return "La modification a échouée";
+  }
+}
+
+
 // I.5 Fonctions DELETE :
 function deleteEcole ($id){
   //Cette fonction supprime une école dans la base de données
@@ -613,6 +667,19 @@ function deleteEvenement ($id){
   //Cette fonction supprime un utlisateru dans la base de données
   global $link;
   $requete = "DELETE FROM evenements
+              WHERE id=" . $id;
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Suppression réussie !";
+  }else{
+    return "La suppression a échouée";
+  }
+}
+
+function deleteFAQ($id){
+  //Cette fonction supprime une école dans la base de données
+  global $link;
+  $requete = "DELETE FROM faq
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
@@ -697,6 +764,10 @@ if (isset($_GET['request']) && $_GET['request'] == "listeUtilisateurs"){
   echo getListeUtilisateurs($filtreAdmin);
 }
 
+if (isset($_GET['request']) && $_GET['request'] == "listeFAQ"){
+  echo getListeFAQ();
+}
+
 if (isset($_GET['request']) && $_GET['request'] == "batiment"){
   $id = $_GET['id'];
   echo getBatimentById($id);
@@ -707,6 +778,9 @@ if (isset($_GET['request']) && $_GET['request'] == "connexion"){
   $mdp  = $_GET['mdp'];
   echo getUtilisateurByMailAndMdp($mail, $mdp);
 }
+
+
+
 
 // II.2 Requêtes SAVE :
 if (isset($_GET['request']) && $_GET['request'] == "saveEcole"){
@@ -757,6 +831,13 @@ if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
   $id_ecole    = $_GET['id_ecole'];
   $id_batiment     = $_GET['id_batiment'];
   echo saveEvenement($nom, $debut, $fin, $id_ecole, $id_batiment);
+}
+
+
+if (isset($_GET['request']) && $_GET['request'] == "saveFAQ"){
+  $question         = $_GET['question'];
+  $reponse       = $_GET['reponse'];
+  echo saveFAQ ($question, $reponse);
 }
 // II.3 Requêtes CHANGE :
 if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
@@ -809,6 +890,12 @@ if (isset($_GET['request']) && $_GET['request'] == "changeEvenement"){
   $id_batiment      = $_GET['id_batiment'];
   echo changeEvenement ($id, $nom, $debut, $fin, $id_ecole, $id_batiment);
 }
+if (isset($_GET['request']) && $_GET['request'] == "changeFAQ"){
+  $id          = $_GET['id'];
+  $question         = $_GET['question'];
+  $reponse       = $_GET['reponse'];
+  echo changeFAQ ($id, $question, $reponse);
+}
 // II.4 Requêtes DELETE :
 if (isset($_GET['request']) && $_GET['request'] == "deleteEcole"){
   $id  = $_GET['id'];
@@ -833,6 +920,10 @@ if (isset($_GET['request']) && $_GET['request'] == "deleteUtilisateur"){
 if (isset($_GET['request']) && $_GET['request'] == "deleteEvenement"){
   $id  = $_GET['id'];
   echo deleteEvenement ($id);
+}
+if (isset($_GET['request']) && $_GET['request'] == "deleteFAQ"){
+  $id  = $_GET['id'];
+  echo deleteFAQ ($id);
 }
 // III - Tests unitaires :
 if (isset($_GET['request']) && $_GET['request'] == "testUnitaire"){
