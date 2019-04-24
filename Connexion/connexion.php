@@ -25,21 +25,9 @@ function connexion($nom,$mdp){
 	
 }
 
-
-
-
 if (isset($_GET['request'])){
   $nom         = $_GET['nom'];
   $mdp       = $_GET['mdp'];
   echo connexion ($nom, $mdp);
 }
-
-
-
-
-
-
-
-
-
 ?>
