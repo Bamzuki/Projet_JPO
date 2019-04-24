@@ -135,6 +135,9 @@
     <string name="favori">Mettre en favori</string>
     <string name="title_activity_planning">PlanningActivity</string>
     <string name="title_activity_template">template</string>
+    <string name="menu">menu</string>
+    <string name="favoris">Favoris</string>
+    <string name="notifications">Notifications</string>
 
 
 </resources>
