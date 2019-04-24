@@ -1,4 +1,7 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> d77ab367e335e0966aeb4667cc5b26b31f5181ef
 <?php
 
 
@@ -26,14 +29,12 @@ function connexion($nom,$mdp){
 	
 }
 
-
-
-
 if (isset($_GET['request'])){
   $nom         = $_GET['nom'];
   $mdp       = $_GET['mdp'];
   echo connexion ($nom, $mdp);
 }
+<<<<<<< HEAD
 
 
 
@@ -89,4 +90,6 @@ if (isset($_GET['request'])){
 
 
 >>>>>>> 02fd06e7c0103460e91d2c98c2f8fb3d017808f9
+=======
+>>>>>>> d77ab367e335e0966aeb4667cc5b26b31f5181ef
 ?>
