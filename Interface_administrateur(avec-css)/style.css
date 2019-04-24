@@ -1,0 +1,64 @@
+body {
+  width: 100%;
+  height: 100%;
+}
+
+#banierre {
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  background-color: rgb(179, 181, 193);
+}
+
+#logo {
+  width: 15%;
+  height: auto;
+  margin: 2%;
+}
+
+#logo img {
+  width: 100%;
+  height: auto;
+}
+
+#banierre h1 {
+  color: white;
+  margin: auto;
+  font-size: 7.5vw;
+  text-align: center;
+}
+
+#boutons {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: row;
+}
+
+#ecoles {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2vw;
+}
+
+#visiteurs {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  align-items: center;
+  font-size: 2vw;
+}
+
+#bouton {
+  width:50%;
+  padding: 2% 2%;
+  color: white;
+  background-color: rgb(53, 53, 140);
+  outline:none;
+  text-align:center;
+  font-weight: bold;
+  font-size: 1.25vw;
+}
