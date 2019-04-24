@@ -132,6 +132,7 @@
     <string name="adresseEcole">Adresse de l\'école</string>
     <string name="descriptionEcole">Description de l\'école</string>
     <string name="descriptif">Quelques mots sur l\'école</string>
+    <string name="favori">Mettre en favori</string>
 
 
 </resources>

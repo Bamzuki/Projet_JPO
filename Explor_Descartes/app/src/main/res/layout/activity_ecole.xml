@@ -12,23 +12,32 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/nomEcole"
+        <LinearLayout
+            android:id="@+id/tetePage"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/white"
-            android:gravity="center"
-            android:padding="15dp"
-            android:text="@string/nomEcole"
-            android:textColor="@android:color/black"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageEcole"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent"
+            android:background="@color/colorAccent"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/nomEcole"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@color/colorAccent"
+                android:gravity="center"
+                android:padding="15dp"
+                android:text="@string/nomEcole"
+                android:textColor="@android:color/white"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toTopOf="@+id/imageEcole"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+        </LinearLayout>
 
         <ImageView
             android:id="@+id/imageEcole"
@@ -142,7 +151,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/white"
-                    android:gravity="center"
                     android:text="@string/descriptionEcole"
                     android:textColor="@android:color/black" />
             </LinearLayout>
@@ -163,13 +171,18 @@
             app:layout_constraintTop_toBottomOf="@+id/infoEcole">
 
             <ExpandableListView
-                android:id="@+id/liste_extensions"
+                android:id="@+id/formations"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:scrollbars="none"/>
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
+
+            <ExpandableListView
+                android:id="@+id/evenements"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="none" />
         </LinearLayout>
 
     </LinearLayout>
 
 </ScrollView>
-
