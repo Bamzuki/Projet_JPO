@@ -1,6 +1,5 @@
 package eu.ensg.jpo.explor_descartes;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-
+import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.FormationDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
@@ -38,7 +37,10 @@ public class EcoleActivity extends AppCompatActivity {
         nomEcole.setText(this.ecole.getNom());
 
         // Chargement de l'image de l'école
-        ImageView imageView = (ImageView) findViewById(R.id.imageEcole);
+        ImageView imageEcole = (ImageView) findViewById(R.id.imageEcole);
+        int id = this.getResources().getIdentifier("ensg","drawable",this.getPackageName());
+        System.out.println("id:" + getString(id));
+        System.out.println("id=" + R.drawable.ensg);
 
         // Chargement de l'adresse de l'école
         TextView adresseEcole = (TextView)findViewById(R.id.adresseEcole);
@@ -49,11 +51,54 @@ public class EcoleActivity extends AppCompatActivity {
         siteEcole.setText(this.ecole.getSite());
         Linkify.addLinks(siteEcole, Linkify.WEB_URLS);
 
+        // Chargement du texte descriptif de l'école
+        TextView descriptionEcole = (TextView)findViewById(R.id.descriptionEcole);
+        descriptionEcole.setText(this.ecole.getDescription());
+
         // 2- Affichage des formations et événements
+        listDataHeader = new ArrayList<>();
+        listHashMap = new HashMap<>();
+
         FormationDAO formationDAO = new FormationDAO(getString(R.string.url_serveur_ecoles));
         formationDAO.afficherFormation(this);
 
-        // 3- Desactivation
+        EvenementDAO evenementDAO = new EvenementDAO(getString(R.string.url_serveur_ecoles));
+        evenementDAO.afficherEvenement(this);
+
+    }
+
+    public void setListViewHeight(ExpandableListView listView, int group) {
+        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
+            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (((listView.isGroupExpanded(i)) && (i != group))
+                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
+                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
+                    View listItem = listAdapter.getChildView(i, j, false, null,
+                            listView);
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+                    totalHeight += listItem.getMeasuredHeight();
+
+                }
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        int height = totalHeight
+                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+        if (height < 10)
+            height = 200;
+        params.height = height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
 
     }
 
@@ -96,6 +141,8 @@ public class EcoleActivity extends AppCompatActivity {
     public void setListHashMap(HashMap<String, List<String>> listHashMap) {
         this.listHashMap = listHashMap;
     }
+
+
 
 
 

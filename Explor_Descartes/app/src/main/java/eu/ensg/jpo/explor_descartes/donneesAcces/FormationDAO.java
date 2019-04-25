@@ -1,5 +1,6 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
+import android.view.View;
 import android.widget.ExpandableListView;
 
 import com.google.gson.Gson;
@@ -81,17 +82,17 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
 
                 final ExpandableListView listView = (ExpandableListView)activity.findViewById(R.id.liste_extensions);
 
-                List<String> listDataHeader = new ArrayList<>();
-                HashMap<String, List<String>> listHashMap = new HashMap<>();
+                List<String> listDataHeader = activity.getListDataHeader();
+                HashMap<String, List<String>> listHashMap =activity.getListHashMap();
                 ArrayList<String> formations = new ArrayList<>();
 
-                listDataHeader.add("Formations proposées");
+                listDataHeader.add("Formations");
 
                 for (Formation formation : listeFormation) {
                     formations.add(formation.getNom());
                 }
 
-                listHashMap.put(listDataHeader.get(0), formations);
+                listHashMap.put(listDataHeader.get(listDataHeader.size()-1), formations);
 
                 final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
                 System.out.print("listAdapter: " + listAdapter);
@@ -99,7 +100,17 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listView.setAdapter(listAdapter);                    }
+                        listView.setAdapter(listAdapter);
+                        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
+
+                            @Override
+                            public boolean onGroupClick(ExpandableListView parent, View v,
+                                                        int groupPosition, long id) {
+                                activity.setListViewHeight(parent, groupPosition);
+                                return false;
+                            }
+                        });
+                    }
                 });
 
             }

@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<android.support.v4.widget.DrawerLayout
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".AccueilActivity">
+    android:background="#FFFFFF"
+    tools:context=".MainActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
+    <!--Barre d'application-->
+    <include layout="@layout/app_bar"/>
+
+    <!--Grid contenant les images des établissements-->
+    <GridView
+        android:id="@+id/main_grid"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
+        android:numColumns="2"
+        android:horizontalSpacing="2dp"
+        android:verticalSpacing="2dp"/>
 
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
+    <!--Menu des activités (à gauche)-->
+    <ListView
+        android:id="@+id/leftMenuList"
+        android:layout_gravity="start"
+        android:layout_width="fill_parent"
+        android:layout_height="match_parent"
+        android:divider="#615B5B"
+        android:dividerHeight="4px"
+        android:background="#FFFFFF"/>
+    <!--android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/selector_la"-->
 
-    </android.support.design.widget.AppBarLayout>
+    <!--Menu notifications et favoris (à droite)-->
+    <include layout="@layout/menu_right"/>
 
-    <include layout="@layout/content_accueil" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:layout_margin="@dimen/fab_margin"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-</android.support.design.widget.CoordinatorLayout>
+</android.support.v4.widget.DrawerLayout>
