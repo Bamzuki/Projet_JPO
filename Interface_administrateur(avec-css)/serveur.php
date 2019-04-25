@@ -482,7 +482,7 @@ function changeEcole ($id, $nom, $image, $adresse, $site, $description){
   $description = str_replace("'", "''", $description);
   global $link;
   $requete = "UPDATE ecoles
-              SET nom = '" . $nom . "', adresse = '" . $adresse . "', site = '" . $site . "', description = '" . $description . "'
+              SET nom = '" . $nom . "', image = '" . $image . "', adresse = '" . $adresse . "', site = '" . $site . "', description = '" . $description . "'
               WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
@@ -847,7 +847,7 @@ if (isset($_GET['request']) && $_GET['request'] == "changeEcole"){
   $adresse     = $_GET['adresse'];
   $site        = $_GET['site'];
   $description = $_GET['description'];
-  echo changeEcole ($id, $nom, $adresse, $site, $description);
+  echo changeEcole ($id, $nom,$image, $adresse, $site, $description);
 }
 if (isset($_GET['request']) && $_GET['request'] == "changeBatiment"){
   $id       = $_GET['id'];

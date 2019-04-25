@@ -61,9 +61,26 @@
 
       <li>
         <p>Ajouter une école </p>
+		
+		
+<form enctype="multipart/form-data" action="image1.php" method="post">
+    <fieldset>
+        <legend>Formulaire (veuillez d'abord charger l'image de l'école sur le serveur avant de l'ajouter au tableau)</legend>
+          <p>
+            <label for="fichier_a_uploader" title="Recherchez le fichier à uploader !">Envoyer le fichier :</label>
+            <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_SIZE; ?>" />
+            <input type="file" id="fileselect" accept="image/*" name="fileselect" />
+            <input type="submit" name="submit" value="Uploader" />
+          </p>
+      </fieldset>
+    </form>
+		
+		
+		
         <ul id="option" class="option1">
           <form action="serveur.php" method="get">
-            <input type="text" id="input_ecole" placeholder="Nom">
+            <input type="file" id="fileselect" accept="image/*" name="fileselect" />
+            <input type="text" id="input_ecole" placeholder="Nom">			
 			<input type="text" id="input_adresse" placeholder="	Adresse de l'école">
             <input type="text" id="input_site" placeholder="Adresse du site">
             <input type="text" id="input_description" placeholder="Description">
