@@ -12,7 +12,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 // Classes needed to initialize the map
-import com.google.gson.JsonObject;
 import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -41,17 +40,11 @@ import java.lang.ref.WeakReference;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
-import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.Layer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
-import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
-import eu.ensg.jpo.explor_descartes.donneesAcces.BddEcoles;
-import eu.ensg.jpo.explor_descartes.donneesAcces.FiliereDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Filiere;
 
 public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
 
@@ -200,7 +193,7 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
         List<Feature> featureList = new ArrayList<Feature>();
         for (Batiment batiment : ListeObjets.listeBatiment) {
-            if (mapboxMap.queryRenderedFeatures(rectF, "batiment"+batiment.getId()).size() > 0){
+            if (mapboxMap.queryRenderedFeatures(rectF, "batiment" + batiment.getId()).size() > 0){
                 int idEcole = batiment.getIdEcole();
                 Toast.makeText(this, idEcole + "", Toast.LENGTH_LONG).show();
                 NavigationActivity.this.openEcoleActivity(ListeObjets.getEcoleById(idEcole));

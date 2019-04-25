@@ -2,7 +2,6 @@ package eu.ensg.jpo.explor_descartes;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.util.Linkify;
@@ -17,8 +16,6 @@ import java.util.List;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.FormationDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
-
-import static android.text.Layout.JUSTIFICATION_MODE_INTER_WORD;
 
 public class EcoleActivity extends AppCompatActivity {
 
@@ -58,9 +55,6 @@ public class EcoleActivity extends AppCompatActivity {
         // Chargement du texte descriptif de l'école
         TextView descriptionEcole = (TextView)findViewById(R.id.descriptionEcole);
         descriptionEcole.setText(this.ecole.getDescription());
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            descriptionEcole.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        }
 
         // 2- Affichage des formations et événements
         FormationDAO formationDAO = new FormationDAO(getString(R.string.url_serveur_ecoles));
@@ -125,25 +119,19 @@ public class EcoleActivity extends AppCompatActivity {
         return listAdapter;
     }
 
-    public void setListAdapter(ExpandableListAdapter listAdapter) {
-        this.listAdapter = listAdapter;
-    }
+    public void setListAdapter(ExpandableListAdapter listAdapter) { this.listAdapter = listAdapter; }
 
     public List<String> getListDataHeader() {
         return listDataHeader;
     }
 
-    public void setListDataHeader(List<String> listDataHeader) {
-        this.listDataHeader = listDataHeader;
-    }
+    public void setListDataHeader(List<String> listDataHeader) { this.listDataHeader = listDataHeader; }
 
     public HashMap<String, List<String>> getListHashMap() {
         return listHashMap;
     }
 
-    public void setListHashMap(HashMap<String, List<String>> listHashMap) {
-        this.listHashMap = listHashMap;
-    }
+    public void setListHashMap(HashMap<String, List<String>> listHashMap) { this.listHashMap = listHashMap; }
 
 
 
