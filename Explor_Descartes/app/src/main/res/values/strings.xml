@@ -165,6 +165,7 @@
     <string name="jpoQ7">7) Les écoles visitées vous ont-elles convaincu ?</string>
     <string name="jpoQ8">8) Pensez-vous vous inscrire dans l’une des écoles du campus Descartes l’année prochaine ? Si oui, laquelle ?</string>
     <string name="jpoQ9">9) Avez-vous été satisfaits par l’organisation de la JPO ?</string>
+    <string name="jpoQ10">10) Avez-vous trouvé de quoi vous restaurer lors du déjeuner ?</string>
 
     <string name="oui">Oui</string>
     <string name="non">Non</string>
@@ -193,8 +194,7 @@
     <string name="tres_satisfaisant">Très satisfaisant</string>
     <string name="satisfaisant">Satisfaisant</string>
     <string name="a_ameliorer">A améliorer</string>
-    <string name="non_satisfaisant">θ\tNon satisfaisant</string>
-    <string name="jpoQ10">10) Avez-vous trouvé de quoi vous restaurer lors du déjeuner ?</string>
+    <string name="non_satisfaisant">Non satisfaisant</string>
     <string name="pre_bac">Pré-BAC</string>
     <string name="prepa">Classe préparatoire</string>
     <string name="licence">Licence</string>
