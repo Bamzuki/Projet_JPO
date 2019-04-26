@@ -15,10 +15,11 @@
         android:roundIcon="@mipmap/icone_lancement_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".SatisfactionActivity"></activity>
         <activity
             android:name=".template"
             android:label="@string/title_activity_template"
-            android:theme="@style/AppTheme.NoActionBar"></activity>
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".PlanningActivity"
             android:label="@string/title_activity_planning"

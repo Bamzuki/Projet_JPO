@@ -2,7 +2,6 @@ package eu.ensg.jpo.explor_descartes;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.GridView;
 
 import java.util.Arrays;
@@ -28,15 +27,22 @@ public class AccueilActivity extends template {
 
     @Override
     protected void contentTemp(){
-        ecoles="ENSG,CFA Decartes,Compagnons du devoir,ESIEE,IUT,UPEM,ESO Paris";
-        name=ecoles.split(",");
+        ecoles = "ENSG,CFA Decartes,Compagnons du devoir,ESIEE,IUT,UPEM,ESO Paris";
+        name = ecoles.split(",");
         Arrays.sort(name);
-        img= new int[]{R.drawable.icone_ensg,R.drawable.icone_cfa,R.drawable.icone_compagnon,
-                R.drawable.icone_esiee,R.drawable.icone_iut,R.drawable.icone_upem,
-                R.drawable.icone_eso3};
+
+        img = new int[]{
+                R.drawable.icone_ensg,
+                R.drawable.icone_cfa,
+                R.drawable.icone_compagnon,
+                R.drawable.icone_esiee,
+                R.drawable.icone_iut,
+                R.drawable.icone_upem,
+                R.drawable.icone_eso
+        };
         Arrays.sort(img);
 
-        cl1=new CustomAdapter(name,contt,img);
+        cl1 = new CustomAdapter(name,contt,img);
         gv.setAdapter(cl1);
     }
 
@@ -44,4 +50,5 @@ public class AccueilActivity extends template {
     protected void llayout(){
         setLayout(R.layout.activity_accueil);
     }
+
 }

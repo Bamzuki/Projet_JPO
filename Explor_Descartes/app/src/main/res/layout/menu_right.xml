@@ -18,14 +18,16 @@
         <android.support.design.widget.AppBarLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:background="@color/colorAccent"
             android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
             // Onglets du menu
+
             <android.support.design.widget.TabLayout
                 android:id="@+id/mytabs"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
         </android.support.design.widget.AppBarLayout>
 
         // Intérieur/contenu des onglets
