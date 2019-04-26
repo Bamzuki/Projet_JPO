@@ -150,7 +150,7 @@ public class template extends AppCompatActivity {
     Méthode pour stocker et récupérer les données
      */
     public void getData() {
-        menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU";
+        menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU,Formulaire de satisfaction";
         menulist = menul.split(",");
 
         final ArrayAdapter<String> adapterLeft = new ArrayAdapter<>(this, R.layout.textcenter, R.id.textItem, menulist);
@@ -169,6 +169,9 @@ public class template extends AppCompatActivity {
                 }
                 if (pos == 4) {
                     menuc.openSettingsActivity();
+                }
+                if (pos == 7) {
+                    menuc.openSatisfactionActivity();
                 }
             }
         });
