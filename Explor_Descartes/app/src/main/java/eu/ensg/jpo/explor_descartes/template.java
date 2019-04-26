@@ -160,7 +160,6 @@ public class template extends AppCompatActivity {
     public void getData() throws ParseException {
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = sdf.parse(ListeObjets.dateJPO);
-        System.out.println("date JPO:" + date);
 
         if (new Date().after(date)) {
             menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU,Formulaire de satisfaction";
