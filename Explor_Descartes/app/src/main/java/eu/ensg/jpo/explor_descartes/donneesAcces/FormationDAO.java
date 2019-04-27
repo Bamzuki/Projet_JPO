@@ -68,6 +68,7 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
     }
 
     public void afficherFormation(final EcoleActivity activity){
+
         // Construction de la requete
         String url = this.urlServeur + "?request=listeFormations";
         String donnees = "&&filtreEcole=" + activity.getEcole().getNom();
