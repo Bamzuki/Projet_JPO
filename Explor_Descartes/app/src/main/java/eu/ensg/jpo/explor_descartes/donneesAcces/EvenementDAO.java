@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.EcoleActivity;
-import eu.ensg.jpo.explor_descartes.ExpandableListAdapter;
+import eu.ensg.jpo.explor_descartes.ExpandableListAdapterEvenement;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.R;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
@@ -95,17 +95,17 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
 
                 listHashMap.put(listDataHeader.get(0), evenements);
 
-                final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
+                final ExpandableListAdapterEvenement listAdapterEvenement = new ExpandableListAdapterEvenement(activity, listDataHeader, listHashMap);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listView.setAdapter(listAdapter);
+                        listView.setAdapter(listAdapterEvenement);
 
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeight(parent, groupPosition);
+                                activity.setListViewHeightEvenement(parent, groupPosition);
                                 return false;
                             }
                         });

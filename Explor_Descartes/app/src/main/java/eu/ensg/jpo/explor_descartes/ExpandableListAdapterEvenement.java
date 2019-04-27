@@ -12,13 +12,13 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.List;
 
-public class ExpandableListAdapter extends BaseExpandableListAdapter {
+public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
 
     private Context context;
     private List<String> listDataHeader;
     private HashMap<String, List<String>> listHashMap;
 
-    public ExpandableListAdapter(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapterEvenement(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
@@ -78,7 +78,7 @@ public class ExpandableListAdapter extends BaseExpandableListAdapter {
         final String childText = (String)getChild(groupPosition, childPosition);
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            convertView = inflater.inflate(R.layout.liste_objets,null);
+            convertView = inflater.inflate(R.layout.liste_evenement,null);
         }
         TextView txtListChild = (TextView)convertView.findViewById(R.id.contenu_objets);
         txtListChild.setText(childText);

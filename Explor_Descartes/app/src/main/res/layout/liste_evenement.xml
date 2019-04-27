@@ -9,11 +9,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@android:color/white"
+        android:drawableEnd="@android:drawable/btn_star_big_off"
         android:gravity="start"
-        android:paddingLeft="?android:attr/expandableListPreferredChildPaddingLeft"
+        android:onClick="ajoutFavoris"
+        android:paddingStart="?android:attr/expandableListPreferredChildPaddingLeft"
         android:paddingTop="5dp"
+        android:paddingEnd="0dp"
         android:paddingBottom="5dp"
         android:textColor="@android:color/black"
-        android:textSize="16dip" />
+        android:textSize="16sp" />
 
 </LinearLayout>
