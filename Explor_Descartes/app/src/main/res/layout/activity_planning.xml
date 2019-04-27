@@ -5,8 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
-    tools:context=".MainActivity">
+    android:background="#FFFFFF">
 
     <!--Barre d'application-->
     <include layout="@layout/app_bar"/>
@@ -15,7 +14,6 @@
     <GridView
         android:id="@+id/main_grid"
         android:layout_marginTop="?attr/actionBarSize"
-        android:textColor="#000"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
