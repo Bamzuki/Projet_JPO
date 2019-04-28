@@ -242,13 +242,6 @@
                 android:layout_marginEnd="7dp"
                 app:srcCompat="@drawable/upe" />
 
-            <ImageView
-                android:id="@+id/IUT"
-                android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:contentDescription="IUT"
-                android:layout_marginEnd="7dp"
-                app:srcCompat="@drawable/iut"/>
         </TableRow>
 
     </TableLayout>
