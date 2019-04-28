@@ -3,8 +3,10 @@ package eu.ensg.jpo.explor_descartes;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.RadioButton;
+import android.widget.RadioGroup;
 
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
@@ -24,4 +26,6 @@ public class SatisfactionActivity extends template {
 
     @Override
     protected void llayout() { setLayout(R.layout.activity_satisfaction);}
+
+
 }

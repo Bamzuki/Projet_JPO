@@ -2,6 +2,7 @@ package eu.ensg.jpo.explor_descartes;
 
 import android.content.Context;
 import android.graphics.Typeface;
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -80,8 +81,15 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.liste_evenement,null);
         }
-        TextView txtListChild = (TextView)convertView.findViewById(R.id.contenu_objets);
+        final TextView txtListChild = (TextView)convertView.findViewById(R.id.contenu_objets);
         txtListChild.setText(childText);
+        txtListChild.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Drawable img = getContext().getDrawable(android.R.drawable.star_big_on);
+                txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
+            }
+        });
         return convertView;
     }
 

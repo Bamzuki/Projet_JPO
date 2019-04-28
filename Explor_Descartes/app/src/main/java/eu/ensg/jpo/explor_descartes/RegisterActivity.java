@@ -87,10 +87,9 @@ public class RegisterActivity extends AppCompatActivity {
         }
 
         // Enregistrement dans la base de données :
-        String urlServeur = getString(R.string.url_serveur_ecoles);
         try {
             Visiteur newVisiteur = new Visiteur(prenom, nom, pseudo, mail, SHA.encode(mdp), false);
-            VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
+            VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur));
             visiteurDAO.inscriptionBdd(this, newVisiteur);
         } catch (Exception e) {
             e.printStackTrace();

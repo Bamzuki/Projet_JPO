@@ -67,6 +67,7 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
     }
 
     public void afficherFormation(final EcoleActivity activity){
+
         // Construction de la requete
         String url = this.urlServeur + "?request=listeFormations";
         String donnees = "&&filtreEcole=" + activity.getEcole().getNom();
@@ -108,7 +109,7 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeight(parent, groupPosition);
+                                activity.setListViewHeightFormation(parent, groupPosition);
                                 return false;
                             }
                         });

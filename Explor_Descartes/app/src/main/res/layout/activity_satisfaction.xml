@@ -176,7 +176,6 @@
                         android:textColor="@android:color/black"
                         android:textColorHint="@android:color/tertiary_text_light"
                         android:textSize="14sp"
-                        android:visibility="invisible"
                         tools:targetApi="o" />
 
                 </LinearLayout>

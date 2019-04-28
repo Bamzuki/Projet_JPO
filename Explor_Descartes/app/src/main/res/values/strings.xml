@@ -46,6 +46,7 @@
     <string name="user_location_permission_not_granted">Localisation non permise</string>
 
     <!-- Ressources relatives à la connexion à la base de données-->
+    <string name="url_serveur">http://82.229.248.34/</string>
     <string name="url_serveur_ecoles">http://82.229.248.34/serveur.php/</string>
 
     <!-- Ressources relatives aux réglages -->

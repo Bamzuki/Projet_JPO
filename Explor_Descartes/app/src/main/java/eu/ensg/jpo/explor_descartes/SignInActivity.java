@@ -1,11 +1,14 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 
@@ -15,6 +18,7 @@ public class SignInActivity extends AppCompatActivity {
     Button connexionB;
     EditText mailET;
     EditText mdpET;
+    Button forgotPassword;
 
     private void connexion(){
 
@@ -53,6 +57,15 @@ public class SignInActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void openForgotPassword(){
+
+        String url = getString(R.string.url_serveur) + "forgotPassword.html";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        startActivity(i);
+
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -62,9 +75,11 @@ public class SignInActivity extends AppCompatActivity {
 
         inscriptionB = (Button) findViewById(R.id.inscriptionB);
         connexionB   = (Button) findViewById(R.id.connexionB);
+        forgotPassword = (Button) findViewById(R.id.forgotPassword);
 
         mailET = (EditText) findViewById(R.id.mailET);
         mdpET  = (EditText) findViewById(R.id.mdpET);
+
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
@@ -78,6 +93,13 @@ public class SignInActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 SignInActivity.this.connexion();
+            }
+        });
+
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignInActivity.this.openForgotPassword();
             }
         });
 
