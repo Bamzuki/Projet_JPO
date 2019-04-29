@@ -243,6 +243,54 @@ function getListeUtilisateurs($filtreAdmin){
   return $response;
 }
 
+
+function getListeSatisfaction(){
+  //Cette fonction renvoie la liste des utilisateurs
+  global $link;
+  $requete = "SELECT * FROM satisfaction  ORDER BY id";
+
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '",  "question_2":"' . $row[2] . '",  "question_3":"' . $row[3] . '",  "question_4":"' . $row[4] . '", "question_5":"' . $row[5] . '", "question_6":"' . $row[6] . '", "question_7":"' . $row[7] . '", "question_8":"' . $row[8] . '", "question_9":"' . $row[9] . '", "question_10":"' . $row[10] . '", "question_11":"' . $row[11] . '", "question_12":"' . $row[12] . '", "question_13":"' . $row[13] . '", "question_14":"' . $row[14] . '", "question_15":"' . $row[15] . '", "question_16":"' . $row[16] . '", "question_17":"' . $row[17] . '", "question_18":"' . $row[18] . '", "question_19":"' . $row[19] . '", "question_20":"' . $row[20] . '"}';
+      $response = $response . $utilisateur . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+
+  return $response;
+}
+
+
+function getListeQuestionnaire(){
+  //Cette fonction renvoie la liste des utilisateurs
+  global $link;
+  $requete = "SELECT id, question_1, question_2, question_3 FROM questionnaire  ORDER BY id";
+
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '", "question_2":"' . $row[2] . '", "question_3":"' . $row[3] . '"}';
+      $response = $response . $utilisateur . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+
+  return $response;
+}
+
+
+
+
+
 function getListeFAQ(){
   //Cette fonction renvoie la liste des utilisateurs
   global $link;
@@ -364,6 +412,21 @@ function saveEcole ($nom, $image, $adresse, $site, $description){
   $description = str_replace("'", "''", $description);
   global $link;
   $requete = "INSERT INTO ecoles (nom, image, adresse, site, description) VALUES ('" . $nom . "', '" . $image . "', '" . $adresse . "', '" . $site . "', '" . $description . "')";
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
+function saveQuestionnaire ($question_1,$question_2,$question_3){
+  //Cette fonction enregistre une nouvelle école dans la base de données
+  $question_1 = str_replace("'", "''", $question_1);
+  $question_2 = str_replace("'", "''", $question_2);
+  $question_3 = str_replace("'", "''", $question_3);
+  global $link;
+  $requete = "INSERT INTO questionnaire (question_1, question_2,question_3) VALUES ('" . $question_1 . "','" . $question_2 . "','" . $question_3 . "')";
+
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -767,6 +830,12 @@ if (isset($_GET['request']) && $_GET['request'] == "listeUtilisateurs"){
 if (isset($_GET['request']) && $_GET['request'] == "listeFAQ"){
   echo getListeFAQ();
 }
+if (isset($_GET['request']) && $_GET['request'] == "listeSatisfaction"){
+  echo getListeSatisfaction();
+}
+if (isset($_GET['request']) && $_GET['request'] == "listeQuestionnaire"){
+  echo getListeQuestionnaire();
+}
 
 if (isset($_GET['request']) && $_GET['request'] == "batiment"){
   $id = $_GET['id'];
@@ -831,6 +900,12 @@ if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
   $id_ecole    = $_GET['id_ecole'];
   $id_batiment     = $_GET['id_batiment'];
   echo saveEvenement($nom, $debut, $fin, $id_ecole, $id_batiment);
+}
+if (isset($_GET['request']) && $_GET['request'] == "saveQuestionnaire"){
+  $question_1   = $_GET['question_1'];
+  $question_2      = $_GET['question_2'];
+  $question_3  = $_GET['question_3'];
+  echo saveQuestionnaire($question_1, $question_2, $question_3);
 }
 
 
