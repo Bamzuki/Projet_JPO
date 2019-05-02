@@ -5,6 +5,9 @@ var listeEcoles = [];
 var listeUtilisateurs=[];
 var listeEvenements=[];
 var listeFAQ=[];
+var listeSatisfaction=[];
+var listeQuestionnaire=[];
+
 
 function getListeNomNiveaux(idSelectNiveau){
   // Mise à jour de la liste des noms des niveaux depuis le serveur
@@ -607,6 +610,241 @@ function getListeEvenement(){
   ajax.send(request);
 }
 
+function getListeQuestionnaire(){
+
+  var request = "request=listeQuestionnaire"
+
+ 
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    listeQuestionnaire = JSON.parse(ajax.response);
+
+    // Remplissage du tableau
+    var tableau = document.getElementById("resultats_questionnaire");
+    tableau.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Comment avez-vous découvert le campus Descartes ?";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Dans quelle tranche d'âge vous situez-vous ?";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Quelle est votre formation actuelle ?";
+    ligne.appendChild(element);
+
+
+
+
+    tableau.appendChild(ligne);
+
+
+    for (var i = 0; i < listeQuestionnaire.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeQuestionnaire[i].question_1;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeQuestionnaire[i].question_2;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeQuestionnaire[i].question_3;
+      ligne.appendChild(element);
+
+
+
+      tableau.appendChild(ligne);
+    }
+  });
+  ajax.send(request);
+}
+
+
+
+function getListeSatisfaction(){
+
+  var request = "request=listeSatisfaction"
+
+ 
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    listeSatisfaction = JSON.parse(ajax.response);
+
+    // Remplissage du tableau
+    var tableau1 = document.getElementById("satisfaction-appli");
+    tableau1.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Question 1";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 2";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 3";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 4";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 5";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 6";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 7";
+    ligne.appendChild(element);
+	element = document.createElement("td");
+    element.innerHTML = "Question 8";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 9";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 10";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 11";
+    ligne.appendChild(element);
+
+
+    tableau1.appendChild(ligne);
+	
+	
+		 // Remplissage du tableau
+    var tableau2 = document.getElementById("satisfaction-JPO");
+    tableau2.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Question 12";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 13";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 14";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 15";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 16";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 17";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 18";
+    ligne.appendChild(element);
+	 element = document.createElement("td");
+    element.innerHTML = "Question 19";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 20";
+    ligne.appendChild(element);
+
+
+    tableau2.appendChild(ligne);
+
+
+
+    for (var i = 0; i < listeSatisfaction.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_1;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_2;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_3;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_4;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_5;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_6;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_7;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_8;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_9;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_10;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_11;
+      ligne.appendChild(element);
+	
+
+
+      tableau1.appendChild(ligne);
+
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_12;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_13;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_14;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_15;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_16;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_17;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_18;
+      ligne.appendChild(element);
+	    element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_19;
+      ligne.appendChild(element);
+	  element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_20;
+      ligne.appendChild(element);
+    
+
+      tableau2.appendChild(ligne);
+    }
+	
+
+	
+	
+	
+  });
+  ajax.send(request);
+}
+
 function getListeFAQ_admin(){
   console.log("FAQ");
   var request = "request=listeFAQ"
@@ -640,9 +878,6 @@ function getListeFAQ_admin(){
     tableau1.appendChild(ligne);
 
 
-
-
-
     for (var i = 0; i < listeFAQ.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -669,10 +904,6 @@ function getListeFAQ_admin(){
 
       tableau1.appendChild(ligne);
     }
-
-
-
-
   });
   ajax.send(request);
 }
@@ -686,9 +917,6 @@ function getListeFAQ_client(){
   ajax.addEventListener('load',  function () {
     // Récupération des données :
     listeFAQ = JSON.parse(ajax.response);
-
-
-
 	var tableau2 = document.getElementById("resultats_FAQ_client");
     tableau2.innerHTML = "";
     var ligne;
@@ -705,10 +933,6 @@ function getListeFAQ_client(){
 
     tableau2.appendChild(ligne);
 
-
-
-
-
     for (var i = 0; i < listeFAQ.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -721,8 +945,6 @@ function getListeFAQ_client(){
 
       tableau2.appendChild(ligne);
     }
-
-
   });
   ajax.send(request);
 }
@@ -784,6 +1006,23 @@ function saveFiliere(){
 }
 
 
+function saveQuestionnaire(){
+  // Enregistrement d'un batiment dans la base de données
+  var question_1      = document.getElementById("input_questionnaire1").value;
+  var question_2 = document.getElementById("input_questionnaire2").value;
+  var question_3      = document.getElementById("input_questionnaire3").value;
+  var ajax           = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=saveQuestionnaire&&question_1=' + question_1 + '&&question_2=' + question_2 + '&&question_3=' + question_3);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    var response = ajax.response;
+    console.log(response);
+  });
+  ajax.send('request=saveQuestionnaire&&question_1=' + question_1 + '&&question_2=' + question_2 + '&&question_3=' + question_3);
+}
+
+
+
 function saveFormation(){
   // Enregistrement d'une formations dans la base de données
   var input_nom      = document.getElementById("input_formation").value;
@@ -840,9 +1079,8 @@ function saveEvenement(){
   });
 
   ajax.send('request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement)
+
   }
-
-
 
 function saveFAQ(){
   // Enregistrement d'une formations dans la base de données
@@ -855,10 +1093,9 @@ function saveFAQ(){
     var response = ajax.response;
     console.log(response);
 	getListeFAQ_admin();
-  });
-
+  });  
   ajax.send('request=saveFAQ&&question=' + input_question + '&&reponse=' + input_reponse);
-  }
+  } 
 
 
 
@@ -912,7 +1149,6 @@ function validechangeEcole(i){
     input_image= listeEcoles[i].image;
   }
 
-
   if(input_adresse == ""){
     // input_nom= listeEcoles[input_id].nom;
     input_adresse= listeEcoles[i].adresse;
@@ -927,11 +1163,6 @@ function validechangeEcole(i){
 	  // input_description=listeEcoles[input_id].description;
 	  input_description= listeEcoles[i].description;
   }
-
-
-
-
-
 
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=changeEcole&&id=' + input_id +'&&nom=' + input_nom +'&&image=' + input_image +'&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description );
@@ -1631,15 +1862,12 @@ function changeFAQ(i){
   var reponse          = papi.children[1];
   reponse.innerHTML      = "<input id='modif_reponse_FAQ" + i + "' placeholder='"+listeFAQ[i].reponse+"'>";
 
-
   //on met en place les deux nouveaux boutons
   var bouton_valider         = papi.children[2];
   bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-FAQ" + i + "' class='modifier_filiere'  onClick='validechangeFAQ("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
   var bouton_annuler         = papi.children[3];
   bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-FAQ" + i + "' class='supprimer_filiere' onClick='annulechangeFAQ("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
-
-
 
 function validechangeFAQ(i){
 
@@ -1662,13 +1890,11 @@ function validechangeFAQ(i){
 
 
   // if(input_debut == ""){
-
     // input_debut = listeEvenements[i].debut;
   // }
 
 
   // if(input_fin == ""){
-
     // input_fin = listeEvenements[i].fin;
   // }
 
@@ -1693,7 +1919,6 @@ function validechangeFAQ(i){
   // on change de nouveau la ligne (normalement avec le changement)
   //boucle qui retransforme la ligne
 
-
   getListeFAQ_admin();
   //boucle qui transforme la ligne
   var papa               = bouton.parentNode;
@@ -1702,8 +1927,6 @@ function validechangeFAQ(i){
   question.innerHTML          = listeFAQ[i].question;
   var reponse             = papi.children[1];
   reponse.innerHTML       = listeFAQ[i].reponse;
-
-
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[2];
@@ -1724,8 +1947,6 @@ function annulechangeFAQ(i){
   question.innerHTML          = listeFAQ[i].question;
   var reponse            = papi.children[1];
   reponse.innerHTML       = listeFAQ[i].reponse;
-
-
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[2];
@@ -1858,6 +2079,9 @@ function deleteFAQ(i) {
 
 
 // I - Chargement des listes des noms des différentes
+
+getListeQuestionnaire();
+getListeSatisfaction();
 getListeFAQ_admin();
 getListeFAQ_client();
 getListeNomNiveaux("filtre-niveau");

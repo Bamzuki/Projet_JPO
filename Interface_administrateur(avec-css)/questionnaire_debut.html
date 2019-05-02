@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title> Données visiteurs</title>
+    <link rel="stylesheet" href="donnees_visiteurs.css">
+	 <script src="AJAX.js"></script>
+  </head>
+  
+    
+  <body>
+  
+  <div id="banierre">
+      <a href="index.html" id="logo"><img src="logo.png" alt="Logo non disponible"></a>
+      <h1>Admin'Descartes</h1>
+    </div>
+	
+	
+	
+	Comment avez-vous découvert le campus Descartes ? 
+	<select id="input_questionnaire1">
+			<option value="Internet">Internet</option>
+			<option value="Prospectus">Prospectus</option>
+			<option value="Bouche-à-oreille">Bouche-à-oreille</option>
+			<option value="Réseaux sociaux">Réseaux sociaux</option>
+    </select>
+</br>
+
+	
+	Dans quelle tranche d'âge vous situez-vous ?  
+
+	<select id="input_questionnaire2">
+			<option value="	Moins de 15 ans ">	Moins de 15 ans </option>
+			<option value="Entre 11 et 25 ans ">Entre 11 et 25 ans 	</option>
+			<option value="	Entre 25 et 40 ans ">Entre 25 et 40 ans </option>
+			<option value="	Plus de 40 ans ">Plus de 40 ans </option>
+    </select>
+</br>
+	
+	Quelle est votre formation actuelle ?
+	<input type="text" id="input_questionnaire3" placeholder="Indiquez votre formation">
+
+
+</br>	
+  <button class="valider" id="bouton-utilisateur1"  onClick="saveQuestionnaire()"> <img src="boutons/valider.png" alt="Ajouter un utilisateur à la table"> </button>
+        
+  
+    
+  </body>
