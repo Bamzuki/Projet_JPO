@@ -8,6 +8,7 @@ var listeFAQ=[];
 var listeSatisfaction=[];
 var listeQuestionnaire=[];
 
+
 function getListeNomNiveaux(idSelectNiveau){
   // Mise à jour de la liste des noms des niveaux depuis le serveur
   var ajax = new XMLHttpRequest();
@@ -439,7 +440,7 @@ function getListeUtilisateur(){
   if (filtre_admin != "*"){
     request += "&&filtreAdmin=" + filtre_admin;
   }
- 
+
   var ajax    = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?'+request);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -530,7 +531,7 @@ function getListeEvenement(){
   if (filtre_batiment != "*"){
     request += "&&filtreBatiment=" + filtre_batiment;
   }
- 
+
   var ajax    = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?'+request);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -875,9 +876,6 @@ function getListeFAQ_admin(){
 
 
     tableau1.appendChild(ligne);
-	
-	
-
 
 
     for (var i = 0; i < listeFAQ.length; i++){
@@ -906,10 +904,6 @@ function getListeFAQ_admin(){
 
       tableau1.appendChild(ligne);
     }
-	
-	
-	
-	
   });
   ajax.send(request);
 }
@@ -923,9 +917,6 @@ function getListeFAQ_client(){
   ajax.addEventListener('load',  function () {
     // Récupération des données :
     listeFAQ = JSON.parse(ajax.response);
-
-  
-	
 	var tableau2 = document.getElementById("resultats_FAQ_client");
     tableau2.innerHTML = "";
     var ligne;
@@ -942,10 +933,6 @@ function getListeFAQ_client(){
 
     tableau2.appendChild(ligne);
 
-
-
-	
-	
     for (var i = 0; i < listeFAQ.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -958,8 +945,6 @@ function getListeFAQ_client(){
 
       tableau2.appendChild(ligne);
     }
-	
-	
   });
   ajax.send(request);
 }
@@ -986,7 +971,7 @@ function saveEcole(){
   //Ajout d'une nouvelle ligne dans la table
   var id                    = listeEcoles.length + 1;
   console.log(id);
-  
+
 }
 
 
@@ -1072,7 +1057,7 @@ function saveUtilisateur(){
 	getListeUtilisateur();
   });
   ajax.send('request=saveUtilisateur&&prenom=' + input_prenom_utilisateur + '&&nom=' + input_nom_utilisateur + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin);
-} 
+}
 
 
 
@@ -1092,12 +1077,11 @@ function saveEvenement(){
     console.log(response);
 	getListeEvenement();
   });
-  
+
   ajax.send('request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement)
-  } 
-  
-  
-  
+
+  }
+
 function saveFAQ(){
   // Enregistrement d'une formations dans la base de données
   var input_question    = document.getElementById("input_question").value;
@@ -1109,11 +1093,10 @@ function saveFAQ(){
     var response = ajax.response;
     console.log(response);
 	getListeFAQ_admin();
-  });
-  
+  });  
   ajax.send('request=saveFAQ&&question=' + input_question + '&&reponse=' + input_reponse);
   } 
-  
+
 
 
 function changeEcole(i){
@@ -1165,13 +1148,12 @@ function validechangeEcole(i){
     // input_nom= listeEcoles[input_id].nom;
     input_image= listeEcoles[i].image;
   }
-  
-  
+
   if(input_adresse == ""){
     // input_nom= listeEcoles[input_id].nom;
     input_adresse= listeEcoles[i].adresse;
   }
-  
+
   if(input_site == ""){
 	  // input_site=listeEcoles[input_id].site;
 	  input_site= listeEcoles[i].site;
@@ -1182,11 +1164,6 @@ function validechangeEcole(i){
 	  input_description= listeEcoles[i].description;
   }
 
-  
-  
-  
-  
-  
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=changeEcole&&id=' + input_id +'&&nom=' + input_nom +'&&image=' + input_image +'&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description );
 	ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -1609,10 +1586,10 @@ function changeUtilisateur(i){
     admin.innerHTML="<input type='checkbox' id='modif_admin_utilisateur" + i + "' value='f' onclick='check_admin("+i+")' '>";
 	admin.value='f';
 	admin.checked='false';
-    console.log(admin.value); 
+    console.log(admin.value);
   }
-  
-  
+
+
  }
 
 function validechangeUtilisateur(i){
@@ -1658,7 +1635,7 @@ function validechangeUtilisateur(i){
 
     // input_mdp = listeUtilisateurs[i].mdp;
   // }
-  
+
   if(input_admin == ""){
     // input_description=listeEcoles[input_id].description;
     input_admin = listeUtilisateurs[i].admin;
@@ -1675,11 +1652,11 @@ function validechangeUtilisateur(i){
   });
 
   ajax.send('request=changeUtilisateur&&id=' + input_id + '&&prenom=' + input_prenom + '&&nom=' + input_nom + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin  );
-  
+
   // on change de nouveau la ligne (normalement avec le changement)
   //boucle qui retransforme la ligne
 
- 
+
   getListeUtilisateur();
   //boucle qui transforme la ligne
   var papa               = bouton.parentNode;
@@ -1758,7 +1735,7 @@ function changeEvenement(i){
   bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-evenement" + i + "' class='supprimer_filiere' onClick='annulechangeEvenement("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
 
- 
+
 
 function validechangeEvenement(i){
 
@@ -1785,13 +1762,13 @@ function validechangeEvenement(i){
 
 
   // if(input_debut == ""){
-   
+
     // input_debut = listeEvenements[i].debut;
   // }
 
 
   // if(input_fin == ""){
-    
+
     // input_fin = listeEvenements[i].fin;
   // }
 
@@ -1804,7 +1781,7 @@ function validechangeEvenement(i){
     // input_description=listeEcoles[input_id].description;
     input_batiment = listeEvenements[i].id_batiment;
   }
-  
+
 
 
   var ajax = new XMLHttpRequest();
@@ -1821,7 +1798,7 @@ function validechangeEvenement(i){
   // on change de nouveau la ligne (normalement avec le changement)
   //boucle qui retransforme la ligne
 
- 
+
   getListeEvenement();
   //boucle qui transforme la ligne
   var papa               = bouton.parentNode;
@@ -1884,7 +1861,6 @@ function changeFAQ(i){
   question.innerHTML         = "<input id='modif_question_FAQ" + i + "' placeholder='"+listeFAQ[i].question+"'>";
   var reponse          = papi.children[1];
   reponse.innerHTML      = "<input id='modif_reponse_FAQ" + i + "' placeholder='"+listeFAQ[i].reponse+"'>";
-  
 
   //on met en place les deux nouveaux boutons
   var bouton_valider         = papi.children[2];
@@ -1892,8 +1868,6 @@ function changeFAQ(i){
   var bouton_annuler         = papi.children[3];
   bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-FAQ" + i + "' class='supprimer_filiere' onClick='annulechangeFAQ("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
-
- 
 
 function validechangeFAQ(i){
 
@@ -1916,13 +1890,11 @@ function validechangeFAQ(i){
 
 
   // if(input_debut == ""){
-   
     // input_debut = listeEvenements[i].debut;
   // }
 
 
   // if(input_fin == ""){
-    
     // input_fin = listeEvenements[i].fin;
   // }
 
@@ -1947,7 +1919,6 @@ function validechangeFAQ(i){
   // on change de nouveau la ligne (normalement avec le changement)
   //boucle qui retransforme la ligne
 
- 
   getListeFAQ_admin();
   //boucle qui transforme la ligne
   var papa               = bouton.parentNode;
@@ -1956,8 +1927,6 @@ function validechangeFAQ(i){
   question.innerHTML          = listeFAQ[i].question;
   var reponse             = papi.children[1];
   reponse.innerHTML       = listeFAQ[i].reponse;
-  
-
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[2];
@@ -1978,8 +1947,6 @@ function annulechangeFAQ(i){
   question.innerHTML          = listeFAQ[i].question;
   var reponse            = papi.children[1];
   reponse.innerHTML       = listeFAQ[i].reponse;
-  
-
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[2];
@@ -2026,8 +1993,8 @@ function deleteEcole(i) {
 function deleteFiliere(i) {
   // Suppression d'une filiere dans la base de données
 
-  
-  
+
+
   var input_id  = listeFilieres[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteFiliere&&id=' + input_id );
@@ -2112,6 +2079,7 @@ function deleteFAQ(i) {
 
 
 // I - Chargement des listes des noms des différentes
+
 getListeQuestionnaire();
 getListeSatisfaction();
 getListeFAQ_admin();
@@ -2131,5 +2099,3 @@ getListeNomFonctions("filtre-fonction");
 getListeEcole();
 getListeFiliere();
 getListeUtilisateur();
-
-
