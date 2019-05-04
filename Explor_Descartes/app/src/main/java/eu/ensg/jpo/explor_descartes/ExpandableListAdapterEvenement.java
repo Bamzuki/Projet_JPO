@@ -3,15 +3,20 @@ package eu.ensg.jpo.explor_descartes;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
 import android.widget.TextView;
+import android.widget.Toast;
+import android.widget.ToggleButton;
 
 
 import java.util.HashMap;
 import java.util.List;
+
+import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 
 public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
 
@@ -75,7 +80,7 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, final View convertView, ViewGroup parent) {
         final String childText = (String)getChild(groupPosition, childPosition);
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
@@ -86,8 +91,28 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
         txtListChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Drawable img = getContext().getDrawable(android.R.drawable.star_big_on);
-                txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
+                if (ListeObjets.visiteur == null){
+                    ToggleButton etat = (ToggleButton) convertView.findViewById(R.id.etat);
+                    if ( ! etat.isChecked()){
+                        Drawable img = context.getDrawable(android.R.drawable.star_big_on);
+                        txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
+/*
+                        VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur));
+                        visiteurDAO.ajouterFavori(new EcoleActivity(), ListeObjets.visiteur, childPosition);
+*/
+                    }
+                    else {
+                        Drawable img = context.getDrawable(android.R.drawable.star_big_off);
+                        txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
+/*
+                        VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur));
+                        visiteurDAO.supprimerFavori(new EcoleActivity(), ListeObjets.visiteur, childPosition);
+*/
+                    }
+                }
+                else {
+                    Toast.makeText(context, R.string.favori_impossible, Toast.LENGTH_SHORT).show();
+                }
             }
         });
         return convertView;

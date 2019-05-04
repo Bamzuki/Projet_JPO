@@ -105,7 +105,7 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeightEvenement(parent, groupPosition);
+                                activity.setListViewHeightEvenement( parent, groupPosition);
                                 return false;
                             }
                         });

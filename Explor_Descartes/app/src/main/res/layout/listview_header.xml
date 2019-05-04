@@ -9,7 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:layout_marginBottom="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:gravity="center_vertical"
         android:text="Menu"
         android:textAlignment="center"

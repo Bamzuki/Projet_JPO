@@ -15,7 +15,7 @@
         android:id="@+id/nom_appli"
         android:layout_width="0dp"
         android:layout_height="100dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:text="@string/nom_appli"
         android:textAppearance="@style/TextAppearance.AppCompat"
@@ -107,7 +107,7 @@
         android:id="@+id/ignorerB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:fontFamily="sans-serif"
         android:padding="10dp"
         android:text="@string/ignorerB"
@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:text="@string/InscriptionB"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
     </LinearLayout>
 
@@ -151,7 +151,7 @@
         android:id="@+id/logos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
@@ -185,7 +185,7 @@
                 android:layout_height="50dp"
                 android:layout_marginEnd="7dp"
                 android:contentDescription="@string/eavt"
-                app:srcCompat="@drawable/eavt" />
+                app:srcCompat="@drawable/eavt1" />
 
             <ImageView
                 android:id="@+id/ENSG"
@@ -239,7 +239,9 @@
                 android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:contentDescription="@string/upe"
+                android:layout_marginEnd="7dp"
                 app:srcCompat="@drawable/upe" />
+
         </TableRow>
 
     </TableLayout>

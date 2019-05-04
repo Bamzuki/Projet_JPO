@@ -30,9 +30,9 @@
         android:layout_height="match_parent"
         android:divider="#615B5B"
         android:dividerHeight="4px"
-        android:background="#FFFFFF"/>
-    <!--android:drawSelectorOnTop="true"
-        android:listSelector="@drawable/selector_la"-->
+        android:background="#FFFFFF"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/selector_la"/>
 
     <!--Menu notifications et favoris (à droite)-->
     <include layout="@layout/menu_right"/>

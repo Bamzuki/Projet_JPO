@@ -202,6 +202,9 @@
     <string name="master">Master</string>
     <string name="inge_commerce">Ecole d\'ingénieur / Ecole de commerce</string>
     <string name="bts_dut_deust">BTS/DUT/DEUST</string>
+    <string name="mot_de_passe_oubli">Mot de passe oublié ?</string>
+
+    <string name="favori_impossible">Cette fonctionnalité n\'est disponible que pour les utilisateurs enregistrés</string>
 
 
 </resources>

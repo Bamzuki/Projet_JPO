@@ -62,7 +62,7 @@
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
             android:textSize="14sp"
-            android:visibility="visible" />
+            android:visibility="visible" tools:targetApi="o"/>
 
         <EditText
             android:id="@+id/mdpET"
@@ -78,35 +78,18 @@
             android:selectAllOnFocus="false"
             android:textColor="@android:color/black"
             android:textColorHint="@android:color/black"
-            android:textSize="14sp" />
+            android:textSize="14sp" tools:targetApi="o"/>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/forgotPassword"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mot de passe oublié ?"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-        </LinearLayout>
+        <Button
+            android:id="@+id/forgotPassword"
+            style="@style/Widget.AppCompat.Button.Borderless"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:text="@string/mot_de_passe_oubli"
+            android:textAppearance="@style/TextAppearance.AppCompat"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="bold" />
 
     </LinearLayout>
 
@@ -115,7 +98,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_margin="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/design_default_color_primary"
         android:padding="5dp"
         android:text="@string/connexion"
         android:textColor="@android:color/white"
@@ -151,7 +134,7 @@
             android:layout_height="wrap_content"
             android:text="@string/InscriptionB"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/design_default_color_primary"
             android:textStyle="bold" />
     </LinearLayout>
 
