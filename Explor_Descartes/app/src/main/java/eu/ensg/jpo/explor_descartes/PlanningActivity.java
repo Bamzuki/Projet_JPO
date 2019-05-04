@@ -17,15 +17,15 @@ import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
 
 public class PlanningActivity extends template implements Serializable {
-    private String text;
-    private TextView tes;
+
+    private GridView gridView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         contentTemp();
 
-        GridView gridView = (GridView) findViewById(R.id.main_grid);
+        gridView = (GridView) findViewById(R.id.main_grid);
         GridViewAdapter gridAdapter = new GridViewAdapter(this, this, R.layout.grid_item_layout, getListImageEcoles());
         gridView.setAdapter(gridAdapter);
         //Ajout de l'event listener :
@@ -45,28 +45,32 @@ public class PlanningActivity extends template implements Serializable {
 
     private ArrayList<ImageEcole> getListImageEcoles() {
 
-        PictureDAO pictureDAO = new PictureDAO(getString(R.string.url_serveur));
 
         final ArrayList<ImageEcole> imageEcoles = new ArrayList<>();
         for (Ecole ecole : ListeObjets.listeEcole) {
             ImageEcole imageEcole = new ImageEcole(ecole.getNom(), ecole);
-            pictureDAO.addPicture(this, imageEcole, ecole.getImage());
             imageEcoles.add(imageEcole);
         }
         return imageEcoles;
     }
 
-    @Override
-    protected void contentTemp(){
-        text = "Planning";
-        //tes = (TextView) findViewById(R.id.textPlanning);
-
-    }
 
     @Override
     protected void llayout(){
         setLayout(R.layout.activity_planning);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        GridViewAdapter adapter = (GridViewAdapter) this.gridView.getAdapter();
+        for (ImageEcole imageEcole : adapter.getData()){
+            imageEcole.addPicture(this, adapter, getString(R.string.url_serveur));
+        }
+
+
+    }
+
 
 
 }

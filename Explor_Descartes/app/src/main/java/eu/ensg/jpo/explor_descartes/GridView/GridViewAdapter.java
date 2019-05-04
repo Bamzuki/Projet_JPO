@@ -53,8 +53,6 @@ public class GridViewAdapter extends ArrayAdapter {
         ImageEcole item = data.get(position);
         holder.imageTitle.setText(item.getNom());
         holder.image.setImageBitmap(item.getImage());
-        // Appel asynchrone de la vrai image depuis le serveur web
-
 
         return row;
     }
@@ -62,5 +60,9 @@ public class GridViewAdapter extends ArrayAdapter {
     static class ViewHolder {
         TextView imageTitle;
         ImageView image;
+    }
+
+    public ArrayList<ImageEcole> getData() {
+        return data;
     }
 }
