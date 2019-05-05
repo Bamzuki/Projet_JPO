@@ -5,14 +5,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
-import android.widget.TextView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
 import eu.ensg.jpo.explor_descartes.GridView.ImageEcole;
-import eu.ensg.jpo.explor_descartes.donneesAcces.PictureDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
 

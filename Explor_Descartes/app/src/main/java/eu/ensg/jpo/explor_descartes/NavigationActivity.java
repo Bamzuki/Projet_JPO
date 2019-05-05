@@ -7,12 +7,10 @@ import android.graphics.RectF;
 import android.location.Location;
 import android.util.Log;
 import android.widget.Toast;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 // Classes needed to initialize the map
-import com.mapbox.geojson.Feature;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.geometry.LatLng;
 import com.mapbox.mapboxsdk.location.LocationComponentOptions;
@@ -45,6 +43,7 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
 public class NavigationActivity extends template implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
 
@@ -59,7 +58,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     private long DEFAULT_MAX_WAIT_TIME = DEFAULT_INTERVAL_IN_MILLISECONDS * 5;
     // Variables needed to listen to location updates
     private MainActivityLocationCallback callback = new MainActivityLocationCallback(this);
-    private ArrayList<Batiment> listeBatiment = new ArrayList<Batiment>();
+    private ArrayList<Batiment> listeBatiment = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -96,12 +95,30 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                     public void onStyleLoaded(@NonNull Style style) {
                         enableLocationComponent(style);
                         style.getLayer("poi-label").setProperties(PropertyFactory.visibility(Property.NONE));
+
                         // Affichage des batiments depuis la base de donnees
                         ArrayList<Batiment> listeBatiment = ListeObjets.listeBatiment;
-                        System.out.println(listeBatiment.size());
                         for (Batiment batiment : listeBatiment){
                             batiment.afficherSurCarte(style);
                         }
+
+                        // Affichage des évènements favoris (si l'utilisateur est connecté)
+                        if (ListeObjets.visiteur != null) {
+                            ArrayList<Evenement> listeFavoris = ListeObjets.listeFavoris;
+
+                            // /!\ DEBUT TEST FAVORIS /!\
+                            Evenement evenement0 = new Evenement(0, "Les points forts du DUT TC en alternance", "2018-02-02 11:00:00", "2018-02-02 11:45:00", "CFA Descartes", "CFA Descartes");
+                            Evenement evenement1 = new Evenement(1, "Présentation du cycle ingénieur en géomatique", "2018-02-02 10:30:00", "2018-02-02 11:00:00", "ENSG-Géomatique", "ENSG");
+                            listeFavoris.add(evenement0);
+                            listeFavoris.add(evenement1);
+                            // /!\ FIN TEST FAVORIS /!\
+
+                            for (Evenement favori : listeFavoris){
+                                favori.afficherSurCarte(style);
+
+                            }
+                        }
+
                         // Ajout des listener
                         mapboxMap.addOnMapClickListener(NavigationActivity.this);
                     }
@@ -199,7 +216,6 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     public boolean onMapClick(@NonNull LatLng point) {
         PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
         RectF rectF = new RectF(pointf.x - 10, pointf.y - 10, pointf.x + 10, pointf.y + 10);
-        List<Feature> featureList = new ArrayList<Feature>();
         for (Batiment batiment : ListeObjets.listeBatiment) {
             if (mapboxMap.queryRenderedFeatures(rectF, "batiment" + batiment.getId()).size() > 0){
                 int idEcole = batiment.getIdEcole();
