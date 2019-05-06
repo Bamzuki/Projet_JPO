@@ -1,6 +1,7 @@
 <?php
   //Répertoire d'enregistrement
   $target_dir = ".\image_ecole\'";
+  	$target_dir=substr($target_dir,0,14);
 	$target_file = $target_dir . basename($_FILES["fileselect"]["name"]);
 	//on initialise la variable update ok
 	$uploadOk = 1;
