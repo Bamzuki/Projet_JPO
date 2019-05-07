@@ -1,3 +1,4 @@
+//Fonction permettant de générer un nouveau mot de passe
 function resetPassword(){
   var mail = document.getElementById("mail").value;
   var error = document.getElementById("error");
@@ -23,7 +24,7 @@ function resetPassword(){
     ajax.send('request=newMail&&mail=' + mail);
   }
 }
-
+//Fonction permettant de recevoir un nouveau mot de passe par mail
 function sendNewPwd(mail){
   var ajax = new XMLHttpRequest();
   ajax.open('GET', 'forgotPassword.php/?mail=' + mail);
