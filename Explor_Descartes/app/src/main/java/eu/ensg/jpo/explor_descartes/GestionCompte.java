@@ -6,14 +6,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.lang.reflect.Modifier;
+
+import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 
 public class GestionCompte extends AppCompatActivity {
 
     Button ModifierPerso;
     Button ModifierMdp;
     Button Deconnexion;
+    Button Suppression;
 
 
 
@@ -37,6 +41,26 @@ public class GestionCompte extends AppCompatActivity {
         startActivity(intent);
 
     }
+
+
+    private void openSuppression() {
+
+
+
+
+
+        // Suppression dans la base de données :
+        String urlServeur = getString(R.string.url_serveur_ecoles);
+        try {
+            VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
+            visiteurDAO.suppression( ListeObjets.visiteur);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 
     private void openDeconnexion() {
@@ -70,6 +94,7 @@ public class GestionCompte extends AppCompatActivity {
     ModifierPerso = (Button) findViewById(R.id.ModifierPersoB);
     ModifierMdp   = (Button) findViewById(R.id.ModifierMdpB);
     Deconnexion = (Button) findViewById(R.id.Deconnexion);
+    Suppression = (Button) findViewById(R.id.Sppression);
 
 
 
@@ -99,7 +124,12 @@ public class GestionCompte extends AppCompatActivity {
             GestionCompte.this.openDeconnexion();
         }
     });
-
+        Suppression.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                GestionCompte.this.openSuppression();
+            }
+        });
 
     }
 

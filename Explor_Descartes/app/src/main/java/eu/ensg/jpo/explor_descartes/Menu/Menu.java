@@ -2,6 +2,7 @@ package eu.ensg.jpo.explor_descartes.Menu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 
 import eu.ensg.jpo.explor_descartes.AccueilActivity;
 import eu.ensg.jpo.explor_descartes.GestionCompte;
@@ -11,6 +12,8 @@ import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SatisfactionActivity;
 import eu.ensg.jpo.explor_descartes.SettingsActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
+
+import static android.provider.Settings.System.getString;
 
 public class Menu {
 
@@ -67,5 +70,19 @@ public class Menu {
         Intent intent = new Intent(con, GestionCompte.class);
         // Start activity
         con.startActivity(intent);
+    }
+
+    public void openpageFAQ() {
+        String url = getString(R.string.url_serveur) + "FAQ.html";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        con.startActivity(i);
+    }
+
+    public void openpageCGU() {
+        String url = getString(R.string.url_serveur) + "Conditions générales d'utilisation";
+        Intent i = new Intent(Intent.ACTION_VIEW);
+        i.setData(Uri.parse(url));
+        con.startActivity(i);
     }
 }

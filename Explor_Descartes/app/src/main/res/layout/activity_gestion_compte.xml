@@ -22,8 +22,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Modifier les Données Personnelles"
-        tools:layout_editor_absoluteX="63dp"
-        tools:layout_editor_absoluteY="143dp" />
+        tools:layout_editor_absoluteX="61dp"
+        tools:layout_editor_absoluteY="95dp" />
 
     <Button
         android:id="@+id/ModifierMdp"
@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="Modifier le mot de passe"
         tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="270dp" />
+        tools:layout_editor_absoluteY="213dp" />
 
     <Button
         android:id="@+id/Deconnexion"
@@ -40,5 +40,13 @@
         android:layout_height="wrap_content"
         android:text="Se déconnecter"
         tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="402dp" />
+        tools:layout_editor_absoluteY="312dp" />
+
+    <Button
+        android:id="@+id/Suppression"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Supprimer son compte"
+        tools:layout_editor_absoluteX="96dp"
+        tools:layout_editor_absoluteY="405dp" />
 </android.support.constraint.ConstraintLayout>

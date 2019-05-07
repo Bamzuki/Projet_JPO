@@ -64,6 +64,42 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
     }
 
 
+    public void suppression( Visiteur visiteur) {
+
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=deleteUtilisateur";
+        String donnees = "&&id=" + visiteur.getId();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                String reponseBdd = response.body().string();
+
+            }
+            // Pseudo et email corrects
+
+
+
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+
+
+
+        return;
+
+
+    }
+
+
+
     public void updatePerso(final ModifierPerso activity, Visiteur visiteur) {
 
 

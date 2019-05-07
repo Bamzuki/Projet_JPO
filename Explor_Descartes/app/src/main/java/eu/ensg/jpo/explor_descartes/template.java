@@ -188,6 +188,15 @@ public class template extends AppCompatActivity {
                 if (pos == 4) {
                     menuc.openSettingsActivity();
                 }
+                if (pos == 5) {
+                    menuc.openGestionCompte();
+                }
+                if (pos == 6) {
+                    menuc.openpageFAQ();
+                }
+                if (pos == 7) {
+                    menuc.openpageCGU();
+                }
                 if (pos == 8) {
                     menuc.openSatisfactionActivity();
                 }
