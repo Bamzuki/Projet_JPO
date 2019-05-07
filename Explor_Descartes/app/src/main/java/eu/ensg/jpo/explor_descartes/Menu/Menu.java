@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 
 import eu.ensg.jpo.explor_descartes.AccueilActivity;
+import eu.ensg.jpo.explor_descartes.GestionCompte;
 import eu.ensg.jpo.explor_descartes.NavigationActivity;
 import eu.ensg.jpo.explor_descartes.PlanningActivity;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
@@ -58,6 +59,12 @@ public class Menu {
     public void openSatisfactionActivity() {
         // Create intent
         Intent intent = new Intent(con, SatisfactionActivity.class);
+        // Start activity
+        con.startActivity(intent);
+    }
+    public void openGestionCompte() {
+        // Create intent
+        Intent intent = new Intent(con, GestionCompte.class);
         // Start activity
         con.startActivity(intent);
     }
