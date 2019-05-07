@@ -72,6 +72,7 @@ public class PictureDAO {
 
                 InputStream inputStream = response.body().byteStream();
                 final Bitmap image = BitmapFactory.decodeStream(inputStream);
+                inputStream.close();
 
                 if (image != null){
                     // On affiche l'image correspondante

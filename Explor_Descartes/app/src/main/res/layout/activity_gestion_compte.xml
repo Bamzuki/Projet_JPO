@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFF"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="148dp"
+        android:layout_height="35dp"
+        android:layout_marginTop="16dp"
+        android:text="Gestion du Compte"
+        android:textColor="@color/black_overlay"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="121dp" />
+
+    <Button
+        android:id="@+id/ModifierPerso"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modifier les Données Personnelles"
+        tools:layout_editor_absoluteX="63dp"
+        tools:layout_editor_absoluteY="143dp" />
+
+    <Button
+        android:id="@+id/ModifierMdp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modifier le mot de passe"
+        tools:layout_editor_absoluteX="88dp"
+        tools:layout_editor_absoluteY="270dp" />
+
+    <Button
+        android:id="@+id/Deconnexion"
+        style="@style/Widget.AppCompat.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Se déconnecter"
+        tools:layout_editor_absoluteX="121dp"
+        tools:layout_editor_absoluteY="402dp" />
+</android.support.constraint.ConstraintLayout>

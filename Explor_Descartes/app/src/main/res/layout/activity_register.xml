@@ -163,7 +163,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_marginTop="10dp"
-        android:background="@color/colorAccent"
+        android:background="@color/colorPrimary"
         android:fontFamily="sans-serif"
         android:padding="5dp"
         android:text="@string/inscription_b"
@@ -203,7 +203,7 @@
             android:text="@string/connexionB"
             android:textAllCaps="false"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
 
     </LinearLayout>
