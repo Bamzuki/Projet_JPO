@@ -629,6 +629,15 @@ function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
   $pseudo   = str_replace("'", "''", $pseudo);
   $email    = str_replace("'", "''", $email);
   $mdp      = str_replace("'", "''", $mdp);
+  
+  if (!newPseudo($pseudo)){
+    return "Pseudo déjà utilisé !";
+  }
+  if (!newMail($email)){
+    return "Email déjà utilisé !";
+  }
+  
+  
   global $link;
   $requete = "UPDATE utilisateurs
               SET prenom = '" . $prenom . "', nom = '" . $nom . "', pseudo = '" . $pseudo . "', email = '" . $email . "', mdp = '" . $mdp . "', admin = '" . $admin ."'
