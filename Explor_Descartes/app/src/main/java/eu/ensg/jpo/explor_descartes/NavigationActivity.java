@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Color;
-import android.graphics.Point;
 import android.graphics.PointF;
 import android.graphics.Rect;
 import android.graphics.RectF;
@@ -16,6 +15,8 @@ import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import android.os.Bundle;
@@ -25,6 +26,7 @@ import android.support.annotation.NonNull;
 import com.mapbox.geojson.BoundingBox;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
+import com.mapbox.geojson.Point;
 import com.mapbox.mapboxsdk.Mapbox;
 import com.mapbox.mapboxsdk.annotations.BubbleLayout;
 import com.mapbox.mapboxsdk.geometry.LatLng;
@@ -73,6 +75,8 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAnchor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
 
 public class NavigationActivity extends template implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
 
@@ -154,8 +158,6 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                             setUpMarkerLayer(style);
                             setUpInfoWindowLayer(style);
 
-
-
                         }
 
                         // Ajout des listener
@@ -188,13 +190,16 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     }
 
     private void setUpImage(Style style){
-        style.addImage("star", BitmapFactory.decodeResource(this.getResources(), R.drawable.ic_star_15));
+        style.addImage("star", BitmapFactory.decodeResource(this.getResources(), R.drawable.star));
 
         System.out.println("SetUpImage");
     }
 
     private void setUpMarkerLayer(@NonNull Style loadedStyle) {
-        loadedStyle.addLayer(new SymbolLayer("MARKER_LAYER_ID", "GEOJSON_SOURCE_ID").withProperties(iconImage("star"),iconAllowOverlap(true)));
+        Float[] translationMarker = new Float[2];
+        translationMarker[0] = new Float(0);
+        translationMarker[1] = new Float(0);
+        loadedStyle.addLayer(new SymbolLayer("MARKER_LAYER_ID", "GEOJSON_SOURCE_ID").withProperties(iconImage("star"),iconAllowOverlap(true), iconTranslate(translationMarker), iconSize(0.7f)));
         System.out.println("SetUpMarkerLayer");
     }
 
@@ -202,7 +207,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         loadedStyle.addLayer(new SymbolLayer("CALLOUT_LAYER_ID", "GEOJSON_SOURCE_ID")
                 .withProperties(
                         /* show image with id title based on the value of the name feature property */
-                        iconImage("{name}"),
+                        iconImage("{nom}"),
 
                         /* set anchor of icon to bottom-left */
                         iconAnchor(ICON_ANCHOR_BOTTOM),
@@ -229,6 +234,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                         setFeatureSelectState(featureList.get(i), false);
                     } else {
                         setSelected(i);
+
                     }
                 }
             }
@@ -262,14 +268,13 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         }
     }
 
-    public void setImageGenResults(HashMap<String, Bitmap> imageMap) {
+    public void setImageGenResults(HashMap<String, View> viewMap, HashMap<String, Bitmap> imageMap) {
         if (mapboxMap != null) {
-            Style style = mapboxMap.getStyle();
-            if (style != null) {
-    // calling addImages is faster as separate addImage calls for each bitmap.
-                style.addImages(imageMap);
-            }
+            // calling addImages is faster as separate addImage calls for each bitmap.
+            mapboxMap.getStyle().addImages(imageMap);
         }
+        // need to store reference to views to be able to use them as hitboxes for click events.
+        this.viewMap = viewMap;
     }
 
     private static class GenerateViewIconTask extends AsyncTask<FeatureCollection, Void, HashMap<String, Bitmap>> {
@@ -290,6 +295,8 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         @SuppressWarnings("WrongThread")
         @Override
         protected HashMap<String, Bitmap> doInBackground(FeatureCollection... params) {
+
+
             NavigationActivity activity = activityRef.get();
             if (activity != null) {
                 HashMap<String, Bitmap> imagesMap = new HashMap<>();
@@ -306,9 +313,15 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                     TextView titleTextView = bubbleLayout.findViewById(R.id.title);
                     titleTextView.setText(name);
 
-                    String horaires = feature.getStringProperty("debut").substring(11,18) + " - " + feature.getStringProperty("fin").substring(11,18);
+                    String horaires = feature.getStringProperty("debut").substring(11,16) + " - " + feature.getStringProperty("fin").substring(11,16);
                     TextView descriptionTextView = bubbleLayout.findViewById(R.id.horaires);
                     descriptionTextView.setText(horaires);
+
+                    boolean favourite = feature.getBooleanProperty("favourite");
+                    ImageView imageView = (ImageView) bubbleLayout.findViewById(R.id.logoView);
+                    imageView.setImageResource(favourite ? R.drawable.star : R.drawable.star_stroked);
+
+
 
                     int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
                     bubbleLayout.measure(measureSpec, measureSpec);
@@ -318,10 +331,12 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                     bubbleLayout.setArrowPosition(measuredWidth / 2 - 5);
 
                     Bitmap bitmap = SymbolGenerator.generate(bubbleLayout);
+
                     imagesMap.put(name, bitmap);
                     viewMap.put(name, bubbleLayout);
-                }
 
+                }
+                System.out.println("Test 946 : " + viewMap.keySet());
                 return imagesMap;
             } else {
                 return null;
@@ -333,12 +348,11 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
             super.onPostExecute(bitmapHashMap);
             NavigationActivity activity = activityRef.get();
             if (activity != null && bitmapHashMap != null) {
-                activity.setImageGenResults(bitmapHashMap);
+                activity.setImageGenResults(viewMap, bitmapHashMap);
                 if (refreshSource) {
                     activity.refreshSource();
                 }
             }
-            Toast.makeText(activity, "OULALA", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -365,13 +379,15 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
             bitmap.eraseColor(Color.TRANSPARENT);
             Canvas canvas = new Canvas(bitmap);
             view.draw(canvas);
+            System.out.println("Window generated");
             return bitmap;
         }
     }
 
     private void handleClickCallout(Feature feature, PointF screenPoint, PointF symbolScreenPoint) {
-
-        View view = viewMap.get(feature.getStringProperty("title"));
+        System.out.println(feature.getStringProperty("nom"));
+        System.out.println(viewMap.keySet());
+        View view = viewMap.get(feature.getStringProperty("nom"));
         View textContainer = view.findViewById(R.id.text_container);
 
         // create hitbox for textView
@@ -389,17 +405,31 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
             // user clicked on text
             String callout = feature.getStringProperty("call-out");
             Toast.makeText(this, callout, Toast.LENGTH_LONG).show();
-        } /*else {
+        } else {
             // user clicked on icon
-            List<Feature> featureList = featureCollection.getFeatures();
+            List<Feature> featureList = featureCollection.features();
             for (int i = 0; i < featureList.size(); i++) {
-                if (featureList.get(i).getStringProperty(PROPERTY_TITLE).equals(feature.getStringProperty(PROPERTY_TITLE))) {
+                if (featureList.get(i).getStringProperty("nom").equals(feature.getStringProperty("nom"))) {
                     toggleFavourite(i);
                 }
             }
         }
-        */
     }
+
+    private void toggleFavourite(int index) {
+        Feature feature = featureCollection.features().get(index);
+        String title = feature.getStringProperty("nom");
+        boolean currentState = feature.getBooleanProperty("favourite");
+        feature.properties().addProperty("favourite", !currentState);
+        View view = viewMap.get(title);
+
+        ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
+        imageView.setImageResource(currentState ? R.drawable.star : R.drawable.star_stroked);
+        Bitmap bitmap = SymbolGenerator.generate(view);
+        this.mapboxMap.getStyle().addImage(title, bitmap);
+        refreshSource();
+    }
+
 
     /**
      * Initialize the Maps SDK's LocationComponent
@@ -488,7 +518,18 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     // Ajout de listener sur les batiments
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
-        handleClickIcon(mapboxMap.getProjection().toScreenLocation(point));/*
+        PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
+        List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, "CALLOUT_LAYER_ID");
+        if (!features.isEmpty()) {
+            // we received a click event on the callout layer
+            Feature feature = features.get(0);
+            PointF symbolScreenPoint = mapboxMap.getProjection().toScreenLocation(convertToLatLng(feature));
+            handleClickCallout(feature, screenPoint, symbolScreenPoint);
+        } else {
+            // we didn't find a click event on callout layer, try clicking maki layer
+            handleClickIcon(screenPoint);
+        }
+        /*
         PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
         RectF rectF = new RectF(pointf.x - 2, pointf.y - 2, pointf.x + 2, pointf.y + 2);
         for (Evenement favori : ListeObjets.listeFavoris){
@@ -513,6 +554,10 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         return false;
     }
 
+    private LatLng convertToLatLng(Feature feature) {
+        Point symbolPoint = (Point) feature.geometry();
+        return new LatLng(symbolPoint.latitude(), symbolPoint.longitude());
+    }
 
 
     private static class MainActivityLocationCallback
