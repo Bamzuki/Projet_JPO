@@ -11,17 +11,18 @@
     <include layout="@layout/app_bar"/>
 
     <!--Grid contenant les images des établissements-->
-    <GridView
-        android:id="@+id/main_grid"
-        android:layout_marginTop="?attr/actionBarSize"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:numColumns="2"
-        android:horizontalSpacing="2dp"
-        android:verticalSpacing="2dp"/>
 
     <!--Menu des activités (à gauche)-->
+    <GridView
+        android:id="@+id/main_grid"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:gravity="center"
+        android:horizontalSpacing="2dp"
+        android:numColumns="2"
+        android:verticalSpacing="2dp" />
+
     <ListView
         android:id="@+id/leftMenuList"
         android:layout_width="fill_parent"

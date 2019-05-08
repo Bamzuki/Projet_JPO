@@ -13,18 +13,20 @@ import android.widget.Toast;
 import android.widget.ToggleButton;
 
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
 public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
 
-    private Context context;
+    private EcoleActivity context;
     private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHashMap;
+    private HashMap<String, List<Evenement>> listHashMap;
 
-    public ExpandableListAdapterEvenement(Context context, List<String> listDataHeader, HashMap<String, List<String>> listHashMap) {
+    public ExpandableListAdapterEvenement(EcoleActivity context, List<String> listDataHeader, HashMap<String, List<Evenement>> listHashMap) {
         this.context = context;
         this.listDataHeader = listDataHeader;
         this.listHashMap = listHashMap;
@@ -80,34 +82,50 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
     }
 
     @Override
-    public View getChildView(int groupPosition, final int childPosition, boolean isLastChild, final View convertView, ViewGroup parent) {
-        final String childText = (String)getChild(groupPosition, childPosition);
+    public View getChildView(final int groupPosition, final int childPosition, boolean isLastChild, View convertView, ViewGroup parent) {
+        Evenement child = (Evenement)getChild(groupPosition, childPosition);
+        final String childText = child.getNom();
         if (convertView == null){
             LayoutInflater inflater = (LayoutInflater)this.context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             convertView = inflater.inflate(R.layout.liste_evenement,null);
         }
         final TextView txtListChild = (TextView)convertView.findViewById(R.id.contenu_objets);
         txtListChild.setText(childText);
+        if (ListeObjets.visiteur == null){
+            txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+        }
+        else {
+            ArrayList<Integer> favoris = ListeObjets.visiteur.getListeFavoris();
+            int id = listHashMap.get(listDataHeader.get(0)).get(childPosition).getId();
+            if (favoris.contains(id)) {
+                Drawable img = context.getDrawable(android.R.drawable.star_big_on);
+                txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
+            }
+            else {
+                Drawable img = context.getDrawable(android.R.drawable.star_big_off);
+                txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
+            }
+        }
         txtListChild.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (ListeObjets.visiteur == null){
-                    ToggleButton etat = (ToggleButton) convertView.findViewById(R.id.etat);
-                    if ( ! etat.isChecked()){
+                if (ListeObjets.visiteur != null){
+                    Boolean tag = Boolean.valueOf(v.getTag().toString());
+                    ArrayList<Integer> favoris = ListeObjets.visiteur.getListeFavoris();
+                    int id = listHashMap.get(listDataHeader.get(0)).get(childPosition).getId();
+                    if ( !favoris.contains(id) ){
                         Drawable img = context.getDrawable(android.R.drawable.star_big_on);
                         txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
-/*
                         VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur));
-                        visiteurDAO.ajouterFavori(new EcoleActivity(), ListeObjets.visiteur, childPosition);
-*/
+                        visiteurDAO.ajouterFavori(context, ListeObjets.visiteur, id);
+                        v.setTag("true");
                     }
                     else {
                         Drawable img = context.getDrawable(android.R.drawable.star_big_off);
                         txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
-/*
                         VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur));
-                        visiteurDAO.supprimerFavori(new EcoleActivity(), ListeObjets.visiteur, childPosition);
-*/
+                        visiteurDAO.supprimerFavori(context, ListeObjets.visiteur, id);
+                        v.setTag("false");
                     }
                 }
                 else {
@@ -125,13 +143,13 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
 
     public Context getContext() { return context; }
 
-    public void setContext(Context context) { this.context = context; }
+    public void setContext(EcoleActivity context) { this.context = context; }
 
     public List<String> getListDataHeader() { return listDataHeader; }
 
     public void setListDataHeader(List<String> listDataHeader) { this.listDataHeader = listDataHeader; }
 
-    public HashMap<String, List<String>> getListHashMap() { return listHashMap; }
+    public HashMap<String, List<Evenement>> getListHashMap() { return listHashMap; }
 
-    public void setListHashMap(HashMap<String, List<String>> listHashMap) { this.listHashMap = listHashMap; }
+    public void setListHashMap(HashMap<String, List<Evenement>> listHashMap) { this.listHashMap = listHashMap; }
 }

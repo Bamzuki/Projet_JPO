@@ -33,6 +33,7 @@
 		// $uploadOk = 0;
 	// }
 	// les formats autorisés
+
 	if($imageFileType != "jpg" && $imageFileType != "JPG" && $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg" && $imageFileType != "JPEG" && $imageFileType != "gif" && $imageFileType != "GIF") {
 
 		$message = "Les images doivent etre au format: JPG, JPEG, PNG ou GIF.";
@@ -43,21 +44,21 @@
 	if ($uploadOk == 0) {
 		$message = "Erreur! impossible d'ajouter l'image.";
 		echo $message;
-
+		
 	// tt c'est bien passé
 	} else {
 		if (move_uploaded_file($_FILES["fileselect"]["tmp_name"], $target_file)) {
-
-
+			
+				
 				$message = "Image ajoutée avec succès.";
-
+					
 				echo $message;
 
 		} else {
 			$message = "Erreur inconnue! Merci de retenter l'ajout plus tard ou de contacter l'administrateur.";
 			echo $message;
 		}
-	}
-
-
+	} 
+	
+	
 	?>

@@ -67,4 +67,6 @@ public class PlanningActivity extends template implements Serializable {
     protected void llayout(){
         setLayout(R.layout.activity_planning);
     }
+
+
 }

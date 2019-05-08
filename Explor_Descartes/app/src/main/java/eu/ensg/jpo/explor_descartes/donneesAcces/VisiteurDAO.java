@@ -7,9 +7,11 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
+import eu.ensg.jpo.explor_descartes.EcoleActivity;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -200,7 +202,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         });
     }
 
-    public void ajouterFavori(final AppCompatActivity activity, Visiteur visiteur, int idFavoris){
+    public void ajouterFavori(final EcoleActivity activity, Visiteur visiteur, int idFavoris){
 
         // I - Ajout du favori sur l'application
         ListeObjets.visiteur.getListeFavoris().add(idFavoris);
@@ -221,7 +223,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, "Favoris ajouté !" , Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Favori ajouté !" , Toast.LENGTH_SHORT).show();
                     }
                 });
             }
@@ -230,14 +232,13 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 System.out.println("Echec de la connection !");
             }
         });
-
-
     }
 
     public void supprimerFavori(final AppCompatActivity activity, Visiteur visiteur, int idFavoris){
 
         // I - Suppression du favori sur l'application
-        ListeObjets.visiteur.getListeFavoris().remove(idFavoris);
+        System.out.println(ListeObjets.visiteur.getListeFavoris().indexOf(idFavoris));
+        ListeObjets.visiteur.getListeFavoris().remove(ListeObjets.visiteur.getListeFavoris().indexOf(idFavoris));
 
         // II - Suppression du favori dans la BDD
 
@@ -255,7 +256,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Toast.makeText(activity, "Favori supprimer !" , Toast.LENGTH_LONG).show();
+                        Toast.makeText(activity, "Favori supprimé !" , Toast.LENGTH_SHORT).show();
                     }
                 });
             }

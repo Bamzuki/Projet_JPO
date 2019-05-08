@@ -46,7 +46,7 @@ import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
-public class NavigationActivity extends AppCompatActivity implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
+public class NavigationActivity extends template implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
 
     // Variables needed to initialize a map
     private MapboxMap mapboxMap;
@@ -63,7 +63,6 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
 
         // Mapbox access token is configured here. This needs to be called either in your application
         // object or in the same activity which contains the mapview.
@@ -72,11 +71,20 @@ public class NavigationActivity extends AppCompatActivity implements OnMapReadyC
         // This contains the MapView in XML and needs to be called after the access token is configured.
         setContentView(R.layout.activity_navigation);
 
+        super.onCreate(savedInstanceState);
+        contentTemp();
+
         mapView = findViewById(R.id.mapView);
         mapView.onCreate(savedInstanceState);
         mapView.getMapAsync(this);
 
     }
+
+    @Override
+    protected void llayout(){
+        setLayout(R.layout.activity_navigation);
+    }
+
 
     @Override
     public void onMapReady(@NonNull final MapboxMap mapboxMap) {

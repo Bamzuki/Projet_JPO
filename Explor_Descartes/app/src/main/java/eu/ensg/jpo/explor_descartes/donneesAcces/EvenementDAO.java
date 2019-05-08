@@ -83,17 +83,11 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                 final ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.evenements);
 
                 final List<String> listDataHeader = new ArrayList<String>();
-                final HashMap<String, List<String>> listHashMap = new HashMap<>();
+                final HashMap<String, List<Evenement>> listHashMap = new HashMap<>();
 
                 listDataHeader.add("Evénements");
 
-                ArrayList<String> evenements = new ArrayList<>();
-
-                for (Evenement evenement : listeEvenement) {
-                    evenements.add(evenement.getNom());
-                }
-
-                listHashMap.put(listDataHeader.get(0), evenements);
+                listHashMap.put(listDataHeader.get(0), listeEvenement);
 
                 final ExpandableListAdapterEvenement listAdapterEvenement = new ExpandableListAdapterEvenement(activity, listDataHeader, listHashMap);
 
@@ -105,13 +99,12 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeightEvenement( parent, groupPosition);
+                                activity.setListViewHeightEvenement(parent, groupPosition);
                                 return false;
                             }
                         });
                     }
                 });
-
             }
 
             public void onFailure(Call call, IOException e) {

@@ -24,7 +24,6 @@ public class EcoleActivity extends AppCompatActivity {
     private ExpandableListAdapterEvenement listAdapterEvenement;
     private ExpandableListAdapterFormation listAdapterFormation;
     private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -80,8 +79,7 @@ public class EcoleActivity extends AppCompatActivity {
             if (((listView.isGroupExpanded(i)) && (i != group))
                     || ((!listView.isGroupExpanded(i)) && (i == group))) {
                 for (int j = 0; j < listAdapterEvenement.getChildrenCount(i); j++) {
-                    View listItem = listAdapterEvenement.getChildView(i, j, false, null,
-                            listView);
+                    View listItem = listAdapterEvenement.getChildView(i, j, false, null, listView);
                     listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
 
                     totalHeight += listItem.getMeasuredHeight();
@@ -167,13 +165,6 @@ public class EcoleActivity extends AppCompatActivity {
     }
 
     public void setListDataHeader(List<String> listDataHeader) { this.listDataHeader = listDataHeader; }
-
-    public HashMap<String, List<String>> getListHashMap() {
-        return listHashMap;
-    }
-
-    public void setListHashMap(HashMap<String, List<String>> listHashMap) { this.listHashMap = listHashMap; }
-
 
 
 
