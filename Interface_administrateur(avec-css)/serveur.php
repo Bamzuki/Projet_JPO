@@ -252,7 +252,7 @@ function getListeSatisfaction(){
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '",  "question_2":"' . $row[2] . '",  "question_3":"' . $row[3] . '",  "question_4":"' . $row[4] . '", "question_5":"' . $row[5] . '", "question_6":"' . $row[6] . '", "question_7":"' . $row[7] . '", "question_8":"' . $row[8] . '", "question_9":"' . $row[9] . '", "question_10":"' . $row[10] . '", "question_11":"' . $row[11] . '", "question_12":"' . $row[12] . '", "question_13":"' . $row[13] . '", "question_14":"' . $row[14] . '", "question_15":"' . $row[15] . '", "question_16":"' . $row[16] . '", "question_17":"' . $row[17] . '", "question_18":"' . $row[18] . '", "question_19":"' . $row[19] . '", "question_20":"' . $row[20] . '"}';
+      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '",  "question_2":"' . $row[2] . '",  "question_3":"' . $row[3] . '",  "question_4":"' . $row[4] . '", "question_5":"' . $row[5] . '", "question_6":"' . $row[6] . '", "question_7":"' . $row[7] . '", "question_8":"' . $row[8] . '", "question_9":"' . $row[9] . '", "question_10":"' . $row[10] . '", "question_11":"' . $row[11] . '", "question_12":"' . $row[12] . '", "question_13":"' . $row[13] . '", "question_14":"' . $row[14] . '", "question_15":"' . $row[15] . '", "question_16":"' . $row[16] . '", "question_17":"' . $row[17] . '", "question_18":"' . $row[18] . '", "question_19":"' . $row[19] . '", "question_20":"' . $row[20] . '", "question_20":"' . $row[21] . '", "question_20":"' . $row[22] . '", "question_20":"' . $row[23] . '"}';
       $response = $response . $utilisateur . ', ';
     }
   }
@@ -265,26 +265,6 @@ function getListeSatisfaction(){
 }
 
 
-function getListeQuestionnaire(){
-  //Cette fonction renvoie la liste des réponses aux questions posées au lancement de l'application 
-  global $link;
-  $requete = "SELECT id, question_1, question_2, question_3 FROM questionnaire  ORDER BY id";
-
-  $result = pg_query($link, $requete);
-  if ($result) {
-    $response = '[';
-    while ($row = pg_fetch_row($result)) {
-      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '", "question_2":"' . $row[2] . '", "question_3":"' . $row[3] . '"}';
-      $response = $response . $utilisateur . ', ';
-    }
-  }
-  $response = substr($response, 0, -2) . ']';
-  if (strlen($response) < 2){
-    $response ="[]";
-  }
-
-  return $response;
-}
 
 function getListeFAQ(){
   //Cette fonction renvoie la liste des questions et des réponses de la FAQ

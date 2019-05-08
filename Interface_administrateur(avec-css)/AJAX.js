@@ -618,60 +618,6 @@ function getListeEvenement(){
   ajax.send(request);
 }
 
-function getListeQuestionnaire(){
-  //Récupération des réponses aux questions du questionnaire en entrée de l'application
-  var request = "request=listeQuestionnaire"
-
- 
-  var ajax    = new XMLHttpRequest();
-  ajax.open('GET', 'serveur.php/?'+request);
-  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-  ajax.addEventListener('load',  function () {
-    // Récupération des données :
-    listeQuestionnaire = JSON.parse(ajax.response);
-
-    // Remplissage des en-têtes du tableau
-    var tableau = document.getElementById("resultats_questionnaire");
-    tableau.innerHTML = "";
-    var ligne;
-    var element;
-    ligne = document.createElement("tr");
-    element = document.createElement("td");
-    element.innerHTML = "Comment avez-vous découvert le campus Descartes ?";
-    ligne.appendChild(element);
-    element = document.createElement("td");
-    element.innerHTML = "Dans quelle tranche d'âge vous situez-vous ?";
-    ligne.appendChild(element);
-    element = document.createElement("td");
-    element.innerHTML = "Quelle est votre formation actuelle ?";
-    ligne.appendChild(element);
-
-
-
-
-    tableau.appendChild(ligne);
-
-    //Remplissage du tableau avec les données de la BDD
-    for (var i = 0; i < listeQuestionnaire.length; i++){
-      ligne   = document.createElement("tr");
-      ligne.setAttribute("id", i);
-      element = document.createElement("td");
-      element.innerHTML = listeQuestionnaire[i].question_1;
-      ligne.appendChild(element);
-      element = document.createElement("td");
-      element.innerHTML = listeQuestionnaire[i].question_2;
-      ligne.appendChild(element);
-      element = document.createElement("td");
-      element.innerHTML = listeQuestionnaire[i].question_3;
-      ligne.appendChild(element);
-
-
-
-      tableau.appendChild(ligne);
-    }
-  });
-  ajax.send(request);
-}
 
 
 
@@ -726,6 +672,13 @@ function getListeSatisfaction(){
     element = document.createElement("td");
     element.innerHTML = "Question 11";
     ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 12";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 13";
+    ligne.appendChild(element);
+
 
 
     tableau1.appendChild(ligne);
@@ -738,31 +691,33 @@ function getListeSatisfaction(){
     var element;
     ligne = document.createElement("tr");
     element = document.createElement("td");
-    element.innerHTML = "Question 12";
+    element.innerHTML = "Question 1";
+    ligne.appendChild(element);
+    element.innerHTML = "Question 2";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 13";
+    element.innerHTML = "Question 3";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 14";
+    element.innerHTML = "Question 4";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 15";
+    element.innerHTML = "Question 5";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 16";
+    element.innerHTML = "Question 6";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 17";
+    element.innerHTML = "Question 7";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 18";
-    ligne.appendChild(element);
-	 element = document.createElement("td");
-    element.innerHTML = "Question 19";
+    element.innerHTML = "Question 8";
     ligne.appendChild(element);
     element = document.createElement("td");
-    element.innerHTML = "Question 20";
+    element.innerHTML = "Question 9";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 10";
     ligne.appendChild(element);
 
 
@@ -785,10 +740,10 @@ function getListeSatisfaction(){
       element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_4;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_5;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_6;
       ligne.appendChild(element);
       element = document.createElement("td");
@@ -800,11 +755,17 @@ function getListeSatisfaction(){
       element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_9;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_10;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_11;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_12;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_13;
       ligne.appendChild(element);
 	
 
@@ -814,33 +775,35 @@ function getListeSatisfaction(){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
       element = document.createElement("td");
-      element.innerHTML = listeSatisfaction[i].question_12;
-      ligne.appendChild(element);
-      element = document.createElement("td");
-      element.innerHTML = listeSatisfaction[i].question_13;
-      ligne.appendChild(element);
-      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_14;
       ligne.appendChild(element);
       element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_15;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_16;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_17;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_18;
       ligne.appendChild(element);
-	    element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_19;
       ligne.appendChild(element);
-	  element = document.createElement("td");
+      element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_20;
       ligne.appendChild(element);
-    
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_21;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_22;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_23;
+      ligne.appendChild(element);
 
       tableau2.appendChild(ligne);
     }
@@ -2071,7 +2034,6 @@ function deleteFAQ(i) {
 //On va ensuite appeler les fonctions dont on a besoin au démarrage des différentes pages
 
 //On appelle les fonctions pour la page consacrée aux différents questionnaire
-getListeQuestionnaire();
 getListeSatisfaction();
 getListeFAQ_admin();
 getListeFAQ_client();
