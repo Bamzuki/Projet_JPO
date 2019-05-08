@@ -7,6 +7,7 @@ import eu.ensg.jpo.explor_descartes.AccueilActivity;
 import eu.ensg.jpo.explor_descartes.NavigationActivity;
 import eu.ensg.jpo.explor_descartes.PlanningActivity;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
+import eu.ensg.jpo.explor_descartes.SatisfactionActivity;
 import eu.ensg.jpo.explor_descartes.SettingsActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
 
@@ -51,6 +52,12 @@ public class Menu {
     public void openPlanningActivity() {
         // Create intent
         Intent intent = new Intent(con, PlanningActivity.class);
+        // Start activity
+        con.startActivity(intent);
+    }
+    public void openSatisfactionActivity() {
+        // Create intent
+        Intent intent = new Intent(con, SatisfactionActivity.class);
         // Start activity
         con.startActivity(intent);
     }

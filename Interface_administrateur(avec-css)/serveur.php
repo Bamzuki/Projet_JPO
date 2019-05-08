@@ -243,8 +243,31 @@ function getListeUtilisateurs($filtreAdmin){
   return $response;
 }
 
+function getListeSatisfaction(){
+  //Cette fonction renvoie la liste des réponses aux questions du questionnaire de satisfaction
+  global $link;
+  $requete = "SELECT * FROM satisfaction  ORDER BY id";
+
+  $result = pg_query($link, $requete);
+  if ($result) {
+    $response = '[';
+    while ($row = pg_fetch_row($result)) {
+      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '",  "question_2":"' . $row[2] . '",  "question_3":"' . $row[3] . '",  "question_4":"' . $row[4] . '", "question_5":"' . $row[5] . '", "question_6":"' . $row[6] . '", "question_7":"' . $row[7] . '", "question_8":"' . $row[8] . '", "question_9":"' . $row[9] . '", "question_10":"' . $row[10] . '", "question_11":"' . $row[11] . '", "question_12":"' . $row[12] . '", "question_13":"' . $row[13] . '", "question_14":"' . $row[14] . '", "question_15":"' . $row[15] . '", "question_16":"' . $row[16] . '", "question_17":"' . $row[17] . '", "question_18":"' . $row[18] . '", "question_19":"' . $row[19] . '", "question_20":"' . $row[20] . '", "question_20":"' . $row[21] . '", "question_20":"' . $row[22] . '", "question_20":"' . $row[23] . '"}';
+      $response = $response . $utilisateur . ', ';
+    }
+  }
+  $response = substr($response, 0, -2) . ']';
+  if (strlen($response) < 2){
+    $response ="[]";
+  }
+
+  return $response;
+}
+
+
+
 function getListeFAQ(){
-  //Cette fonction renvoie la liste des utilisateurs
+  //Cette fonction renvoie la liste des questions et des réponses de la FAQ
   global $link;
   $requete = "SELECT id, question, reponse FROM faq";
   $result = pg_query($link, $requete);
@@ -371,6 +394,21 @@ function saveEcole ($nom, $image, $adresse, $site, $description){
     return "La sauvegarde a échouée";
   }
 }
+function saveQuestionnaire ($question_1,$question_2,$question_3){
+  //Cette fonction enregistre une nouvelle question  dans la base de données
+  $question_1 = str_replace("'", "''", $question_1);
+  $question_2 = str_replace("'", "''", $question_2);
+  $question_3 = str_replace("'", "''", $question_3);
+  global $link;
+  $requete = "INSERT INTO questionnaire (question_1, question_2,question_3) VALUES ('" . $question_1 . "','" . $question_2 . "','" . $question_3 . "')";
+
+  $result = pg_query($link, $requete);
+  if ($result){
+    return "Sauvegarde réussie !";
+  }else{
+    return "La sauvegarde a échouée";
+  }
+}
 function saveBatiment ($nom, $fonction, $lat, $lng){
   //Cette fonction enregistre un nouveau batiment dans la base de données
   $nom = str_replace("'", "''", $nom);
@@ -385,7 +423,7 @@ function saveBatiment ($nom, $fonction, $lat, $lng){
   }
 }
 function saveFiliere ($nom){
-  //Cette fonction enregistre un nouveau batiment dans la base de données
+  //Cette fonction enregistre une nouvelle filière dans la base de données
   $nom = str_replace("'", "''", $nom);
   global $link;
   $requete = "INSERT INTO filieres (nom) VALUES ('" . $nom . "')";
@@ -443,7 +481,7 @@ function saveUtilisateur ($prenom, $nom, $pseudo, $email, $mdp, $admin){
 }
 
 function saveEvenement ($nom, $debut, $fin, $ecole, $batiment){
-  //Cette fonction enregistre un nouvel utilisateur dans la base de données
+  //Cette fonction enregistre un nouvel évènement dans la base de données
   $nom = str_replace("'", "''", $nom);
   // Détermination des id des objets
   $id_ecole    = getIdEcole($ecole);
@@ -459,7 +497,7 @@ function saveEvenement ($nom, $debut, $fin, $ecole, $batiment){
 }
 
 function saveFAQ ($question,$reponse){
-  //Cette fonction enregistre un nouveau batiment dans la base de données
+  //Cette fonction enregistre une nouvelle question et une nouvelle réponse de la FAQ dans la base de données
   $question = str_replace("'", "''", $question);
   $reponse = str_replace("'", "''", $reponse);
   global $link;
@@ -543,7 +581,7 @@ function changeFormation ($id, $nom, $niveau, $ecole, $batiment, $filiere){
   }
 }
 function changeEvenement ($id, $nom, $debut, $fin, $id_ecole, $id_batiment){
-  //Cette fonction modifie une formation déjà existante dans la base de données
+  //Cette fonction modifie un évènement déjà existant dans la base de données
   $nom      = str_replace("'", "''", $nom);
   $debut  = str_replace("'", "''", $debut);
   $fin    = str_replace("'", "''", $fin);
@@ -571,6 +609,15 @@ function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
   $pseudo   = str_replace("'", "''", $pseudo);
   $email    = str_replace("'", "''", $email);
   $mdp      = str_replace("'", "''", $mdp);
+  
+  if (!newPseudo($pseudo)){
+    return "Pseudo déjà utilisé !";
+  }
+  if (!newMail($email)){
+    return "Email déjà utilisé !";
+  }
+  
+  
   global $link;
   $requete = "UPDATE utilisateurs
               SET prenom = '" . $prenom . "', nom = '" . $nom . "', pseudo = '" . $pseudo . "', email = '" . $email . "', mdp = '" . $mdp . "', admin = '" . $admin ."'
@@ -585,7 +632,7 @@ function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
 
 
 function changeFAQ ($id, $question, $reponse){
-  //Cette fonction modifie une formation déjà existante dans la base de données
+  //Cette fonction modifie une question et/ou une réponse de la FAQ déjà existante(s) dans la base de données
   $question      = str_replace("'", "''", $question);
   $reponse   = str_replace("'", "''", $reponse);
 
@@ -652,7 +699,7 @@ function deleteFormation ($id){
   }
 }
 function deleteUtilisateur ($id){
-  //Cette fonction supprime un utlisateru dans la base de données
+  //Cette fonction supprime un utlisateur dans la base de données
   global $link;
   $requete = "DELETE FROM utilisateurs
               WHERE id=" . $id;
@@ -664,7 +711,7 @@ function deleteUtilisateur ($id){
   }
 }
 function deleteEvenement ($id){
-  //Cette fonction supprime un utlisateru dans la base de données
+  //Cette fonction supprime un évènement dans la base de données
   global $link;
   $requete = "DELETE FROM evenements
               WHERE id=" . $id;
@@ -677,7 +724,7 @@ function deleteEvenement ($id){
 }
 
 function deleteFAQ($id){
-  //Cette fonction supprime une école dans la base de données
+  //Cette fonction supprime une question et une réponse de la FAQ dans la base de données
   global $link;
   $requete = "DELETE FROM faq
               WHERE id=" . $id;
@@ -710,6 +757,7 @@ function supprimerFavori($idUtilisateur, $idFavoris){
     return "Suppression du favori réussi !";
   }
 }
+
 
 // II - Requêtes :
 // II.1 Requêtes GET :
@@ -791,6 +839,13 @@ if (isset($_GET['request']) && $_GET['request'] == "listeFAQ"){
   echo getListeFAQ();
 }
 
+if (isset($_GET['request']) && $_GET['request'] == "listeSatisfaction"){
+  echo getListeSatisfaction();
+}
+if (isset($_GET['request']) && $_GET['request'] == "listeQuestionnaire"){
+  echo getListeQuestionnaire();
+}
+
 if (isset($_GET['request']) && $_GET['request'] == "batiment"){
   $id = $_GET['id'];
   echo getBatimentById($id);
@@ -854,6 +909,13 @@ if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
   $id_ecole    = $_GET['id_ecole'];
   $id_batiment     = $_GET['id_batiment'];
   echo saveEvenement($nom, $debut, $fin, $id_ecole, $id_batiment);
+}
+
+if (isset($_GET['request']) && $_GET['request'] == "saveQuestionnaire"){
+  $question_1   = $_GET['question_1'];
+  $question_2      = $_GET['question_2'];
+  $question_3  = $_GET['question_3'];
+  echo saveQuestionnaire($question_1, $question_2, $question_3);
 }
 
 

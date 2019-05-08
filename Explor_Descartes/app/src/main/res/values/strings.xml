@@ -46,6 +46,7 @@
     <string name="user_location_permission_not_granted">Localisation non permise</string>
 
     <!-- Ressources relatives à la connexion à la base de données-->
+    <string name="url_serveur">http://82.229.248.34/</string>
     <string name="url_serveur_ecoles">http://82.229.248.34/serveur.php/</string>
 
     <!-- Ressources relatives aux réglages -->
@@ -132,8 +133,75 @@
     <string name="adresseEcole">Adresse de l\'école</string>
     <string name="descriptionEcole">Description de l\'école</string>
     <string name="descriptif">Quelques mots sur l\'école</string>
+    <string name="favori">Mettre en favori</string>
     <string name="title_activity_planning">PlanningActivity</string>
     <string name="title_activity_template">template</string>
+    <string name="menu">menu</string>
+    <string name="favoris">Favoris</string>
+    <string name="notifications">Notifications</string>
+    <string name="planning">Planning</string>
+
+    <!-- Ressources relatives à activity_satisfaction-->
+    <string name="questionnaire_satisfaction">Questionnaire de satisfaction</string>
+    <string name="application">- Application</string>
+    <string name="appQ1">1) Pensez-vous que cette application vous ait été utile ?</string>
+    <string name="appQ2">2) Comment avez-vous découvert l’existence de cette application ?</string>
+    <string name="appQ3">3) Comment vous êtes-vous connectés ?</string>
+    <string name="appQ4">4) Avez-vous téléchargé cette application avant ou pendant la JP0 ?</string>
+    <string name="appQ5">5) Avez-vous planifié votre JPO à l’avance ? Si oui, avez-vous utilisé l’application ?</string>
+    <string name="appQ6">6) Les notifications vous ont-elles été utiles ?</string>
+    <string name="appQ7">7) Etes-vous globalement satisfaits du panel de fonctionnalités de l’application ?</string>
+    <string name="appQ8">8) Avez-vous des suggestions de nouvelles fonctionnalités à implémenter ? Si oui, lesquelles ?</string>
+    <string name="appQ9">9) Pensez-vous que la fonctionnalité de guidage et de géolocalisation soit pertinente ?</string>
+    <string name="appQ10">10) Pensez-vous que la fonctionnalité de planning soit pertinente ?</string>
+    <string name="appQ11">11) Pensez-vous que le fait d’indiquer les sites de restauration soit pertinent ?</string>
+    <string name="appQ12">12) Pensez-vous que la fonctionnalité de gestion des favoris soit pertinente ?</string>
+    <string name="appQ13">13) Recommanderiez-vous l’application pour les élèves des années suivantes ?</string>
+    <string name="jpoQ1">1) Comment avez-vous découvert le campus Descartes ?</string>
+    <string name="jpoQ2">2) Dans quelle tranche d\'âge vous situez-vous ?</string>
+    <string name="jpoQ3">3) Quelle est votre formation actuelle ?</string>
+    <string name="jpoQ4">4) Par quelles formations étiez-vous particulièrement intéressés ?</string>
+    <string name="jpoQ5">5) Quelles écoles aviez-vous prévu de visiter ?</string>
+    <string name="jpoQ6">6) Quelles écoles avez-vous visité lors de la JPO ?</string>
+    <string name="jpoQ7">7) Les écoles visitées vous ont-elles convaincu ?</string>
+    <string name="jpoQ8">8) Pensez-vous vous inscrire dans l’une des écoles du campus Descartes l’année prochaine ? Si oui, laquelle ?</string>
+    <string name="jpoQ9">9) Avez-vous été satisfaits par l’organisation de la JPO ?</string>
+    <string name="jpoQ10">10) Avez-vous trouvé de quoi vous restaurer lors du déjeuner ?</string>
+
+    <string name="oui">Oui</string>
+    <string name="non">Non</string>
+    <string name="viaFacebook">Avec un compte Facebook</string>
+    <string name="pendant">Pendant</string>
+    <string name="oui_avec">Oui avec l\'application</string>
+    <string name="oui_sans">Oui sans l\'application</string>
+    <string name="google_store">Google Store</string>
+    <string name="autre">Autre :</string>
+    <string name="via_instagram">Avec un compte Instagram</string>
+    <string name="via_google">Avec un compte Google</string>
+    <string name="via_mail">Avec une adresse mail</string>
+    <string name="suggestions">Suggestions</string>
+    <string name="precisez">Précisez</string>
+    <string name="avant">Avant</string>
+    <string name="non_connecté">Vous ne vous êtes pas connectés</string>
+    <string name="jpo">- JPO</string>
+    <string name="internet">Internet</string>
+    <string name="prospectus">Prospectus</string>
+    <string name="bouche_oreille">Bouche-à-oreille</string>
+    <string name="moins15">Moins de 15 ans</string>
+    <string name="cfa_descartes">CFA Descartes</string>
+    <string name="compagnon_du_devoir">Compagnon du devoir</string>
+    <string name="entre_15_25">Entre 15 et 25 ans</string>
+    <string name="reseaux_sociaux">Réseaux sociaux</string>
+    <string name="tres_satisfaisant">Très satisfaisant</string>
+    <string name="satisfaisant">Satisfaisant</string>
+    <string name="a_ameliorer">A améliorer</string>
+    <string name="non_satisfaisant">Non satisfaisant</string>
+    <string name="pre_bac">Pré-BAC</string>
+    <string name="prepa">Classe préparatoire</string>
+    <string name="licence">Licence</string>
+    <string name="master">Master</string>
+    <string name="inge_commerce">Ecole d\'ingénieur / Ecole de commerce</string>
+    <string name="bts_dut_deust">BTS/DUT/DEUST</string>
 
 
 </resources>

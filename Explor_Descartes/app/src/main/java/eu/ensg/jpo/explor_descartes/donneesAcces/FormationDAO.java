@@ -2,6 +2,7 @@ package eu.ensg.jpo.explor_descartes.donneesAcces;
 
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -67,6 +68,7 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
     }
 
     public void afficherFormation(final EcoleActivity activity){
+
         // Construction de la requete
         String url = this.urlServeur + "?request=listeFormations";
         String donnees = "&&filtreEcole=" + activity.getEcole().getNom();
@@ -80,39 +82,40 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
                 Type listType = new TypeToken<ArrayList<Formation>>(){}.getType();
                 ArrayList<Formation> listeFormation = new Gson().fromJson(response.body().string(), listType);
 
-                final ExpandableListView listView = (ExpandableListView)activity.findViewById(R.id.liste_extensions);
+                final ExpandableListView listView = (ExpandableListView)activity.findViewById(R.id.formations);
 
-                List<String> listDataHeader = activity.getListDataHeader();
-                HashMap<String, List<String>> listHashMap =activity.getListHashMap();
-                ArrayList<String> formations = new ArrayList<>();
+                final List<String> listDataHeader = new ArrayList<String>();
+                final HashMap<String, List<String>> listHashMap = new HashMap<>();
 
                 listDataHeader.add("Formations");
+
+                ArrayList<String> formations = new ArrayList<>();
 
                 for (Formation formation : listeFormation) {
                     formations.add(formation.getNom());
                 }
 
-                listHashMap.put(listDataHeader.get(listDataHeader.size()-1), formations);
+                 listHashMap.put(listDataHeader.get(0), formations);
+
+                System.out.println("FormationDAO:" + listHashMap);
 
                 final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
-                System.out.print("listAdapter: " + listAdapter);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listView.setAdapter(listAdapter);
-                        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
+                        listView.setAdapter(listAdapter);
+
+                        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
-                            public boolean onGroupClick(ExpandableListView parent, View v,
-                                                        int groupPosition, long id) {
+                            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                                 activity.setListViewHeight(parent, groupPosition);
                                 return false;
                             }
                         });
                     }
                 });
-
             }
 
             public void onFailure(Call call, IOException e) {

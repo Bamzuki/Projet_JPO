@@ -1,47 +1,69 @@
 package eu.ensg.jpo.explor_descartes;
 
-import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
-import java.util.Arrays;
+import java.util.ArrayList;
 
-import eu.ensg.jpo.explor_descartes.Menu.CustomAdapter;
+import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
+import eu.ensg.jpo.explor_descartes.GridView.ImageEcole;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
 public class AccueilActivity extends template {
-    private String ecoles;
-    private String[] name;
-    private int img[];
-    private Context contt=this;
-    private CustomAdapter cl1;
-    private GridView gv;
-
-
+    private GridView gridView;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        gv = (GridView) findViewById(R.id.main_grid);
         contentTemp();
+
+        gridView = (GridView) findViewById(R.id.main_grid);
+        GridViewAdapter gridAdapter = new GridViewAdapter(this, this, R.layout.grid_item_layout, getListImageEcoles());
+        gridView.setAdapter(gridAdapter);
+        //Ajout de l'event listener :
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                ImageEcole item = (ImageEcole) parent.getItemAtPosition(position);
+                //Create intent
+                Intent intent = new Intent(AccueilActivity.this, EcoleActivity.class);
+                ListeObjets.ecoleSelectionnee = item.getEcole();
+
+                //Start details activity
+                startActivity(intent);
+            }
+        });
+
     }
 
-    @Override
-    protected void contentTemp(){
-        ecoles="ENSG,CFA Decartes,Compagnons du devoir,ESIEE,IUT,UPEM,ESO Paris";
-        name=ecoles.split(",");
-        Arrays.sort(name);
-        img= new int[]{R.drawable.icone_ensg,R.drawable.icone_cfa,R.drawable.icone_compagnon,
-                R.drawable.icone_esiee,R.drawable.icone_iut,R.drawable.icone_upem,
-                R.drawable.icone_eso3};
-        Arrays.sort(img);
+    private ArrayList<ImageEcole> getListImageEcoles() {
 
-        cl1=new CustomAdapter(name,contt,img);
-        gv.setAdapter(cl1);
+
+        final ArrayList<ImageEcole> imageEcoles = new ArrayList<>();
+        for (Ecole ecole : ListeObjets.listeEcole) {
+            ImageEcole imageEcole = new ImageEcole(ecole.getNom(), ecole);
+            imageEcoles.add(imageEcole);
+        }
+        return imageEcoles;
     }
+
 
     @Override
     protected void llayout(){
-        setLayout(R.layout.activity_accueil);
+        setLayout(R.layout.activity_planning);
     }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        GridViewAdapter adapter = (GridViewAdapter) this.gridView.getAdapter();
+        for (ImageEcole imageEcole : adapter.getData()){
+            imageEcole.addPicture(this, adapter, getString(R.string.url_serveur));
+        }
+
+
+    }
+
 }

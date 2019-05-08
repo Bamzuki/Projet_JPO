@@ -19,7 +19,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.Menu.FavorisFragment;
@@ -104,7 +108,11 @@ public class template extends AppCompatActivity {
         });
 
         // Appel de la méthode servant à récupérer les données
-        getData();
+        try {
+            getData();
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
     }
 
     class ViewPagerAdapter extends FragmentPagerAdapter {
@@ -149,9 +157,19 @@ public class template extends AppCompatActivity {
     /*
     Méthode pour stocker et récupérer les données
      */
-    public void getData() {
-        menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU";
-        menulist = menul.split(",");
+    public void getData() throws ParseException {
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date date = sdf.parse(ListeObjets.dateJPO);
+
+        if (new Date().after(date)) {
+            menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU,Profil,Formulaire de satisfaction,";
+            menulist = menul.split(",");
+        }
+
+        else {
+            menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU,Profil";
+            menulist = menul.split(",");
+        }
 
         final ArrayAdapter<String> adapterLeft = new ArrayAdapter<>(this, R.layout.textcenter, R.id.textItem, menulist);
         drawer_left.setAdapter(adapterLeft);
@@ -169,6 +187,9 @@ public class template extends AppCompatActivity {
                 }
                 if (pos == 4) {
                     menuc.openSettingsActivity();
+                }
+                if (pos == 8) {
+                    menuc.openSatisfactionActivity();
                 }
             }
         });

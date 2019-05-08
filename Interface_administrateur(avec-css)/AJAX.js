@@ -1,3 +1,4 @@
+//Ensemble des listes permettant de stocker les variables à récupérer dans les BDD
 var listeFormations = [];
 var listeFilieres = [];
 var listeBatiments = [];
@@ -5,6 +6,9 @@ var listeEcoles = [];
 var listeUtilisateurs=[];
 var listeEvenements=[];
 var listeFAQ=[];
+var listeSatisfaction=[];
+var listeQuestionnaire=[];
+
 
 function getListeNomNiveaux(idSelectNiveau){
   // Mise à jour de la liste des noms des niveaux depuis le serveur
@@ -103,7 +107,7 @@ function getListeNomFilieres(idSelectFiliere){
 
 
 function getListeNomFonctions(idSelectFonction){
-  // Mise à jour de la liste des noms des fonctions des ba depuis le serveur
+  // Mise à jour de la liste des noms des fonctions des batiments depuis le serveur
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=listeNomObjets&&nomTable=fonctions');
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -126,6 +130,8 @@ function getListeNomFonctions(idSelectFonction){
 
 
 function getListeFormation(){
+  //Récupération de la liste des formations
+
   // Mise à jour de la liste des formations depuis le serveur en fonction des filtres choisis
   var filtre_niveau    = document.getElementById("filtre-niveau").value;
   var filtre_ecole     = document.getElementById("filtre-ecole2").value;
@@ -151,7 +157,7 @@ function getListeFormation(){
     // Récupération des données :
     listeFormations = JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau = document.getElementById("resultats_formations");
     tableau.innerHTML="";
     var ligne;
@@ -180,7 +186,7 @@ function getListeFormation(){
     ligne.appendChild(element);
 
     tableau.appendChild(ligne);
-
+    //Remplissage du tableau avec les données de la BDD
     for (var i = 0; i < listeFormations.length; i++){
       ligne = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -222,7 +228,7 @@ function getListeFormation(){
 
 
 function getListeEcole(){
-
+  //Récupération de la liste des écoles
   var request = "request=listeEcoles";
   var ajax    = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?'+request);
@@ -231,7 +237,7 @@ function getListeEcole(){
     // Récupération des données :
     listeEcoles = JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau       = document.getElementById("resultats_ecoles");
     tableau.innerHTML = "";
     var ligne;
@@ -260,7 +266,7 @@ function getListeEcole(){
     ligne.appendChild(element);
 
     tableau.appendChild(ligne);
-
+    //Remplissage du tableau avec les données de la BDD
     for (var i = 0; i < listeEcoles.length; i++){
       ligne                     = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -302,6 +308,7 @@ function getListeEcole(){
 
 
 function getListeFiliere(){
+  //Récupération de la liste des filières
   var request = "request=listeFilieres"
   var ajax    = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?'+request);
@@ -310,7 +317,7 @@ function getListeFiliere(){
     // Récupération des données :
     listeFilieres= JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau = document.getElementById("resultats_filieres");
     tableau.innerHTML = "";
     var ligne;
@@ -327,7 +334,7 @@ function getListeFiliere(){
     ligne.appendChild(element);
 
     tableau.appendChild(ligne);
-
+    //Remplissage du tableau avec les données de la BDD
     for (var i = 0; i < listeFilieres.length; i++){
       ligne = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -357,6 +364,7 @@ function getListeFiliere(){
 
 
 function getListeBatiment(){
+//Récupération de la liste des batiments
   var request = "request=listeBatiments";
   var ajax    = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?'+request);
@@ -365,7 +373,7 @@ function getListeBatiment(){
     // Récupération des données :
     listeBatiments = JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau = document.getElementById("resultats_batiments");
     tableau.innerHTML = "";
     var ligne;
@@ -392,7 +400,7 @@ function getListeBatiment(){
 
     tableau.appendChild(ligne);
 
-
+    //Remplissage du tableau avec les données de la BDD
     for (var i = 0; i < listeBatiments.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -431,6 +439,7 @@ function getListeBatiment(){
 
 
 function getListeUtilisateur(){
+  //Récupération de la liste des utilisateurs
   var filtre_admin   = document.getElementById("filtre-admin").value;
   console.log(filtre_admin);
   var request = "request=listeUtilisateurs"
@@ -445,7 +454,7 @@ function getListeUtilisateur(){
     // Récupération des données :
     listeUtilisateurs = JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau = document.getElementById("resultats_utilisateurs");
     tableau.innerHTML = "";
     var ligne;
@@ -475,7 +484,7 @@ function getListeUtilisateur(){
 
     tableau.appendChild(ligne);
 
-
+    //Remplissage du tableau avec les données de la BDD
     for (var i = 0; i < listeUtilisateurs.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -517,10 +526,12 @@ function getListeUtilisateur(){
 
 
 function getListeEvenement(){
+  //Récupération de la liste des évènements
   var filtre_ecole  = document.getElementById("filtre-ecole4").value;
   var filtre_batiment   = document.getElementById("filtre-batiment4").value;
   console.log(filtre_ecole);
   console.log(filtre_batiment);
+  //Mise à jour à partir des filtres choisis
   var request = "request=listeEvenements"
   if (filtre_ecole != "*"){
     request += "&&filtreEcole=" + filtre_ecole;
@@ -536,7 +547,7 @@ function getListeEvenement(){
     // Récupération des données :
     listeEvenements = JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau = document.getElementById("resultats_evenements");
     tableau.innerHTML = "";
     var ligne;
@@ -567,7 +578,7 @@ function getListeEvenement(){
 
     tableau.appendChild(ligne);
 
-
+    //Remplissage du tableau avec les données de la BDD	
     for (var i = 0; i < listeEvenements.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -607,7 +618,206 @@ function getListeEvenement(){
   ajax.send(request);
 }
 
+
+
+
+function getListeSatisfaction(){
+  //Récupération des réponses au questionnaire de satisfaction
+  var request = "request=listeSatisfaction"
+
+ 
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    listeSatisfaction = JSON.parse(ajax.response);
+
+    // Remplissage des en-têtes du tableau 1
+    var tableau1 = document.getElementById("satisfaction-appli");
+    tableau1.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Question 1";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 2";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 3";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 4";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 5";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 6";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 7";
+    ligne.appendChild(element);
+	element = document.createElement("td");
+    element.innerHTML = "Question 8";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 9";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 10";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 11";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 12";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 13";
+    ligne.appendChild(element);
+
+
+
+    tableau1.appendChild(ligne);
+	
+	
+    // Remplissage des en-têtes du tableau 2
+    var tableau2 = document.getElementById("satisfaction-JPO");
+    tableau2.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Question 1";
+    ligne.appendChild(element);
+    element.innerHTML = "Question 2";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 3";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 4";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 5";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 6";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 7";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 8";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 9";
+    ligne.appendChild(element);
+    element = document.createElement("td");
+    element.innerHTML = "Question 10";
+    ligne.appendChild(element);
+
+
+    tableau2.appendChild(ligne);
+
+
+    //Remplissage des deux tableaux avec les éléments de la BDD
+    for (var i = 0; i < listeSatisfaction.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_1;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_2;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_3;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_4;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_5;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_6;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_7;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_8;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_9;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_10;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_11;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_12;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_13;
+      ligne.appendChild(element);
+	
+
+
+      tableau1.appendChild(ligne);
+
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_14;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_15;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_16;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_17;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_18;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_19;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_20;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_21;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_22;
+      ligne.appendChild(element);
+      element = document.createElement("td");
+      element.innerHTML = listeSatisfaction[i].question_23;
+      ligne.appendChild(element);
+
+      tableau2.appendChild(ligne);
+    }
+	
+
+	
+	
+	
+  });
+  ajax.send(request);
+}
+
 function getListeFAQ_admin(){
+//Cette fonction récupère la FAQ et la charge sur la page destinée aux admins (pour pouvoir mettre à jour les question)                                                           
   console.log("FAQ");
   var request = "request=listeFAQ"
   var ajax    = new XMLHttpRequest();
@@ -617,7 +827,7 @@ function getListeFAQ_admin(){
     // Récupération des données :
     listeFAQ = JSON.parse(ajax.response);
 
-    // Remplissage du tableau
+    // Remplissage des en-têtes du tableau
     var tableau1 = document.getElementById("resultats_FAQ_admin");
     tableau1.innerHTML = "";
     var ligne;
@@ -639,10 +849,7 @@ function getListeFAQ_admin(){
 
     tableau1.appendChild(ligne);
 
-
-
-
-
+    //REmplissage du tableau avec les éléments de la BDD
     for (var i = 0; i < listeFAQ.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -669,15 +876,12 @@ function getListeFAQ_admin(){
 
       tableau1.appendChild(ligne);
     }
-
-
-
-
   });
   ajax.send(request);
 }
 
 function getListeFAQ_client(){
+//Cette fonction charge la FAQ sur la page des utilisateurs (pour simplement consulter la FAQ)
   console.log("FAQ");
   var request = "request=listeFAQ"
   var ajax    = new XMLHttpRequest();
@@ -686,9 +890,6 @@ function getListeFAQ_client(){
   ajax.addEventListener('load',  function () {
     // Récupération des données :
     listeFAQ = JSON.parse(ajax.response);
-
-
-
 	var tableau2 = document.getElementById("resultats_FAQ_client");
     tableau2.innerHTML = "";
     var ligne;
@@ -702,12 +903,8 @@ function getListeFAQ_client(){
     ligne.appendChild(element);
 
 
-
+    //On affiche la FAQ sur la page
     tableau2.appendChild(ligne);
-
-
-
-
 
     for (var i = 0; i < listeFAQ.length; i++){
       ligne   = document.createElement("tr");
@@ -721,8 +918,6 @@ function getListeFAQ_client(){
 
       tableau2.appendChild(ligne);
     }
-
-
   });
   ajax.send(request);
 }
@@ -784,6 +979,23 @@ function saveFiliere(){
 }
 
 
+function saveQuestionnaire(){
+  // Enregistrement d'une question dans la base de données
+  var question_1      = document.getElementById("input_questionnaire1").value;
+  var question_2 = document.getElementById("input_questionnaire2").value;
+  var question_3      = document.getElementById("input_questionnaire3").value;
+  var ajax           = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?request=saveQuestionnaire&&question_1=' + question_1 + '&&question_2=' + question_2 + '&&question_3=' + question_3);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    var response = ajax.response;
+    console.log(response);
+  });
+  ajax.send('request=saveQuestionnaire&&question_1=' + question_1 + '&&question_2=' + question_2 + '&&question_3=' + question_3);
+}
+
+
+
 function saveFormation(){
   // Enregistrement d'une formations dans la base de données
   var input_nom      = document.getElementById("input_formation").value;
@@ -802,7 +1014,7 @@ function saveFormation(){
 }
 
 function saveUtilisateur(){
-  // Enregistrement d'une formations dans la base de données
+  // Enregistrement d'un tuilisateur dans la base de données
   var input_prenom_utilisateur      = document.getElementById("input_prenom_utilisateur").value;
   var input_nom_utilisateur  = document.getElementById("input_nom_utilisateur").value;
   var input_pseudo    = document.getElementById("input_pseudo").value;
@@ -823,7 +1035,7 @@ function saveUtilisateur(){
 
 
 function saveEvenement(){
-  // Enregistrement d'une formations dans la base de données
+  // Enregistrement d'un évènement dans la base de données
   var input_nom_evenement     = document.getElementById("input_evenement").value;
   var input_date_evenement    =document.getElementById("input_date").value;
   var input_debut_evenement  = document.getElementById("input_debut").value;
@@ -840,12 +1052,11 @@ function saveEvenement(){
   });
 
   ajax.send('request=saveEvenement&&nom=' + input_nom_evenement + '&&debut=' + input_date_evenement + input_debut_evenement + '&&fin=' + input_date_evenement + input_fin_evenement + '&&id_ecole=' + input_ecole_evenement + '&&id_batiment=' + input_batiment_evenement)
+
   }
 
-
-
 function saveFAQ(){
-  // Enregistrement d'une formations dans la base de données
+  // Enregistrement d'un question et d'une réponse de la FAQ dans la base de données
   var input_question    = document.getElementById("input_question").value;
   var input_reponse    =document.getElementById("input_reponse").value;
   var ajax = new XMLHttpRequest()
@@ -855,10 +1066,9 @@ function saveFAQ(){
     var response = ajax.response;
     console.log(response);
 	getListeFAQ_admin();
-  });
-
+  });  
   ajax.send('request=saveFAQ&&question=' + input_question + '&&reponse=' + input_reponse);
-  }
+  } 
 
 
 
@@ -867,7 +1077,7 @@ function changeEcole(i){
   // Modification des informations d'une école
   bouton                = document.getElementById("bouton-modifier-ecole"+i);
 
-  //Boucle transformant la ligne
+  //Boucle transformant la ligne de manière à pouvoir la modifier
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
   var nom               = papi.children[0];
@@ -881,7 +1091,7 @@ function changeEcole(i){
   var description       = papi.children[4];
   description.innerHTML = "<input id='modif_description_ecole" + i + "' placeholder='"+listeEcoles[i].description+"'>";
 
-  //Mise en place les deux nouveaux boutons
+  //Mise en place des deux nouveaux boutons
   var bouton_valider        = papi.children[5];
   bouton_valider.innerHTML  = "<button  id='bouton-valider-modifications-ecole" + i + "' class='modifier_ecole' onClick='validechangeEcole(" + i + ")'> <img src='boutons/valider.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
@@ -890,6 +1100,7 @@ function changeEcole(i){
 
 
 function validechangeEcole(i){
+  //Fonction qui récupère les changements effectués après validation
   bouton                = document.getElementById("bouton-valider-modifications-ecole"+i);
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
@@ -904,35 +1115,29 @@ function validechangeEcole(i){
 
 
   if(input_nom == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_nom= listeEcoles[i].nom;
   }
   if(input_image == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_image= listeEcoles[i].image;
   }
 
-
   if(input_adresse == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_adresse= listeEcoles[i].adresse;
   }
 
   if(input_site == ""){
-	  // input_site=listeEcoles[input_id].site;
+
 	  input_site= listeEcoles[i].site;
   }
 
   if(input_description == ""){
-	  // input_description=listeEcoles[input_id].description;
+
 	  input_description= listeEcoles[i].description;
   }
-
-
-
-
-
-
+  //Mise à jour de la BDD
   var ajax = new XMLHttpRequest()
   ajax.open('GET', 'serveur.php/?request=changeEcole&&id=' + input_id +'&&nom=' + input_nom +'&&image=' + input_image +'&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description );
 	ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -945,7 +1150,7 @@ function validechangeEcole(i){
 
   ajax.send('request=changeEcole&&id=' + input_id + '&&nom=' + input_nom +'&&image=' + input_image +'&&adresse=' + input_adresse + '&&site=' + input_site + '&&description=' + input_description);
 
-  // on change de nouveau la ligne (normalement avec le changement)
+  // on rappelle la BDD avec le changement
   //boucle qui retransforme la ligne
   var nom                 = papi.children[0];
   nom.innerHTML           = listeEcoles[i].nom;
@@ -968,7 +1173,7 @@ function validechangeEcole(i){
 
 function annulechangeEcole(i){
 
-  //on refait la fonction de changement à l'envers
+  //on remet la ligne en place si l'administrateur décide de ne pas effectuer de changement
   bouton=document.getElementById("bouton-annuler-modifications-ecole"+i);
   getListeEcole();
 
@@ -986,7 +1191,7 @@ function annulechangeEcole(i){
   var description=papi.children[4];
   description.innerHTML=listeEcoles[i].description;
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider=papi.children[5];
   bouton_valider.innerHTML="<button  id='bouton-modifier-ecole" + i + "' class='modifier_ecole'  onClick='changeEcole("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler=papi.children[6];
@@ -995,7 +1200,7 @@ function annulechangeEcole(i){
 
 
 function changeBatiment(i){
-
+ //Fonction permettant de modifier les informations sur un batiment
  bouton = document.getElementById("bouton-modifier-batiment" + i);
 
  //boucle qui transforme la ligne
@@ -1019,7 +1224,7 @@ function changeBatiment(i){
 
 
 function validechangeBatiment(i){
-
+  //On valide les changements sur les batiments
   bouton    = document.getElementById("bouton-valider-modifications-batiment"+i);
   var papa  = bouton.parentNode;
   var papi  = papa.parentNode;
@@ -1032,22 +1237,22 @@ function validechangeBatiment(i){
   var input_longitude   = document.getElementById("modif_longitude_batiment" + i + "").value;
 
   if(input_nom == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_nom= listeBatiments[i].nom;
   }
 
   if(input_fonction == ""){
-    // input_site=listeEcoles[input_id].site;
+
     input_fonction= listeBatiments[i].fonction;
   }
 
   if(input_latitude == ""){
-    // input_description=listeEcoles[input_id].description;
+
     input_latitude= listeBatiments[i].lat;
   }
 
   if(input_longitude == ""){
-    // input_description=listeEcoles[input_id].description;
+
     input_longitude= listeBatiments[i].lng;
   }
 
@@ -1062,7 +1267,7 @@ function validechangeBatiment(i){
 
   ajax.send('request=changeBatiment&&id=' + input_id + '&&nom=' + input_nom + '&&fonction=' + input_fonction + '&&lat=' + input_latitude + '&&lng=' + input_longitude);
 
-  // on change de nouveau la ligne (normalement avec le changement)
+  // on appelle de nouveau la BDD avec le changement
 
   //boucle qui retransforme la ligne
 
@@ -1084,7 +1289,7 @@ function validechangeBatiment(i){
 
 
 function annulechangeBatiment(i){
-	//on refait la fonction de changement à l'envers
+	//on remet la ligne en place si l'administrateur décide de nae pas faire de changement
  bouton = document.getElementById("bouton-annuler-modifications-batiment" + i);
  getListeBatiment();
   //boucle qui transforme la ligne
@@ -1099,7 +1304,7 @@ function annulechangeBatiment(i){
  var longitude      = papi.children[3];
  longitude.innerHTML= listeBatiments[i].lng;
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[4];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-batiment" + i + "' class='modifier_batiment'  onClick='changeBatiment("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[5];
@@ -1108,7 +1313,7 @@ function annulechangeBatiment(i){
 
 
 function changeFiliere(i){
-
+  //Fonction qui permet de changer les informations sur les filières
   bouton  = document.getElementById("bouton-modifier-filiere"+i);
   //boucle qui transforme la ligne
   var papa        = bouton.parentNode;
@@ -1125,7 +1330,7 @@ function changeFiliere(i){
 
 
 function validechangeFiliere(i){
-
+  //On valide les changements sur une filière
   bouton    = document.getElementById("bouton-valider-modifications-filiere"+i);
   var papa  = bouton.parentNode;
   var papi  = papa.parentNode;
@@ -1134,7 +1339,7 @@ function validechangeFiliere(i){
   var input_nom    = document.getElementById("modif_nom_filiere"+i+"").value;
 
   if(input_nom == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_nom= listeFilieres[i].nom;
   }
 
@@ -1148,7 +1353,7 @@ function validechangeFiliere(i){
 
   ajax.send('request=changeFiliere&&id=' + input_id + '&&nom=' + input_nom );
 
-  // on change de nouveau la ligne (normalement avec le changement)
+  // on appelle de nouveau la ligne avec le changement
 
   //boucle qui retransforme la ligne
 
@@ -1164,7 +1369,7 @@ function validechangeFiliere(i){
 
 
 function annulechangeFiliere(i){
-  //on refait la fonction de changement à l'envers
+  //on remet la ligne en place si l'administrateur décide d ene pas faire de changement
   bouton = document.getElementById("bouton-valider-modifications-filiere"+i);
   getListeFiliere();
   //boucle qui transforme la ligne
@@ -1173,7 +1378,7 @@ function annulechangeFiliere(i){
   var nom   = papi.children[0];
   nom.innerHTML=listeFilieres[i].nom;
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[1];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-filiere" + i + "' class='modifier_filiere'  onClick='changeFiliere("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[2];
@@ -1209,7 +1414,7 @@ function changeFormation(i){
 
 
 function validechangeFormation(i){
-
+  //Fonction qui valide les changements effectués
   bouton    = document.getElementById("bouton-valider-modifications-formation" + i);
   var papa  = bouton.parentNode;
   var papi  = papa.parentNode;
@@ -1228,29 +1433,29 @@ function validechangeFormation(i){
   console.log(input_id_filiere);
 
   if(input_nom == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_nom = listeFormations[i].nom;
   }
 
 
   if(input_niveau == ""){
-    // input_site=listeEcoles[input_id].site;
+
     input_niveau = listeFormations[i].niveau;
   }
 
 
   if(input_id_ecole == "*"){
-    // input_description=listeEcoles[input_id].description;
+
     input_id_ecole = listeFormations[i].input_id_ecole;
   }
 
   if(input_id_batiment == "*"){
-    // input_description=listeEcoles[input_id].description;
+
     input_id_batiment = listeFormations[i].input_id_batiment;
   }
 
   if(input_id_filiere == "*"){
-    // input_description=listeEcoles[input_id].description;
+
     input_id_filiere = listeFormations[i].input_id_filiere;
   }
 
@@ -1266,7 +1471,7 @@ function validechangeFormation(i){
 
   ajax.send('request=changeFormation&&id=' + input_id + '&&nom=' + input_nom + '&&niveau=' + input_niveau + '&&id_ecole=' + input_id_ecole + '&&id_batiment=' + input_id_batiment + '&&id_filiere=' + input_id_filiere );
 
-  // on change de nouveau la ligne (normalement avec le changement)
+  // on met de nouveau la ligne en place avec le changement
   //boucle qui retransforme la ligne
 
   var nom               = papi.children[0];
@@ -1289,7 +1494,7 @@ function validechangeFormation(i){
 
 
 function annulechangeFormation(i){
-  //on refait la fonction de changement à l'envers
+  //on remet la ligne en place si l'administrateur décide de ne pas faire de changement
   bouton  = document.getElementById("bouton-valider-modifications-formation"+i);
   getListeFormation();
   //boucle qui transforme la ligne
@@ -1306,7 +1511,7 @@ function annulechangeFormation(i){
   var id_filiere         = papi.children[4];
   id_filiere.innerHTML   = listeFormations[i].id_filiere;
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[5];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-formation" + i + "' class='modifier_formation' onClick='changeFormation("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
@@ -1314,6 +1519,7 @@ function annulechangeFormation(i){
 }
 
 function changeUtilisateur(i){
+  //fonction pour changer les informations sur un utilisateur
   bouton  = document.getElementById("bouton-modifier-utilisateur"+i);
   //boucle qui transforme la ligne
   var papa              = bouton.parentNode;
@@ -1341,6 +1547,7 @@ function changeUtilisateur(i){
  }
 
  function check_admin(i){
+  //Cette fonction permeter de cocher et de décocher la case qui signale si l'utilisateur possède les droits d'administrateur ou non
   bouton  = document.getElementById("bouton-valider-modifications-utilisateur"+i);
   var papa               = bouton.parentNode;
   var papi               = papa.parentNode;
@@ -1362,7 +1569,7 @@ function changeUtilisateur(i){
  }
 
 function validechangeUtilisateur(i){
-
+ //Fonction pour valider les changement effectués
   bouton    = document.getElementById("bouton-valider-modifications-utilisateur" + i);
   var papa  = bouton.parentNode;
   var papi  = papa.parentNode;
@@ -1373,40 +1580,37 @@ function validechangeUtilisateur(i){
   var input_nom      = document.getElementById("modif_nom_utilisateur" + i + "").value;
   var input_pseudo    = document.getElementById("modif_pseudo_utilisateur" + i + "").value;
   var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
-  // var input_mdp  = document.getElementById("modif_mdp_utilisateur" + i + "").value;
+
   var input_admin  =  document.getElementById("modif_admin_utilisateur" + i + "").value;
   console.log(input_admin);
 
 
   if(input_prenom == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_prenom = listeUtilisateurs[i].prenom;
   }
 
 
   if(input_nom == ""){
-    // input_site=listeEcoles[input_id].site;
+
     input_nom = listeUtilisateurs[i].nom;
   }
 
 
   if(input_pseudo == ""){
-    // input_description=listeEcoles[input_id].description;
+
     input_pseudo = listeUtilisateurs[i].pseudo;
   }
 
   if(input_email == ""){
-    // input_description=listeEcoles[input_id].description;
+
     input_email = listeUtilisateurs[i].email;
   }
 
-  // if(input_mdp == ""){
 
-    // input_mdp = listeUtilisateurs[i].mdp;
-  // }
 
   if(input_admin == ""){
-    // input_description=listeEcoles[input_id].description;
+
     input_admin = listeUtilisateurs[i].admin;
   }
 
@@ -1422,7 +1626,7 @@ function validechangeUtilisateur(i){
 
   ajax.send('request=changeUtilisateur&&id=' + input_id + '&&prenom=' + input_prenom + '&&nom=' + input_nom + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin  );
 
-  // on change de nouveau la ligne (normalement avec le changement)
+  // on change de nouveau en place la ligne avec le changement
   //boucle qui retransforme la ligne
 
 
@@ -1443,7 +1647,7 @@ function validechangeUtilisateur(i){
   var admin       = papi.children[5];
   admin.innerHTML   = listeUtilisateurs[i].admin;
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[6];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_filiere' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[7];
@@ -1452,7 +1656,7 @@ function validechangeUtilisateur(i){
 
 
 function annulechangeUtilisateur(i){
-  //on refait la fonction de changement à l'envers
+  //on annule les changements effectués
   bouton  = document.getElementById("bouton-valider-modifications-utilisateur"+i);
   getListeUtilisateur();
   //boucle qui transforme la ligne
@@ -1471,7 +1675,7 @@ function annulechangeUtilisateur(i){
   var admin       = papi.children[5];
   admin.innerHTML   = listeUtilisateurs[i].admin;
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[6];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_filiere' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[7];
@@ -1479,6 +1683,7 @@ function annulechangeUtilisateur(i){
 }
 
 function changeEvenement(i){
+  //Fonction permmettant de modifier les évènements
   bouton  = document.getElementById("bouton-modifier-evenement"+i);
   //boucle qui transforme la ligne
   var papa              = bouton.parentNode;
@@ -1507,7 +1712,7 @@ function changeEvenement(i){
 
 
 function validechangeEvenement(i){
-
+  //On valide les changements effectués
   bouton    = document.getElementById("bouton-valider-modifications-evenement" + i);
   var papa  = bouton.parentNode;
   var papi  = papa.parentNode;
@@ -1525,29 +1730,18 @@ function validechangeEvenement(i){
 
 
   if(input_nom == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_nom = listeEvenements[i].nom;
   }
 
 
-  // if(input_debut == ""){
-
-    // input_debut = listeEvenements[i].debut;
-  // }
-
-
-  // if(input_fin == ""){
-
-    // input_fin = listeEvenements[i].fin;
-  // }
 
   if(input_ecole == ""){
-    // input_description=listeEcoles[input_id].description;
+
     input_ecole = listeEvenements[i].id_ecole;
   }
 
   if(input_batiment == ""){
-    // input_description=listeEcoles[input_id].description;
     input_batiment = listeEvenements[i].id_batiment;
   }
 
@@ -1564,8 +1758,7 @@ function validechangeEvenement(i){
   });
 
   ajax.send('request=changeEvenement&&id=' + input_id + '&&nom=' + input_nom + '&&debut=' + input_debut + '&&fin=' + input_fin + '&&id_ecole=' + input_ecole + '&&id_batiment=' + input_batiment);
-  // on change de nouveau la ligne (normalement avec le changement)
-  //boucle qui retransforme la ligne
+  // on met en place de nouveau la ligne avec le changement
 
 
   getListeEvenement();
@@ -1584,7 +1777,7 @@ function validechangeEvenement(i){
   id_batiment.innerHTML   = listeEvenements[i].id_batiment;
 
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[5];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-utilisateur" + i + "' class='modifier_filiere' onClick='changeUtilisateur("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
@@ -1593,7 +1786,7 @@ function validechangeEvenement(i){
 
 
 function annulechangeEvenement(i){
-  //on refait la fonction de changement à l'envers
+  //on annule le changement effectué
   bouton  = document.getElementById("bouton-valider-modifications-evenement"+i);
   getListeEvenement();
   //boucle qui transforme la ligne
@@ -1611,7 +1804,7 @@ function annulechangeEvenement(i){
   id_batiment.innerHTML   = listeEvenements[i].id_batiment;
 
 
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[5];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-evenement" + i + "' class='modifier_filiere' onClick='changeEvenement("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[6];
@@ -1622,6 +1815,7 @@ function annulechangeEvenement(i){
 
 
 function changeFAQ(i){
+  //Fonction permettant de modifier la FAQ
   bouton  = document.getElementById("bouton-modifier-FAQ"+i);
   //boucle qui transforme la ligne
   var papa              = bouton.parentNode;
@@ -1631,7 +1825,6 @@ function changeFAQ(i){
   var reponse          = papi.children[1];
   reponse.innerHTML      = "<input id='modif_reponse_FAQ" + i + "' placeholder='"+listeFAQ[i].reponse+"'>";
 
-
   //on met en place les deux nouveaux boutons
   var bouton_valider         = papi.children[2];
   bouton_valider.innerHTML   = "<button  id='bouton-valider-modifications-FAQ" + i + "' class='modifier_filiere'  onClick='validechangeFAQ("+i+")'> <img src='boutons/valider.png' alt='Oups'> </button>"
@@ -1639,10 +1832,8 @@ function changeFAQ(i){
   bouton_annuler.innerHTML   = "<button  id='bouton-annuler-modifications-FAQ" + i + "' class='supprimer_filiere' onClick='annulechangeFAQ("+i+")'> <img src='boutons/supprimer.png' alt='Oups'> </button>"
  }
 
-
-
 function validechangeFAQ(i){
-
+  //On valide les changmeents edffectués
   bouton    = document.getElementById("bouton-valider-modifications-FAQ" + i);
   var papa  = bouton.parentNode;
   var papi  = papa.parentNode;
@@ -1656,24 +1847,13 @@ function validechangeFAQ(i){
 
 
   if(input_question == ""){
-    // input_nom= listeEcoles[input_id].nom;
+
     input_question = listeFAQ[i].question;
   }
 
 
-  // if(input_debut == ""){
-
-    // input_debut = listeEvenements[i].debut;
-  // }
-
-
-  // if(input_fin == ""){
-
-    // input_fin = listeEvenements[i].fin;
-  // }
-
   if(input_reponse == ""){
-    // input_description=listeEcoles[input_id].description;
+   
     input_reponse = listeFAQ[i].reponse;
   }
 
@@ -1690,9 +1870,7 @@ function validechangeFAQ(i){
   });
 
   ajax.send('request=changeFAQ&&id=' + input_id + '&&question=' + input_question + '&&reponse=' + input_reponse );
-  // on change de nouveau la ligne (normalement avec le changement)
-  //boucle qui retransforme la ligne
-
+  // on met en place de nouveau la ligne avec le changement
 
   getListeFAQ_admin();
   //boucle qui transforme la ligne
@@ -1703,9 +1881,7 @@ function validechangeFAQ(i){
   var reponse             = papi.children[1];
   reponse.innerHTML       = listeFAQ[i].reponse;
 
-
-
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[2];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-FAQ" + i + "' class='modifier_filiere' onClick='changeFAQ("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[3];
@@ -1714,7 +1890,7 @@ function validechangeFAQ(i){
 
 
 function annulechangeFAQ(i){
-  //on refait la fonction de changement à l'envers
+  //on annule les changements effectués
   bouton  = document.getElementById("bouton-valider-modifications-evenement"+i);
   getListeEvenement();
   //boucle qui transforme la ligne
@@ -1725,9 +1901,7 @@ function annulechangeFAQ(i){
   var reponse            = papi.children[1];
   reponse.innerHTML       = listeFAQ[i].reponse;
 
-
-
-  //on met en place les deux nouveaux boutons
+  //on met en place les deux anciens boutons
   var bouton_valider        = papi.children[2];
   bouton_valider.innerHTML  = "<button  id='bouton-modifier-FAQ" + i + "' class='modifier_filiere' onClick='changeFAQ("+i+")'> <img src='boutons/modifier.png' alt='Oups'> </button>"
   var bouton_annuler        = papi.children[3];
@@ -1753,7 +1927,7 @@ function deleteBatiment(i) {
 
 
 function deleteEcole(i) {
-  // Suppression d'un batiment dans la base de données
+  // Suppression d'une école dans la base de données
   var input_id  = listeEcoles[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteEcole&&id=' + input_id );
@@ -1790,7 +1964,7 @@ function deleteFiliere(i) {
 
 
 function deleteFormation(i) {
-  // Suppression d'un batiment dans la base de données
+  // Suppression d'une formation dans la base de données
   var input_id  = listeFormations[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteFormation&&id=' + input_id );
@@ -1808,7 +1982,7 @@ function deleteFormation(i) {
 
 
 function deleteUtilisateur(i) {
-  // Suppression d'un batiment dans la base de données
+  // Suppression d'un utilisateur dans la base de données
   var input_id  = listeUtilisateurs[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteUtilisateur&&id=' + input_id );
@@ -1824,7 +1998,7 @@ function deleteUtilisateur(i) {
 }
 
 function deleteEvenement(i) {
-  // Suppression d'un batiment dans la base de données
+  // Suppression d'un évènement dans la base de données
   var input_id  = listeEvenements[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteEvenement&&id=' + input_id );
@@ -1840,7 +2014,7 @@ function deleteEvenement(i) {
 }
 
 function deleteFAQ(i) {
-  // Suppression d'un batiment dans la base de données
+  // Suppression d'une question/réponse de la FAQ dans la base de données
   var input_id  = listeFAQ[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteFAQ&&id=' + input_id );
@@ -1857,9 +2031,13 @@ function deleteFAQ(i) {
 
 
 
-// I - Chargement des listes des noms des différentes
+//On va ensuite appeler les fonctions dont on a besoin au démarrage des différentes pages
+
+//On appelle les fonctions pour la page consacrée aux différents questionnaire
+getListeSatisfaction();
 getListeFAQ_admin();
 getListeFAQ_client();
+//On appelle les fonctions qui permettent de remplir les filtres de sélection avec les noms des différents éléments
 getListeNomNiveaux("filtre-niveau");
 getListeNomEcoles("filtre-ecole1");
 getListeNomBatiments("filtre-batiment1");
@@ -1872,6 +2050,8 @@ getListeNomEcoles("filtre-ecole4");
 getListeNomBatiments("filtre-batiment4");
 getListeNomFilieres("filtre-filiere2");
 getListeNomFonctions("filtre-fonction");
+//On appelle les fonctions pour la page consacrée aux informations sur les écoles
 getListeEcole();
 getListeFiliere();
 getListeUtilisateur();
+//Les autres fonctions sont déclenchées en apuyant sur le bouton correspondant

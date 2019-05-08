@@ -59,7 +59,7 @@ public class SignInActivity extends AppCompatActivity {
 
     public void openForgotPassword(){
 
-        String url = "http://82.229.248.34";
+        String url = getString(R.string.url_serveur) + "forgotPassword.html";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         startActivity(i);

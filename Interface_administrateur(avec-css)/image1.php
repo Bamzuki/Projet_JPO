@@ -1,15 +1,19 @@
 <?php
+  //Cette fonction va nous permettre d'enregistrer des images sur le serveur depuis le site administrateur
+
+
   //Répertoire d'enregistrement
   $target_dir = ".\image_ecole\'";
+  	$target_dir=substr($target_dir,0,14);
 	$target_file = $target_dir . basename($_FILES["fileselect"]["name"]);
 	//on initialise la variable update ok
 	$uploadOk = 1;
-	//on recup l'extention du fichier
+	//on recupère l'extention du fichier
 	$imageFileType = pathinfo($target_file,PATHINFO_EXTENSION);
 
 	//on a cliqué sur le bouton qui s'appel submit
 	if(isset($_POST["submit"])) {
-		//fichier image?
+		//est-ce une image?
 		$check = getimagesize($_FILES["fileselect"]["tmp_name"]);
 		if($check !== false) {
 			echo "File is an image - " . $check["mime"] . ".";
@@ -20,7 +24,7 @@
 			$uploadOk = 0;
 		}
 	}
-	// le fichier existe déjà?
+	// le fichier existe-t-il déjà?
 	if (file_exists($target_file)) {
 		$message = "Erreur! le fichier image existe déjà.";
 		echo $message;
@@ -33,6 +37,7 @@
 		// $uploadOk = 0;
 	// }
 	// les formats autorisés
+
 	if($imageFileType != "jpg" && $imageFileType != "JPG" && $imageFileType != "png" && $imageFileType != "PNG" && $imageFileType != "jpeg" && $imageFileType != "JPEG" && $imageFileType != "gif" && $imageFileType != "GIF") {
 
 		$message = "Les images doivent etre au format: JPG, JPEG, PNG ou GIF.";
@@ -43,21 +48,21 @@
 	if ($uploadOk == 0) {
 		$message = "Erreur! impossible d'ajouter l'image.";
 		echo $message;
-
-	// tt c'est bien passé
+		
+	// tout s'est bien passé
 	} else {
 		if (move_uploaded_file($_FILES["fileselect"]["tmp_name"], $target_file)) {
-
-
+			
+				
 				$message = "Image ajoutée avec succès.";
-
+					
 				echo $message;
 
 		} else {
 			$message = "Erreur inconnue! Merci de retenter l'ajout plus tard ou de contacter l'administrateur.";
 			echo $message;
 		}
-	}
-
-
+	} 
+	
+	
 	?>

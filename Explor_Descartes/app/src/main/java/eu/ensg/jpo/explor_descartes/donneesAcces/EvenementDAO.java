@@ -80,32 +80,31 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                 Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
                 ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
 
-                final ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.liste_extensions);
+                final ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.evenements);
 
-                List<String> listDataHeader = activity.getListDataHeader();
-                HashMap<String, List<String>> listHashMap = activity.getListHashMap();
-                ArrayList<String> evenements = new ArrayList<>();
+                final List<String> listDataHeader = new ArrayList<String>();
+                final HashMap<String, List<String>> listHashMap = new HashMap<>();
 
                 listDataHeader.add("Evénements");
+
+                ArrayList<String> evenements = new ArrayList<>();
 
                 for (Evenement evenement : listeEvenement) {
                     evenements.add(evenement.getNom());
                 }
 
-                listHashMap.put(listDataHeader.get(listDataHeader.size()-1), evenements);
+                listHashMap.put(listDataHeader.get(0), evenements);
 
                 final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
-                System.out.print("listAdapter: " + listAdapter);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
                         listView.setAdapter(listAdapter);
-                        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
+                        listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
-                            public boolean onGroupClick(ExpandableListView parent, View v,
-                                                        int groupPosition, long id) {
+                            public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
                                 activity.setListViewHeight(parent, groupPosition);
                                 return false;
                             }

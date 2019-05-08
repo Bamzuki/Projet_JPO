@@ -1,5 +1,6 @@
 package eu.ensg.jpo.explor_descartes;
 
+import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -7,8 +8,11 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.ImageButton;
 
+import java.util.ArrayList;
+import eu.ensg.jpo.explor_descartes.Menu.Menu;
 import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EcoleDAO;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -16,34 +20,8 @@ public class MainActivity extends AppCompatActivity {
     ImageButton connexionB;
     Button inscriptionB;
     Button ignorerB;
-
-    private void openSignInActivity() {
-
-        // Create intent
-        Intent intent = new Intent(this, SignInActivity.class);
-
-        // Start activity
-        startActivity(intent);
-    }
-
-    private void openRegisterActivity() {
-
-        // Create intent
-        Intent intent = new Intent(this, RegisterActivity.class);
-
-        // Start activity
-        startActivity(intent);
-    }
-
-    private void openAccueilActivity() {
-
-        // Create intent
-        Intent intent = new Intent(this, AccueilActivity.class);
-
-        // Start activity
-        startActivity(intent);
-    }
-
+    Context con = this;
+    private Menu menuc = new Menu(con);
 
 
     @Override
@@ -65,24 +43,23 @@ public class MainActivity extends AppCompatActivity {
         connexionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.openSignInActivity();
+                menuc.openSignInActivity();
             }
         });
 
         inscriptionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.openRegisterActivity();
+                menuc.openRegisterActivity();
             }
         });
 
         ignorerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                MainActivity.this.openAccueilActivity();
+                menuc.openAccueilActivity();
             }
         });
-
 
     }
 
