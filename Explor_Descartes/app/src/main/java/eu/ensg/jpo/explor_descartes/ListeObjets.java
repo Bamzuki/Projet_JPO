@@ -1,6 +1,8 @@
 package eu.ensg.jpo.explor_descartes;
 
 import java.util.ArrayList;
+
+import eu.ensg.jpo.explor_descartes.donnesObjet.Satisfaction;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
@@ -17,6 +19,7 @@ public final class ListeObjets {
     public static Visiteur visiteur = null;
     public static ArrayList<Evenement> listeFavoris = new ArrayList<>();
     public static String dateJPO = "26/04/2019";
+    public static Satisfaction satisfaction=null;
 
     public static Ecole getEcoleById(int id){
         for (Ecole ecole : listeEcole){

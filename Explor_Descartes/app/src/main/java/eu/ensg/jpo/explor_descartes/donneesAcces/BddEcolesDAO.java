@@ -5,7 +5,7 @@ import okhttp3.OkHttpClient;
 public abstract class BddEcolesDAO<T> {
 
     protected String urlServeur;
-    protected final OkHttpClient client = new OkHttpClient();
+    protected static final OkHttpClient client = new OkHttpClient();
 
 
     public BddEcolesDAO(String urlServeur) {
