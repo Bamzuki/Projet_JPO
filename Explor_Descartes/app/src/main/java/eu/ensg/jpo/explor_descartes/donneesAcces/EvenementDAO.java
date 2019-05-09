@@ -13,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.EcoleActivity;
-import eu.ensg.jpo.explor_descartes.ExpandableListAdapter;
+import eu.ensg.jpo.explor_descartes.ExpandableListAdapterEvenement;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.R;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
@@ -83,35 +83,28 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                 final ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.evenements);
 
                 final List<String> listDataHeader = new ArrayList<String>();
-                final HashMap<String, List<String>> listHashMap = new HashMap<>();
+                final HashMap<String, List<Evenement>> listHashMap = new HashMap<>();
 
                 listDataHeader.add("Evénements");
 
-                ArrayList<String> evenements = new ArrayList<>();
+                listHashMap.put(listDataHeader.get(0), listeEvenement);
 
-                for (Evenement evenement : listeEvenement) {
-                    evenements.add(evenement.getNom());
-                }
-
-                listHashMap.put(listDataHeader.get(0), evenements);
-
-                final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
+                final ExpandableListAdapterEvenement listAdapterEvenement = new ExpandableListAdapterEvenement(activity, listDataHeader, listHashMap);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listView.setAdapter(listAdapter);
+                        listView.setAdapter(listAdapterEvenement);
 
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeight(parent, groupPosition);
+                                activity.setListViewHeightEvenement(parent, groupPosition);
                                 return false;
                             }
                         });
                     }
                 });
-
             }
 
             public void onFailure(Call call, IOException e) {

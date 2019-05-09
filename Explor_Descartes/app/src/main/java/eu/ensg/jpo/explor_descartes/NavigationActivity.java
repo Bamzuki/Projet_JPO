@@ -436,7 +436,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
      */
     @SuppressWarnings( {"MissingPermission"})
     private void enableLocationComponent(@NonNull Style loadedMapStyle) {
-    // Check if permissions are enabled and if not request
+        // Check if permissions are enabled and if not request
         if (PermissionsManager.areLocationPermissionsGranted(this)) {
 
             // Get an instance of the component
@@ -587,7 +587,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
 
                 // Create a Toast which displays the new location's coordinates
                 //Toast.makeText(activity, String.format(String.valueOf(result.getLastLocation().getLatitude()) + " " + String.valueOf(result.getLastLocation().getLongitude())),
-                        //Toast.LENGTH_SHORT).show();
+                //Toast.LENGTH_SHORT).show();
 
                 // Pass the new location to the Maps SDK's LocationComponent
                 if (activity.mapboxMap != null && result.getLastLocation() != null) {

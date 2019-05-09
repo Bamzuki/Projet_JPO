@@ -54,7 +54,7 @@ public class Batiment extends DataBaseObject{
             FillLayer layerBatiment = new FillLayer("batiment"+this.id, "polygon"+this.id).withProperties(fillOpacity(0.5f), fillColor("blue"));
             style.addLayer(layerBatiment);
 
-
+            /*
             // II - Création et affichage du nom :
             String geoJsonPoint = "{\"type\": \"Point\",\"coordinates\": [" + this.lng + ", " + this.lat + "]}";
             GeoJsonSource point = new GeoJsonSource("point"+this.id, geoJsonPoint);
@@ -70,8 +70,7 @@ public class Batiment extends DataBaseObject{
             String text = ListeObjets.getEcoleById(this.id_ecole).getNom() + "\n(" + this.nom + ")";
             layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), PropertyFactory.iconTranslate(translationIcon), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true));
             style.addLayer(layerNomBatiment);
-
-
+            */
         }
 
     }
