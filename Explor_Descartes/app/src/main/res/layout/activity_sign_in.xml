@@ -80,7 +80,6 @@
             android:textColorHint="@android:color/black"
             android:textSize="14sp" tools:targetApi="o"/>
 
-<<<<<<< HEAD
         <Button
             android:id="@+id/forgotPassword"
             style="@style/Widget.AppCompat.Button.Borderless"
@@ -91,35 +90,7 @@
             android:textAppearance="@style/TextAppearance.AppCompat"
             android:textColor="@color/colorPrimary"
             android:textStyle="bold" />
-=======
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/forgotPassword"
-                style="@style/Widget.AppCompat.Button.Borderless"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Mot de passe oublié ?"
-                android:textAppearance="@style/TextAppearance.AppCompat"
-                android:textColor="@color/colorPrimary"
-                android:textStyle="bold" />
-
-            <Space
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-        </LinearLayout>
->>>>>>> 2fd9ca1bd5ac93e007058d38bd4ea72448d6753a
 
     </LinearLayout>
 
@@ -128,11 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="35dp"
         android:layout_margin="10dp"
-<<<<<<< HEAD
-        android:background="@color/design_default_color_primary"
-=======
         android:background="@color/colorPrimary"
->>>>>>> 2fd9ca1bd5ac93e007058d38bd4ea72448d6753a
         android:padding="5dp"
         android:text="@string/connexion"
         android:textColor="@android:color/white"
@@ -168,11 +135,7 @@
             android:layout_height="wrap_content"
             android:text="@string/InscriptionB"
             android:textAppearance="@style/TextAppearance.AppCompat"
-<<<<<<< HEAD
-            android:textColor="@color/design_default_color_primary"
-=======
             android:textColor="@color/colorPrimary"
->>>>>>> 2fd9ca1bd5ac93e007058d38bd4ea72448d6753a
             android:textStyle="bold" />
     </LinearLayout>
 

@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import eu.ensg.jpo.explor_descartes.EcoleActivity;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
+import eu.ensg.jpo.explor_descartes.ModifierMdp;
+import eu.ensg.jpo.explor_descartes.ModifierPerso;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
@@ -30,18 +32,89 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
     }
 
     @Override
-    public void update(Visiteur visiteur) {
+    public void update(Visiteur obj) {
+
+    }
+
+    public void updateMdp(final ModifierMdp activity, Visiteur visiteur) {
         // Construction de la requete
         String url = this.urlServeur + "?request=changeUtilisateur";
-        String donnees = "&&id=" + visiteur.getId() + "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
+        String donnees = "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
         url = url + donnees;
         Request request = new Request.Builder().url(url).build();
+
         // Envoi de la requete
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
-                //Toast.makeText(getActivity(), response.body().string() , Toast.LENGTH_LONG).show();
+                String reponseBdd = response.body().string();
+
+                }
+                // Pseudo et email corrects
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+        return;
+    }
+
+    public void suppression( Visiteur visiteur) {
+        // Construction de la requete
+        String url = this.urlServeur + "?request=deleteUtilisateur";
+        String donnees = "&&id=" + visiteur.getId();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                String reponseBdd = response.body().string();
+            }
+            // Pseudo et email corrects
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+        return;
+    }
+
+    public void updatePerso(final ModifierPerso activity, Visiteur visiteur) {
+        // Construction de la requete
+        String url = this.urlServeur + "?request=changeUtilisateur";
+        String donnees = "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                String reponseBdd = response.body().string();
+                // Pseudo déjà utilisé
+                if (reponseBdd.equals("Pseudo déjà utilisé !")){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "Pseudo déjà utilisé !" , Toast.LENGTH_LONG).show();
+                            activity.getPseudoET().getText().clear();
+                        }
+                    });
+                }
+                // Email déjà utilisé
+                else if (reponseBdd.equals("Email déjà utilisé !")){
+                    activity.runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            Toast.makeText(activity, "Email déjà utilisé !" , Toast.LENGTH_LONG).show();
+                            activity.getMailET().getText().clear();
+                        }
+                    });
+                }
+                // Pseudo et email corrects
             }
 
             public void onFailure(Call call, IOException e) {

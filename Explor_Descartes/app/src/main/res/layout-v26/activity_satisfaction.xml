@@ -1561,6 +1561,7 @@
                     android:text="@string/non"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
+
             </RadioGroup>
         </LinearLayout>
     </ScrollView>
@@ -1573,7 +1574,9 @@
         android:layout_height="match_parent"
         android:divider="#615B5B"
         android:dividerHeight="4px"
-        android:background="#FFFFFF"/>
+        android:background="#FFFFFF">
+
+    </ListView>
     <!--android:drawSelectorOnTop="true"
         android:listSelector="@drawable/selector_la"-->
 

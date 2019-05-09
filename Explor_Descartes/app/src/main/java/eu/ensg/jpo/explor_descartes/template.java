@@ -162,12 +162,12 @@ public class template extends AppCompatActivity {
         Date date = sdf.parse(ListeObjets.dateJPO);
 
         if (new Date().after(date)) {
-            menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU,Profil,Formulaire de satisfaction,";
+            menul = "Accueil,Carte,Planning,Réglages,Profil,FAQ,CGU,Formulaire de satisfaction";
             menulist = menul.split(",");
         }
 
         else {
-            menul = "Accueil,Carte,Planning,Réglages,FAQ,CGU,Profil";
+            menul = "Accueil,Carte,Planning,Réglages,Profil,FAQ,CGU";
             menulist = menul.split(",");
         }
 
@@ -187,6 +187,15 @@ public class template extends AppCompatActivity {
                 }
                 if (pos == 4) {
                     menuc.openSettingsActivity();
+                }
+                if (pos == 5) {
+                    menuc.openGestionCompte();
+                }
+                if (pos == 6) {
+                    menuc.openpageFAQ();
+                }
+                if (pos == 7) {
+                    menuc.openpageCGU();
                 }
                 if (pos == 8) {
                     menuc.openSatisfactionActivity();
