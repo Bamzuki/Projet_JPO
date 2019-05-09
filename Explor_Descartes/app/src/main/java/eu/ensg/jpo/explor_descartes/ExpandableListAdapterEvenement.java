@@ -92,7 +92,7 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
         final TextView txtListChild = (TextView)convertView.findViewById(R.id.contenu_objets);
         txtListChild.setText(childText);
         if (ListeObjets.visiteur == null){
-            txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, null, null);
+            txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(android.R.drawable.star_big_off), null);
         }
         else {
             ArrayList<Integer> favoris = ListeObjets.visiteur.getListeFavoris();
