@@ -1,4 +1,9 @@
 <?php
+
+
+//Cette fonction va nous permettre de nous connecter au site à l'aide d'un pseudo et d'un mot de passe si on possède les droits d'administrateur
+
+
 function connexion($nom,$mdp){
 	$link = pg_connect("host=localhost port=5432 dbname=test-JPO user=postgres password=postgres");
 	$requete = "SELECT * FROM utilisateurs WHERE nom LIKE '" . $nom . "'";

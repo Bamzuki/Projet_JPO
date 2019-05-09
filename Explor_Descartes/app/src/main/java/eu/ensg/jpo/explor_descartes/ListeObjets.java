@@ -27,4 +27,13 @@ public final class ListeObjets {
         return null;
     }
 
+    public static Batiment getBatimentFromNom(String nom){
+        for (Batiment batiment : listeBatiment){
+            if (batiment.getNom().equals(nom)){
+                return batiment;
+            }
+        }
+        return null;
+    }
+
 }
