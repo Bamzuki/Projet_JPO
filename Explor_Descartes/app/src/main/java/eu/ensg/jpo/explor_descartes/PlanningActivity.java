@@ -1,9 +1,6 @@
 package eu.ensg.jpo.explor_descartes;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.io.Serializable;
@@ -11,12 +8,15 @@ import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
 import eu.ensg.jpo.explor_descartes.GridView.ImageEcole;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
+import eu.ensg.jpo.explor_descartes.GridViewPlanning.GridViewAdapterPlanning;
+import eu.ensg.jpo.explor_descartes.GridViewPlanning.ImageEvenement;
+import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
 
 
 public class PlanningActivity extends template implements Serializable {
 
     private GridView gridView;
+    private GridViewAdapterPlanning gridAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState){
@@ -24,32 +24,18 @@ public class PlanningActivity extends template implements Serializable {
         contentTemp();
 
         gridView = (GridView) findViewById(R.id.main_grid);
-        GridViewAdapter gridAdapter = new GridViewAdapter(this, this, R.layout.grid_item_layout, getListImageEcoles());
+        gridAdapter = new GridViewAdapterPlanning(this, this, R.layout.grid_item_layout_planning, getListImageEvenements());
         gridView.setAdapter(gridAdapter);
-        //Ajout de l'event listener :
-        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                ImageEcole item = (ImageEcole) parent.getItemAtPosition(position);
-                //Create intent
-                Intent intent = new Intent(PlanningActivity.this, EcoleActivity.class);
-                ListeObjets.ecoleSelectionnee = item.getEcole();
-
-                //Start details activity
-                startActivity(intent);
-            }
-        });
 
     }
 
-    private ArrayList<ImageEcole> getListImageEcoles() {
+    private ArrayList<ImageEvenement> getListImageEvenements() {
 
+        EvenementDAO evenementDAO = new EvenementDAO(getString(R.string.url_serveur)+ "serveur.php/");
+        evenementDAO.chargerPlanning(this);
 
-        final ArrayList<ImageEcole> imageEcoles = new ArrayList<>();
-        for (Ecole ecole : ListeObjets.listeEcole) {
-            ImageEcole imageEcole = new ImageEcole(ecole.getNom(), ecole);
-            imageEcoles.add(imageEcole);
-        }
-        return imageEcoles;
+        ArrayList<ImageEvenement> imageEvenements = new ArrayList<>();
+        return imageEvenements;
     }
 
 
@@ -58,17 +44,11 @@ public class PlanningActivity extends template implements Serializable {
         setLayout(R.layout.activity_planning);
     }
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        GridViewAdapter adapter = (GridViewAdapter) this.gridView.getAdapter();
-        for (ImageEcole imageEcole : adapter.getData()){
-            imageEcole.addPicture(this, adapter, getString(R.string.url_serveur));
-        }
-
-
+    public GridView getGridView() {
+        return gridView;
     }
 
-
-
+    public GridViewAdapterPlanning getGridAdapter() {
+        return gridAdapter;
+    }
 }

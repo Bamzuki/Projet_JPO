@@ -73,7 +73,7 @@ public class EcoleDAO extends BddEcolesDAO<Ecole>{
 
         // Construction de la requete
         String urlImage = this.urlServeur + "image_ecole/" + ecole.getImage();
-        
+
         Request request = new Request.Builder().url(urlImage).build();
 
         // Envoi de la requete

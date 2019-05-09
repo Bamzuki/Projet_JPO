@@ -30,6 +30,15 @@ public final class ListeObjets {
         return null;
     }
 
+    public static Ecole getEcoleFromNom(String nom){
+        for (Ecole ecole: listeEcole){
+            if (ecole.getNom().equals(nom)){
+                return ecole;
+            }
+        }
+        return null;
+    }
+
     public static Batiment getBatimentFromNom(String nom){
         for (Batiment batiment : listeBatiment){
             if (batiment.getNom().equals(nom)){

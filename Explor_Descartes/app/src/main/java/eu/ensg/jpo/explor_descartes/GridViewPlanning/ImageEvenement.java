@@ -1,4 +1,4 @@
-package eu.ensg.jpo.explor_descartes.GridView;
+package eu.ensg.jpo.explor_descartes.GridViewPlanning;
 
 import android.app.Activity;
 import android.graphics.Bitmap;
@@ -8,8 +8,9 @@ import android.graphics.drawable.Drawable;
 import java.io.IOException;
 import java.io.InputStream;
 
+import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
 import eu.ensg.jpo.explor_descartes.R;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.OkHttpClient;
@@ -18,23 +19,23 @@ import okhttp3.Response;
 
 import static xdroid.core.Global.getResources;
 
-public class ImageEcole {
-    private Bitmap image;
-    private String nom;
-    private Ecole ecole;
+public class ImageEvenement {
+
+    private Bitmap iconEcole;
+    private Evenement evenement;
+    private String nomIcon;
     private final OkHttpClient client = new OkHttpClient();
 
-    public ImageEcole(String nom, Ecole ecole) {
-        super();
-        this.image = BitmapFactory.decodeResource(getResources(), R.drawable.wait);
-        this.nom = nom;
-        this.ecole = ecole;
+    public ImageEvenement(Bitmap iconEcole, Evenement evenement, String nomIcon) {
+        this.iconEcole = iconEcole;
+        this.evenement = evenement;
+        this.nomIcon = nomIcon;
     }
 
-    public void addPicture (final Activity activity, final GridViewAdapter adapter, String url) {
+    public void addPicture (final Activity activity, final GridViewAdapterPlanning adapter, String url) {
 
         // Construction de la requete
-        String urlImage = url + "image_ecole/" + this.ecole.getImage();
+        String urlImage = url + "image_ecole/" + this.nomIcon;
         //String url = this.url + "image_ecole/eavt-icone.jpg";
         System.out.println(url);
         Request request = new Request.Builder().url(urlImage).build();
@@ -57,7 +58,7 @@ public class ImageEcole {
 
                 if (imageLoaded != null){
                     // On affiche l'image correspondante
-                    image = imageLoaded;
+                    iconEcole = imageLoaded;
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -68,7 +69,7 @@ public class ImageEcole {
 
                 }else{
                     // On affiche l'image par défaut
-                    image = BitmapFactory.decodeResource(getResources(), R.drawable.error);
+                    iconEcole = BitmapFactory.decodeResource(getResources(), R.drawable.error);
                     activity.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
@@ -82,7 +83,7 @@ public class ImageEcole {
             public void onFailure(Call call, IOException e) {
                 System.out.println("Echec de la connexion !");
                 // On affiche l'image par défaut
-                image = BitmapFactory.decodeResource(getResources(), R.drawable.error);
+                iconEcole = BitmapFactory.decodeResource(getResources(), R.drawable.error);
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -93,23 +94,27 @@ public class ImageEcole {
         });
     }
 
-    public Bitmap getImage() {
-        return image;
+    public Bitmap getIconEcole() {
+        return iconEcole;
     }
 
-    public void setImage(Bitmap image) {
-        this.image = image;
+    public void setIconEcole(Bitmap iconEcole) {
+        this.iconEcole = iconEcole;
     }
 
-    public String getNom() {
-        return nom;
+    public Evenement getEvenement() {
+        return evenement;
     }
 
-    public void setNome(String nom) {
-        this.nom = nom;
+    public void setEvenement(Evenement evenement) {
+        this.evenement = evenement;
     }
 
-    public Ecole getEcole() {
-        return ecole;
+    public String getNomIcon() {
+        return nomIcon;
+    }
+
+    public void setNomIcon(String nomIcon) {
+        this.nomIcon = nomIcon;
     }
 }

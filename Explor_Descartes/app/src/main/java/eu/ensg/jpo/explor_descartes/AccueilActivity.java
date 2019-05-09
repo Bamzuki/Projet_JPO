@@ -52,7 +52,7 @@ public class AccueilActivity extends template {
 
     @Override
     protected void llayout(){
-        setLayout(R.layout.activity_planning);
+        setLayout(R.layout.activity_accueil);
     }
 
     @Override
