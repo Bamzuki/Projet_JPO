@@ -14,7 +14,7 @@ import eu.ensg.jpo.explor_descartes.donneesAcces.SatisfactionDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
-public class SatisfactionActivity extends AppCompatActivity {
+public class SatisfactionActivity extends template {
 
     Button validationB;
 

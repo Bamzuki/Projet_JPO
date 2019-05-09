@@ -24,11 +24,7 @@
             android:padding="15dp"
             android:text="@string/nomEcole"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
-            app:layout_constraintBottom_toTopOf="@+id/imageEcole"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:textSize="30sp" />
 
         <ImageView
             android:id="@+id/imageEcole"
@@ -38,10 +34,6 @@
             android:background="@android:color/white"
             android:contentDescription="@string/imageEcole"
             android:padding="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/infoEcole"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/nomEcole"
             app:srcCompat="@android:color/black" />
 
         <LinearLayout
@@ -51,11 +43,7 @@
             android:background="@android:color/white"
             android:gravity="center"
             android:orientation="vertical"
-            android:padding="15dp"
-            app:layout_constraintBottom_toTopOf="@+id/extensions"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/imageEcole">
+            android:padding="15dp">
 
             <LinearLayout
                 android:id="@+id/adresse"
@@ -155,11 +143,7 @@
             android:background="@android:color/white"
             android:gravity="start"
             android:orientation="vertical"
-            android:padding="15dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/infoEcole">
+            android:padding="15dp">
 
             <ExpandableListView
                 android:id="@+id/formations"

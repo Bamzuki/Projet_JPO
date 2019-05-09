@@ -29,13 +29,15 @@
                 android:id="@+id/textSatisfaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
                 android:background="@android:color/white"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="@string/questionnaire_satisfaction"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000"
-                android:textSize="24sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/application"

@@ -206,7 +206,7 @@
 
     <string name="favori_impossible">Cette fonctionnalité n\'est disponible que pour les utilisateurs enregistrés</string>
     <string name="gestion_compte">Gestion du compte</string>
-    <string name="modifier_donnees_perso">Modifier les Données Personnelles</string>
+    <string name="modifier_donnees_perso">Modifier les données Personnelles</string>
     <string name="modifier_mdp">Modifier le mot de passe</string>
     <string name="deconnexion">Se déconnecter</string>
     <string name="supprimer_compte">Supprimer son compte</string>

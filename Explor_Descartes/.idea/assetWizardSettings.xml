@@ -55,9 +55,9 @@
                                   </option>
                                   <option name="values">
                                     <map>
-                                      <entry key="outputName" value="retour" />
+                                      <entry key="outputName" value="retour_blanc" />
                                       <entry key="theme" value="CUSTOM" />
-                                      <entry key="themeColor" value="3e248e" />
+                                      <entry key="themeColor" value="ffffff" />
                                     </map>
                                   </option>
                                 </PersistentState>

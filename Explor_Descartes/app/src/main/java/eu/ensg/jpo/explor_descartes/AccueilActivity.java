@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
@@ -52,7 +53,22 @@ public class AccueilActivity extends template {
 
     @Override
     protected void llayout(){
-        setLayout(R.layout.activity_planning);
+        setLayout(R.layout.activity_accueil);
+    }
+
+    @Override
+    public void getData() throws ParseException {
+        super.getData();
+    }
+
+    @Override
+    protected void contentTemp() {
+        super.contentTemp();
+    }
+
+    @Override
+    public void setLayout(int newLayout) {
+        super.setLayout(newLayout);
     }
 
     @Override
