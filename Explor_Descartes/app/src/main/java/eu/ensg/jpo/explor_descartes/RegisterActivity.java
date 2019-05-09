@@ -89,7 +89,7 @@ public class RegisterActivity extends AppCompatActivity {
         // Enregistrement dans la base de données :
         try {
             Visiteur newVisiteur = new Visiteur(prenom, nom, pseudo, mail, SHA.encode(mdp), false);
-            VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur));
+            VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
             visiteurDAO.inscriptionBdd(this, newVisiteur);
         } catch (Exception e) {
             e.printStackTrace();

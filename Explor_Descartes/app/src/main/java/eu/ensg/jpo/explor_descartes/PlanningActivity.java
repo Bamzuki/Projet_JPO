@@ -1,16 +1,20 @@
 package eu.ensg.jpo.explor_descartes;
 
+import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.GridView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 
-import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
-import eu.ensg.jpo.explor_descartes.GridView.ImageEcole;
 import eu.ensg.jpo.explor_descartes.GridViewPlanning.GridViewAdapterPlanning;
 import eu.ensg.jpo.explor_descartes.GridViewPlanning.ImageEvenement;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
+import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
 
 public class PlanningActivity extends template implements Serializable {
@@ -26,6 +30,21 @@ public class PlanningActivity extends template implements Serializable {
         gridView = (GridView) findViewById(R.id.main_grid);
         gridAdapter = new GridViewAdapterPlanning(this, this, R.layout.grid_item_layout_planning, getListImageEvenements());
         gridView.setAdapter(gridAdapter);
+        final PlanningActivity activity = this;
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
+                ImageEvenement item = (ImageEvenement) parent.getItemAtPosition(position);
+                VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
+                Evenement evenement = item.getEvenement();
+                if (ListeObjets.listeFavoris.contains(evenement)){
+                    visiteurDAO.supprimerFavori(activity, evenement);
+                }else{
+                    visiteurDAO.ajouterFavori(activity, evenement);
+                }
+                activity.gridAdapter.notifyDataSetChanged();
+
+            }
+        });
 
     }
 
