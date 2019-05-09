@@ -36,12 +36,9 @@ public class AccueilActivity extends template {
                 startActivity(intent);
             }
         });
-
     }
 
     private ArrayList<ImageEcole> getListImageEcoles() {
-
-
         final ArrayList<ImageEcole> imageEcoles = new ArrayList<>();
         for (Ecole ecole : ListeObjets.listeEcole) {
             ImageEcole imageEcole = new ImageEcole(ecole.getNom(), ecole);
@@ -49,7 +46,6 @@ public class AccueilActivity extends template {
         }
         return imageEcoles;
     }
-
 
     @Override
     protected void llayout(){
@@ -78,8 +74,6 @@ public class AccueilActivity extends template {
         for (ImageEcole imageEcole : adapter.getData()){
             imageEcole.addPicture(this, adapter, getString(R.string.url_serveur));
         }
-
-
     }
 
 }
