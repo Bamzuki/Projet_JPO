@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+
+import eu.ensg.jpo.explor_descartes.donneesAcces.EcoleDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.FormationDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
@@ -39,9 +41,11 @@ public class EcoleActivity extends AppCompatActivity {
 
         // Chargement de l'image de l'école
         ImageView imageEcole = (ImageView) findViewById(R.id.imageEcole);
-        int id = (int) this.getResources().getIdentifier("icone_cfa","drawable", getPackageName());
+        int id = (int) this.getResources().getIdentifier("wait","drawable", getPackageName());
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), id);
         imageEcole.setImageBitmap(bitmap);
+        EcoleDAO ecoleDAO = new EcoleDAO(getString(R.string.url_serveur));
+        ecoleDAO.addPicture(this, imageEcole, this.ecole);
 
         // Chargement de l'adresse de l'école
         TextView adresseEcole = (TextView)findViewById(R.id.adresseEcole);
