@@ -20,7 +20,7 @@ import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.FormationDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
-public class EcoleActivity extends AppCompatActivity {
+public class EcoleActivity extends template {
 
     private Ecole ecole;
     private ExpandableListView listView;
@@ -31,8 +31,12 @@ public class EcoleActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_ecole);
+        contentTemp();
 
+    }
+
+    @Override
+    public void contentTemp(){
         // 1- Chargement des données relatives à l'école sélectionnée
         this.ecole = ListeObjets.ecoleSelectionnee;
 
@@ -171,7 +175,8 @@ public class EcoleActivity extends AppCompatActivity {
 
     public void setListDataHeader(List<String> listDataHeader) { this.listDataHeader = listDataHeader; }
 
-
-
-
+    @Override
+    public void llayout(){
+        setLayout(R.layout.activity_ecole);
+    }
 }

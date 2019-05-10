@@ -11,8 +11,6 @@
     <include layout="@layout/app_bar"/>
 
     <!--Grid contenant les images des établissements-->
-
-    <!--Menu des activités (à gauche)-->
     <GridView
         android:id="@+id/main_grid"
         android:layout_width="fill_parent"
