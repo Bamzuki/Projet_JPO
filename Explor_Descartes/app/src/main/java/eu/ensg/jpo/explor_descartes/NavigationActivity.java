@@ -300,13 +300,20 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
             ArrayList<Evenement> listEvenement = loadListEvenement(activity);
             String jsonFeatureCollection = "{\"type\": \"FeatureCollection\", \"features\": [";
 
+            int i = 0;
+
             for (Evenement evenement : listEvenement){
                 if (evenement.estUnFavori(ListeObjets.visiteur)){
                     jsonFeatureCollection += evenement.getJson() + ",";
+                    i += 1;
                 }
             }
-
-            jsonFeatureCollection = jsonFeatureCollection.substring(0, jsonFeatureCollection.length() - 1) + "]}";
+            if (i !=0){
+                jsonFeatureCollection = jsonFeatureCollection.substring(0, jsonFeatureCollection.length() - 1) + "]}";
+            }
+            else{
+                jsonFeatureCollection += "]}";
+            }
             System.out.println("ECHO");
             System.out.println(jsonFeatureCollection);
 
