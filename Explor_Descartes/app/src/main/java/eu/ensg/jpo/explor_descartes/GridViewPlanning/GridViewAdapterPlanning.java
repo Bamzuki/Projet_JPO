@@ -58,7 +58,7 @@ public class GridViewAdapterPlanning extends ArrayAdapter {
         holder.ecole.setText(item.getEvenement().getEcole());
         holder.batiment.setText(item.getEvenement().getBatiment());
         holder.horaires.setText(item.getEvenement().getHoraires());
-        if (ListeObjets.listeFavoris.contains(item.getEvenement())){
+        if (item.getEvenement().estUnFavori(ListeObjets.visiteur)){
             int id = (int) this.context.getResources().getIdentifier("star","drawable", this.context.getPackageName());
             Bitmap bitmap = BitmapFactory.decodeResource(getResources(), id);
             holder.favourite.setImageBitmap(bitmap);
