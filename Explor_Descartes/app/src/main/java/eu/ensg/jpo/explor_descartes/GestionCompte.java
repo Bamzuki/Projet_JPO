@@ -51,10 +51,10 @@ public class GestionCompte extends template {
     private void openSuppression() {
         if (ListeObjets.visiteur != null){
             // Suppression dans la base de données :
-            String urlServeur = getString(R.string.url_serveur_ecoles);
+            String urlServeur = getString(R.string.url_serveur) + "serveur.php/";
             try {
                 VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-                visiteurDAO.suppression( ListeObjets.visiteur);
+                visiteurDAO.suppression(ListeObjets.visiteur);
             } catch (Exception e) {
                 e.printStackTrace();
             }
@@ -86,8 +86,6 @@ public class GestionCompte extends template {
 
             // Start activity
             startActivity(intent);
-
-            Toast.makeText(this, "Au revoir " + ListeObjets.visiteur.getPseudo() , Toast.LENGTH_SHORT).show();
 
         }
         else {
