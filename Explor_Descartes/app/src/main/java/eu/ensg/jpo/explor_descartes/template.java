@@ -163,12 +163,12 @@ public class template extends AppCompatActivity {
         Date date = sdf.parse(ListeObjets.dateJPO);
 
         if (new Date().after(date)) {
-            menul = "Accueil,Carte,Planning,Réglages,Profil,FAQ,CGU,Formulaire de satisfaction";
+            menul = "Établissements,Carte,Planning,Réglages,Profil,FAQ,CGU,Formulaire de satisfaction";
             menulist = menul.split(",");
         }
 
         else {
-            menul = "Accueil,Carte,Planning,Réglages,Profil,FAQ,CGU";
+            menul = "Etablissements,Carte,Planning,Réglages,Profil,FAQ,CGU";
             menulist = menul.split(",");
         }
 

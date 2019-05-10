@@ -26,7 +26,7 @@
             android:text="@string/gestion_compte"
             android:textColor="@color/colorPrimary"
             android:textSize="24sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"/>
 
         <Button
             android:id="@+id/ModifierMdpB"
@@ -37,6 +37,17 @@
             android:gravity="center"
             android:padding="5dp"
             android:text="@string/modifier_mdp"
+            android:textColor="@android:color/white" />
+
+        <Button
+            android:id="@+id/ModifierPersoB"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:padding="5dp"
+            android:text="@string/modifier_donnees_perso"
             android:textColor="@android:color/white" />
 
         <Button
@@ -61,16 +72,6 @@
             android:text="@string/deconnexion"
             android:textColor="@android:color/white" />
 
-        <Button
-            android:id="@+id/ModifierPersoB"
-            android:layout_width="300dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp"
-            android:background="@color/colorPrimary"
-            android:gravity="center"
-            android:padding="5dp"
-            android:text="@string/modifier_donnees_perso"
-            android:textColor="@android:color/white" />
     </LinearLayout>
 
     <include layout="@layout/app_bar" />
