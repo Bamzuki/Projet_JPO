@@ -62,8 +62,5 @@ public class AccueilActivity extends template {
         for (ImageEcole imageEcole : adapter.getData()){
             imageEcole.addPicture(this, adapter, getString(R.string.url_serveur));
         }
-
-
     }
-
 }
