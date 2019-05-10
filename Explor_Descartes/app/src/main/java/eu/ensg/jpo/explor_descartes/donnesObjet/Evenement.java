@@ -117,7 +117,7 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
     @Override
     public int compareTo(Evenement o) {
-        return this.getDebut().compareTo(o.getDebut());
+        return this.getHoraires().compareTo(o.getHoraires());
     }
 
     private static class SymbolGenerator {

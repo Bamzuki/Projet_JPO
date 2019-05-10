@@ -56,7 +56,7 @@ public class PlanningActivity extends template implements Serializable {
         evenementDAO.chargerPlanning(this);
 
         ArrayList<ImageEvenement> imageEvenements = new ArrayList<>();
-        Collections.sort(imageEvenements);
+
         return imageEvenements;
     }
 
