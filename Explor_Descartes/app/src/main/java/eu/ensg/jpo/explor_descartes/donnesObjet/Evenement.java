@@ -28,7 +28,7 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import com.mapbox.mapboxsdk.style.layers.Property;
 
-public class Evenement extends DataBaseObject{
+public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
     private String nom;
     private String debut;
@@ -45,66 +45,6 @@ public class Evenement extends DataBaseObject{
         this.batiment = batiment;
     }
 
-    public void afficherSurCarte(NavigationActivity activity, Style style){
-
-        // I - Récupération du bâtiment accueillant l'évènement
-        Batiment batiment = ListeObjets.getBatimentFromNom(this.batiment);
-        if (batiment == null){
-            return;
-        }
-
-        // II - Création et affichage du nom :
-
-        // II.1 - Création du GeoJson :
-
-        String geoJsonPoint = "{\"type\": \"Feature\", \"properties\": {\"nom\": \"" + this.nom + "\", \"type\": \"favori\", \"debut\": \"" + this.debut + "\", \"fin\": \"" + this.fin + "\", \"selected\": false, \"favourite\": true}, \"geometry\": {\"type\": \"Point\",\"coordinates\": [" + batiment.getLng() + ", " + batiment.getLat() + "]}}";
-        Feature feature = Feature.fromJson(geoJsonPoint);
-        GeoJsonSource pointFavori = new GeoJsonSource("pointFavori"+this.id, geoJsonPoint);
-        style.addSource(pointFavori);
-
-        // II.2 - Création du vecteur de translation de l'icone :
-        Float[] translationIcon = new Float[2];
-        translationIcon[0] = new Float(0);
-        translationIcon[1] = new Float(-5);
-
-        // II.3 - Ajout du layer sur la carte :
-        SymbolLayer layerFavori = new SymbolLayer("favori"+this.id, "pointFavori"+this.id);
-        layerFavori.withProperties(PropertyFactory.iconImage("college-15"), PropertyFactory.iconTranslate(translationIcon), PropertyFactory.iconAllowOverlap(true), PropertyFactory.iconSize(1.5f));
-        style.addLayer(layerFavori);
-
-        // II.4 - Création des Views :
-        createViewCallout(activity, feature);
-
-        // II.5 - Ajout des bulles :
-        SymbolLayer infoWindow = new SymbolLayer("calloutFavori"+this.id, "pointFavori"+this.id).withProperties(PropertyFactory.iconImage("{nom}"), PropertyFactory.iconAnchor(Property.ICON_ANCHOR_BOTTOM_LEFT), PropertyFactory.iconAllowOverlap(true),PropertyFactory.iconOffset(new Float[] {-20.0f, -10.0f})).withFilter(eq((get("selected")), literal(true)));
-        style.addLayer(infoWindow);
-
-        System.out.println("Ajout évènement " + this.id);
-        System.out.println(geoJsonPoint);
-    }
-
-    public void createViewCallout(NavigationActivity activity, Feature feature){
-
-        LayoutInflater inflater = LayoutInflater.from(activity);
-        View view = inflater.inflate(R.layout.layout_callout, null);
-
-        String title = feature.getStringProperty("nom");
-        TextView titleTv = (TextView) view.findViewById(R.id.title);
-        titleTv.setText(title);
-
-        String horaires = feature.getStringProperty("debut").substring(11,18) + " - " + feature.getStringProperty("fin").substring(11,18);
-        TextView horairesTv = (TextView) view.findViewById(R.id.horaires);
-        horairesTv.setText(horaires);
-
-        boolean favourite = feature.getBooleanProperty("favourite");
-        ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
-        imageView.setImageResource(favourite ? R.drawable.ic_star_15 : R.drawable.ic_star_stroked_15);
-
-        Bitmap bitmap = SymbolGenerator.generate(view);
-        activity.imagesMap.put(title, bitmap);
-        activity.viewMap.put(title, view);
-    }
-
     public String getJson(){
         // I - Récupération du bâtiment accueillant l'évènement
         Batiment batiment = ListeObjets.getBatimentFromNom(this.batiment);
@@ -113,6 +53,11 @@ public class Evenement extends DataBaseObject{
         }
         String Json = "{\"type\": \"Feature\", \"properties\": {\"id\": \""+this.id+"\", \"nom\": \"" + this.nom + "\", \"titre\": \"" + this.ecole+ "\n(" + this.batiment +")\", \"type\": \"favori\", \"debut\": \"" + this.debut + "\", \"fin\": \"" + this.fin + "\", \"selected\": false, \"favourite\": true}, \"geometry\": {\"type\": \"Point\",\"coordinates\": [" + batiment.getLng() + ", " + batiment.getLat() + "]}}";
         return Json;
+    }
+
+    @Override
+    public int compareTo(Evenement o) {
+        return this.getHoraires().compareTo(o.getHoraires());
     }
 
     private static class SymbolGenerator {

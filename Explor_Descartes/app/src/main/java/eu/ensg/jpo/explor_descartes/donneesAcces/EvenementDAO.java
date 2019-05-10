@@ -12,6 +12,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 
@@ -29,7 +30,7 @@ import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class EvenementDAO extends BddEcolesDAO<Evenement> {
+public class EvenementDAO extends BddEcolesDAO<Evenement>{
 
     public EvenementDAO(String urlServeur) {
         super(urlServeur);
@@ -132,6 +133,7 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                 System.out.println(response.body());
                 Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
                 final ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
+                Collections.sort(listeEvenement);
                 final ArrayList<ImageEvenement> listeImageEvenement = new ArrayList<>();
 
                 int id = (int) activity.getResources().getIdentifier("wait","drawable", activity.getPackageName());
@@ -163,4 +165,5 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
         });
 
     }
+
 }
