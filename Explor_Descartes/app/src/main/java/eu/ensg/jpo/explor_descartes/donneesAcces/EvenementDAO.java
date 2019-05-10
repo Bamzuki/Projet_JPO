@@ -29,7 +29,7 @@ import okhttp3.Callback;
 import okhttp3.Request;
 import okhttp3.Response;
 
-public class EvenementDAO extends BddEcolesDAO<Evenement> {
+public class EvenementDAO extends BddEcolesDAO<Evenement>{
 
     public EvenementDAO(String urlServeur) {
         super(urlServeur);
@@ -163,4 +163,5 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
         });
 
     }
+
 }

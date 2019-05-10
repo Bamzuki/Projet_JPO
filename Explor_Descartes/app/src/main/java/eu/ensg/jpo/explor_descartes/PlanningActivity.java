@@ -9,6 +9,8 @@ import android.widget.GridView;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import eu.ensg.jpo.explor_descartes.GridViewPlanning.GridViewAdapterPlanning;
 import eu.ensg.jpo.explor_descartes.GridViewPlanning.ImageEvenement;
@@ -54,6 +56,7 @@ public class PlanningActivity extends template implements Serializable {
         evenementDAO.chargerPlanning(this);
 
         ArrayList<ImageEvenement> imageEvenements = new ArrayList<>();
+        Collections.sort(imageEvenements);
         return imageEvenements;
     }
 

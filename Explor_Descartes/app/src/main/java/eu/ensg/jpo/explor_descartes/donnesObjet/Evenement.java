@@ -28,7 +28,7 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import com.mapbox.mapboxsdk.style.layers.Property;
 
-public class Evenement extends DataBaseObject{
+public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
     private String nom;
     private String debut;
@@ -45,7 +45,7 @@ public class Evenement extends DataBaseObject{
         this.batiment = batiment;
     }
 
-    public void afficherSurCarte(NavigationActivity activity, Style style){
+    public void afficherSurCarte(NavigationActivity activity, Style style) {
 
         // I - Récupération du bâtiment accueillant l'évènement
         Batiment batiment = ListeObjets.getBatimentFromNom(this.batiment);
@@ -113,6 +113,11 @@ public class Evenement extends DataBaseObject{
         }
         String Json = "{\"type\": \"Feature\", \"properties\": {\"id\": \""+this.id+"\", \"nom\": \"" + this.nom + "\", \"titre\": \"" + this.ecole+ "\n(" + this.batiment +")\", \"type\": \"favori\", \"debut\": \"" + this.debut + "\", \"fin\": \"" + this.fin + "\", \"selected\": false, \"favourite\": true}, \"geometry\": {\"type\": \"Point\",\"coordinates\": [" + batiment.getLng() + ", " + batiment.getLat() + "]}}";
         return Json;
+    }
+
+    @Override
+    public int compareTo(Evenement o) {
+        return this.getDebut().compareTo(o.getDebut());
     }
 
     private static class SymbolGenerator {

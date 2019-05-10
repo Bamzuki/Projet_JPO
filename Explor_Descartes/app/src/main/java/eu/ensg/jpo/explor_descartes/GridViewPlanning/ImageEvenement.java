@@ -19,7 +19,7 @@ import okhttp3.Response;
 
 import static xdroid.core.Global.getResources;
 
-public class ImageEvenement {
+public class ImageEvenement implements Comparable<ImageEvenement>{
 
     private Bitmap iconEcole;
     private Evenement evenement;
@@ -116,5 +116,10 @@ public class ImageEvenement {
 
     public void setNomIcon(String nomIcon) {
         this.nomIcon = nomIcon;
+    }
+
+    @Override
+    public int compareTo(ImageEvenement o) {
+        return this.getEvenement().getDebut().compareTo(o.getEvenement().getDebut());
     }
 }
