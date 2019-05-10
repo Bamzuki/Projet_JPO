@@ -81,7 +81,7 @@ public class Menu {
     }
 
     public void openpageCGU() {
-        String url = "http://82.229.248.34/Conditions générales d'utilisation";
+        String url = "http://82.229.248.34/Conditions générales d'utilisation.html";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         con.startActivity(i);
