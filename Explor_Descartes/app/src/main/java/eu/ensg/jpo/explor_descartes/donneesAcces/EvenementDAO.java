@@ -1,7 +1,10 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.view.View;
 import android.widget.ExpandableListView;
+import android.widget.GridView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -13,9 +16,13 @@ import java.util.HashMap;
 import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.EcoleActivity;
-import eu.ensg.jpo.explor_descartes.ExpandableListAdapter;
+import eu.ensg.jpo.explor_descartes.ExpandableListAdapterEvenement;
+import eu.ensg.jpo.explor_descartes.GridViewPlanning.GridViewAdapterPlanning;
+import eu.ensg.jpo.explor_descartes.GridViewPlanning.ImageEvenement;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
+import eu.ensg.jpo.explor_descartes.PlanningActivity;
 import eu.ensg.jpo.explor_descartes.R;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -83,40 +90,77 @@ public class EvenementDAO extends BddEcolesDAO<Evenement> {
                 final ExpandableListView listView = (ExpandableListView) activity.findViewById(R.id.evenements);
 
                 final List<String> listDataHeader = new ArrayList<String>();
-                final HashMap<String, List<String>> listHashMap = new HashMap<>();
+                final HashMap<String, List<Evenement>> listHashMap = new HashMap<>();
 
                 listDataHeader.add("Evénements");
 
-                ArrayList<String> evenements = new ArrayList<>();
+                listHashMap.put(listDataHeader.get(0), listeEvenement);
 
-                for (Evenement evenement : listeEvenement) {
-                    evenements.add(evenement.getNom());
-                }
-
-                listHashMap.put(listDataHeader.get(0), evenements);
-
-                final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
+                final ExpandableListAdapterEvenement listAdapterEvenement = new ExpandableListAdapterEvenement(activity, listDataHeader, listHashMap);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        listView.setAdapter(listAdapter);
+                        listView.setAdapter(listAdapterEvenement);
 
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeight(parent, groupPosition);
+                                activity.setListViewHeightEvenement(parent, groupPosition);
                                 return false;
                             }
                         });
                     }
                 });
-
             }
 
             public void onFailure(Call call, IOException e) {
                 System.out.println("Echec de la connexion !");
             }
         });
+    }
+
+    public void chargerPlanning(final PlanningActivity activity) {
+        // Construction de la requete
+        String url = this.urlServeur + "?request=listeEvenements";
+        final Request request = new Request.Builder().url(url).build();
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                System.out.println(response.body());
+                Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
+                final ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
+                final ArrayList<ImageEvenement> listeImageEvenement = new ArrayList<>();
+
+                int id = (int) activity.getResources().getIdentifier("wait","drawable", activity.getPackageName());
+                Bitmap bitmap = BitmapFactory.decodeResource(activity.getResources(), id);
+
+                for (Evenement evenement : listeEvenement){
+                    Ecole ecole = ListeObjets.getEcoleFromNom(evenement.getEcole());
+                    if (ecole != null){
+                        listeImageEvenement.add(new ImageEvenement(bitmap, evenement, ecole.getImage()));
+                    }
+                }
+                activity.getGridAdapter().getData().addAll(listeImageEvenement);
+
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        activity.getGridAdapter().notifyDataSetChanged();
+                        for (ImageEvenement imageEvenement : listeImageEvenement){
+                            imageEvenement.addPicture(activity, activity.getGridAdapter(), activity.getString(R.string.url_serveur));
+                        }
+                    }
+                });
+
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+
     }
 }

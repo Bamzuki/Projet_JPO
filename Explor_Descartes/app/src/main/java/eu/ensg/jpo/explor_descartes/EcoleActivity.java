@@ -13,6 +13,8 @@ import android.widget.TextView;
 
 import java.util.HashMap;
 import java.util.List;
+
+import eu.ensg.jpo.explor_descartes.donneesAcces.EcoleDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EvenementDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.FormationDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
@@ -21,9 +23,9 @@ public class EcoleActivity extends AppCompatActivity {
 
     private Ecole ecole;
     private ExpandableListView listView;
-    private ExpandableListAdapter listAdapter;
+    private ExpandableListAdapterEvenement listAdapterEvenement;
+    private ExpandableListAdapterFormation listAdapterFormation;
     private List<String> listDataHeader;
-    private HashMap<String, List<String>> listHashMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,9 +41,11 @@ public class EcoleActivity extends AppCompatActivity {
 
         // Chargement de l'image de l'école
         ImageView imageEcole = (ImageView) findViewById(R.id.imageEcole);
-        int id = (int) this.getResources().getIdentifier("icone_cfa","drawable", getPackageName());
+        int id = (int) this.getResources().getIdentifier("wait","drawable", getPackageName());
         Bitmap bitmap = BitmapFactory.decodeResource(getResources(), id);
         imageEcole.setImageBitmap(bitmap);
+        EcoleDAO ecoleDAO = new EcoleDAO(getString(R.string.url_serveur));
+        ecoleDAO.addPicture(this, imageEcole, this.ecole);
 
         // Chargement de l'adresse de l'école
         TextView adresseEcole = (TextView)findViewById(R.id.adresseEcole);
@@ -65,21 +69,54 @@ public class EcoleActivity extends AppCompatActivity {
 
     }
 
-    public void setListViewHeight(ExpandableListView listView, int group) {
-        ExpandableListAdapter listAdapter = (ExpandableListAdapter) listView.getExpandableListAdapter();
+    public void setListViewHeightEvenement(ExpandableListView listView, int group) {
+        ExpandableListAdapterEvenement listAdapterEvenement = (ExpandableListAdapterEvenement) listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
                 View.MeasureSpec.EXACTLY);
-        for (int i = 0; i < listAdapter.getGroupCount(); i++) {
-            View groupItem = listAdapter.getGroupView(i, false, null, listView);
+        for (int i = 0; i < listAdapterEvenement.getGroupCount(); i++) {
+            View groupItem = listAdapterEvenement.getGroupView(i, false, null, listView);
             groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
 
             totalHeight += groupItem.getMeasuredHeight();
 
             if (((listView.isGroupExpanded(i)) && (i != group))
                     || ((!listView.isGroupExpanded(i)) && (i == group))) {
-                for (int j = 0; j < listAdapter.getChildrenCount(i); j++) {
-                    View listItem = listAdapter.getChildView(i, j, false, null,
+                for (int j = 0; j < listAdapterEvenement.getChildrenCount(i); j++) {
+                    View listItem = listAdapterEvenement.getChildView(i, j, false, null, listView);
+                    listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+                    totalHeight += listItem.getMeasuredHeight();
+
+                }
+            }
+        }
+
+        ViewGroup.LayoutParams params = listView.getLayoutParams();
+        int height = totalHeight
+                + (listView.getDividerHeight() * (listAdapterEvenement.getGroupCount() - 1));
+        if (height < 10)
+            height = 200;
+        params.height = height;
+        listView.setLayoutParams(params);
+        listView.requestLayout();
+    }
+
+    public void setListViewHeightFormation(ExpandableListView listView, int group) {
+        ExpandableListAdapterFormation listAdapterFormation = (ExpandableListAdapterFormation) listView.getExpandableListAdapter();
+        int totalHeight = 0;
+        int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
+                View.MeasureSpec.EXACTLY);
+        for (int i = 0; i < listAdapterFormation.getGroupCount(); i++) {
+            View groupItem = listAdapterFormation.getGroupView(i, false, null, listView);
+            groupItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
+
+            totalHeight += groupItem.getMeasuredHeight();
+
+            if (((listView.isGroupExpanded(i)) && (i != group))
+                    || ((!listView.isGroupExpanded(i)) && (i == group))) {
+                for (int j = 0; j < listAdapterFormation.getChildrenCount(i); j++) {
+                    View listItem = listAdapterFormation.getChildView(i, j, false, null,
                             listView);
                     listItem.measure(desiredWidth, View.MeasureSpec.UNSPECIFIED);
 
@@ -91,7 +128,7 @@ public class EcoleActivity extends AppCompatActivity {
 
         ViewGroup.LayoutParams params = listView.getLayoutParams();
         int height = totalHeight
-                + (listView.getDividerHeight() * (listAdapter.getGroupCount() - 1));
+                + (listView.getDividerHeight() * (listAdapterFormation.getGroupCount() - 1));
         if (height < 10)
             height = 200;
         params.height = height;
@@ -115,24 +152,23 @@ public class EcoleActivity extends AppCompatActivity {
         this.listView = listView;
     }
 
-    public ExpandableListAdapter getListAdapter() {
-        return listAdapter;
+    public ExpandableListAdapterEvenement getListAdapterEvenement() {
+        return listAdapterEvenement;
     }
 
-    public void setListAdapter(ExpandableListAdapter listAdapter) { this.listAdapter = listAdapter; }
+    public void setListAdapter(ExpandableListAdapterEvenement listAdapterEvenement) { this.listAdapterEvenement = listAdapterEvenement; }
+
+    public ExpandableListAdapterFormation getListAdapterFormation() {
+        return listAdapterFormation;
+    }
+
+    public void setListAdapter(ExpandableListAdapterFormation listAdapterFormation) { this.listAdapterFormation = listAdapterFormation; }
 
     public List<String> getListDataHeader() {
         return listDataHeader;
     }
 
     public void setListDataHeader(List<String> listDataHeader) { this.listDataHeader = listDataHeader; }
-
-    public HashMap<String, List<String>> getListHashMap() {
-        return listHashMap;
-    }
-
-    public void setListHashMap(HashMap<String, List<String>> listHashMap) { this.listHashMap = listHashMap; }
-
 
 
 

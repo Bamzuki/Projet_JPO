@@ -2,7 +2,6 @@ package eu.ensg.jpo.explor_descartes.donneesAcces;
 
 import android.view.View;
 import android.widget.ExpandableListView;
-import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -14,7 +13,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import eu.ensg.jpo.explor_descartes.EcoleActivity;
-import eu.ensg.jpo.explor_descartes.ExpandableListAdapter;
+import eu.ensg.jpo.explor_descartes.ExpandableListAdapterFormation;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.R;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Formation;
@@ -99,7 +98,7 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
 
                 System.out.println("FormationDAO:" + listHashMap);
 
-                final ExpandableListAdapter listAdapter = new ExpandableListAdapter(activity, listDataHeader, listHashMap);
+                final ExpandableListAdapterFormation listAdapter = new ExpandableListAdapterFormation(activity, listDataHeader, listHashMap);
 
                 activity.runOnUiThread(new Runnable() {
                     @Override
@@ -110,7 +109,7 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
                         listView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
                             @Override
                             public boolean onGroupClick(ExpandableListView parent, View v, int groupPosition, long id) {
-                                activity.setListViewHeight(parent, groupPosition);
+                                activity.setListViewHeightFormation(parent, groupPosition);
                                 return false;
                             }
                         });

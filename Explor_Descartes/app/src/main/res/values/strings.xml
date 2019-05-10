@@ -202,6 +202,19 @@
     <string name="master">Master</string>
     <string name="inge_commerce">Ecole d\'ingénieur / Ecole de commerce</string>
     <string name="bts_dut_deust">BTS/DUT/DEUST</string>
+    <string name="mot_de_passe_oubli">Mot de passe oublié ?</string>
+
+    <string name="favori_impossible">Cette fonctionnalité n\'est disponible que pour les utilisateurs enregistrés</string>
+    <string name="gestion_compte">Gestion du compte</string>
+    <string name="modifier_donnees_perso">Modifier les Données Personnelles</string>
+    <string name="modifier_mdp">Modifier le mot de passe</string>
+    <string name="deconnexion">Se déconnecter</string>
+    <string name="supprimer_compte">Supprimer son compte</string>
+    <string name="valider">Valider</string>
+    <string name="entrer_mdp">Entrer le nouveau mot de passe</string>
+    <string name="modif_prenom">Prénom</string>
+    <string name="modif_nom">Nom</string>
+    <string name="retour">retour</string>
 
 
 </resources>

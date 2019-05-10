@@ -45,10 +45,7 @@ public class SatisfactionActivity extends AppCompatActivity {
 
 
     private void validation() {
-
         // Récupération des valeurs entrées :
-
-
         String App1=app1.getText().toString();
         String App2=app2.getText().toString();
         String App3=app3.getText().toString();
@@ -73,9 +70,6 @@ public class SatisfactionActivity extends AppCompatActivity {
         String Jpo8=jpo8.getText().toString();
         String Jpo9=jpo9.getText().toString();
         String Jpo10=jpo10.getText().toString();
-
-
-
 
         ListeObjets.satisfaction.setQuestion_1(App1);
         ListeObjets.satisfaction.setQuestion_2(App2);
@@ -106,20 +100,17 @@ public class SatisfactionActivity extends AppCompatActivity {
         String urlServeur = getString(R.string.url_serveur_ecoles);
         try {
             SatisfactionDAO satisfactionDAO = new SatisfactionDAO(urlServeur);
-            SatisfactionDAO.saveSatisfaction( this, ListeObjets.satisfaction);
+            satisfactionDAO.saveSatisfaction( this, ListeObjets.satisfaction);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @SuppressLint("WrongViewCast")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
-
+        setContentView(R.layout.activity_satisfaction);
         // I - Instanciation des objets Java représentant les composants graphiques
 
         validationB = (Button)findViewById(R.id.validationB);
@@ -150,55 +141,12 @@ public class SatisfactionActivity extends AppCompatActivity {
         jpo10=(CheckBox)findViewById(R.id.jpo10);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
-
-
-
         validationB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 SatisfactionActivity.this.validation();
             }
         });
-
-
-
-
-
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        contentTemp();
-
-    }
-
-    @Override
-    protected void contentTemp() {
-
-    }
-
-    @Override
-    protected void llayout() { setLayout(R.layout.activity_satisfaction);}
 }

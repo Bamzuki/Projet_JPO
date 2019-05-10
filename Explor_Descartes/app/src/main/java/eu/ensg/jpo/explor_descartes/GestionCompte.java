@@ -19,89 +19,77 @@ public class GestionCompte extends AppCompatActivity {
     Button Deconnexion;
     Button Suppression;
 
-
-
-
-
     private void openModifierPerso() {
-
         // Create intent
         Intent intent = new Intent(this, ModifierPerso.class);
 
-        // Start activity
-        startActivity(intent);
+        if (ListeObjets.visiteur != null){
+            // Start activity
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this, "Vous n'est pas connecté !" , Toast.LENGTH_SHORT).show();
+        }
     }
 
     private void openModifierMdp() {
-
         // Create intent
         Intent intent = new Intent(this, ModifierMdp.class);
 
-        // Start activity
-        startActivity(intent);
-
+        if (ListeObjets.visiteur != null){
+            // Start activity
+            startActivity(intent);
+        }
+        else {
+            Toast.makeText(this, "Vous n'est pas connecté !" , Toast.LENGTH_SHORT).show();
+        }
     }
-
 
     private void openSuppression() {
-
-
-
-
-
-        // Suppression dans la base de données :
-        String urlServeur = getString(R.string.url_serveur_ecoles);
-        try {
-            VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-            visiteurDAO.suppression( ListeObjets.visiteur);
-        } catch (Exception e) {
-            e.printStackTrace();
+        if (ListeObjets.visiteur != null){
+            // Suppression dans la base de données :
+            String urlServeur = getString(R.string.url_serveur_ecoles);
+            try {
+                VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
+                visiteurDAO.suppression( ListeObjets.visiteur);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
         }
-
+        else {
+            Toast.makeText(this, "Vous n'est pas connecté !" , Toast.LENGTH_SHORT).show();
+        }
     }
-
-
-
 
     private void openDeconnexion() {
-
-        //Remise à zéro de la valeur
-
-
         // Create intent
-        Intent intent = new Intent(this, SignInActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
 
-        // Start activity
-        startActivity(intent);
+        if (ListeObjets.visiteur != null){
+            //Remise à zéro de la valeur
+            ListeObjets.visiteur = null;
 
+            // Start activity
+            startActivity(intent);
+
+            Toast.makeText(this, "Au revoir " + ListeObjets.visiteur.getPseudo() , Toast.LENGTH_SHORT).show();
+
+        }
+        else {
+            Toast.makeText(this, "Vous n'est pas connecté !" , Toast.LENGTH_SHORT).show();
+        }
     }
-
-
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gestion_compte);
 
-
-
-
-
     // I - Instanciation des objets Java représentant les composants graphiques
-
     ModifierPerso = (Button) findViewById(R.id.ModifierPersoB);
     ModifierMdp   = (Button) findViewById(R.id.ModifierMdpB);
     Deconnexion = (Button) findViewById(R.id.Deconnexion);
-    Suppression = (Button) findViewById(R.id.Sppression);
-
-
-
-
-
-
-
+    Suppression = (Button) findViewById(R.id.Suppression);
 
     // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
@@ -132,7 +120,4 @@ public class GestionCompte extends AppCompatActivity {
         });
 
     }
-
-
-
 }

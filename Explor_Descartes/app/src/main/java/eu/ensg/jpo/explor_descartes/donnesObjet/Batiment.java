@@ -71,7 +71,6 @@ public class Batiment extends DataBaseObject{
             layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), PropertyFactory.iconTranslate(translationIcon), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true));
             style.addLayer(layerNomBatiment);
             */
-
         }
 
     }

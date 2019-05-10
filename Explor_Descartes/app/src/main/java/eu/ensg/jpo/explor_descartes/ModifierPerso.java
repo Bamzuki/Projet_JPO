@@ -22,6 +22,7 @@ public class ModifierPerso extends AppCompatActivity {
     EditText pseudoET;
     EditText mailET;
 
+
     public static boolean isValidEmailAddress(String email) {
         boolean result = true;
         try {

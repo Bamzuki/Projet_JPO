@@ -22,27 +22,7 @@ public class ModifierMdp extends AppCompatActivity {
     EditText mdp_confirmET;
 
 
-
-    public void openSignInActivity() {
-
-        // Create intent
-        Intent intent = new Intent(this, SignInActivity.class);
-
-        // Start activity
-        startActivity(intent);
-    }
-
-    public void openAccueilActivity() {
-
-        // Create intent
-        Intent intent = new Intent(this, AccueilActivity.class);
-
-        // Start activity
-        startActivity(intent);
-    }
-
     private void validation() {
-
         // Récupération des valeurs entrées :
 
         String mdp = mdpET.getText().toString();
@@ -58,8 +38,6 @@ public class ModifierMdp extends AppCompatActivity {
             return;
         }
 
-
-
         ListeObjets.visiteur.setMdp(mdp);
 
         // Enregistrement dans la base de données :
@@ -70,14 +48,12 @@ public class ModifierMdp extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_register);
-
+        setContentView(R.layout.activity_modifier_mdp);
 
         // I - Instanciation des objets Java représentant les composants graphiques
 
@@ -87,8 +63,6 @@ public class ModifierMdp extends AppCompatActivity {
         mdp_confirmET = (EditText) findViewById(R.id.mdp_confirmET);
 
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
-
-
 
         validationB.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -140,6 +140,22 @@ public class Evenement extends DataBaseObject{
         }
     }
 
+    public String getHoraires(){
+        return this.debut.substring(11,16) + " - " + this.fin.substring(11,16);
+    }
+
+    public boolean estUnFavori(Visiteur visiteur){
+        if (ListeObjets.visiteur == null){
+            return false;
+        }
+        for (int idFavori : visiteur.getListeFavoris()){
+            if (idFavori == this.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public String getNom() {
         return nom;
     }

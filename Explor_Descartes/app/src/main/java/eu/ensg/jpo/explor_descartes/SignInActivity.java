@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 
 public class SignInActivity extends AppCompatActivity {
 

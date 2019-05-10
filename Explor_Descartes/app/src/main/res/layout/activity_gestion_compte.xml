@@ -1,52 +1,69 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#FFFF"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <TextView
-        android:id="@+id/textView2"
-        android:layout_width="148dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="16dp"
-        android:text="Gestion du Compte"
-        android:textColor="@color/black_overlay"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="121dp" />
+        android:id="@+id/gestionCompte"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/gestion_compte"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <Button
-        android:id="@+id/ModifierPerso"
-        android:layout_width="wrap_content"
+        android:id="@+id/ModifierPersoB"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Modifier les Données Personnelles"
-        tools:layout_editor_absoluteX="61dp"
-        tools:layout_editor_absoluteY="95dp" />
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/modifier_donnees_perso"
+        android:textColor="@android:color/white" />
 
     <Button
-        android:id="@+id/ModifierMdp"
-        android:layout_width="wrap_content"
+        android:id="@+id/ModifierMdpB"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Modifier le mot de passe"
-        tools:layout_editor_absoluteX="88dp"
-        tools:layout_editor_absoluteY="213dp" />
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/modifier_mdp"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/Deconnexion"
-        style="@style/Widget.AppCompat.Button"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Se déconnecter"
-        tools:layout_editor_absoluteX="121dp"
-        tools:layout_editor_absoluteY="312dp" />
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/deconnexion"
+        android:textColor="@android:color/white" />
 
     <Button
         android:id="@+id/Suppression"
-        android:layout_width="wrap_content"
+        android:layout_width="300dp"
         android:layout_height="wrap_content"
-        android:text="Supprimer son compte"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="405dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_margin="20dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:padding="5dp"
+        android:text="@string/supprimer_compte"
+        android:textColor="@android:color/white" />
+</LinearLayout>

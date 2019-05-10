@@ -1,53 +1,84 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFF"
+    android:background="@android:color/white"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
     tools:context=".ModifierMdp">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="30dp"
+        android:background="@android:color/white"
+        android:gravity="center"
+        android:padding="10dp"
+        android:text="@string/modifier_mdp"
+        android:textColor="@color/colorPrimary"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/entrer_mdp"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/mdpET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/colorPrimary"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/mdp"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="14sp"
+        tools:targetApi="o" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/mdp_confirmation"
+        android:textColor="@android:color/black"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/mdp_confirmET"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="15dp"
+        android:autofillHints=""
+        android:backgroundTint="@color/colorPrimary"
+        android:ems="10"
+        android:gravity="center"
+        android:hint="@string/mdp_confirmation"
+        android:inputType="textPassword"
+        android:textColor="@android:color/black"
+        android:textColorHint="@android:color/darker_gray"
+        android:textSize="14sp"
+        tools:targetApi="o" />
 
     <Button
         android:id="@+id/validationB"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Valider"
-        tools:layout_editor_absoluteX="159dp"
-        tools:layout_editor_absoluteY="434dp" />
-
-    <EditText
-        android:id="@+id/mdpET"
-        android:layout_width="wrap_content"
-        android:layout_height="42dp"
-        android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="173dp" />
-
-    <EditText
-        android:id="@+id/mdp_confirmET"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        tools:layout_editor_absoluteX="94dp"
-        tools:layout_editor_absoluteY="318dp" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Modifier le mot de passe"
-        android:textColor="@color/black_overlay"
-        tools:layout_editor_absoluteX="107dp"
-        tools:layout_editor_absoluteY="114dp" />
-
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="189dp"
-        android:layout_height="21dp"
-        android:text="Confirmer la modification"
-        android:textColor="@color/black_overlay"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="273dp" />
-</android.support.constraint.ConstraintLayout>
+        android:layout_margin="5dp"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:text="@string/valider"
+        android:textColor="@android:color/white" />
+</LinearLayout>
