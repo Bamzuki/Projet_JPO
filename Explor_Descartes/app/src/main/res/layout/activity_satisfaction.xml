@@ -2,11 +2,10 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FFFFFF"
+    android:background="@android:color/white"
     tools:context=".MainActivity">
 
     <!--Barre d'application-->
@@ -15,27 +14,32 @@
     <!--Scroll contenant le questionnaire -->
 
     <ScrollView
+        android:id="@+id/scrollview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="?attr/actionBarSize"
         android:background="@android:color/white">
 
         <LinearLayout
+            android:id="@+id/questionnaire"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_horizontal"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/textSatisfaction"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="30dp"
                 android:background="@android:color/white"
                 android:gravity="center"
+                android:padding="10dp"
                 android:text="@string/questionnaire_satisfaction"
-                android:textAlignment="center"
-                android:textAppearance="?android:attr/textAppearanceLarge"
-                android:textColor="#000"
-                android:textSize="24sp" />
+                android:textColor="@color/colorPrimary"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/application"
@@ -77,11 +81,11 @@
                     android:layout_marginStart="15dp"
                     android:layout_weight="1"
                     android:background="@android:color/white"
+                    android:buttonTint="@color/colorPrimary"
                     android:gravity="center_vertical"
                     android:text="@string/oui"
                     android:textColor="@android:color/black"
-                    android:textSize="14sp"
-                    android:buttonTint="@color/colorPrimary"/>
+                    android:textSize="14sp" />
 
                 <RadioButton
                     android:id="@+id/appQ1Choix2"
@@ -941,7 +945,7 @@
                     android:background="@android:color/white"
                     android:buttonTint="@color/colorPrimary"
                     android:gravity="center_vertical"
-                    android:text="Entre 25 en 40 ans "
+                    android:text="@string/entre_15_25"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
 
@@ -954,7 +958,7 @@
                     android:background="@android:color/white"
                     android:buttonTint="@color/colorPrimary"
                     android:gravity="center_vertical"
-                    android:text="Plus de 40 ans "
+                    android:text="@string/plus_40"
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </RadioGroup>
@@ -1616,6 +1620,17 @@
                     android:textColor="@android:color/black"
                     android:textSize="14sp" />
             </RadioGroup>
+
+            <Button
+                android:id="@+id/validationB"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:layout_marginBottom="15dp"
+                android:background="@color/colorPrimary"
+                android:gravity="center"
+                android:text="@string/valider"
+                android:textColor="@android:color/white" />
         </LinearLayout>
     </ScrollView>
 

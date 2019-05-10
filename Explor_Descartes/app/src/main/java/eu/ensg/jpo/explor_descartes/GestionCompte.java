@@ -11,15 +11,16 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import java.lang.reflect.Modifier;
+import java.text.ParseException;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 
-public class GestionCompte extends AppCompatActivity {
+public class GestionCompte extends template {
 
-    Button ModifierPerso;
-    Button ModifierMdp;
-    Button Deconnexion;
-    Button Suppression;
+    private Button ModifierPerso;
+    private Button ModifierMdp;
+    private Button Deconnexion;
+    private Button Suppression;
 
     private void openModifierPerso() {
         // Create intent
@@ -86,6 +87,7 @@ public class GestionCompte extends AppCompatActivity {
             // Start activity
             startActivity(intent);
 
+            Toast.makeText(this, "Au revoir " + ListeObjets.visiteur.getPseudo() , Toast.LENGTH_SHORT).show();
 
         }
         else {
@@ -96,13 +98,13 @@ public class GestionCompte extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_gestion_compte);
+        contentTemp();
 
-    // I - Instanciation des objets Java représentant les composants graphiques
-    ModifierPerso = (Button) findViewById(R.id.ModifierPersoB);
-    ModifierMdp   = (Button) findViewById(R.id.ModifierMdpB);
-    Deconnexion = (Button) findViewById(R.id.Deconnexion);
-    Suppression = (Button) findViewById(R.id.Suppression);
+        // I - Instanciation des objets Java représentant les composants graphiques
+        Button ModifierPerso = (Button) findViewById(R.id.ModifierPersoB);
+        Button ModifierMdp   = (Button) findViewById(R.id.ModifierMdpB);
+        Button Deconnexion = (Button) findViewById(R.id.Deconnexion);
+        Button Suppression = (Button) findViewById(R.id.Suppression);
 
     // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
@@ -128,9 +130,46 @@ public class GestionCompte extends AppCompatActivity {
         Suppression.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                GestionCompte.this.openSuppression();
-            }
-        });
+                    GestionCompte.this.openModifierPerso();
+                }
+            });
+            ModifierMdp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    GestionCompte.this.openModifierMdp();
+                }
+            });
+            Deconnexion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                    GestionCompte.this.openDeconnexion();
+                }
+            });
+            Suppression.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    GestionCompte.this.openSuppression();
+                }
+            });
+    }
 
+    @Override
+    public void getData() throws ParseException {
+        super.getData();
+    }
+
+    @Override
+    protected void contentTemp() {
+        super.contentTemp();
+    }
+
+    @Override
+    protected void llayout() {
+        setLayout(R.layout.activity_gestion_compte);
+    }
+
+    @Override
+    public void setLayout(int newLayout) {
+        super.setLayout(newLayout);
     }
 }

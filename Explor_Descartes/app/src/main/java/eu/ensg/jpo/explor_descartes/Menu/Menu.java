@@ -74,14 +74,14 @@ public class Menu {
     }
 
     public void openpageFAQ() {
-        String url = String.valueOf(R.string.url_serveur) + "FAQ.html";
+        String url = "http://82.229.248.34/FAQ.html";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         con.startActivity(i);
     }
 
     public void openpageCGU() {
-        String url = String.valueOf(R.string.url_serveur) + "Conditions générales d'utilisation";
+        String url = "http://82.229.248.34/Conditions générales d'utilisation.html";
         Intent i = new Intent(Intent.ACTION_VIEW);
         i.setData(Uri.parse(url));
         con.startActivity(i);

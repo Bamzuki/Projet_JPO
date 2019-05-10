@@ -67,7 +67,6 @@ public class Batiment extends DataBaseObject{
             String text = ListeObjets.getEcoleById(this.id_ecole).getNom() + "\n(" + this.nom + ")";
             layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true), PropertyFactory.textAnchor(Property.TEXT_ANCHOR_TOP));
             style.addLayer(layerNomBatiment);
-
         }
 
     }

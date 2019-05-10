@@ -152,6 +152,7 @@
         android:textAlignment="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
         android:textColor="@android:color/black"
+        android:textColorLink="@color/colorPrimary"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/validationB"
         app:layout_constraintLeft_toLeftOf="parent"
