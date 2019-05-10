@@ -17,6 +17,11 @@ import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 
 public class GestionCompte extends template {
 
+    private Button ModifierPerso;
+    private Button ModifierMdp;
+    private Button Deconnexion;
+    private Button Suppression;
+
     private void openModifierPerso() {
         // Create intent
         Intent intent = new Intent(this, ModifierPerso.class);
@@ -82,6 +87,7 @@ public class GestionCompte extends template {
             // Start activity
             startActivity(intent);
 
+            Toast.makeText(this, "Au revoir " + ListeObjets.visiteur.getPseudo() , Toast.LENGTH_SHORT).show();
 
         }
         else {
@@ -100,8 +106,28 @@ public class GestionCompte extends template {
         Button Deconnexion = (Button) findViewById(R.id.Deconnexion);
         Button Suppression = (Button) findViewById(R.id.Suppression);
 
-        // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
-            ModifierPerso.setOnClickListener(new View.OnClickListener() {
+    // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
+
+        ModifierPerso.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GestionCompte.this.openModifierPerso();
+        }
+    });
+        ModifierMdp.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GestionCompte.this.openModifierMdp();
+        }
+    });
+
+        Deconnexion.setOnClickListener(new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            GestionCompte.this.openDeconnexion();
+        }
+    });
+        Suppression.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                     GestionCompte.this.openModifierPerso();

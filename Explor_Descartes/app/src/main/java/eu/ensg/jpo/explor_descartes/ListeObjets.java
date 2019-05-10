@@ -22,6 +22,7 @@ public final class ListeObjets {
     public static Satisfaction satisfaction = null;
 
 
+
     public static Ecole getEcoleById(int id){
         for (Ecole ecole : listeEcole){
             if (ecole.getId() == id){

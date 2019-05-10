@@ -118,7 +118,6 @@ public class SatisfactionActivity extends template {
             @Override
             public void onClick(View view) {
                 SatisfactionActivity.this.validation();
-                SatisfactionActivity.this.fermer();
             }
         });
     }
@@ -130,7 +129,7 @@ public class SatisfactionActivity extends template {
 
         //Recupération des valeurs entrées
         int id_rep_app1 = app1.getCheckedRadioButtonId();
-            if (id_rep_app1 > -1){
+        if (id_rep_app1 > -1){
             rep_app1 = (RadioButton) findViewById(id_rep_app1);
             reponses.add(rep_app1.getText().toString());
         }
@@ -381,27 +380,6 @@ public class SatisfactionActivity extends template {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-    }
-
-    public void fermer(){
-
-        // Suppresion du questionnaire
-        ScrollView scrollView = (ScrollView) findViewById(R.id.scrollview);
-        LinearLayout questionnaire = (LinearLayout) findViewById(R.id.questionnaire);
-        questionnaire.removeAllViews();
-
-        // Creation d'un nouvel LinearLayout
-        LinearLayout linearLayout = new LinearLayout(this);
-        linearLayout.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.WRAP_CONTENT));
-        linearLayout.setOrientation(LinearLayout.VERTICAL);
-        linearLayout.setGravity(Gravity.CENTER);
-
-        //Ajout du texte
-        TextView textView = new TextView(this);
-        textView.setText(R.string.remerciment);
-        linearLayout.addView(textView);
-        scrollView.addView(linearLayout);
 
     }
 

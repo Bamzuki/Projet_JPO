@@ -6,7 +6,6 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.GridView;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
@@ -36,9 +35,12 @@ public class AccueilActivity extends template {
                 startActivity(intent);
             }
         });
+
     }
 
     private ArrayList<ImageEcole> getListImageEcoles() {
+
+
         final ArrayList<ImageEcole> imageEcoles = new ArrayList<>();
         for (Ecole ecole : ListeObjets.listeEcole) {
             ImageEcole imageEcole = new ImageEcole(ecole.getNom(), ecole);
@@ -47,24 +49,10 @@ public class AccueilActivity extends template {
         return imageEcoles;
     }
 
+
     @Override
     protected void llayout(){
         setLayout(R.layout.activity_accueil);
-    }
-
-    @Override
-    public void getData() throws ParseException {
-        super.getData();
-    }
-
-    @Override
-    protected void contentTemp() {
-        super.contentTemp();
-    }
-
-    @Override
-    public void setLayout(int newLayout) {
-        super.setLayout(newLayout);
     }
 
     @Override
@@ -74,6 +62,8 @@ public class AccueilActivity extends template {
         for (ImageEcole imageEcole : adapter.getData()){
             imageEcole.addPicture(this, adapter, getString(R.string.url_serveur));
         }
+
+
     }
 
 }
