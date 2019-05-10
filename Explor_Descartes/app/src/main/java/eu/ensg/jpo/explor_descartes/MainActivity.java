@@ -1,6 +1,8 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.widget.Button;
@@ -12,6 +14,7 @@ import java.util.ArrayList;
 import eu.ensg.jpo.explor_descartes.Menu.Menu;
 import eu.ensg.jpo.explor_descartes.donneesAcces.BatimentDAO;
 import eu.ensg.jpo.explor_descartes.donneesAcces.EcoleDAO;
+import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 
 
@@ -21,12 +24,25 @@ public class MainActivity extends AppCompatActivity {
     Button inscriptionB;
     Button ignorerB;
     Context con = this;
-    private Menu menuc = new Menu(con);
+    private Menu menu = new Menu(con);
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+        // Si déjà connecter :
+        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+        String pseudo = preferences.getString("pseudo", null);
+        String mdp = preferences.getString("mdp", null);
+        if (pseudo != null && mdp != null){
+            System.out.println(pseudo);
+            System.out.println(mdp);
+            VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
+            visiteurDAO.connexionAuto(this, pseudo, mdp);
+        }
+
         setContentView(R.layout.activity_main);
 
         // 0 - Chargement des objets depuis la base de données
@@ -43,21 +59,21 @@ public class MainActivity extends AppCompatActivity {
         connexionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuc.openSignInActivity();
+                menu.openSignInActivity();
             }
         });
 
         inscriptionB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuc.openRegisterActivity();
+                menu.openRegisterActivity();
             }
         });
 
         ignorerB.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                menuc.openAccueilActivity();
+                menu.openAccueilActivity();
             }
         });
 
@@ -72,5 +88,9 @@ public class MainActivity extends AppCompatActivity {
         EcoleDAO ecoleDAO = new EcoleDAO(urlServeur);
         ecoleDAO.chargerEcole();
 
+    }
+
+    public Menu getMenu() {
+        return menu;
     }
 }
