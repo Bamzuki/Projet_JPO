@@ -1,6 +1,8 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -51,6 +53,7 @@ public class GestionCompte extends template {
             } catch (Exception e) {
                 e.printStackTrace();
             }
+            openDeconnexion();
         }
         else {
             Toast.makeText(this, "Vous n'est pas connecté !" , Toast.LENGTH_SHORT).show();
@@ -58,17 +61,27 @@ public class GestionCompte extends template {
     }
 
     private void openDeconnexion() {
-        // Create intent
-        Intent intent = new Intent(this, MainActivity.class);
 
         if (ListeObjets.visiteur != null){
-            //Remise à zéro de la valeur
+
+            Toast.makeText(this, "Au revoir " + ListeObjets.visiteur.getPseudo() , Toast.LENGTH_SHORT).show();
+
+            // Suppression des données stockées sur l'application
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove("pseudo");
+            editor.remove("mdp");
+            editor.commit();
+
+            //Remise à zéro de la valeur visiteur
             ListeObjets.visiteur = null;
+
+            // Create intent
+            Intent intent = new Intent(this, MainActivity.class);
 
             // Start activity
             startActivity(intent);
 
-            Toast.makeText(this, "Au revoir " + ListeObjets.visiteur.getPseudo() , Toast.LENGTH_SHORT).show();
 
         }
         else {

@@ -13,6 +13,7 @@ import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
 import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.PropertyValue;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -54,23 +55,19 @@ public class Batiment extends DataBaseObject{
             FillLayer layerBatiment = new FillLayer("batiment"+this.id, "polygon"+this.id).withProperties(fillOpacity(0.5f), fillColor("blue"));
             style.addLayer(layerBatiment);
 
-            /*
+
             // II - Création et affichage du nom :
             String geoJsonPoint = "{\"type\": \"Point\",\"coordinates\": [" + this.lng + ", " + this.lat + "]}";
             GeoJsonSource point = new GeoJsonSource("point"+this.id, geoJsonPoint);
             style.addSource(point);
             SymbolLayer layerNomBatiment = new SymbolLayer("nomBatiment"+this.id, "point"+this.id);
-            Float[] translationIcon = new Float[2];
-            translationIcon[0] = new Float(0);
-            translationIcon[1] = new Float(0);
             Float[] translationText = new Float[2];
             translationText[0] = new Float(0);
-            translationText[1] = new Float(25);
-            System.out.println(this.id_ecole);
+            translationText[1] = new Float(10);
             String text = ListeObjets.getEcoleById(this.id_ecole).getNom() + "\n(" + this.nom + ")";
-            layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), PropertyFactory.iconTranslate(translationIcon), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true));
+            layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true), PropertyFactory.textAnchor(Property.TEXT_ANCHOR_TOP));
             style.addLayer(layerNomBatiment);
-            */
+
         }
 
     }

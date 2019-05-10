@@ -1,5 +1,8 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
 
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -9,11 +12,13 @@ import java.io.IOException;
 
 import eu.ensg.jpo.explor_descartes.EcoleActivity;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
+import eu.ensg.jpo.explor_descartes.MainActivity;
 import eu.ensg.jpo.explor_descartes.ModifierMdp;
 import eu.ensg.jpo.explor_descartes.ModifierPerso;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
+import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -146,6 +151,53 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         return;
     }
 
+    public void connexionAuto(final MainActivity activity, String mailOrPseudo, String mdp) {
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=connexion";
+        String donnees = "&&mail=" + mailOrPseudo + "&&mdp=" + mdp;
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                final Visiteur visiteur = new Gson().fromJson(response.body().string(), Visiteur.class);
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+
+                        //Identifiants incorrects
+                        if (visiteur == null){
+                            Toast.makeText(activity, "Votre compte semble avoir été modifié ! Reconnectez-vous avec vos nouveaux identifiants." , Toast.LENGTH_LONG).show();
+                        }
+
+                        //Identifiants corrects
+                        else{
+                            // Instanciation du visiteur
+                            ListeObjets.visiteur = visiteur;
+                            Toast.makeText(activity, "Bonjour " + visiteur.getPseudo() + " !", Toast.LENGTH_LONG).show();
+                            activity.getMenu().openAccueilActivity();
+
+                        }
+                    }
+                });
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Problème de connexion au serveur..." , Toast.LENGTH_LONG).show();
+                    }
+                });
+            }
+        });
+    }
+
     public void connexionBdd(final SignInActivity activity, String mailOrPseudo, String mdp) {
 
         // Construction de la requete
@@ -172,9 +224,21 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
                         //Identifiants corrects
                         else{
+                            // Instanciation du visiteur
                             ListeObjets.visiteur = visiteur;
+                            // Enregistrement dans les données de l'application
+                            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.remove("pseudo");
+                            editor.remove("mdp");
+                            editor.putString("pseudo", visiteur.getPseudo());
+                            editor.putString("mdp", visiteur.getMdp());
+                            editor.commit();
                             Toast.makeText(activity, "Bonjour " + visiteur.getPseudo() + " !", Toast.LENGTH_LONG).show();
                             activity.openAccueilActivity();
+
+
+
                         }
                     }
                 });
@@ -210,6 +274,14 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                     @Override
                     public void run() {
                         ListeObjets.visiteur = visiteur;
+                        // Enregistrement dans les données de l'application
+                        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(activity);
+                        SharedPreferences.Editor editor = preferences.edit();
+                        editor.remove("pseudo");
+                        editor.remove("mdp");
+                        editor.putString("pseudo", visiteur.getPseudo());
+                        editor.putString("mdp", visiteur.getMdp());
+                        editor.commit();
                         Toast.makeText(activity, "Inscription réussie !", Toast.LENGTH_LONG).show();
                         activity.openAccueilActivity();
                     }
@@ -275,7 +347,77 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         });
     }
 
-    public void ajouterFavori(final EcoleActivity activity, Visiteur visiteur, int idFavoris){
+    public void ajouterFavori(final Activity activity, Evenement favori){
+
+        // I - Ajout du favori sur l'application
+        ListeObjets.listeFavoris.add(favori);
+        ListeObjets.visiteur.getListeFavoris().add(favori.getId());
+
+        // II - Ajout du favori dans la BDD
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=ajouterFavori";
+        String donnees = "&&idUtilisateur=" + ListeObjets.visiteur.getId() + "&&idFavoris=" + favori.getId();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+        System.out.println(url);
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Favori ajouté !" , Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+    }
+
+    public void supprimerFavori(final Activity activity, Evenement favori){
+
+        // I - Suppression du favori sur l'application
+        ListeObjets.listeFavoris.remove(favori);
+        ListeObjets.visiteur.getListeFavoris().remove(ListeObjets.visiteur.getListeFavoris().indexOf(favori.getId()));
+
+        // II - Suppression du favori dans la BDD
+
+        // Construction de la requete
+        String url = this.urlServeur + "?request=supprimerFavori";
+        String donnees = "&&idUtilisateur=" + ListeObjets.visiteur.getId() + "&&idFavoris=" + favori.getId();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(activity, "Favori supprimé !" , Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
+
+
+    }
+
+
+    public void ajouterFavori(final Activity activity, Visiteur visiteur, int idFavoris){
 
         // I - Ajout du favori sur l'application
         ListeObjets.visiteur.getListeFavoris().add(idFavoris);
@@ -283,7 +425,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         // II - Ajout du favori dans la BDD
 
         // Construction de la requete
-        String url = this.urlServeur + "?request=ajouterFavoris";
+        String url = this.urlServeur + "?request=ajouterFavori";
         String donnees = "&&idUtilisateur=" + visiteur.getId() + "&&idFavoris=" + idFavoris;
         url = url + donnees;
         Request request = new Request.Builder().url(url).build();
@@ -307,7 +449,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         });
     }
 
-    public void supprimerFavori(final AppCompatActivity activity, Visiteur visiteur, int idFavoris){
+    public void supprimerFavori(final Activity activity, Visiteur visiteur, int idFavoris){
 
         // I - Suppression du favori sur l'application
         System.out.println(ListeObjets.visiteur.getListeFavoris().indexOf(idFavoris));
@@ -316,7 +458,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         // II - Suppression du favori dans la BDD
 
         // Construction de la requete
-        String url = this.urlServeur + "?request=supprimerFavoris";
+        String url = this.urlServeur + "?request=supprimerFavori";
         String donnees = "&&idUtilisateur=" + visiteur.getId() + "&&idFavoris=" + idFavoris;
         url = url + donnees;
         Request request = new Request.Builder().url(url).build();

@@ -26,15 +26,18 @@
         <activity android:name=".EcoleActivity" />
         <activity
             android:name=".MainActivity"
-            android:theme="@style/AppTheme">
+            android:theme="@style/AppTheme"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".SignInActivity" />
+        <activity android:name=".RegisterActivity"
+            android:screenOrientation="portrait"/>
+        <activity android:name=".SignInActivity"
+            android:screenOrientation="portrait"/>
         <activity android:name=".NavigationActivity" />
         <activity
             android:name=".SettingsActivity"
@@ -44,7 +47,6 @@
             android:label="@string/title_activity_accueil"
             android:theme="@style/AppTheme" />
         <activity android:name=".GestionCompte" />
-        <activity android:name=".MoodifierPerso" />
         <activity android:name=".ModifierMdp" />
         <activity android:name=".ModifierPerso"></activity>
     </application>

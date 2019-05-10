@@ -26,7 +26,6 @@ import eu.ensg.jpo.explor_descartes.R;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 import com.mapbox.mapboxsdk.style.layers.Property;
 
 public class Evenement extends DataBaseObject{
@@ -112,7 +111,7 @@ public class Evenement extends DataBaseObject{
         if (batiment == null){
             return null;
         }
-        String Json = "{\"type\": \"Feature\", \"properties\": {\"nom\": \"" + this.nom + "\", \"type\": \"favori\", \"debut\": \"" + this.debut + "\", \"fin\": \"" + this.fin + "\", \"selected\": false, \"favourite\": true}, \"geometry\": {\"type\": \"Point\",\"coordinates\": [" + batiment.getLng() + ", " + batiment.getLat() + "]}}";
+        String Json = "{\"type\": \"Feature\", \"properties\": {\"id\": \""+this.id+"\", \"nom\": \"" + this.nom + "\", \"titre\": \"" + this.ecole+ "\n(" + this.batiment +")\", \"type\": \"favori\", \"debut\": \"" + this.debut + "\", \"fin\": \"" + this.fin + "\", \"selected\": false, \"favourite\": true}, \"geometry\": {\"type\": \"Point\",\"coordinates\": [" + batiment.getLng() + ", " + batiment.getLat() + "]}}";
         return Json;
     }
 
@@ -142,6 +141,18 @@ public class Evenement extends DataBaseObject{
 
     public String getHoraires(){
         return this.debut.substring(11,16) + " - " + this.fin.substring(11,16);
+    }
+
+    public boolean estUnFavori(Visiteur visiteur){
+        if (ListeObjets.visiteur == null){
+            return false;
+        }
+        for (int idFavori : visiteur.getListeFavoris()){
+            if (idFavori == this.getId()){
+                return true;
+            }
+        }
+        return false;
     }
 
     public String getNom() {
