@@ -29,14 +29,14 @@
     <!--Menu des activités (à gauche)-->
     <ListView
         android:id="@+id/leftMenuList"
+        android:layout_gravity="start"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
-        android:background="#FFFFFF"
         android:divider="#615B5B"
-        android:dividerHeight="4dp" />
-    <!--android:drawSelectorOnTop="true"
-        android:listSelector="@drawable/selector_la"-->
+        android:dividerHeight="4px"
+        android:background="#FFFFFF"
+        android:drawSelectorOnTop="true"
+        android:listSelector="@drawable/selector_la"/>
 
     <!--Menu notifications et favoris (à droite)-->
     <include layout="@layout/menu_right"/>

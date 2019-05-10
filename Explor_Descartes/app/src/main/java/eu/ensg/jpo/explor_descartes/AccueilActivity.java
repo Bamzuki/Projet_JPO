@@ -18,9 +18,9 @@ public class AccueilActivity extends template {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        gridView = (GridView) findViewById(R.id.main_grid);
         contentTemp();
 
-        gridView = (GridView) findViewById(R.id.main_grid);
         GridViewAdapter gridAdapter = new GridViewAdapter(this, this, R.layout.grid_item_layout, getListImageEcoles());
         gridView.setAdapter(gridAdapter);
         //Ajout de l'event listener :
