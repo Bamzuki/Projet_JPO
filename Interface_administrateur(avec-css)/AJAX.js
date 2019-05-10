@@ -1081,15 +1081,15 @@ function changeEcole(i){
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
   var nom               = papi.children[0];
-  nom.innerHTML         = "<input id='modif_nom_ecole" + i + "' placeholder='"+listeEcoles[i].nom+"'>";
+  nom.innerHTML         = "<input id='modif_nom_ecole" + i + "' value='"+listeEcoles[i].nom+"'>";
   var image               = papi.children[1];
   image.innerHTML         = " <input type='file' id='fileselect"+i+"' accept='image/*' name='fileselect' />";
   var adresse              = papi.children[2];
-  adresse.innerHTML         = "<input id='modif_adresse_ecole" + i + "' placeholder='"+listeEcoles[i].adresse+"'>";
+  adresse.innerHTML         = "<input id='modif_adresse_ecole" + i + "' value='"+listeEcoles[i].adresse+"'>";
   var site              = papi.children[3];
-  site.innerHTML        = "<input id='modif_site_ecole" + i + "' placeholder='"+listeEcoles[i].site+"'>";
+  site.innerHTML        = "<input id='modif_site_ecole" + i + "' value='"+listeEcoles[i].site+"'>";
   var description       = papi.children[4];
-  description.innerHTML = "<input id='modif_description_ecole" + i + "' placeholder='"+listeEcoles[i].description+"'>";
+  description.innerHTML = "<input id='modif_description_ecole" + i + "' value='"+listeEcoles[i].description+"'>";
 
   //Mise en place des deux nouveaux boutons
   var bouton_valider        = papi.children[5];
@@ -1207,13 +1207,13 @@ function changeBatiment(i){
  var papa               = bouton.parentNode;
  var papi               = papa.parentNode;
  var nom                = papi.children[0];
- nom.innerHTML          = "<input id='modif_nom_batiment" + i + "' placeholder='"+listeBatiments[i].nom+"'>";
+ nom.innerHTML          = "<input id='modif_nom_batiment" + i + "' value='"+listeBatiments[i].nom+"'>";
  var fonction           = papi.children[1];
- fonction.innerHTML     = "<input id='modif_fonction_batiment" + i + "' placeholder='"+listeBatiments[i].fonction+"'>";
+ fonction.innerHTML     = "<input id='modif_fonction_batiment" + i + "' value='"+listeBatiments[i].fonction+"'>";
  var latitude           = papi.children[2];
- latitude.innerHTML     = "<input id='modif_latitude_batiment" + i + "' placeholder='"+listeBatiments[i].lat+"'>";
+ latitude.innerHTML     = "<input id='modif_latitude_batiment" + i + "' value='"+listeBatiments[i].lat+"'>";
  var longitude          = papi.children[3];
- longitude.innerHTML    = "<input id='modif_longitude_batiment" + i + "' placeholder='"+listeBatiments[i].lng+"'>";
+ longitude.innerHTML    = "<input id='modif_longitude_batiment" + i + "' value='"+listeBatiments[i].lng+"'>";
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[4];
@@ -1319,7 +1319,7 @@ function changeFiliere(i){
   var papa        = bouton.parentNode;
   var papi        = papa.parentNode;
   var nom         = papi.children[0];
-  nom.innerHTML   = "<input id='modif_nom_filiere"+i+"' placeholder='"+listeFilieres[i].nom+"'>";
+  nom.innerHTML   = "<input id='modif_nom_filiere"+i+"' value='"+listeFilieres[i].nom+"'>";
 
   //on met en place les deux nouveaux boutons
   var bouton_valider        = papi.children[1];
@@ -1392,9 +1392,9 @@ function changeFormation(i){
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
   var nom               = papi.children[0];
-  nom.innerHTML         = "<input id='modif_nom_formation" + i + "' placeholder='"+listeFormations[i].nom+"'>";
+  nom.innerHTML         = "<input id='modif_nom_formation" + i + "' value='"+listeFormations[i].nom+"'>";
   var niveau            = papi.children[1];
-  niveau.innerHTML      = "<input id='modif_niveau_formation" + i + "' placeholder='"+listeFormations[i].niveau+"'>";
+  niveau.innerHTML      = "<input id='modif_niveau_formation" + i + "' value='"+listeFormations[i].niveau+"'>";
   var id_ecole          = papi.children[2];
   id_ecole.innerHTML    = "<select id='modif_id_ecole_formation" + i + "'></select>";
   getListeNomEcoles("modif_id_ecole_formation" + i + "");
@@ -1524,14 +1524,14 @@ function changeUtilisateur(i){
   //boucle qui transforme la ligne
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
-  var prenom               = papi.children[0];
-  prenom.innerHTML         = "<input id='modif_prenom_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].prenom+"'>";
-  var nom           = papi.children[1];
-  nom.innerHTML      = "<input id='modif_nom_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].nom+"'>";
-  var pseudo         = papi.children[2];
-  pseudo.innerHTML    = "<input id='modif_pseudo_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].pseudo+"'>";
-  var email      = papi.children[3];
-  email.innerHTML = "<input id='modif_email_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].email+"'>";
+  // var prenom               = papi.children[0];
+  // prenom.innerHTML         = "<input id='modif_prenom_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].prenom+"'>";
+  // var nom           = papi.children[1];
+  // nom.innerHTML      = "<input id='modif_nom_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].nom+"'>";
+  // var pseudo         = papi.children[2];
+  // pseudo.innerHTML    = "<input id='modif_pseudo_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].pseudo+"'>";
+  // var email      = papi.children[3];
+  // email.innerHTML = "<input id='modif_email_utilisateur" + i + "' placeholder='"+listeUtilisateurs[i].email+"'>";
   var admin        = papi.children[4];
   admin.innerHTML  = "<select id='modif_admin_utilisateur" + i + "'><option value='t'>Oui</option><option value='f'>Non</option></select>";
   admin.checked='false';
@@ -1576,36 +1576,36 @@ function validechangeUtilisateur(i){
 
   var input_id     = listeUtilisateurs[i].id;
 
-  var input_prenom         = document.getElementById("modif_prenom_utilisateur" + i + "").value;
-  var input_nom      = document.getElementById("modif_nom_utilisateur" + i + "").value;
-  var input_pseudo    = document.getElementById("modif_pseudo_utilisateur" + i + "").value;
-  var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
+  // var input_prenom         = document.getElementById("modif_prenom_utilisateur" + i + "").value;
+  // var input_nom      = document.getElementById("modif_nom_utilisateur" + i + "").value;
+  // var input_pseudo    = document.getElementById("modif_pseudo_utilisateur" + i + "").value;
+  // var input_email = document.getElementById("modif_email_utilisateur" + i + "").value;
 
   var input_admin  =  document.getElementById("modif_admin_utilisateur" + i + "").value;
   console.log(input_admin);
 
 
-  if(input_prenom == ""){
+  // if(input_prenom == ""){
 
-    input_prenom = listeUtilisateurs[i].prenom;
-  }
-
-
-  if(input_nom == ""){
-
-    input_nom = listeUtilisateurs[i].nom;
-  }
+    // input_prenom = listeUtilisateurs[i].prenom;
+  // }
 
 
-  if(input_pseudo == ""){
+  // if(input_nom == ""){
 
-    input_pseudo = listeUtilisateurs[i].pseudo;
-  }
+    // input_nom = listeUtilisateurs[i].nom;
+  // }
 
-  if(input_email == ""){
 
-    input_email = listeUtilisateurs[i].email;
-  }
+  // if(input_pseudo == ""){
+
+    // input_pseudo = listeUtilisateurs[i].pseudo;
+  // }
+
+  // if(input_email == ""){
+
+    // input_email = listeUtilisateurs[i].email;
+  // }
 
 
 
@@ -1616,7 +1616,7 @@ function validechangeUtilisateur(i){
 
   var ajax = new XMLHttpRequest();
 
-  ajax.open('GET', 'serveur.php/?request=changeUtilisateur&&id=' + input_id + '&&prenom=' + input_prenom + '&&nom=' + input_nom + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin );
+  ajax.open('GET', 'serveur.php/?request=changeUtilisateur&&id=' + input_id +'&&admin=' + input_admin );
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.addEventListener('load',  function () {
     var response = ajax.response;
@@ -1624,7 +1624,7 @@ function validechangeUtilisateur(i){
 	console.log(response);
   });
 
-  ajax.send('request=changeUtilisateur&&id=' + input_id + '&&prenom=' + input_prenom + '&&nom=' + input_nom + '&&pseudo=' + input_pseudo + '&&email=' + input_email + '&&mdp=' + input_mdp + '&&admin=' + input_admin  );
+  ajax.send('request=changeUtilisateur&&id=' + input_id + '&&admin=' + input_admin  );
 
   // on change de nouveau en place la ligne avec le changement
   //boucle qui retransforme la ligne
@@ -1689,7 +1689,7 @@ function changeEvenement(i){
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
   var nom               = papi.children[0];
-  nom.innerHTML         = "<input id='modif_nom_evenement" + i + "' placeholder='"+listeEvenements[i].nom+"'>";
+  nom.innerHTML         = "<input id='modif_nom_evenement" + i + "' value='"+listeEvenements[i].nom+"'>";
   var debut          = papi.children[1];
   debut.innerHTML      = "<input type='time' id='modif_temps_debut_evenement" + i + "'><input type='date' id='modif_date_debut_evenement" + i + "'>";
   var fin         = papi.children[2];
@@ -1821,9 +1821,9 @@ function changeFAQ(i){
   var papa              = bouton.parentNode;
   var papi              = papa.parentNode;
   var question               = papi.children[0];
-  question.innerHTML         = "<input id='modif_question_FAQ" + i + "' placeholder='"+listeFAQ[i].question+"'>";
+  question.innerHTML         = "<input id='modif_question_FAQ" + i + "' value='"+listeFAQ[i].question+"'>";
   var reponse          = papi.children[1];
-  reponse.innerHTML      = "<input id='modif_reponse_FAQ" + i + "' placeholder='"+listeFAQ[i].reponse+"'>";
+  reponse.innerHTML      = "<input id='modif_reponse_FAQ" + i + "' value='"+listeFAQ[i].reponse+"'>";
 
   //on met en place les deux nouveaux boutons
   var bouton_valider         = papi.children[2];

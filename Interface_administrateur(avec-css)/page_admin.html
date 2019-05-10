@@ -54,17 +54,17 @@
       </li>
 
     </ul>
-    <label for="ecoles"> Ecoles </label>
+    <label for="ecoles"> Etablissements </label>
     <input id="ecoles" name="menu" type="radio" />
 
     <ul id="sousmenu">
 
       <li>
-        <p>Ajouter une école </p>
+        <p>Ajouter un établissement </p>
         
 <form enctype="multipart/form-data" action="image1.php" method="post">
     <fieldset>
-        <legend>Formulaire (veuillez d'abord charger l'image de l'école sur le serveur avant de l'ajouter au tableau)</legend>
+        <legend>Formulaire (veuillez d'abord charger l'image de l'établissement sur le serveur avant de l'ajouter au tableau)</legend>
           <p>
             <label for="fichier_a_uploader" title="Recherchez le fichier à uploader !">Envoyer le fichier :</label>
             <input type="hidden" name="MAX_FILE_SIZE" value="<?php echo MAX_SIZE; ?>" />
@@ -77,7 +77,7 @@
           <form action="serveur.php" method="get">
             <input type="file" id="fileselect" accept="image/*" name="fileselect" />
             <input type="text" id="input_ecole" placeholder="Nom">			
-			<input type="text" id="input_adresse" placeholder="	Adresse de l'école">
+			<input type="text" id="input_adresse" placeholder="	Adresse de l'établissement">
             <input type="text" id="input_site" placeholder="Adresse du site">
             <input type="text" id="input_description" placeholder="Description">
           </form>
@@ -88,7 +88,7 @@
       </li>
 
       <li>
-        <p>Mettre à jour les informations sur une école</p>
+        <p>Mettre à jour les informations sur un établissement</p>
         <ul id="option" class="option2">
           <table id="resultats_ecoles" border="1">
             <th> Nom </th>
