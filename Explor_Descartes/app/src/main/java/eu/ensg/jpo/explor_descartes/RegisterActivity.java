@@ -3,9 +3,12 @@ package eu.ensg.jpo.explor_descartes;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import javax.mail.internet.AddressException;
@@ -115,6 +118,10 @@ public class RegisterActivity extends AppCompatActivity {
         mdpET         = (EditText) findViewById(R.id.mdpET);
         mdp_confirmET = (EditText) findViewById(R.id.mdp_confirmET);
 
+        //Ajout de la redirection vers CGU
+        TextView lienCGU = (TextView)findViewById(R.id.accord);
+        lienCGU.setMovementMethod(LinkMovementMethod.getInstance());
+
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
         connexionB.setOnClickListener(new View.OnClickListener() {
@@ -131,6 +138,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
     }
+
 
     public EditText getPseudoET() {
         return pseudoET;

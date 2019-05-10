@@ -45,8 +45,6 @@ public class Visiteur extends DataBaseObject{
         this.listeFavoris = listeFavoris;
     }
 
-
-
     public String getPrenom() {
         return prenom;
     }

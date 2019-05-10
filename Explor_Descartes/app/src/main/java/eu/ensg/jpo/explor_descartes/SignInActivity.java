@@ -80,7 +80,6 @@ public class SignInActivity extends AppCompatActivity {
         mailET = (EditText) findViewById(R.id.mailET);
         mdpET  = (EditText) findViewById(R.id.mdpET);
 
-
         // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
         inscriptionB.setOnClickListener(new View.OnClickListener() {

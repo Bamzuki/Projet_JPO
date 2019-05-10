@@ -62,10 +62,10 @@ public class EcoleActivity extends AppCompatActivity {
         descriptionEcole.setText(this.ecole.getDescription());
 
         // 2- Affichage des formations et événements
-        FormationDAO formationDAO = new FormationDAO(getString(R.string.url_serveur_ecoles));
+        FormationDAO formationDAO = new FormationDAO(getString(R.string.url_serveur_ecoles) + "serveur.php/");
         formationDAO.afficherFormation(this);
 
-        EvenementDAO evenementDAO = new EvenementDAO(getString(R.string.url_serveur_ecoles));
+        EvenementDAO evenementDAO = new EvenementDAO(getString(R.string.url_serveur_ecoles) + "serveur.php/");
         evenementDAO.afficherEvenement(this);
 
     }

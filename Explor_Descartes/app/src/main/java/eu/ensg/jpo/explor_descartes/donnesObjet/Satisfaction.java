@@ -3,8 +3,34 @@ package eu.ensg.jpo.explor_descartes.donnesObjet;
 import java.util.ArrayList;
 
 public class Satisfaction extends DataBaseObject {
-    Satisfaction(int id) {
+
+    private int id;
+
+    public Satisfaction(int id, String question_1, String question_2, String question_3, String question_4, String question_5, String question_6, String question_7, String question_8, String question_9, String question_10, String question_11, String question_12, String question_13, String question_14, String question_15, String question_16, String question_17, String question_18, String question_19, String question_20, String question_21, String question_22, String question_23) {
         super(id);
+        this.question_1 = question_1;
+        this.question_2 = question_2;
+        this.question_3 = question_3;
+        this.question_4 = question_4;
+        this.question_5 = question_5;
+        this.question_6 = question_6;
+        this.question_7 = question_7;
+        this.question_8 = question_8;
+        this.question_9 = question_9;
+        this.question_10 = question_10;
+        this.question_11 = question_11;
+        this.question_12 = question_12;
+        this.question_13 = question_13;
+        this.question_14 = question_14;
+        this.question_15 = question_15;
+        this.question_16 = question_16;
+        this.question_17 = question_17;
+        this.question_18 = question_18;
+        this.question_19 = question_19;
+        this.question_20 = question_20;
+        this.question_21 = question_21;
+        this.question_22 = question_22;
+        this.question_23 = question_23;
     }
 
     private String question_1;
@@ -31,9 +57,6 @@ public class Satisfaction extends DataBaseObject {
     private String question_22;
     private String question_23;
 
-
-
-
     public Satisfaction(String question_1, String question_2,String question_3,String question_4,String question_5,String question_6,String question_7,String question_8,String question_9,String question_10,String question_11,String question_12,String question_13,String question_14,String question_15,String question_16,String question_17,String question_18,String question_19,String question_20,String question_21,String question_22,String question_23) {
         super(0);
         this.question_1 = question_1;
@@ -59,13 +82,7 @@ public class Satisfaction extends DataBaseObject {
         this.question_21 = question_21;
         this.question_22 = question_22;
         this.question_23 = question_23;
-
-
-
     }
-
-
-
 
     public String getQuestion_1() {
         return question_1;
@@ -225,8 +242,7 @@ public class Satisfaction extends DataBaseObject {
         return question_20;
     }
 
-    public void setQuestion_20(String question_20) {
-        this.question_20 = question_20; }
+    public void setQuestion_20(String question_20) { this.question_20 = question_20; }
 
     public String getQuestion_21() {
         return question_21;
