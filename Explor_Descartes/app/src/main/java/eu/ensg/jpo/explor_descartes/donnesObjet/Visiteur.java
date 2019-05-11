@@ -9,7 +9,7 @@ public class Visiteur extends DataBaseObject{
     private String pseudo;
     private String email;
     private String mdp;
-    private Boolean admin;
+    private boolean admin;
     private ArrayList<Integer> listeFavoris;
 
     public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
