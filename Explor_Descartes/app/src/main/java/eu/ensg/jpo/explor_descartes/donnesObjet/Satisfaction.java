@@ -194,8 +194,6 @@ public class Satisfaction extends DataBaseObject {
     }
 
 
-
-
     public String getQuestion_15() {
         return question_15;
     }

@@ -150,7 +150,7 @@ public class SatisfactionActivity extends template {
             RadioButton autre = (RadioButton) findViewById(R.id.appQ2Autre);
             if (rep_app2.getText().toString() == autre.getText().toString()){
                 EditText precisez = (EditText) findViewById(R.id.appQ2Precisez);
-                if (precisez.getText().toString() == ""){
+                if (precisez.getText().toString().isEmpty()){
                     reponses.add("autre sans précision");
                 }
                 else {
@@ -216,7 +216,7 @@ public class SatisfactionActivity extends template {
             RadioButton autre = (RadioButton) findViewById(R.id.appQ8Choix1);
             if (rep_app8.getText().toString() == autre.getText().toString()){
                 EditText precisez = (EditText) findViewById(R.id.suggestions);
-                if (precisez.getText().toString() == ""){
+                if (precisez.getText().toString().isEmpty()){
                     reponses.add("oui sans suggestions");
                 }
                 else {
@@ -329,13 +329,13 @@ public class SatisfactionActivity extends template {
         }
 
         ArrayList<CheckBox> jpo6_checkboxes = new ArrayList<CheckBox>();
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix1));
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix2));
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix3));
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix4));
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix5));
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix6));
-        jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix7));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix1));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix2));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix3));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix4));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix5));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix6));
+        jpo6_checkboxes.add((CheckBox) findViewById(R.id.jpoQ6Choix7));
         String choixQ6 = checked(jpo6_checkboxes);
         if (choixQ6.isEmpty()){
             reponses.add("pas de réponse");

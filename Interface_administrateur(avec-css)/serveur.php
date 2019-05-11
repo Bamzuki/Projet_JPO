@@ -252,7 +252,12 @@ function getListeSatisfaction(){
   if ($result) {
     $response = '[';
     while ($row = pg_fetch_row($result)) {
-      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '",  "question_2":"' . $row[2] . '",  "question_3":"' . $row[3] . '",  "question_4":"' . $row[4] . '", "question_5":"' . $row[5] . '", "question_6":"' . $row[6] . '", "question_7":"' . $row[7] . '", "question_8":"' . $row[8] . '", "question_9":"' . $row[9] . '", "question_10":"' . $row[10] . '", "question_11":"' . $row[11] . '", "question_12":"' . $row[12] . '", "question_13":"' . $row[13] . '", "question_14":"' . $row[14] . '", "question_15":"' . $row[15] . '", "question_16":"' . $row[16] . '", "question_17":"' . $row[17] . '", "question_18":"' . $row[18] . '", "question_19":"' . $row[19] . '", "question_20":"' . $row[20] . '", "question_20":"' . $row[21] . '", "question_20":"' . $row[22] . '", "question_20":"' . $row[23] . '"}';
+      $utilisateur = '{"id":' . $row[0] . ', "question_1":"' . $row[1] . '",  "question_2":"' . $row[2] . '",  "question_3":"' . $row[3] . '",  "question_4":"' . $row[4] .
+      '", "question_5":"' . $row[5] . '", "question_6":"' . $row[6] . '", "question_7":"' . $row[7] . '", "question_8":"' . $row[8] . '", "question_9":"' .
+      $row[9] . '", "question_10":"' . $row[10] . '", "question_11":"' . $row[11] . '", "question_12":"' . $row[12] . '", "question_13":"' . $row[13] . '
+      ", "question_14":"' . $row[14] . '", "question_15":"' . $row[15] . '", "question_16":"' . $row[16] . '", "question_17":"' . $row[17] . '", "question_18":"'.
+      $row[18] . '", "question_19":"' . $row[19] . '", "question_20":"' . $row[20] . '", "question_21":"' . $row[21] . '", "question_22":"' . $row[22] .
+      '", "question_23":"' . $row[23] . '"}';
       $response = $response . $utilisateur . ', ';
     }
   }
@@ -995,7 +1000,9 @@ if (isset($_GET['request']) && $_GET['request'] == "saveSatisfaction"){
   $question_21 = $_GET['question_21'];
   $question_22 = $_GET['question_22'];
   $question_23 = $_GET['question_23'];
-  echo saveQuestionnaire($question_1, $question_2, $question_3, $question_4, $question_5, $question_6, $question_7, $question_8, $question_9, $question_10, $question_11, $question_12, $question_13, $question_14, $question_15, $question_16, $question_17, $question_18, $question_19, $question_20, $question_21, $question_22, $question_23);
+  echo saveQuestionnaire($question_1, $question_2, $question_3, $question_4, $question_5, $question_6, $question_7, $question_8, $question_9, $question_10,
+   $question_11, $question_12, $question_13, $question_14, $question_15, $question_16, $question_17, $question_18, $question_19, $question_20,
+   $question_21, $question_22, $question_23);
 }
 
 
