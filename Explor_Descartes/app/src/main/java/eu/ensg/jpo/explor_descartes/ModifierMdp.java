@@ -58,7 +58,7 @@ public class ModifierMdp extends AppCompatActivity {
             VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
             visiteurDAO.update(ListeObjets.visiteur);
 
-            // Renvoie sur la page d'accueil :
+            // Renvoie sur la page Profil :
             Toast.makeText(this, "Votre mot de passe a bien été modifié.", Toast.LENGTH_LONG).show();
             Intent intent = new Intent(this, GestionCompte.class);
             startActivity(intent);
