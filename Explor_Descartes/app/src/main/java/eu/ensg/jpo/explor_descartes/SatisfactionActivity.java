@@ -14,6 +14,7 @@ import android.widget.RadioGroup;
 import java.text.ParseException;
 import java.util.ArrayList;
 
+import eu.ensg.jpo.explor_descartes.donneesAcces.SatisfactionDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Satisfaction;
 
 public class SatisfactionActivity extends template {
@@ -369,21 +370,18 @@ public class SatisfactionActivity extends template {
             reponses.add("pas de réponse");
         }
 
-        Satisfaction satisfaction = new Satisfaction(0, reponses.get(0), reponses.get(1), reponses.get(2), reponses.get(3), reponses.get(4), reponses.get(5), reponses.get(6), reponses.get(7),
-                reponses.get(8), reponses.get(9), reponses.get(10), reponses.get(11), reponses.get(12), reponses.get(13), reponses.get(14), reponses.get(15), reponses.get(16), reponses.get(17),
-                reponses.get(18), reponses.get(19), reponses.get(20), reponses.get(21), reponses.get(22));
 
-        System.out.println(satisfaction);
-
-/*
        // Enregistrement dans la base de données :
         try {
+            Satisfaction satisfaction = new Satisfaction(0, reponses.get(0), reponses.get(1), reponses.get(2), reponses.get(3), reponses.get(4), reponses.get(5), reponses.get(6), reponses.get(7),
+                    reponses.get(8), reponses.get(9), reponses.get(10), reponses.get(11), reponses.get(12), reponses.get(13), reponses.get(14), reponses.get(15), reponses.get(16), reponses.get(17),
+                    reponses.get(18), reponses.get(19), reponses.get(20), reponses.get(21), reponses.get(22));
             SatisfactionDAO satisfactionDAO = new SatisfactionDAO(getString(R.string.url_serveur) + "serveur.php/");
             satisfactionDAO.saveSatisfaction( this, satisfaction);
         } catch (Exception e) {
             e.printStackTrace();
         }
-*/
+
     }
 
     public String checked(ArrayList<CheckBox> checkBoxes){
