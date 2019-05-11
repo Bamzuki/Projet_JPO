@@ -37,6 +37,7 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
+                System.out.println("JSON:" + response);
                 final Satisfaction satisfaction = new Gson().fromJson(response.body().string(), Satisfaction.class);
                 activity.runOnUiThread(new Runnable() {
                     @Override

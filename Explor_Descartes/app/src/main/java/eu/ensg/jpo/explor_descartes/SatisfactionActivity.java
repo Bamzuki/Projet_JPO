@@ -3,123 +3,129 @@ package eu.ensg.jpo.explor_descartes;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.ScrollView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 import java.util.ArrayList;
-import java.util.List;
 
-import eu.ensg.jpo.explor_descartes.donneesAcces.SatisfactionDAO;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Satisfaction;
 
 public class SatisfactionActivity extends template {
 
     Button validationB;
 
-    RadioGroup app1;
-    RadioGroup app2;
-    RadioGroup app3;
-    RadioGroup app4;
-    RadioGroup app5;
-    RadioGroup app6;
-    RadioGroup app7;
-    RadioGroup app8;
-    RadioGroup app9;
-    RadioGroup app10;
-    RadioGroup app11;
-    RadioGroup app12;
-    RadioGroup app13;
+    private RadioGroup app1;
+    private RadioGroup app2;
+    private RadioGroup app3;
+    private RadioGroup app4;
+    private RadioGroup app5;
+    private RadioGroup app6;
+    private RadioGroup app7;
+    private RadioGroup app8;
+    private RadioGroup app9;
+    private RadioGroup app10;
+    private RadioGroup app11;
+    private RadioGroup app12;
+    private RadioGroup app13;
 
-    RadioButton rep_app1;
-    RadioButton rep_app2;
-    RadioButton rep_app3;
-    RadioButton rep_app4;
-    RadioButton rep_app5;
-    RadioButton rep_app6;
-    RadioButton rep_app7;
-    RadioButton rep_app8;
-    RadioButton rep_app9;
-    RadioButton rep_app10;
-    RadioButton rep_app11;
-    RadioButton rep_app12;
-    RadioButton rep_app13;
+    private RadioButton rep_app1;
+    private RadioButton rep_app2;
+    private RadioButton rep_app3;
+    private RadioButton rep_app4;
+    private RadioButton rep_app5;
+    private RadioButton rep_app6;
+    private RadioButton rep_app7;
+    private RadioButton rep_app8;
+    private RadioButton rep_app9;
+    private RadioButton rep_app10;
+    private RadioButton rep_app11;
+    private RadioButton rep_app12;
+    private RadioButton rep_app13;
 
-    RadioGroup jpo1;
-    RadioGroup jpo2;
-    RadioGroup jpo3;
-    RadioGroup jpo4;
-    LinearLayout jpo5;
-    LinearLayout jpo6;
-    RadioGroup jpo7;
-    RadioGroup jpo8;
-    RadioGroup jpo9;
-    RadioGroup jpo10;
+    private RadioGroup jpo1;
+    private RadioGroup jpo2;
+    private RadioGroup jpo3;
+    private RadioGroup jpo4;
+    private LinearLayout jpo5;
+    private LinearLayout jpo6;
+    private RadioGroup jpo7;
+    private RadioGroup jpo8;
+    private RadioGroup jpo9;
+    private RadioGroup jpo10;
 
-    RadioButton rep_jpo1;
-    RadioButton rep_jpo2;
-    RadioButton rep_jpo3;
-    RadioButton rep_jpo4;
-    LinearLayout rep_jpo5;
-    LinearLayout rep_jpo6;
-    RadioButton rep_jpo7;
-    RadioButton rep_jpo8;
-    RadioButton rep_jpo9;
-    RadioButton rep_jpo10;
+    private RadioButton rep_jpo1;
+    private RadioButton rep_jpo2;
+    private RadioButton rep_jpo3;
+    private RadioButton rep_jpo4;
+    private RadioButton rep_jpo7;
+    private RadioButton rep_jpo8;
+    private RadioButton rep_jpo9;
+    private RadioButton rep_jpo10;
 
     @SuppressLint("WrongViewCast")
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         contentTemp();
 
-        setContentView(R.layout.activity_satisfaction);
+        if (ListeObjets.satisfaction == null) {
+            // I - Instanciation des objets Java représentant les composants graphiques
+            validationB = (Button) findViewById(R.id.validationB);
 
-        // I - Instanciation des objets Java représentant les composants graphiques
-        validationB = (Button) findViewById(R.id.validationB);
+            app1 = (RadioGroup) findViewById(R.id.app1);
+            app2 = (RadioGroup) findViewById(R.id.app2);
+            app3 = (RadioGroup) findViewById(R.id.app3);
+            app4 = (RadioGroup) findViewById(R.id.app4);
+            app5 = (RadioGroup) findViewById(R.id.app5);
+            app6 = (RadioGroup) findViewById(R.id.app6);
+            app7 = (RadioGroup) findViewById(R.id.app7);
+            app8 = (RadioGroup) findViewById(R.id.app8);
+            app9 = (RadioGroup) findViewById(R.id.app9);
+            app10 = (RadioGroup) findViewById(R.id.app10);
+            app11 = (RadioGroup) findViewById(R.id.app11);
+            app12 = (RadioGroup) findViewById(R.id.app12);
+            app13 = (RadioGroup) findViewById(R.id.app13);
 
-        app1 = (RadioGroup) findViewById(R.id.app1);
-        app2 = (RadioGroup) findViewById(R.id.app2);
-        app3 = (RadioGroup) findViewById(R.id.app3);
-        app4 = (RadioGroup) findViewById(R.id.app4);
-        app5 = (RadioGroup) findViewById(R.id.app5);
-        app6 = (RadioGroup) findViewById(R.id.app6);
-        app7 = (RadioGroup) findViewById(R.id.app7);
-        app8 = (RadioGroup) findViewById(R.id.app8);
-        app9 = (RadioGroup) findViewById(R.id.app9);
-        app10 = (RadioGroup) findViewById(R.id.app10);
-        app11 = (RadioGroup) findViewById(R.id.app11);
-        app12 = (RadioGroup) findViewById(R.id.app12);
-        app13 = (RadioGroup) findViewById(R.id.app13);
+            jpo1 = (RadioGroup) findViewById(R.id.jpo1);
+            jpo2 = (RadioGroup) findViewById(R.id.jpo2);
+            jpo3 = (RadioGroup) findViewById(R.id.jpo3);
+            jpo4 = (RadioGroup) findViewById(R.id.jpo4);
+            jpo5 = (LinearLayout) findViewById(R.id.jpo5);
+            jpo6 = (LinearLayout) findViewById(R.id.jpo6);
+            jpo7 = (RadioGroup) findViewById(R.id.jpo7);
+            jpo8 = (RadioGroup) findViewById(R.id.jpo8);
+            jpo9 = (RadioGroup) findViewById(R.id.jpo9);
+            jpo10 = (RadioGroup) findViewById(R.id.jpo10);
 
-        jpo1 = (RadioGroup) findViewById(R.id.jpo1);
-        jpo2 = (RadioGroup) findViewById(R.id.jpo2);
-        jpo3 = (RadioGroup) findViewById(R.id.jpo3);
-        jpo4 = (RadioGroup) findViewById(R.id.jpo4);
-        jpo5 = (LinearLayout) findViewById(R.id.jpo5);
-        jpo6 = (LinearLayout) findViewById(R.id.jpo6);
-        jpo7 = (RadioGroup) findViewById(R.id.jpo7);
-        jpo8 = (RadioGroup) findViewById(R.id.jpo8);
-        jpo9 = (RadioGroup) findViewById(R.id.jpo9);
-        jpo10 = (RadioGroup) findViewById(R.id.jpo10);
+            // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
+            validationB.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    SatisfactionActivity.this.validation();
 
-        // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
-        validationB.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                SatisfactionActivity.this.validation();
-            }
-        });
+                    LinearLayout questionnaire = (LinearLayout) findViewById(R.id.questionnaire);
+                    questionnaire.setVisibility(View.GONE);
+
+                    LinearLayout remerciement = (LinearLayout) findViewById(R.id.remerciement);
+                    remerciement.setVisibility(View.VISIBLE);
+
+                }
+            });
+        }
+
+        else {
+            LinearLayout questionnaire = (LinearLayout) findViewById(R.id.questionnaire);
+            questionnaire.setVisibility(View.GONE);
+
+            LinearLayout remerciement = (LinearLayout) findViewById(R.id.remerciement);
+            remerciement.setVisibility(View.VISIBLE);
+        }
     }
 
     public void validation() {
@@ -295,7 +301,6 @@ public class SatisfactionActivity extends template {
             reponses.add("pas de réponse");
         }
 
-        //GESTION LISTVIEW
         ArrayList<CheckBox> jpo5_checkboxes = new ArrayList<CheckBox>();
         jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ5Choix1));
         jpo5_checkboxes.add((CheckBox) findViewById(R.id.jpoQ5Choix2));
@@ -373,14 +378,15 @@ public class SatisfactionActivity extends template {
         ListeObjets.satisfaction = satisfaction;
 
 
-        // Enregistrement dans la base de données :
+/*
+       // Enregistrement dans la base de données :
         try {
-            SatisfactionDAO satisfactionDAO = new SatisfactionDAO(getString(R.string.url_serveur_ecoles) + "serveur.php/");
-            satisfactionDAO.saveSatisfaction( this, ListeObjets.satisfaction);
+            SatisfactionDAO satisfactionDAO = new SatisfactionDAO(getString(R.string.url_serveur) + "serveur.php/");
+            satisfactionDAO.saveSatisfaction( this, satisfaction);
         } catch (Exception e) {
             e.printStackTrace();
         }
-
+*/
     }
 
     public String checked(ArrayList<CheckBox> checkBoxes){
@@ -409,10 +415,6 @@ public class SatisfactionActivity extends template {
     @Override
     protected void llayout() {
         setLayout(R.layout.activity_satisfaction);
-    }
 
-    @Override
-    public void setLayout(int newLayout) {
-        super.setLayout(newLayout);
     }
 }

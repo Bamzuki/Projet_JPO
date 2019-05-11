@@ -4,8 +4,6 @@ import java.util.ArrayList;
 
 public class Satisfaction extends DataBaseObject {
 
-    private int id;
-
     public Satisfaction(int id, String question_1, String question_2, String question_3, String question_4, String question_5, String question_6, String question_7, String question_8, String question_9, String question_10, String question_11, String question_12, String question_13, String question_14, String question_15, String question_16, String question_17, String question_18, String question_19, String question_20, String question_21, String question_22, String question_23) {
         super(id);
         this.question_1 = question_1;
