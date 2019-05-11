@@ -394,14 +394,35 @@ function saveEcole ($nom, $image, $adresse, $site, $description){
     return "La sauvegarde a échouée";
   }
 }
-function saveQuestionnaire ($question_1,$question_2,$question_3){
+function saveQuestionnaire ($question_1,$question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10,$question_11,$question_12,$question_13,$question_14,$question_15,$question_16,$question_17,$question_18,$question_19,$question_20,$question_21,$question_22,$question_23){
   //Cette fonction enregistre une nouvelle question  dans la base de données
   $question_1 = str_replace("'", "''", $question_1);
   $question_2 = str_replace("'", "''", $question_2);
   $question_3 = str_replace("'", "''", $question_3);
+  $question_4 = str_replace("'", "''", $question_4);
+  $question_5 = str_replace("'", "''", $question_5);
+  $question_6 = str_replace("'", "''", $question_6);
+  $question_7 = str_replace("'", "''", $question_7);
+  $question_8 = str_replace("'", "''", $question_8);
+  $question_9 = str_replace("'", "''", $question_9);
+  $question_10 = str_replace("'", "''", $question_10);
+  $question_11 = str_replace("'", "''", $question_11);
+  $question_12 = str_replace("'", "''", $question_12);
+  $question_13 = str_replace("'", "''", $question_13);
+  $question_14 = str_replace("'", "''", $question_14);
+  $question_15 = str_replace("'", "''", $question_15);
+  $question_16 = str_replace("'", "''", $question_16);
+  $question_17 = str_replace("'", "''", $question_17);
+  $question_18 = str_replace("'", "''", $question_18);
+  $question_19 = str_replace("'", "''", $question_19);
+  $question_20 = str_replace("'", "''", $question_20);
+  $question_21 = str_replace("'", "''", $question_21);
+  $question_22 = str_replace("'", "''", $question_22);
+  $question_23 = str_replace("'", "''", $question_23);
   global $link;
-  $requete = "INSERT INTO questionnaire (question_1, question_2,question_3) VALUES ('" . $question_1 . "','" . $question_2 . "','" . $question_3 . "')";
-
+  $requete = "INSERT INTO satisfaction (question_1,question_2,question_3,question_4,question_5,question_6,question_7,question_8,question_9,question_10,
+    question_11,question_12,question_13,question_14,question_15,question_16,question_17,question_18,question_19,question_20,question_21,question_22,question_23) VALUES ('" . $question_1 . "','" . $question_2 . "','" . $question_3 . "','" . $question_4 . "','" . $question_5 . "','" . $question_6 . "','" . $question_7 . "','" . $question_8 . "','" . $question_9 . "','" . $question_10 . "','" . $question_11 . "','" . $question_12 . "','" . $question_13 . "','" . $question_14 . "','" . $question_15 . "','" . $question_16 . "','" . $question_17 . "','" . $question_18 . "','" . $question_19 . "','" . $question_20 . "','" . $question_21 . "','" . $question_22 . "','" . $question_23 ."')";
+  echo $requete;
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -511,7 +532,7 @@ function saveFAQ ($question,$reponse){
 }
 
 function saveSatisfaction($question_1,$question_2,$question_3,$question_4,$question_5,$question_6,$question_7,$question_8,$question_9,$question_10,$question_11,$question_12,$question_13,$question_14,$question_15,$question_16,$question_17,$question_18,$question_19,$question_20,$question_21,$question_22,$question_23){
-  //Cette fonction enregistre un nouveau batiment dans la base de données
+  //Cette fonction enregistre un nouveau formulaire de satisfaction dans la base de données
   $question_1 = str_replace("'", "''", $question_1);
   $question_2 = str_replace("'", "''", $question_2);
   $question_3 = str_replace("'", "''", $question_3);
@@ -543,6 +564,7 @@ function saveSatisfaction($question_1,$question_2,$question_3,$question_4,$quest
       '" . $question_8 . "','" . $question_9 . "','" . $question_10 . "','" . $question_11 . "','" . $question_12 . "','" . $question_13 . "','" . $question_14 . "',
       '" . $question_15 . "','" . $question_16 . "','" . $question_17 . "','" . $question_18 . "','" . $question_19 . "','" . $question_20 . "','" . $question_21 . "',
       '" . $question_22 . "','" . $question_23 . "')";
+  echo $requete;
   $result = pg_query($link, $requete);
   if ($result){
     return "Sauvegarde réussie !";
@@ -946,29 +968,29 @@ if (isset($_GET['request']) && $_GET['request'] == "saveEvenement"){
 }
 
 if (isset($_GET['request']) && $_GET['request'] == "saveSatisfaction"){
-  $question_1   = $_GET['question_1'];
-  $question_2      = $_GET['question_2'];
+  $question_1  = $_GET['question_1'];
+  $question_2  = $_GET['question_2'];
   $question_3  = $_GET['question_3'];
-  $question_1   = $_GET['question_4'];
-  $question_1   = $_GET['question_5'];
-  $question_1   = $_GET['question_6'];
-  $question_1   = $_GET['question_7'];
-  $question_1   = $_GET['question_8'];
-  $question_1   = $_GET['question_9'];
-  $question_1   = $_GET['question_10'];
-  $question_1   = $_GET['question_11'];
-  $question_1   = $_GET['question_12'];
-  $question_1   = $_GET['question_13'];
-  $question_1   = $_GET['question_14'];
-  $question_1   = $_GET['question_15'];
-  $question_1   = $_GET['question_16'];
-  $question_1   = $_GET['question_17'];
-  $question_1   = $_GET['question_18'];
-  $question_1   = $_GET['question_19'];
-  $question_1   = $_GET['question_20'];
-  $question_1   = $_GET['question_21'];
-  $question_1   = $_GET['question_22'];
-  $question_1   = $_GET['question_23'];
+  $question_4  = $_GET['question_4'];
+  $question_5  = $_GET['question_5'];
+  $question_6  = $_GET['question_6'];
+  $question_7  = $_GET['question_7'];
+  $question_8  = $_GET['question_8'];
+  $question_9  = $_GET['question_9'];
+  $question_10 = $_GET['question_10'];
+  $question_11 = $_GET['question_11'];
+  $question_12 = $_GET['question_12'];
+  $question_13 = $_GET['question_13'];
+  $question_14 = $_GET['question_14'];
+  $question_15 = $_GET['question_15'];
+  $question_16 = $_GET['question_16'];
+  $question_17 = $_GET['question_17'];
+  $question_18 = $_GET['question_18'];
+  $question_19 = $_GET['question_19'];
+  $question_20 = $_GET['question_20'];
+  $question_21 = $_GET['question_21'];
+  $question_22 = $_GET['question_22'];
+  $question_23 = $_GET['question_23'];
   echo saveQuestionnaire($question_1, $question_2, $question_3, $question_4, $question_5, $question_6, $question_7, $question_8, $question_9, $question_10, $question_11, $question_12, $question_13, $question_14, $question_15, $question_16, $question_17, $question_18, $question_19, $question_20, $question_21, $question_22, $question_23);
 }
 
