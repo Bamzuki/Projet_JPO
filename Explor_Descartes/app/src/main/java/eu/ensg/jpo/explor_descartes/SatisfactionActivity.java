@@ -150,7 +150,12 @@ public class SatisfactionActivity extends template {
             RadioButton autre = (RadioButton) findViewById(R.id.appQ2Autre);
             if (rep_app2.getText().toString() == autre.getText().toString()){
                 EditText precisez = (EditText) findViewById(R.id.appQ2Precisez);
-                reponses.add(precisez.getText().toString());
+                if (precisez.getText().toString() == ""){
+                    reponses.add("autre sans précision");
+                }
+                else {
+                    reponses.add(precisez.getText().toString());
+                }
             }
             else{
                 reponses.add(rep_app2.getText().toString());
@@ -211,7 +216,12 @@ public class SatisfactionActivity extends template {
             RadioButton autre = (RadioButton) findViewById(R.id.appQ8Choix1);
             if (rep_app8.getText().toString() == autre.getText().toString()){
                 EditText precisez = (EditText) findViewById(R.id.suggestions);
-                reponses.add(precisez.getText().toString());
+                if (precisez.getText().toString() == ""){
+                    reponses.add("oui sans suggestions");
+                }
+                else {
+                    reponses.add(precisez.getText().toString());
+                }
             }
             else{
                 reponses.add(rep_app2.getText().toString());

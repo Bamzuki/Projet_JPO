@@ -222,5 +222,7 @@
     <string name="nom_ecole">Nom de l\'école</string>
     <string name="nom_bat">Nom du bâtiment</string>
     <string name="horaires">Horaires</string>
+    <string name="inge">Formation d\'ingénieur</string>
+    <string name="doctorat">Doctorat</string>
 
 </resources>

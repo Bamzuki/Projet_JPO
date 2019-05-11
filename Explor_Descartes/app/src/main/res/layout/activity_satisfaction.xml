@@ -1099,7 +1099,7 @@
                         android:background="@android:color/white"
                         android:buttonTint="@color/colorPrimary"
                         android:gravity="center_vertical"
-                        android:text="Internet"
+                        android:text="@string/inge"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
@@ -1112,7 +1112,7 @@
                         android:background="@android:color/white"
                         android:buttonTint="@color/colorPrimary"
                         android:gravity="center_vertical"
-                        android:text="Prospectus"
+                        android:text="@string/master"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
@@ -1125,7 +1125,7 @@
                         android:background="@android:color/white"
                         android:buttonTint="@color/colorPrimary"
                         android:gravity="center_vertical"
-                        android:text="Bouche-à-oreille"
+                        android:text="@string/licence"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
@@ -1138,7 +1138,7 @@
                         android:background="@android:color/white"
                         android:buttonTint="@color/colorPrimary"
                         android:gravity="center_vertical"
-                        android:text="Réseaux sociaux "
+                        android:text="@string/doctorat"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
                 </RadioGroup>
@@ -1578,18 +1578,6 @@
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
 
-                    <RadioButton
-                        android:id="@+id/jpoQ10Choix1"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_marginStart="15dp"
-                        android:layout_weight="1"
-                        android:background="@android:color/white"
-                        android:buttonTint="@color/colorPrimary"
-                        android:gravity="center_vertical"
-                        android:text="@string/oui"
-                        android:textColor="@android:color/black"
-                        android:textSize="14sp" />
                 </RadioGroup>
 
                 <TextView
@@ -1614,6 +1602,19 @@
                     android:paddingEnd="0dp">
 
                     <RadioButton
+                        android:id="@+id/jpoQ10Choix1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="15dp"
+                        android:layout_weight="1"
+                        android:background="@android:color/white"
+                        android:buttonTint="@color/colorPrimary"
+                        android:gravity="center_vertical"
+                        android:text="@string/oui"
+                        android:textColor="@android:color/black"
+                        android:textSize="14sp" />
+
+                    <RadioButton
                         android:id="@+id/jpoQ10Choix2"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
@@ -1625,6 +1626,7 @@
                         android:text="@string/non"
                         android:textColor="@android:color/black"
                         android:textSize="14sp" />
+
                 </RadioGroup>
 
                 <Button

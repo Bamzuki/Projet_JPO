@@ -578,7 +578,7 @@ function getListeEvenement(){
 
     tableau.appendChild(ligne);
 
-    //Remplissage du tableau avec les données de la BDD	
+    //Remplissage du tableau avec les données de la BDD
     for (var i = 0; i < listeEvenements.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -625,7 +625,7 @@ function getListeSatisfaction(){
   //Récupération des réponses au questionnaire de satisfaction
   var request = "request=listeSatisfaction"
 
- 
+
   var ajax    = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?'+request);
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
@@ -682,8 +682,8 @@ function getListeSatisfaction(){
 
 
     tableau1.appendChild(ligne);
-	
-	
+
+
     // Remplissage des en-têtes du tableau 2
     var tableau2 = document.getElementById("satisfaction-JPO");
     tableau2.innerHTML = "";
@@ -693,6 +693,7 @@ function getListeSatisfaction(){
     element = document.createElement("td");
     element.innerHTML = "Question 1";
     ligne.appendChild(element);
+    element = document.createElement("td");
     element.innerHTML = "Question 2";
     ligne.appendChild(element);
     element = document.createElement("td");
@@ -767,7 +768,7 @@ function getListeSatisfaction(){
       element = document.createElement("td");
       element.innerHTML = listeSatisfaction[i].question_13;
       ligne.appendChild(element);
-	
+
 
 
       tableau1.appendChild(ligne);
@@ -807,17 +808,17 @@ function getListeSatisfaction(){
 
       tableau2.appendChild(ligne);
     }
-	
 
-	
-	
-	
+
+
+
+
   });
   ajax.send(request);
 }
 
 function getListeFAQ_admin(){
-//Cette fonction récupère la FAQ et la charge sur la page destinée aux admins (pour pouvoir mettre à jour les question)                                                           
+//Cette fonction récupère la FAQ et la charge sur la page destinée aux admins (pour pouvoir mettre à jour les question)
   console.log("FAQ");
   var request = "request=listeFAQ"
   var ajax    = new XMLHttpRequest();
@@ -1066,9 +1067,9 @@ function saveFAQ(){
     var response = ajax.response;
     console.log(response);
 	getListeFAQ_admin();
-  });  
+  });
   ajax.send('request=saveFAQ&&question=' + input_question + '&&reponse=' + input_reponse);
-  } 
+  }
 
 
 
@@ -1853,7 +1854,7 @@ function validechangeFAQ(i){
 
 
   if(input_reponse == ""){
-   
+
     input_reponse = listeFAQ[i].reponse;
   }
 
