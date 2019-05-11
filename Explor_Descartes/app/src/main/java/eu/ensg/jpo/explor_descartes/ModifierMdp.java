@@ -60,7 +60,7 @@ public class ModifierMdp extends AppCompatActivity {
 
             // Renvoie sur la page d'accueil :
             Toast.makeText(this, "Votre mot de passe a bien été modifié.", Toast.LENGTH_LONG).show();
-            Intent intent = new Intent(this, ModifierMdp.class);
+            Intent intent = new Intent(this, GestionCompte.class);
             startActivity(intent);
 
         } catch (Exception e) {

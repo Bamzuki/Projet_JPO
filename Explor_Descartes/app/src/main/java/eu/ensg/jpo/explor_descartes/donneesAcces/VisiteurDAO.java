@@ -42,6 +42,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         String url = this.urlServeur + "?request=changeUtilisateur";
         String donnees = "&&id=" + visiteur.getId() + "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
         url = url + donnees;
+        System.out.println(url);
         Request request = new Request.Builder().url(url).build();
 
         // Envoi de la requete

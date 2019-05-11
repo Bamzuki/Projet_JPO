@@ -1012,13 +1012,13 @@ if (isset($_GET['request']) && $_GET['request'] == "changeFormation"){
 }
 if (isset($_GET['request']) && $_GET['request'] == "changeUtilisateur"){
   $id       = $_GET['id'];
-  // $prenom   = $_GET['prenom'];
-  // $nom      = $_GET['nom'];
-  // $pseudo   = $_GET['pseudo'];
-  // $email    = $_GET['email'];
-  // $mdp      = $_GET['mdp'];
+  $prenom   = $_GET['prenom'];
+  $nom      = $_GET['nom'];
+  $pseudo   = $_GET['pseudo'];
+  $email    = $_GET['email'];
+  $mdp      = $_GET['mdp'];
   $admin    = $_GET['admin'];
-  echo changeUtilisateur ($id, $admin);
+  echo changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin);
 }
 if (isset($_GET['request']) && $_GET['request'] == "changeEvenement"){
   $id       = $_GET['id'];
