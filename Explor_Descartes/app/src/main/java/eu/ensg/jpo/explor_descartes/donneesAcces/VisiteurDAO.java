@@ -37,7 +37,24 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
     }
 
     @Override
-    public void update(Visiteur obj) {
+    public void update(Visiteur visiteur) {
+        // Construction de la requete
+        String url = this.urlServeur + "?request=changeUtilisateur";
+        String donnees = "&&id=" + visiteur.getId() + "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
+        url = url + donnees;
+        Request request = new Request.Builder().url(url).build();
+
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+            }
+            // Pseudo et email corrects
+            public void onFailure(Call call, IOException e) {
+                System.out.println("Echec de la connection !");
+            }
+        });
 
     }
 

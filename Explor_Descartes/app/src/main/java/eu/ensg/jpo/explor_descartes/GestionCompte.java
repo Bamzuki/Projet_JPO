@@ -23,10 +23,10 @@ public class GestionCompte extends template {
     private Button Suppression;
 
     private void openModifierPerso() {
-        // Create intent
-        Intent intent = new Intent(this, ModifierPerso.class);
 
         if (ListeObjets.visiteur != null){
+            // Create intent
+            Intent intent = new Intent(this, ModifierPerso.class);
             // Start activity
             startActivity(intent);
         }
@@ -36,10 +36,10 @@ public class GestionCompte extends template {
     }
 
     private void openModifierMdp() {
-        // Create intent
-        Intent intent = new Intent(this, ModifierMdp.class);
 
         if (ListeObjets.visiteur != null){
+            // Create intent
+            Intent intent = new Intent(this, ModifierMdp.class);
             // Start activity
             startActivity(intent);
         }

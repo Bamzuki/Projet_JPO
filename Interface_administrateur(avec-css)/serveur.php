@@ -644,25 +644,17 @@ function changeEvenement ($id, $nom, $debut, $fin, $id_ecole, $id_batiment){
     return "La modification a échouée";
   }
 }
-function changeUtilisateur ($id, $admin){
+
+function changeUtilisateur ($id, $prenom, $nom, $pseudo, $email, $mdp, $admin){
   //Cette fonction modifie un utilisateur déjà existant dans la base de données
-  // $prenom   = str_replace("'", "''", $prenom);
-  // $nom      = str_replace("'", "''", $nom);
-  // $pseudo   = str_replace("'", "''", $pseudo);
-  // $email    = str_replace("'", "''", $email);
-  // $mdp      = str_replace("'", "''", $mdp);
-
-  // if (!newPseudo($pseudo)){
-    // return "Pseudo déjà utilisé !";
-  // }
-  // if (!newMail($email)){
-    // return "Email déjà utilisé !";
-  // }
-
-
+  $prenom   = str_replace("'", "''", $prenom);
+  $nom      = str_replace("'", "''", $nom);
+  $pseudo   = str_replace("'", "''", $pseudo);
+  $email    = str_replace("'", "''", $email);
+  $mdp      = str_replace("'", "''", $mdp);
   global $link;
   $requete = "UPDATE utilisateurs
-              SET  admin = '" . $admin ."'
+              SET prenom = '" . $prenom . "', nom = '" . $nom . "', pseudo = '" . $pseudo . "', email = '" . $email . "', mdp = '" . $mdp . "', admin = '" . $admin ."'
              WHERE id=" . $id;
   $result = pg_query($link, $requete);
   if ($result){
