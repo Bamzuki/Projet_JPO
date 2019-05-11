@@ -24,7 +24,7 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
         super(urlServeur);
     }
 
-    public void saveSatisfaction(final SatisfactionActivity activity, Satisfaction satisfaction) {
+    public void saveSatisfaction(final SatisfactionActivity activity, final Satisfaction satisfaction) {
 
         // Construction de la requete
         String url = this.urlServeur + "?request=saveSatisfaction";
@@ -38,7 +38,6 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
                 System.out.println("JSON:" + response);
-                final Satisfaction satisfaction = new Gson().fromJson(response.body().string(), Satisfaction.class);
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
