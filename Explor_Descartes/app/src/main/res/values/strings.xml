@@ -217,5 +217,10 @@
     <string name="retour">retour</string>
     <string name="plus_40">Plus de 40 ans</string>
     <string name="remerciment">Merci pour votre retour !</string>
+    <string name="merci">Merci pour votre retour !</string>
+    <string name="nom_EVENT">Nom de l\'évènement</string>
+    <string name="nom_ecole">Nom de l\'école</string>
+    <string name="nom_bat">Nom du bâtiment</string>
+    <string name="horaires">Horaires</string>
 
 </resources>

@@ -42,7 +42,7 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-
+                        ListeObjets.satisfaction = satisfaction;
                     }
                 });
             }

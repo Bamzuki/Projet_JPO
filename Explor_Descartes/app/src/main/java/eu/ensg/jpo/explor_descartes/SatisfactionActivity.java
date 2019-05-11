@@ -375,9 +375,6 @@ public class SatisfactionActivity extends template {
 
         System.out.println(satisfaction);
 
-        ListeObjets.satisfaction = satisfaction;
-
-
 /*
        // Enregistrement dans la base de données :
         try {
