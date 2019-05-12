@@ -51,4 +51,31 @@ Il faut ensuite configurer sendmail. Pour cela, on ouvre le fichier avec la comm
 
 Il faut ensuite entre dans le fichier php.ini, chercher la partie [mail function] et remplir le champ sendmail_path avec le chemin de sendmail.
 
+II – Configuration des fichiers :
+
+Une fois le serveur configuré, il faut placer l'ensemble des fichiers présents dans le dossier Interface_administrateur(avec-css) sur votre serveur. Il faut maintenant configurer les chemins d'accès au serveur des différents fichiers de l'application.
+
+1. Interface administrateur :
+
+Pour commencer, il faut modifier l'accès à la base de données dans les fichiers suivants : 
+connexion.php
+forgetPassword.php
+serveur.php
+
+Pour cela il faut modifier la valeur de la variable $link.
+Pour host, vous pouvez laisser la valeur localhost sauf si le serveur Postgres et le serveur contenant les fichiers sont différents. Il faut alors mettre l'adresse du serveur Postgres.
+Pour port, il faut renseigner le port de votre serveur Postgres (par défaut 5432).
+Pour dbname, il faut renseigner le nom de la base de données (laisser test-JPO si vous gardez ce nom).
+Pour user et password, il s'agit de ceux de la base de données.
+
+Dans forgetPassword.php, il faut aussi modifier la variable $mailAppli qui le mail officiel de l'application qui est utilisé pour envoyer les nouveaux mots de passe.
+
+
+2. Application :
+
+Il faut ensuite modifier les chemins d'accès de l'application. Pour cela, il faut ouvrir le projet Explor_Descartes avec Android Studio, puis ouvrir ouvrir le fichier res/values/string.xml. Il faut ensuite modifier les valeurs url_serveur, url_serveur_ecoles, et accord avec l'adresse de votre serveur.
+Il faut ensuite modifier le compte Mapbox utiliser. Pour cela, il faut créer un nouveau compte avec le site suivant : https://www.mapbox.com/mobile/. Il faut ensuite copier le token et le copier à la place de l'ancien dans la balise access_token du fichier string.xml. 
+
+
+Vous pouvez alors utiliser et modifier l'application Explor'Descartes !
 
