@@ -27,11 +27,11 @@ L'installation de ses services ne sera pas décrit dans ce guide, car les métho
 Une fois le serveur Postgres installé sur votre serveur, il faut créer une base de données qui contiendra toutes les données nécessaires à l'application. On peut faire cela en ligne de commande avec la commande createdb [nombase]  ou plus simplement en utilisant un SGBD installé sur le serveur comme phpPgAdmin. Le nom de la base utilisé durant les test étaient test-JPO. Vous pouvez en changer, il sera décrit plus loin comment configurer l'accès à la base de données.
 Il faut ensuite instancier les différentes tables et les remplir avec les données de base. Pour cela, il faut lancer les scripts SQL suivant :
 
-./BDD/BDD_Ecoles.sql
-./BDD/BDD_évènements.sql
-./BDD/BDD_FAQ.sql
-./BDD/BDD_Questionnaire.sql
-./BDD/BDD_Visiteurs.sql
+ - ./BDD/BDD_Ecoles.sql
+ - ./BDD/BDD_évènements.sql
+ - ./BDD/BDD_FAQ.sql
+ - ./BDD/BDD_Questionnaire.sql
+ - ./BDD/BDD_Visiteurs.sql
  
 Cette opération peut se faire en ligne de commande avec la commande \i nomfichier ou grâce à un SGBD comme phpPgAdmin.
 
