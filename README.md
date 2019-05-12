@@ -40,8 +40,8 @@ La configuration du serveur diffère selon le système d'exploitation utilisé.
  - Sur Windows :
 
 Il faut entrer dans le fichier php.ini, chercher la partie [mail function] et remplir les champs avec les informations correspondantes :
-- Pour le champ SMTP : Adresse du serveur SMTP. Cela peut-être votre serveur SMTP personnel ou comme ici celui de votre fournisseur d'accès internet.
-- Pour le champ sendmail_from : Adresse mail officielle de l'application, celle-ci a été créée lors du développement. Il est donc possible d'en changer.
++ Pour le champ SMTP : Adresse du serveur SMTP. Cela peut-être votre serveur SMTP personnel ou comme ici celui de votre fournisseur d'accès internet.
++ Pour le champ sendmail_from : Adresse mail officielle de l'application, celle-ci a été créée lors du développement. Il est donc possible d'en changer.
 
  - Sur Unix :
 
