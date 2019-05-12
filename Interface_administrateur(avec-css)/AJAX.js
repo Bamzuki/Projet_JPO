@@ -8,7 +8,7 @@ var listeEvenements=[];
 var listeFAQ=[];
 var listeSatisfaction=[];
 var listeQuestionnaire=[];
-
+var listeNbUtilisateurs=[];
 
 function getListeNomNiveaux(idSelectNiveau){
   // Mise à jour de la liste des noms des niveaux depuis le serveur
@@ -618,12 +618,11 @@ function getListeEvenement(){
   ajax.send(request);
 }
 
+function getNbUtilisateurs(){
+  //Récupération de la liste des évènements
 
-
-
-function getListeSatisfaction(){
-  //Récupération des réponses au questionnaire de satisfaction
-  var request = "request=listeSatisfaction"
+  //Mise à jour à partir des filtres choisis
+  var request = "request=nbUtilisateurs"
 
 
   var ajax    = new XMLHttpRequest();
@@ -631,6 +630,50 @@ function getListeSatisfaction(){
   ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
   ajax.addEventListener('load',  function () {
     // Récupération des données :
+	console.log(ajax.response);
+    listeNbUtilisateurs = JSON.parse(ajax.response);
+    console.log(listeNbUtilisateurs);
+    // Remplissage des en-têtes du tableau
+	
+	
+	var tableau = document.getElementById("nb_utilisateurs");
+    console.log(tableau);
+    tableau.innerHTML = "";
+    var ligne;
+    var element;
+    ligne = document.createElement("tr");
+    element = document.createElement("td");
+    element.innerHTML = "Nombre d'utilisateurs";
+    ligne.appendChild(element);
+	tableau.appendChild(ligne);
+	
+	
+	
+  for (var i = 0; i < listeNbUtilisateurs.length; i++){
+      ligne   = document.createElement("tr");
+      ligne.setAttribute("id", i);
+	  ligne   = document.createElement("tr");
+      element = document.createElement("td");
+      element.innerHTML = listeNbUtilisateurs[i].id;
+      ligne.appendChild(element);
+	  tableau.appendChild(ligne);
+  }
+  });
+  ajax.send(request);
+}
+
+
+function getListeSatisfaction(){
+  //Récupération des réponses au questionnaire de satisfaction
+  var request = "request=listeSatisfaction";
+
+
+  var ajax    = new XMLHttpRequest();
+  ajax.open('GET', 'serveur.php/?'+request);
+  ajax.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+  ajax.addEventListener('load',  function () {
+    // Récupération des données :
+    console.log(ajax.response);
     listeSatisfaction = JSON.parse(ajax.response);
 
     // Remplissage des en-têtes du tableau 1
@@ -2035,6 +2078,7 @@ function deleteFAQ(i) {
 //On va ensuite appeler les fonctions dont on a besoin au démarrage des différentes pages
 
 //On appelle les fonctions pour la page consacrée aux différents questionnaire
+getNbUtilisateurs();
 getListeSatisfaction();
 getListeFAQ_admin();
 getListeFAQ_client();
