@@ -634,8 +634,8 @@ function getNbUtilisateurs(){
     listeNbUtilisateurs = JSON.parse(ajax.response);
     console.log(listeNbUtilisateurs);
     // Remplissage des en-têtes du tableau
-	
-	
+
+
 	var tableau = document.getElementById("nb_utilisateurs");
     console.log(tableau);
     tableau.innerHTML = "";
@@ -646,9 +646,9 @@ function getNbUtilisateurs(){
     element.innerHTML = "Nombre d'utilisateurs";
     ligne.appendChild(element);
 	tableau.appendChild(ligne);
-	
-	
-	
+
+
+
   for (var i = 0; i < listeNbUtilisateurs.length; i++){
       ligne   = document.createElement("tr");
       ligne.setAttribute("id", i);
@@ -767,7 +767,29 @@ function getListeSatisfaction(){
 
     tableau2.appendChild(ligne);
 
-
+    listeResultat1 = [];
+    listeResultat2 = [];
+    listeResultat3 = [];
+    listeResultat4 = [];
+    listeResultat5 = [];
+    listeResultat6 = [];
+    listeResultat7 = [];
+    listeResultat8 = [];
+    listeResultat9 = [];
+    listeResultat10 = [];
+    listeResultat11 = [];
+    listeResultat12 = [];
+    listeResultat13 = [];
+    listeResultat14 = [];
+    listeResultat15 = [];
+    listeResultat16 = [];
+    listeResultat17 = [];
+    listeResultat18 = [];
+    listeResultat19 = [];
+    listeResultat20 = [];
+    listeResultat21 = [];
+    listeResultat22 = [];
+    listeResultat23 = [];
     //Remplissage des deux tableaux avec les éléments de la BDD
     for (var i = 0; i < listeSatisfaction.length; i++){
       ligne   = document.createElement("tr");
@@ -850,11 +872,56 @@ function getListeSatisfaction(){
       ligne.appendChild(element);
 
       tableau2.appendChild(ligne);
+
+      listeResultat1[i] = listeSatisfaction[i].question_1;
+      listeResultat2[i] = listeSatisfaction[i].question_2;
+      listeResultat3[i] = listeSatisfaction[i].question_3;
+      listeResultat4[i] = listeSatisfaction[i].question_4;
+      listeResultat5[i] = listeSatisfaction[i].question_5;
+      listeResultat6[i] = listeSatisfaction[i].question_6;
+      listeResultat7[i] = listeSatisfaction[i].question_7;
+      listeResultat8[i] = listeSatisfaction[i].question_8;
+      listeResultat9[i] = listeSatisfaction[i].question_9;
+      listeResultat10[i] = listeSatisfaction[i].question_10;
+      listeResultat11[i] = listeSatisfaction[i].question_11;
+      listeResultat12[i] = listeSatisfaction[i].question_12;
+      listeResultat13[i] = listeSatisfaction[i].question_13;
+      listeResultat14[i] = listeSatisfaction[i].question_14;
+      listeResultat15[i] = listeSatisfaction[i].question_15;
+      listeResultat16[i] = listeSatisfaction[i].question_16;
+      listeResultat17[i] = listeSatisfaction[i].question_17;
+      listeResultat18[i] = listeSatisfaction[i].question_18;
+      listeResultat19[i] = listeSatisfaction[i].question_19;
+      listeResultat20[i] = listeSatisfaction[i].question_20;
+      listeResultat21[i] = listeSatisfaction[i].question_21;
+      listeResultat22[i] = listeSatisfaction[i].question_22;
+      listeResultat23[i] = listeSatisfaction[i].question_23;
+      listeResultat12[i] = listeSatisfaction[i].question_24;
     }
 
-
-
-
+    afficherGraphique(1,listeResultat1);
+    afficherGraphique(2,listeResultat2);
+    afficherGraphique(3,listeResultat3);
+    afficherGraphique(4,listeResultat4);
+    afficherGraphique(5,listeResultat5);
+    afficherGraphique(6,listeResultat6);
+    afficherGraphique(7,listeResultat7);
+    afficherGraphique(8,listeResultat8);
+    afficherGraphique(9,listeResultat9);
+    afficherGraphique(10,listeResultat10);
+    afficherGraphique(11,listeResultat11);
+    afficherGraphique(12,listeResultat12);
+    afficherGraphique(13,listeResultat13);
+    afficherGraphique(14,listeResultat14);
+    afficherGraphique(15,listeResultat15);
+    afficherGraphique(16,listeResultat16);
+    afficherGraphique(17,listeResultat17);
+    afficherGraphique(18,listeResultat18);
+    afficherGraphique(19,listeResultat19);
+    afficherGraphique(20,listeResultat20);
+    afficherGraphique(21,listeResultat21);
+    afficherGraphique(22,listeResultat22);
+    afficherGraphique(23,listeResultat23);
 
   });
   ajax.send(request);
@@ -1990,8 +2057,6 @@ function deleteEcole(i) {
 function deleteFiliere(i) {
   // Suppression d'une filiere dans la base de données
 
-
-
   var input_id  = listeFilieres[i].id;
   var ajax      = new XMLHttpRequest();
   ajax.open('GET', 'serveur.php/?request=deleteFiliere&&id=' + input_id );
@@ -2073,7 +2138,43 @@ function deleteFAQ(i) {
   ajax.send('request=deleteFAQ&&id=' + input_id );
 }
 
+// Fonctions graphiques
+function afficherGraphique(nQuestion, liste_Resultat){
+  //var liste_Resultat = [];
+  //for (var i=0; i<satisfaction.length; i ++){
+  //  liste_Resultat = listeSatisfaction.question_1;
+  //}
+  // Calcul des données pour la question
+  var labels = [];
+  var data   = [];
+  var data
+  for (var i=0; i<liste_Resultat.length; i ++){
+    if (labels.indexOf(liste_Resultat[i]) == -1){
+      labels.push(liste_Resultat[i]);
+      data.push(0);
+    }
+    data[labels.indexOf(liste_Resultat[i])] += 1;
+  }
+  console.log();
+  var ctx = document.getElementById('canvas_'+nQuestion).getContext('2d');
+  var myChart = new Chart(ctx, {
+    type: 'pie',
+    data: {
+      labels: labels,
+      datasets: [{
+        data: data,
+        backgroundColor: ["blue","red", "green", "yellow", "pink", "orange", "black", "grey", "cyan"]
+      }]
+    },
+    options: {
+      legend: {
+          display: true,
+          position: 'top'
+      }
+    }
+  });
 
+}
 
 //On va ensuite appeler les fonctions dont on a besoin au démarrage des différentes pages
 
