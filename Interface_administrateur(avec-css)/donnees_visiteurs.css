@@ -91,8 +91,8 @@ input:checked + #sousmenu li {
 }
 
 .option1 {
-  display: flex;
-  flex-direction: row;
+  display: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
@@ -140,4 +140,8 @@ th, td {
 
 .modifier_batiment img, .supprimer_batiment img, .modifier_ecole img, .supprimer_ecole img, .modifier_formation img, .supprimer_formation img, .modifier_filiere img, .supprimer_filiere img {
   width: 100%;
+}
+
+.chart{
+  width: 20%;
 }

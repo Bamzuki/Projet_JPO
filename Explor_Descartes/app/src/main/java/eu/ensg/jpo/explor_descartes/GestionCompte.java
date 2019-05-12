@@ -3,14 +3,11 @@ package eu.ensg.jpo.explor_descartes;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.Toast;
-
-import java.lang.reflect.Modifier;
+;
 import java.text.ParseException;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
@@ -23,10 +20,10 @@ public class GestionCompte extends template {
     private Button Suppression;
 
     private void openModifierPerso() {
-        // Create intent
-        Intent intent = new Intent(this, ModifierPerso.class);
 
         if (ListeObjets.visiteur != null){
+            // Create intent
+            Intent intent = new Intent(this, ModifierPerso.class);
             // Start activity
             startActivity(intent);
         }
@@ -36,10 +33,10 @@ public class GestionCompte extends template {
     }
 
     private void openModifierMdp() {
-        // Create intent
-        Intent intent = new Intent(this, ModifierMdp.class);
 
         if (ListeObjets.visiteur != null){
+            // Create intent
+            Intent intent = new Intent(this, ModifierMdp.class);
             // Start activity
             startActivity(intent);
         }
@@ -49,16 +46,19 @@ public class GestionCompte extends template {
     }
 
     private void openSuppression() {
+
         if (ListeObjets.visiteur != null){
-            // Suppression dans la base de données :
-            String urlServeur = getString(R.string.url_serveur) + "serveur.php/";
+
             try {
-                VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
-                visiteurDAO.suppression(ListeObjets.visiteur);
+                // Suppression dans la base de données :
+                VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
+                visiteurDAO.delete(ListeObjets.visiteur);
+                // Déconnexon :
+                openDeconnexion();
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            openDeconnexion();
+
         }
         else {
             Toast.makeText(this, "Vous n'est pas connecté !" , Toast.LENGTH_SHORT).show();
@@ -76,7 +76,7 @@ public class GestionCompte extends template {
             SharedPreferences.Editor editor = preferences.edit();
             editor.remove("pseudo");
             editor.remove("mdp");
-            editor.commit();
+            editor.apply();
 
             //Remise à zéro de la valeur visiteur
             ListeObjets.visiteur = null;
@@ -99,10 +99,10 @@ public class GestionCompte extends template {
         contentTemp();
 
         // I - Instanciation des objets Java représentant les composants graphiques
-        Button ModifierPerso = (Button) findViewById(R.id.ModifierPersoB);
-        Button ModifierMdp   = (Button) findViewById(R.id.ModifierMdpB);
-        Button Deconnexion = (Button) findViewById(R.id.Deconnexion);
-        Button Suppression = (Button) findViewById(R.id.Suppression);
+        ModifierPerso = (Button) findViewById(R.id.ModifierPersoB);
+        ModifierMdp   = (Button) findViewById(R.id.ModifierMdpB);
+        Deconnexion = (Button) findViewById(R.id.Deconnexion);
+        Suppression = (Button) findViewById(R.id.Suppression);
 
     // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 

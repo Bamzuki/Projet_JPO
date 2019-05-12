@@ -38,7 +38,7 @@ public class PlanningActivity extends template implements Serializable {
                 ImageEvenement item = (ImageEvenement) parent.getItemAtPosition(position);
                 VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
                 Evenement evenement = item.getEvenement();
-                if (ListeObjets.listeFavoris.contains(evenement)){
+                if (evenement.estUnFavori(ListeObjets.visiteur)){
                     visiteurDAO.supprimerFavori(activity, evenement);
                 }else{
                     visiteurDAO.ajouterFavori(activity, evenement);
@@ -56,7 +56,7 @@ public class PlanningActivity extends template implements Serializable {
         evenementDAO.chargerPlanning(this);
 
         ArrayList<ImageEvenement> imageEvenements = new ArrayList<>();
-        Collections.sort(imageEvenements);
+
         return imageEvenements;
     }
 

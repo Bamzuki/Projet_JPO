@@ -3,21 +3,17 @@ package eu.ensg.jpo.explor_descartes.donneesAcces;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
 
 import java.io.IOException;
 
-import eu.ensg.jpo.explor_descartes.EcoleActivity;
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.MainActivity;
-import eu.ensg.jpo.explor_descartes.ModifierMdp;
 import eu.ensg.jpo.explor_descartes.ModifierPerso;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import okhttp3.Call;
@@ -33,19 +29,16 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     @Override
     public void create(Visiteur newVisiteur) {
-        return;
+
     }
 
     @Override
-    public void update(Visiteur obj) {
-
-    }
-
-    public void updateMdp(final ModifierMdp activity, Visiteur visiteur) {
+    public void update(Visiteur visiteur) {
         // Construction de la requete
         String url = this.urlServeur + "?request=changeUtilisateur";
-        String donnees = "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
+        String donnees = "&&id=" + visiteur.getId() + "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
         url = url + donnees;
+        System.out.println(url);
         Request request = new Request.Builder().url(url).build();
 
         // Envoi de la requete
@@ -53,18 +46,17 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
-                String reponseBdd = response.body().string();
-
-                }
-                // Pseudo et email corrects
+            }
+            // Pseudo et email corrects
             public void onFailure(Call call, IOException e) {
                 System.out.println("Echec de la connection !");
             }
         });
-        return;
+
     }
 
-    public void suppression( Visiteur visiteur) {
+    @Override
+    public void delete(Visiteur visiteur) {
         // Construction de la requete
         String url = this.urlServeur + "?request=deleteUtilisateur";
         String donnees = "&&id=" + visiteur.getId();
@@ -76,21 +68,21 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
                 System.out.println("Connexion etablie avec succes !");
-                String reponseBdd = response.body().string();
             }
             // Pseudo et email corrects
             public void onFailure(Call call, IOException e) {
                 System.out.println("Echec de la connection !");
             }
         });
-        return;
+
     }
 
     public void updatePerso(final ModifierPerso activity, Visiteur visiteur) {
         // Construction de la requete
         String url = this.urlServeur + "?request=changeUtilisateur";
-        String donnees = "&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
+        String donnees = "&&id="+visiteur.getId()+"&&prenom=" + visiteur.getPrenom() + "&&nom=" + visiteur.getNom() + "&&pseudo=" + visiteur.getPseudo() + "&&email=" + visiteur.getEmail() + "&&mdp=" + visiteur.getMdp() + "&&admin=" + visiteur.getAdmin();
         url = url + donnees;
+        System.out.println(url);
         Request request = new Request.Builder().url(url).build();
 
         // Envoi de la requete
@@ -119,29 +111,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                         }
                     });
                 }
-                // Pseudo et email corrects
-            }
 
-            public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connection !");
-            }
-        });
-        return;
-    }
-
-    @Override
-    public void delete(final Visiteur visiteur) {
-        // Construction de la requete
-        String url = this.urlServeur + "?request=deleteUtilisateur";
-        String donnees = "&&id=" + visiteur.getId();
-        url = url + donnees;
-        Request request = new Request.Builder().url(url).build();
-        // Envoi de la requete
-        Call call = client.newCall(request);
-        call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
-                //Toast.makeText(getActivity(), response.body().string() , Toast.LENGTH_LONG).show();
             }
 
             public void onFailure(Call call, IOException e) {
