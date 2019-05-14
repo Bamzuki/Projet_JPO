@@ -13,6 +13,11 @@ import eu.ensg.jpo.explor_descartes.GridView.ImageEcole;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
 public class AccueilActivity extends template {
+
+    /**
+     * Page d'acceuil
+     */
+
     private GridView gridView;
 
     @Override
@@ -40,6 +45,11 @@ public class AccueilActivity extends template {
 
     private ArrayList<ImageEcole> getListImageEcoles() {
 
+        /**
+         * Fonction récuppérant les icones des différentes écoles
+         *
+         * @return : liste de toutes les icones
+         */
 
         final ArrayList<ImageEcole> imageEcoles = new ArrayList<>();
         for (Ecole ecole : ListeObjets.listeEcole) {

@@ -19,11 +19,22 @@ import okhttp3.Response;
 import static xdroid.core.Global.getResources;
 
 public class ImageEcole {
+
+    /**
+     * Classse représentant l'icone d'une école
+     *
+     * @param nom : nom de l'école auquelle est associé l'image
+     * @param ecole : école à laquelle est associé l'image
+     */
+
+
     private Bitmap image;
     private String nom;
     private Ecole ecole;
     private final OkHttpClient client = new OkHttpClient();
 
+
+    //Constructeur
     public ImageEcole(String nom, Ecole ecole) {
         super();
         this.image = BitmapFactory.decodeResource(getResources(), R.drawable.wait);
@@ -31,12 +42,19 @@ public class ImageEcole {
         this.ecole = ecole;
     }
 
+
     public void addPicture (final Activity activity, final GridViewAdapter adapter, String url) {
+
+        /**
+         * Fonction permettant d'ajouter l'icone d'une école d'une image à une page
+         *
+         * @param activity : page dans laquelle on souhaite inserer l'image
+         * @param adapter : adaptateur
+         * @param url : url du serveur
+         */
 
         // Construction de la requete
         String urlImage = url + "image_ecole/" + this.ecole.getImage();
-        //String url = this.url + "image_ecole/eavt-icone.jpg";
-        System.out.println(url);
         Request request = new Request.Builder().url(urlImage).build();
 
         // Envoi de la requete
@@ -47,7 +65,7 @@ public class ImageEcole {
 
         call.enqueue(new Callback() {
 
-            public void onResponse(Call call, Response response) throws IOException {
+            public void onResponse(Call call, Response response) throws IOException { //Obtention de la réponse du serveur si la requête est effectué
 
                 System.out.println("Image chargée avec succès !");
 
@@ -79,7 +97,7 @@ public class ImageEcole {
 
             }
 
-            public void onFailure(Call call, IOException e) {
+            public void onFailure(Call call, IOException e) { //Cas où la requête échoue
                 System.out.println("Echec de la connexion !");
                 // On affiche l'image par défaut
                 image = BitmapFactory.decodeResource(getResources(), R.drawable.error);
@@ -92,6 +110,11 @@ public class ImageEcole {
             }
         });
     }
+
+
+    /*
+    Getter et Setter
+     */
 
     public Bitmap getImage() {
         return image;

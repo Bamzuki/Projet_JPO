@@ -30,12 +30,24 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 
 public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
+    /**
+     * Classe représentant un événement
+     * @param id : id
+     * @param nom : intitulé
+     * @param debut : heure de début
+     * @param fin : heure de fin
+     * @param ecole : école où a lieu l'événement
+     * @param batiment : batiment où à lieu l'événement
+     */
+
     private String nom;
     private String debut;
     private String fin;
     private String ecole;
     private String batiment;
 
+
+    //Constructeur
     public Evenement(int id, String nom, String debut, String fin, String ecole, String batiment) {
         super(id);
         this.nom = nom;
@@ -45,7 +57,16 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
         this.batiment = batiment;
     }
 
-    public String getJson(){
+
+
+     public String getJson(){
+
+         /**
+          * Fonction permettant de transformer un événement en GeoJSON
+          *
+          * @return événement sous forme de GeoJSON
+          */
+
         // I - Récupération du bâtiment accueillant l'évènement
         Batiment batiment = ListeObjets.getBatimentFromNom(this.batiment);
         if (batiment == null){
@@ -60,35 +81,25 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
         return this.getHoraires().compareTo(o.getHoraires());
     }
 
-    private static class SymbolGenerator {
+    public String getHoraires(){
 
         /**
-         * Generate a Bitmap from an Android SDK View.
+         * Fonction permettant de récupérer l'horraire dun événement
          *
-         * @param view the View to be drawn to a Bitmap
-         * @return the generated bitmap
+         * @return horaires de début et de fin de l'événement
          */
-        static Bitmap generate(@NonNull View view) {
-            int measureSpec = View.MeasureSpec.makeMeasureSpec(0, View.MeasureSpec.UNSPECIFIED);
-            view.measure(measureSpec, measureSpec);
 
-            int measuredWidth = view.getMeasuredWidth();
-            int measuredHeight = view.getMeasuredHeight();
-
-            view.layout(0, 0, measuredWidth, measuredHeight);
-            Bitmap bitmap = Bitmap.createBitmap(measuredWidth, measuredHeight, Bitmap.Config.ARGB_8888);
-            bitmap.eraseColor(Color.TRANSPARENT);
-            Canvas canvas = new Canvas(bitmap);
-            view.draw(canvas);
-            return bitmap;
-        }
-    }
-
-    public String getHoraires(){
         return this.debut.substring(11,16) + " - " + this.fin.substring(11,16);
     }
 
     public boolean estUnFavori(Visiteur visiteur){
+
+        /**
+         * Fonction permettant de vérifier si un événement est en favori ou pas
+         *
+         * @return booléen true si l'événement est en favori, false sinon
+         */
+
         if (ListeObjets.visiteur == null){
             return false;
         }
@@ -99,6 +110,11 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
         }
         return false;
     }
+
+
+    /*
+    Getter et Setter
+     */
 
     public String getNom() {
         return nom;

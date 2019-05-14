@@ -23,6 +23,11 @@ import static xdroid.core.Global.getResources;
 
 public class PictureDAO {
 
+    /**
+     * Classe permettant d'implementer une image en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
+     */
+
     private String url;
     protected final OkHttpClient client = new OkHttpClient();
 
@@ -32,6 +37,12 @@ public class PictureDAO {
 
 
     public Drawable getPicture (String nomImage) {
+
+        /*
+        Fonction permettant de renvoyer une image à partir de son nom
+        nomImage: nom de l'image que l'on souhaite récupérer depuis le serveur
+         */
+
         // Le drawable à renvoyer
         Drawable drawable = null;
         try {

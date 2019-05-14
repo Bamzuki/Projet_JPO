@@ -22,11 +22,16 @@ import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
 public class EcoleActivity extends template {
 
+    /**
+     * Page école
+     */
+
     private Ecole ecole;
     private ExpandableListView listView;
     private ExpandableListAdapterEvenement listAdapterEvenement;
     private ExpandableListAdapterFormation listAdapterFormation;
     private List<String> listDataHeader;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -75,6 +80,14 @@ public class EcoleActivity extends template {
     }
 
     public void setListViewHeightEvenement(ExpandableListView listView, int group) {
+
+        /**
+         *  Fonction permettant de modifier la taille de la liste extensible des événements
+         *
+         * @param listView : liste des formation
+         * @param group : position de la liste d'événements dans la liste extensible
+         */
+
         ExpandableListAdapterEvenement listAdapterEvenement = (ExpandableListAdapterEvenement) listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
@@ -108,6 +121,14 @@ public class EcoleActivity extends template {
     }
 
     public void setListViewHeightFormation(ExpandableListView listView, int group) {
+
+        /**
+         *  Fonction permettant de modifier la taille de la liste extensible des formations
+         *
+         * @param listView : liste des formation
+         * @param group : position de la liste des formations dans la liste extensible
+         */
+
         ExpandableListAdapterFormation listAdapterFormation = (ExpandableListAdapterFormation) listView.getExpandableListAdapter();
         int totalHeight = 0;
         int desiredWidth = View.MeasureSpec.makeMeasureSpec(listView.getWidth(),
@@ -140,6 +161,10 @@ public class EcoleActivity extends template {
         listView.requestLayout();
     }
 
+
+    /*
+    Getter et Setter
+     */
 
     public Ecole getEcole() {
         return ecole;

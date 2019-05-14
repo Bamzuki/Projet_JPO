@@ -34,7 +34,11 @@
                                           <PersistentState>
                                             <option name="values">
                                               <map>
+<<<<<<< HEAD
                                                 <entry key="url" value="jar:file:/Applications/Android%20Studio.app/Contents/plugins/android/lib/android.jar!/images/material_design_icons/action/ic_delete_black_24dp.xml" />
+=======
+                                                <entry key="url" value="jar:file:/home/formation/android-studio-ide-181.5056338-linux/android-studio/plugins/android/lib/android.jar!/images/material_design_icons/image/ic_brightness_1_black_24dp.xml" />
+>>>>>>> 8d797a9f3dcf8b6ca28b7235d3e0676f10d1924f
                                               </map>
                                             </option>
                                           </PersistentState>
@@ -44,9 +48,14 @@
                                   </option>
                                   <option name="values">
                                     <map>
+<<<<<<< HEAD
                                       <entry key="outputName" value="delete" />
                                       <entry key="theme" value="CUSTOM" />
                                       <entry key="themeColor" value="4b4b4b" />
+=======
+                                      <entry key="theme" value="CUSTOM" />
+                                      <entry key="themeColor" value="e55e5e" />
+>>>>>>> 8d797a9f3dcf8b6ca28b7235d3e0676f10d1924f
                                     </map>
                                   </option>
                                 </PersistentState>
@@ -57,6 +66,7 @@
                                 <PersistentState>
                                   <option name="children">
                                     <map>
+<<<<<<< HEAD
                                       <entry key="foregroundClipArt">
                                         <value>
                                           <PersistentState>
@@ -79,6 +89,8 @@
                                           </PersistentState>
                                         </value>
                                       </entry>
+=======
+>>>>>>> 8d797a9f3dcf8b6ca28b7235d3e0676f10d1924f
                                       <entry key="foregroundImage">
                                         <value>
                                           <PersistentState>
@@ -92,6 +104,7 @@
                                       </entry>
                                     </map>
                                   </option>
+<<<<<<< HEAD
                                   <option name="values">
                                     <map>
                                       <entry key="backgroundLayerName" value="ic_launcher_background" />
@@ -100,6 +113,8 @@
                                       <entry key="outputName" value="delete" />
                                     </map>
                                   </option>
+=======
+>>>>>>> 8d797a9f3dcf8b6ca28b7235d3e0676f10d1924f
                                 </PersistentState>
                               </value>
                             </entry>

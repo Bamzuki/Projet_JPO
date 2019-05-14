@@ -21,11 +21,22 @@ import static xdroid.core.Global.getResources;
 
 public class ImageEvenement implements Comparable<ImageEvenement>{
 
+    /**
+     * Classe représentant un événement dans le planning
+     *
+     * @param iconEcole
+     * @param evenement : évenement
+     * @param nomIcon : nom de l'icone
+     */
+
+
     private Bitmap iconEcole;
     private Evenement evenement;
     private String nomIcon;
     private final OkHttpClient client = new OkHttpClient();
 
+
+    //Constructeur
     public ImageEvenement(Bitmap iconEcole, Evenement evenement, String nomIcon) {
         this.iconEcole = iconEcole;
         this.evenement = evenement;

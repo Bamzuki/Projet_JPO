@@ -1,9 +1,62 @@
 package eu.ensg.jpo.explor_descartes.donnesObjet;
 
-import java.util.ArrayList;
-
 public class Satisfaction extends DataBaseObject {
 
+    /**
+     * Classe représentant un formulaire de réponse au questionnaire de satisfaction
+     * @param id : id
+     * @param question_1 : réponse à la question 1
+     * @param question_2 : réponse à la question 2
+     * @param question_3 : réponse à la question 3
+     * @param question_4 : réponse à la question 4
+     * @param question_5 : réponse à la question 5
+     * @param question_6 : réponse à la question 6
+     * @param question_7 : réponse à la question 7
+     * @param question_8 : réponse à la question 8
+     * @param question_9 : réponse à la question 9
+     * @param question_10 : réponse à la question 10
+     * @param question_11 : réponse à la question 11
+     * @param question_12 : réponse à la question 12
+     * @param question_13 : réponse à la question 13
+     * @param question_14 : réponse à la question 14
+     * @param question_15 : réponse à la question 15
+     * @param question_16 : réponse à la question 16
+     * @param question_17 : réponse à la question 17
+     * @param question_18 : réponse à la question 18
+     * @param question_19 : réponse à la question 19
+     * @param question_20 : réponse à la question 20
+     * @param question_21 : réponse à la question 21
+     * @param question_22 : réponse à la question 22
+     * @param question_23 : réponse à la question 23
+     */
+
+
+    private String question_1;
+    private String question_2;
+    private String question_3;
+    private String question_4;
+    private String question_5;
+    private String question_6;
+    private String question_7;
+    private String question_8;
+    private String question_9;
+    private String question_10;
+    private String question_11;
+    private String question_12;
+    private String question_13;
+    private String question_14;
+    private String question_15;
+    private String question_16;
+    private String question_17;
+    private String question_18;
+    private String question_19;
+    private String question_20;
+    private String question_21;
+    private String question_22;
+    private String question_23;
+
+
+    //Constrcuteur
     public Satisfaction(int id, String question_1, String question_2, String question_3, String question_4, String question_5, String question_6, String question_7, String question_8, String question_9, String question_10, String question_11, String question_12, String question_13, String question_14, String question_15, String question_16, String question_17, String question_18, String question_19, String question_20, String question_21, String question_22, String question_23) {
         super(id);
         this.question_1 = question_1;
@@ -31,56 +84,9 @@ public class Satisfaction extends DataBaseObject {
         this.question_23 = question_23;
     }
 
-    private String question_1;
-    private String question_2;
-    private String question_3;
-    private String question_4;
-    private String question_5;
-    private String question_6;
-    private String question_7;
-    private String question_8;
-    private String question_9;
-    private String question_10;
-    private String question_11;
-    private String question_12;
-    private String question_13;
-    private String question_14;
-    private String question_15;
-    private String question_16;
-    private String question_17;
-    private String question_18;
-    private String question_19;
-    private String question_20;
-    private String question_21;
-    private String question_22;
-    private String question_23;
-
-    public Satisfaction(String question_1, String question_2,String question_3,String question_4,String question_5,String question_6,String question_7,String question_8,String question_9,String question_10,String question_11,String question_12,String question_13,String question_14,String question_15,String question_16,String question_17,String question_18,String question_19,String question_20,String question_21,String question_22,String question_23) {
-        super(0);
-        this.question_1 = question_1;
-        this.question_2 = question_2;
-        this.question_3 = question_3;
-        this.question_4 = question_4;
-        this.question_5 = question_5;
-        this.question_6 = question_6;
-        this.question_7 = question_7;
-        this.question_8 = question_8;
-        this.question_9 = question_9;
-        this.question_10 = question_10;
-        this.question_11 = question_11;
-        this.question_12 = question_12;
-        this.question_13 = question_13;
-        this.question_14 = question_14;
-        this.question_15 = question_15;
-        this.question_16 = question_16;
-        this.question_17 = question_17;
-        this.question_18 = question_18;
-        this.question_19 = question_19;
-        this.question_20 = question_20;
-        this.question_21 = question_21;
-        this.question_22 = question_22;
-        this.question_23 = question_23;
-    }
+    /*
+    Getter et Setter
+     */
 
     public String getQuestion_1() {
         return question_1;

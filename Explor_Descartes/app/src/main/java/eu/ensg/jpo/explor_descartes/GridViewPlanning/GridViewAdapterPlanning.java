@@ -19,11 +19,24 @@ import eu.ensg.jpo.explor_descartes.R;
 import static xdroid.core.Global.getResources;
 
 public class GridViewAdapterPlanning extends ArrayAdapter {
+
+    /**
+     * Classe représsantant l'adapateur de la liste du planning
+     *
+     * @param context : contexte
+     * @param activity : page du planning
+     * @param layoutResourceId : id de la ressource
+     * @param data : données
+     */
+
+
     private Context context;
     private Activity activity;
     private int layoutResourceId;
     private ArrayList<ImageEvenement> data = new ArrayList<>();
 
+
+    //Constructeur
     public GridViewAdapterPlanning(Context context, Activity activity, int layoutResourceId, ArrayList data) {
         super(context, layoutResourceId, data);
         this.activity = activity;
