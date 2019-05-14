@@ -4,18 +4,24 @@ import okhttp3.OkHttpClient;
 
 public abstract class BddEcolesDAO<T> {
 
+    /*
+    Classe mère de tous les DAO
+     */
+
     protected String urlServeur;
     protected static final OkHttpClient client = new OkHttpClient();
 
 
+    //Constructeur
     public BddEcolesDAO(String urlServeur) {
         this.urlServeur = urlServeur;
     }
 
-    public abstract void create(T obj);
+    //Fonctions permettant de mettre à jour des données dans la base de onnées
+    public abstract void create(T obj);  //création
 
-    public abstract void update(T obj);
+    public abstract void update(T obj);  //mise à jour
 
-    public abstract void delete(T obj);
+    public abstract void delete(T obj);  //suppression
 
 }
