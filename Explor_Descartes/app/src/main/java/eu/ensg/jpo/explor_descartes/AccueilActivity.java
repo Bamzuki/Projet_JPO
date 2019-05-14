@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.GridView.GridViewAdapter;
 import eu.ensg.jpo.explor_descartes.GridView.ImageEcole;
+import eu.ensg.jpo.explor_descartes.Menu.BackgroundNotification;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 
 public class AccueilActivity extends template {
@@ -23,6 +24,7 @@ public class AccueilActivity extends template {
     @Override
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
+        startService(new Intent(this, BackgroundNotification.class));
         gridView = (GridView) findViewById(R.id.main_grid);
         contentTemp();
 

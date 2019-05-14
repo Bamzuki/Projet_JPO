@@ -48,7 +48,8 @@
             android:theme="@style/AppTheme" />
         <activity android:name=".GestionCompte" />
         <activity android:name=".ModifierMdp" />
-        <activity android:name=".ModifierPerso"></activity>
+        <activity android:name=".ModifierPerso"/>
+        <service android:name=".Menu.BackgroundNotification"/>
     </application>
 
 </manifest>

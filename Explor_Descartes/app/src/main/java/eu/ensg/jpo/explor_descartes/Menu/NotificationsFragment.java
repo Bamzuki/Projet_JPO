@@ -34,7 +34,8 @@ public class NotificationsFragment extends Fragment {
         contextNotif = getActivity();
         activityNotif = getActivity();
 
-
+        if(ListeObjets.visiteur.getListeFavoris() != null){
+        }
 
         return v;
     }

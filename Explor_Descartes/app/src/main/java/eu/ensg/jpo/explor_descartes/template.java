@@ -1,6 +1,7 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -27,6 +28,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
+import eu.ensg.jpo.explor_descartes.Menu.BackgroundNotification;
 import eu.ensg.jpo.explor_descartes.Menu.FavorisFragment;
 import eu.ensg.jpo.explor_descartes.Menu.Menu;
 import eu.ensg.jpo.explor_descartes.Menu.NotificationsFragment;
@@ -181,6 +183,7 @@ public class template extends AppCompatActivity {
                     menuc.openAccueilActivity();
                 }
                 if (pos == 2) {
+                    stopService(new Intent(template.this, BackgroundNotification.class));
                     menuc.openNavigationActivity();
                 }
                 if (pos == 3) {

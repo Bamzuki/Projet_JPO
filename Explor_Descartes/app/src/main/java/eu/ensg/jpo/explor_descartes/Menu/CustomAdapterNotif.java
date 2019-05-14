@@ -1,6 +1,7 @@
 package eu.ensg.jpo.explor_descartes.Menu;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
+import eu.ensg.jpo.explor_descartes.PlanningActivity;
 import eu.ensg.jpo.explor_descartes.R;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
@@ -89,7 +91,7 @@ public class CustomAdapterNotif extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(int position, final View convertView, ViewGroup parent) {
         final holderNotif hldNot = new holderNotif();
         final View rowviewNotif;
         rowviewNotif = inflaterNotif.inflate(R.layout.gd_notif, null);
@@ -98,6 +100,20 @@ public class CustomAdapterNotif extends BaseAdapter {
         hldNot.textNotif = (TextView) rowviewNotif.findViewById(R.id.textNotif);
         hldNot.date = (TextView) rowviewNotif.findViewById(R.id.horairesNotif);
         hldNot.suppr = (ImageView) rowviewNotif.findViewById(R.id.supprNotif);
+        hldNot.titreNotif.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, PlanningActivity.class);
+                context.startActivity(intent);
+            }
+        });
+        hldNot.suppr.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                notifyDataSetChanged();
+            }
+        });
 
         return rowviewNotif;
     }
