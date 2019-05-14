@@ -1,20 +1,10 @@
 package eu.ensg.jpo.explor_descartes.donnesObjet;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import com.mapbox.geojson.Feature;
-import com.mapbox.geojson.Geometry;
-import com.mapbox.geojson.Polygon;
-import com.mapbox.geojson.gson.GeometryGeoJson;
-import com.mapbox.mapboxsdk.annotations.MarkerOptions;
-import com.mapbox.mapboxsdk.geometry.LatLng;
-import com.mapbox.mapboxsdk.maps.MapView;
-import com.mapbox.mapboxsdk.maps.MapboxMap;
 import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.mapboxsdk.style.layers.FillLayer;
-import com.mapbox.mapboxsdk.style.layers.LineLayer;
+import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
-import com.mapbox.mapboxsdk.style.layers.PropertyValue;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
 import com.mapbox.mapboxsdk.style.sources.GeoJsonSource;
 
@@ -22,10 +12,13 @@ import eu.ensg.jpo.explor_descartes.ListeObjets;
 
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillOpacity;
-import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
 public class Batiment extends DataBaseObject{
+
+    /*
+    Classe représentant un batiment
+     */
 
     private String nom;
     private String fonction;
@@ -34,6 +27,8 @@ public class Batiment extends DataBaseObject{
     private int id_ecole;
     private JsonObject geometrie;
 
+
+    //Constructeur
     public Batiment(int id, String nom, String fonction, float lat, float lng, int idEcole, JsonObject geometrie) {
         super(id);
         this.nom = nom;
@@ -44,7 +39,13 @@ public class Batiment extends DataBaseObject{
         this.geometrie = geometrie;
     }
 
+
     public void afficherSurCarte (Style style){
+
+        /*
+        Fonction permettant d'afficher l'emprise d'batiment sur la carte
+        style : outil carte de mapbox
+         */
 
         if (!geometrie.toString().equals("{}")) {
 
@@ -54,26 +55,26 @@ public class Batiment extends DataBaseObject{
             FillLayer layerBatiment = new FillLayer("batiment"+this.id, "polygon"+this.id).withProperties(fillOpacity(0.5f), fillColor("blue"));
             style.addLayer(layerBatiment);
 
-            /*
+
             // II - Création et affichage du nom :
             String geoJsonPoint = "{\"type\": \"Point\",\"coordinates\": [" + this.lng + ", " + this.lat + "]}";
             GeoJsonSource point = new GeoJsonSource("point"+this.id, geoJsonPoint);
             style.addSource(point);
             SymbolLayer layerNomBatiment = new SymbolLayer("nomBatiment"+this.id, "point"+this.id);
-            Float[] translationIcon = new Float[2];
-            translationIcon[0] = new Float(0);
-            translationIcon[1] = new Float(0);
             Float[] translationText = new Float[2];
             translationText[0] = new Float(0);
-            translationText[1] = new Float(25);
-            System.out.println(this.id_ecole);
+            translationText[1] = new Float(10);
             String text = ListeObjets.getEcoleById(this.id_ecole).getNom() + "\n(" + this.nom + ")";
-            layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), PropertyFactory.iconTranslate(translationIcon), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true));
+            layerNomBatiment.withProperties(PropertyFactory.iconImage("college-15"), textField(text), PropertyFactory.textTranslate(translationText), PropertyFactory.iconAllowOverlap(true), PropertyFactory.textAnchor(Property.TEXT_ANCHOR_TOP));
             style.addLayer(layerNomBatiment);
-            */
         }
 
     }
+
+
+    /*
+    Getter et Setter
+     */
 
     public String getNom() {
         return nom;

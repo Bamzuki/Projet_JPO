@@ -2,12 +2,18 @@ package eu.ensg.jpo.explor_descartes.donnesObjet;
 
 public class Formation extends DataBaseObject {
 
+    /*
+    Classe représentant une formation
+     */
+
     private String nom;
     private String niveau;
     private String ecole;
     private String batiment;
     private String filiere;
 
+
+    //Constructeur
     public Formation(int id, String nom, String niveau, String ecole, String batiment, String filiere) {
         super(id);
         this.nom = nom;
@@ -16,6 +22,11 @@ public class Formation extends DataBaseObject {
         this.batiment = batiment;
         this.filiere = filiere;
     }
+
+
+    /*
+    Getter et Setter
+     */
 
     public String getNom() {
         return nom;

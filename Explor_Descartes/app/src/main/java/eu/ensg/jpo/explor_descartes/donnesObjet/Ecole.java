@@ -1,9 +1,12 @@
 package eu.ensg.jpo.explor_descartes.donnesObjet;
 
-import java.net.URL;
 import java.util.List;
 
 public class Ecole extends DataBaseObject{
+
+    /*
+    Classe représentant une école
+     */
 
     private String nom;
     private String image;
@@ -12,6 +15,8 @@ public class Ecole extends DataBaseObject{
     private String description;
     private List<Formation> formations;
 
+
+    //Constructeur
     public Ecole(int id, String image, String nom, String adresse, String site, String description) {
         super(id);
         this.nom = nom;
@@ -20,6 +25,11 @@ public class Ecole extends DataBaseObject{
         this.site = site;
         this.description = description;
     }
+
+
+    /*
+    Getter et Setter
+     */
 
     public String getNom() {
         return nom;

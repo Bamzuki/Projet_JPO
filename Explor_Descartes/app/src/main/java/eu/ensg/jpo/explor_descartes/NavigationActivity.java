@@ -1,6 +1,7 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -11,11 +12,9 @@ import android.graphics.Rect;
 import android.graphics.RectF;
 import android.location.Location;
 import android.os.AsyncTask;
-import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,7 +22,8 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 
 // Classes needed to initialize the map
-import com.mapbox.geojson.BoundingBox;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.mapbox.geojson.Feature;
 import com.mapbox.geojson.FeatureCollection;
 import com.mapbox.geojson.Point;
@@ -40,6 +40,8 @@ import com.mapbox.mapboxsdk.maps.Style;
 import com.mapbox.android.core.permissions.PermissionsListener;
 import com.mapbox.android.core.permissions.PermissionsManager;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -56,6 +58,8 @@ import java.lang.ref.WeakReference;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -66,17 +70,27 @@ import com.mapbox.mapboxsdk.style.sources.Source;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Batiment;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Ecole;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
+import okhttp3.Call;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
 
 import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.layers.Property.ICON_ANCHOR_BOTTOM;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAnchor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconOffset;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconSize;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconTranslate;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textAnchor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textTranslate;
 
 public class NavigationActivity extends template implements OnMapReadyCallback, PermissionsListener, MapboxMap.OnMapClickListener{
 
@@ -94,9 +108,11 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     private ArrayList<Batiment> listeBatiment = new ArrayList<>();
     public HashMap<String, View> viewMap = new HashMap<>();
     public HashMap<String, Bitmap> imagesMap = new HashMap<>();
-    private NavigationActivity activity = this;
+    private final NavigationActivity activity = this;
     public FeatureCollection featureCollection;
     private GeoJsonSource source;
+    // Connexion à la BDD
+    protected static final OkHttpClient client = new OkHttpClient();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,30 +150,19 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                         enableLocationComponent(style);
                         style.getLayer("poi-label").setProperties(PropertyFactory.visibility(Property.NONE));
 
+
+                        // Affichage des évènements favoris (si l'utilisateur est connecté)
+                        if (ListeObjets.visiteur != null) {
+                            new LoadGeoJsonDataTask(NavigationActivity.this).execute();
+                        }
+
+                        // Affichage de l'itinéraire de la navette :
+                        afficherItineraireNavette(style);
+
                         // Affichage des batiments depuis la base de donnees
                         ArrayList<Batiment> listeBatiment = ListeObjets.listeBatiment;
                         for (Batiment batiment : listeBatiment){
                             batiment.afficherSurCarte(style);
-                        }
-
-                        // Affichage des évènements favoris (si l'utilisateur est connecté)
-                        if (ListeObjets.visiteur != null) {
-
-
-                            // /!\ DEBUT TEST FAVORIS /!\
-                            Evenement evenement0 = new Evenement(0, "Les points forts du DUT TC en alternance", "2018-02-02 11:00:00", "2018-02-02 11:45:00", "CFA Descartes", "CFA Descartes");
-                            Evenement evenement1 = new Evenement(1, "Présentation du cycle ingénieur en géomatique", "2018-02-02 10:30:00", "2018-02-02 11:00:00", "ENSG-Géomatique", "ENSG");
-                            ListeObjets.listeFavoris.add(evenement0);
-                            ListeObjets.listeFavoris.add(evenement1);
-                            // /!\ FIN TEST FAVORIS /!\
-
-                            ArrayList<Evenement> listeFavoris = ListeObjets.listeFavoris;
-
-                            setUpSource(style);
-                            setUpImage(style);
-                            setUpMarkerLayer(style);
-                            setUpInfoWindowLayer(style);
-
                         }
 
                         // Ajout des listener
@@ -169,37 +174,39 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
 
     }
 
-    public void setUpSource(Style style){
-        String jsonFeatureCollection = "{\"type\": \"FeatureCollection\", \"features\": [";
-
-        for (Evenement favori : ListeObjets.listeFavoris){
-            jsonFeatureCollection += favori.getJson() + ",";
+    public void setUpData(final FeatureCollection collection) {
+        
+        featureCollection = collection;
+        if (mapboxMap != null) {
+            Style style = mapboxMap.getStyle();
+            if (style != null) {
+                setUpSource(style);
+                setUpImage(style);
+                setUpMarkerLayer(style);
+                setUpInfoWindowLayer(style);
+            }
         }
+    }
 
-        jsonFeatureCollection = jsonFeatureCollection.substring(0, jsonFeatureCollection.length() - 1) + "]}";
-        System.out.println(jsonFeatureCollection);
-
-        featureCollection = FeatureCollection.fromJson(jsonFeatureCollection);
-
+    public void setUpSource(Style style){
         source = new GeoJsonSource("GEOJSON_SOURCE_ID", featureCollection);
         style.addSource(source);
-
-        new GenerateViewIconTask(activity).execute(featureCollection);
 
         System.out.println("SetUpSource");
     }
 
     private void setUpImage(Style style){
+        style.addImage("station", BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_action_name));
         style.addImage("star", BitmapFactory.decodeResource(this.getResources(), R.drawable.star));
 
         System.out.println("SetUpImage");
     }
 
     private void setUpMarkerLayer(@NonNull Style loadedStyle) {
-        Float[] translationMarker = new Float[2];
-        translationMarker[0] = new Float(0);
-        translationMarker[1] = new Float(0);
-        loadedStyle.addLayer(new SymbolLayer("MARKER_LAYER_ID", "GEOJSON_SOURCE_ID").withProperties(iconImage("star"),iconAllowOverlap(true), iconTranslate(translationMarker), iconSize(0.7f)));
+        Float[] translationText = new Float[2];
+        translationText[0] = new Float(0);
+        translationText[1] = new Float(20);
+        loadedStyle.addLayer(new SymbolLayer("MARKER_LAYER_ID", "GEOJSON_SOURCE_ID").withProperties(iconImage("star"),iconAllowOverlap(true), textField("{titre}"), textTranslate(translationText), textAnchor(Property.TEXT_ANCHOR_TOP), iconSize(0.7f)));
         System.out.println("SetUpMarkerLayer");
     }
 
@@ -207,7 +214,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         loadedStyle.addLayer(new SymbolLayer("CALLOUT_LAYER_ID", "GEOJSON_SOURCE_ID")
                 .withProperties(
                         /* show image with id title based on the value of the name feature property */
-                        iconImage("{nom}"),
+                        iconImage("{id}"),
 
                         /* set anchor of icon to bottom-left */
                         iconAnchor(ICON_ANCHOR_BOTTOM),
@@ -226,14 +233,17 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     private boolean handleClickIcon(PointF screenPoint) {
         List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, "MARKER_LAYER_ID");
         if (!features.isEmpty()) {
-            String name = features.get(0).getStringProperty("nom");
+            String id = features.get(0).getStringProperty("id");
             List<Feature> featureList = featureCollection.features();
             for (int i = 0; i < featureList.size(); i++) {
-                if (featureList.get(i).getStringProperty("nom").equals(name)) {
+                System.out.println("Compare : " + id + " avec " + featureList.get(i).getStringProperty("id"));
+                if (featureList.get(i).getStringProperty("id").equals(id)) {
+                    System.out.println("Select");
                     if (featureSelectStatus(i)) {
                         setFeatureSelectState(featureList.get(i), false);
                     } else {
                         setSelected(i);
+                        System.out.println("Selected");
 
                     }
                 }
@@ -277,6 +287,85 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         this.viewMap = viewMap;
     }
 
+    /**
+     * AsyncTask to load data from the assets folder.
+     */
+    private static class LoadGeoJsonDataTask extends AsyncTask<Void, Void, FeatureCollection> {
+
+        private final WeakReference<NavigationActivity> activityRef;
+
+        LoadGeoJsonDataTask(NavigationActivity activity) {
+            this.activityRef = new WeakReference<>(activity);
+        }
+
+        @Override
+        protected FeatureCollection doInBackground(Void... params) {
+            NavigationActivity activity = activityRef.get();
+
+            if (activity == null) {
+                return null;
+            }
+
+            ArrayList<Evenement> listEvenement = loadListEvenement(activity);
+            String jsonFeatureCollection = "{\"type\": \"FeatureCollection\", \"features\": [";
+
+            int i = 0;
+
+            for (Evenement evenement : listEvenement){
+                if (evenement.estUnFavori(ListeObjets.visiteur)){
+                    jsonFeatureCollection += evenement.getJson() + ",";
+                    i += 1;
+                }
+            }
+            if (i !=0){
+                jsonFeatureCollection = jsonFeatureCollection.substring(0, jsonFeatureCollection.length() - 1) + "]}";
+            }
+            else{
+                jsonFeatureCollection += "]}";
+            }
+            System.out.println("ECHO");
+            System.out.println(jsonFeatureCollection);
+
+            return FeatureCollection.fromJson(jsonFeatureCollection);
+        }
+
+        @Override
+        protected void onPostExecute(FeatureCollection featureCollection) {
+            super.onPostExecute(featureCollection);
+            NavigationActivity activity = activityRef.get();
+            if (featureCollection == null || activity == null) {
+                return;
+            }
+
+            // This example runs on the premise that each GeoJSON Feature has a "selected" property,
+            // with a boolean value. If your data's Features don't have this boolean property,
+            // add it to the FeatureCollection 's features with the following code:
+            for (Feature singleFeature : featureCollection.features()) {
+                singleFeature.addBooleanProperty("selected", false);
+            }
+
+            activity.setUpData(featureCollection);
+            new GenerateViewIconTask(activity).execute(featureCollection);
+        }
+
+        static ArrayList<Evenement> loadListEvenement(Activity activity) {
+            String url = activity.getString(R.string.url_serveur) + "serveur.php/?request=listeEvenements";
+            Request request = new Request.Builder().url(url).build();
+
+            Call call = client.newCall(request);
+            try {
+                Response response = call.execute();
+                Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
+                ArrayList<Evenement> listEvenement = new Gson().fromJson(response.body().string(), listType);
+                return listEvenement;
+            } catch (IOException e) {
+                e.printStackTrace();
+                return new ArrayList<Evenement>();
+            }
+
+        }
+    }
+
     private static class GenerateViewIconTask extends AsyncTask<FeatureCollection, Void, HashMap<String, Bitmap>> {
 
         private final HashMap<String, View> viewMap = new HashMap<>();
@@ -309,6 +398,8 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                     BubbleLayout bubbleLayout = (BubbleLayout)
                             inflater.inflate(R.layout.layout_callout, null);
 
+                    String id = feature.getStringProperty("id");
+
                     String name = feature.getStringProperty("nom");
                     TextView titleTextView = bubbleLayout.findViewById(R.id.title);
                     titleTextView.setText(name);
@@ -332,8 +423,8 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
 
                     Bitmap bitmap = SymbolGenerator.generate(bubbleLayout);
 
-                    imagesMap.put(name, bitmap);
-                    viewMap.put(name, bubbleLayout);
+                    imagesMap.put(id, bitmap);
+                    viewMap.put(id, bubbleLayout);
 
                 }
                 System.out.println("Test 946 : " + viewMap.keySet());
@@ -385,9 +476,8 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     }
 
     private void handleClickCallout(Feature feature, PointF screenPoint, PointF symbolScreenPoint) {
-        System.out.println(feature.getStringProperty("nom"));
-        System.out.println(viewMap.keySet());
-        View view = viewMap.get(feature.getStringProperty("nom"));
+
+        View view = viewMap.get(feature.getStringProperty("id"));
         View textContainer = view.findViewById(R.id.text_container);
 
         // create hitbox for textView
@@ -409,7 +499,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
             // user clicked on icon
             List<Feature> featureList = featureCollection.features();
             for (int i = 0; i < featureList.size(); i++) {
-                if (featureList.get(i).getStringProperty("nom").equals(feature.getStringProperty("nom"))) {
+                if (featureList.get(i).getStringProperty("id").equals(feature.getStringProperty("id"))) {
                     toggleFavourite(i);
                 }
             }
@@ -418,15 +508,15 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
 
     private void toggleFavourite(int index) {
         Feature feature = featureCollection.features().get(index);
-        String title = feature.getStringProperty("nom");
+        String id = feature.getStringProperty("id");
         boolean currentState = feature.getBooleanProperty("favourite");
         feature.properties().addProperty("favourite", !currentState);
-        View view = viewMap.get(title);
+        View view = viewMap.get(id);
 
         ImageView imageView = (ImageView) view.findViewById(R.id.logoView);
         imageView.setImageResource(currentState ? R.drawable.star : R.drawable.star_stroked);
         Bitmap bitmap = SymbolGenerator.generate(view);
-        this.mapboxMap.getStyle().addImage(title, bitmap);
+        this.mapboxMap.getStyle().addImage(id, bitmap);
         refreshSource();
     }
 
@@ -518,8 +608,11 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     // Ajout de listener sur les batiments
     @Override
     public boolean onMapClick(@NonNull LatLng point) {
+
         PointF screenPoint = mapboxMap.getProjection().toScreenLocation(point);
-        List<Feature> features = mapboxMap.queryRenderedFeatures(screenPoint, "CALLOUT_LAYER_ID");
+        List<Feature> features;
+        features = mapboxMap.queryRenderedFeatures(screenPoint, "CALLOUT_LAYER_ID");
+
         if (!features.isEmpty()) {
             // we received a click event on the callout layer
             Feature feature = features.get(0);
@@ -527,21 +620,14 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
             handleClickCallout(feature, screenPoint, symbolScreenPoint);
         } else {
             // we didn't find a click event on callout layer, try clicking maki layer
-            handleClickIcon(screenPoint);
-        }
-        /*
-        PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
-        RectF rectF = new RectF(pointf.x - 2, pointf.y - 2, pointf.x + 2, pointf.y + 2);
-        for (Evenement favori : ListeObjets.listeFavoris){
-            if (mapboxMap.queryRenderedFeatures(rectF, "favori" + favori.getId()).size() > 0){
-                Feature selectedFeature = mapboxMap.queryRenderedFeatures(rectF, "favori" + favori.getId()).get(0);
-                String title = selectedFeature.getStringProperty("nom");
-                Toast.makeText(this, "You selected " + title, Toast.LENGTH_SHORT).show();
-                //PointF symbolScreenPoint = mapboxMap.getProjection().toScreenLocation(convertToLatLng(selectedFeature));
-                //handleClickCallout(selectedFeature, pointf, symbolScreenPoint);
+            boolean clickOnIcon = handleClickIcon(screenPoint);
+            if (clickOnIcon){
                 return true;
             }
         }
+
+        PointF pointf = mapboxMap.getProjection().toScreenLocation(point);
+        RectF rectF = new RectF(pointf.x - 2, pointf.y - 2, pointf.x + 2, pointf.y + 2);
         for (Batiment batiment : ListeObjets.listeBatiment) {
             if (mapboxMap.queryRenderedFeatures(rectF, "batiment" + batiment.getId()).size() > 0){
                 int idEcole = batiment.getIdEcole();
@@ -550,7 +636,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                 return true;
             }
         }
-        */
+
         return false;
     }
 
@@ -612,6 +698,25 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         }
     }
 
+    public void afficherItineraireNavette(Style style){
+        System.out.println(getString(R.string.arrets_navette));
+
+
+
+        // Affichage de l'itinéraire :
+        GeoJsonSource jsonItineraire = new GeoJsonSource("json_itineraire_navette", getString(R.string.itineraire_navette));
+        style.addSource(jsonItineraire);
+        LineLayer layerNavette = new LineLayer("layer_itineraire_navette", "json_itineraire_navette").withProperties(
+                PropertyFactory.lineWidth(5f),
+                PropertyFactory.lineColor(Color.parseColor("#e55e5e")));
+        style.addLayer(layerNavette);
+        // Affichage des arrêts :
+        GeoJsonSource jsonArrets = new GeoJsonSource("json_arrets_navette", getString(R.string.arrets_navette));
+        style.addSource(jsonArrets);
+        CircleLayer layerArrets = new CircleLayer("layer_arrets_navette", "json_arrets_navette").withProperties(circleColor(Color.parseColor("#e55e5e")),circleRadius(8f));
+        style.addLayer(layerArrets);
+    }
+
 
     // Add the mapView's own lifecycle methods to the activity's lifecycle methods
     @Override
@@ -660,15 +765,4 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
         mapView.onSaveInstanceState(outState);
     }
 
-    public ArrayList<Batiment> getListeBatiment() {
-        return listeBatiment;
-    }
-
-    public void setListeBatiment(ArrayList<Batiment> listeBatiment) {
-        this.listeBatiment = listeBatiment;
-    }
-
-    public MapboxMap getMapboxMap() {
-        return mapboxMap;
-    }
 }

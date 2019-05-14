@@ -1,6 +1,8 @@
 package eu.ensg.jpo.explor_descartes;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -47,7 +49,6 @@ public class ModifierPerso extends AppCompatActivity {
 
         // Create intent
         Intent intent = new Intent(this, AccueilActivity.class);
-
         // Start activity
         startActivity(intent);
     }
@@ -60,8 +61,6 @@ public class ModifierPerso extends AppCompatActivity {
         String pseudo = pseudoET.getText().toString();
         String mail = mailET.getText().toString().toLowerCase();
 
-
-
         //A completer avec la vérification du pseudo (il ne doit pas y avoir deux fois le même)
         ListeObjets.visiteur.setPrenom(prenom);
         ListeObjets.visiteur.setNom(nom);
@@ -70,9 +69,23 @@ public class ModifierPerso extends AppCompatActivity {
 
         // Enregistrement dans la base de données :
         String urlServeur = getString(R.string.url_serveur_ecoles);
+
         try {
+            // Modification dans les données internes de l'application :
+            SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(this);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.remove("pseudo");
+            editor.putString("pseudo", pseudo);
+            editor.apply();
+
+            // Modification dans la BDD :
             VisiteurDAO visiteurDAO = new VisiteurDAO(urlServeur);
             visiteurDAO.updatePerso(this ,ListeObjets.visiteur);
+
+            // Renvoie sur la page Profil :
+            Toast.makeText(this, "Vos informations personnelles ont bien été modifiées.", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent(this, GestionCompte.class);
+            startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -95,9 +108,14 @@ public class ModifierPerso extends AppCompatActivity {
         mailET        = (EditText) findViewById(R.id.mailET);
 
 
-        // II - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
+        // II - Préremplissage des champs :
 
+        prenomET.setText(ListeObjets.visiteur.getPrenom());
+        nomET.setText(ListeObjets.visiteur.getNom());
+        pseudoET.setText(ListeObjets.visiteur.getPseudo());
+        mailET.setText(ListeObjets.visiteur.getEmail());
 
+        // III - Ajout des écouteurs d'événements aux composants graphiques représentés par des objets Java
 
         validationB.setOnClickListener(new View.OnClickListener() {
             @Override

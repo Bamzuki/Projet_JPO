@@ -4,25 +4,20 @@ import java.util.ArrayList;
 
 public class Visiteur extends DataBaseObject{
 
+    /*
+    Classe représenatnt un compte pour un utilisateur engistré
+     */
+
     private String prenom;
     private String nom;
     private String pseudo;
     private String email;
     private String mdp;
-    private Boolean admin;
+    private boolean admin;
     private ArrayList<Integer> listeFavoris;
 
-    public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
-        super(id);
-        this.prenom = prenom;
-        this.nom = nom;
-        this.pseudo = pseudo;
-        this.email = email;
-        this.mdp = mdp;
-        this.admin = admin;
-        this.listeFavoris = new ArrayList<Integer>();
-    }
 
+    //Constructeur
     public Visiteur(String prenom, String nom, String pseudo, String email, String mdp,Boolean admin) {
         super(0);
         this.prenom = prenom;
@@ -34,16 +29,10 @@ public class Visiteur extends DataBaseObject{
         this.listeFavoris = new ArrayList<Integer>();
     }
 
-    public Visiteur(int id, String prenom, String nom, String pseudo, String email, String mdp,Boolean admin, ArrayList<Integer> listeFavoris) {
-        super(id);
-        this.prenom = prenom;
-        this.nom = nom;
-        this.pseudo = pseudo;
-        this.email = email;
-        this.mdp = mdp;
-        this.admin = admin;
-        this.listeFavoris = listeFavoris;
-    }
+
+    /*
+    Getter et Setter
+     */
 
     public String getPrenom() {
         return prenom;

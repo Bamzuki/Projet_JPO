@@ -5,6 +5,12 @@ import java.security.MessageDigest;
 public final class SHA {
 
     public static String encode(String mdp) throws Exception{
+        /**
+         * Fonction encodant les mots de passe en SHA256
+         *
+         * @param mdp: le mot de passe à encoder
+         * @return le mot de passe encodé
+         */
 
         MessageDigest md = MessageDigest.getInstance("SHA-256");
         md.update(mdp.getBytes());

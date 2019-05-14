@@ -19,10 +19,11 @@ import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
+
 import java.util.Date;
 import java.util.List;
 
@@ -32,6 +33,9 @@ import eu.ensg.jpo.explor_descartes.Menu.NotificationsFragment;
 
 public class template extends AppCompatActivity {
 
+    /**
+     * Classe gérant la mise en page de l'application
+     */
     // Déclaration des variables
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
@@ -115,7 +119,10 @@ public class template extends AppCompatActivity {
         }
     }
 
+
+
     class ViewPagerAdapter extends FragmentPagerAdapter {
+
         private final List<Fragment> mFragmentList = new ArrayList<>();
         private final List<String> mFragmentTitleList = new ArrayList<>();
 
@@ -144,7 +151,7 @@ public class template extends AppCompatActivity {
         }
     }
 
-    /*
+    /**
     Méthode pour remplir le menu notifications et favoris (ajout de tabs)
      */
     private void setViewPager(ViewPager viewPager) {
@@ -154,7 +161,7 @@ public class template extends AppCompatActivity {
         viewPager.setAdapter(adapter);
     }
 
-    /*
+    /**
     Méthode pour stocker et récupérer les données
      */
     public void getData() throws ParseException {
@@ -162,12 +169,12 @@ public class template extends AppCompatActivity {
         Date date = sdf.parse(ListeObjets.dateJPO);
 
         if (new Date().after(date)) {
-            menul = "Accueil,Carte,Planning,Réglages,Profil,FAQ,CGU,Formulaire de satisfaction";
+            menul = "Établissements,Carte,Planning,Réglages,Profil,FAQ,CGU,Formulaire de satisfaction";
             menulist = menul.split(",");
         }
 
         else {
-            menul = "Accueil,Carte,Planning,Réglages,Profil,FAQ,CGU";
+            menul = "Etablissements,Carte,Planning,Réglages,Profil,FAQ,CGU";
             menulist = menul.split(",");
         }
 

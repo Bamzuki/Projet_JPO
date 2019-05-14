@@ -35,8 +35,6 @@ public class ImageEcole {
 
         // Construction de la requete
         String urlImage = url + "image_ecole/" + this.ecole.getImage();
-        //String url = this.url + "image_ecole/eavt-icone.jpg";
-        System.out.println(url);
         Request request = new Request.Builder().url(urlImage).build();
 
         // Envoi de la requete

@@ -92,17 +92,17 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
         final TextView txtListChild = (TextView)convertView.findViewById(R.id.contenu_objets);
         txtListChild.setText(childText);
         if (ListeObjets.visiteur == null){
-            txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(android.R.drawable.star_big_off), null);
+            txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, context.getDrawable(R.drawable.star_stroked), null);
         }
         else {
             ArrayList<Integer> favoris = ListeObjets.visiteur.getListeFavoris();
             int id = listHashMap.get(listDataHeader.get(0)).get(childPosition).getId();
             if (favoris.contains(id)) {
-                Drawable img = context.getDrawable(android.R.drawable.star_big_on);
+                Drawable img = context.getDrawable(R.drawable.star);
                 txtListChild.setCompoundDrawablesWithIntrinsicBounds(null, null, img, null);
             }
             else {
-                Drawable img = context.getDrawable(android.R.drawable.star_big_off);
+                Drawable img = context.getDrawable(R.drawable.star_stroked);
                 txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
             }
         }
@@ -114,16 +114,16 @@ public class ExpandableListAdapterEvenement extends BaseExpandableListAdapter {
                     ArrayList<Integer> favoris = ListeObjets.visiteur.getListeFavoris();
                     int id = listHashMap.get(listDataHeader.get(0)).get(childPosition).getId();
                     if ( !favoris.contains(id) ){
-                        Drawable img = context.getDrawable(android.R.drawable.star_big_on);
+                        Drawable img = context.getDrawable(R.drawable.star);
                         txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
-                        VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur));
+                        VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur) + "serveur.php/");
                         visiteurDAO.ajouterFavori(context, ListeObjets.visiteur, id);
                         v.setTag("true");
                     }
                     else {
-                        Drawable img = context.getDrawable(android.R.drawable.star_big_off);
+                        Drawable img = context.getDrawable(R.drawable.star_stroked);
                         txtListChild.setCompoundDrawablesWithIntrinsicBounds(null,null, img, null);
-                        VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur));
+                        VisiteurDAO visiteurDAO = new VisiteurDAO(getContext().getString(R.string.url_serveur) + "serveur.php/");
                         visiteurDAO.supprimerFavori(context, ListeObjets.visiteur, id);
                         v.setTag("false");
                     }

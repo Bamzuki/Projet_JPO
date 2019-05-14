@@ -19,7 +19,8 @@ public final class ListeObjets {
     public static Visiteur visiteur = null;
     public static ArrayList<Evenement> listeFavoris = new ArrayList<>();
     public static String dateJPO = "26/04/2019";
-    public static Satisfaction satisfaction=null;
+    public static Satisfaction satisfaction = null;
+
 
 
     public static Ecole getEcoleById(int id){
