@@ -80,6 +80,11 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void chargerListeObjets(){
+
+        /**
+         * fonction chargeant tout les batiments et les écoles
+         */
+
         String urlServeur = getString(R.string.url_serveur_ecoles);
         // Chargement de la liste des batiments :
         BatimentDAO batimentDAO = new BatimentDAO(urlServeur);

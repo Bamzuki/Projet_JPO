@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.text.method.LinkMovementMethod;
-import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -19,6 +18,10 @@ import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 
 public class RegisterActivity extends AppCompatActivity {
 
+    /**
+     * classe gérant la page de création d'un compte
+     */
+
     Button validationB;
     Button connexionB;
     EditText prenomET;
@@ -29,6 +32,14 @@ public class RegisterActivity extends AppCompatActivity {
     EditText mdp_confirmET;
 
     public static boolean isValidEmailAddress(String email) {
+
+        /**
+         * On vérifie si l'adresse email entrée est valide
+         *
+         * @param email : l'email de l'utilisateur
+         * @return un booléen indiquant si l'adresse mail est valide ou non
+         */
+
         boolean result = true;
         try {
             InternetAddress emailAddr = new InternetAddress(email);
@@ -41,6 +52,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void openSignInActivity() {
 
+        /**
+         * Fonction qui ouvre la page d'enregistrement
+         */
+
         // Create intent
         Intent intent = new Intent(this, SignInActivity.class);
 
@@ -50,6 +65,10 @@ public class RegisterActivity extends AppCompatActivity {
 
     public void openAccueilActivity() {
 
+        /**
+         * Fonction qui ouvre la page d'accueil
+         */
+
         // Create intent
         Intent intent = new Intent(this, AccueilActivity.class);
 
@@ -58,6 +77,12 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     private void inscription() {
+
+        /**
+         * Fonction qui permet de s'incrire en appuyant sur le bouton de validation
+         * et qui enregistre les informations de l'utilisateur dans la base de données si les
+         * champs sont correctement remplis
+         */
 
         // Récupération des valeurs entrées :
         String prenom = prenomET.getText().toString();

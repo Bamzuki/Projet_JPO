@@ -17,6 +17,7 @@ import com.google.gson.reflect.TypeToken;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Collections;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.PlanningActivity;
@@ -35,7 +36,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
     Context context;
     LayoutInflater li;
     String url;
-    ArrayList<Evenement> listeEventFav;
+    public ArrayList<Evenement> listeEventFav;
     ArrayList<Integer> listeFavoris;
     private static LayoutInflater inflaterFav=null;
     ImageView supprFav;
@@ -63,6 +64,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
                 System.out.println(response.body());
                 Type listType = new TypeToken<ArrayList<Evenement>>(){}.getType();
                 ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
+                Collections.sort(listeEvenement);
                 System.out.println("test prouti " + listeEvenement);
                 ListeObjets.listeEvenement = listeEvenement;
             }
@@ -119,7 +121,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
         hldFav.suppr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                VisiteurDAO visiteurDAO = new VisiteurDAO(context.getString(R.string.url_serveur));
+                VisiteurDAO visiteurDAO = new VisiteurDAO(context.getString(R.string.url_serveur)+"serveur.php/");
                 visiteurDAO.supprimerFavori(activity,evnt);
                 listeEventFav.remove(position);
                 notifyDataSetChanged();
@@ -142,4 +144,40 @@ public class CustomAdapterFavoris extends BaseAdapter {
         TextView date;
         ImageView suppr;
     }
+
+
+
+    @Override
+    public void notifyDataSetChanged(){
+        // Construction de la requete
+        this.url = context.getString(R.string.url_serveur) + "serveur.php/"+ "?request=listeEvenements";
+        final Request request = new Request.Builder().url(this.url).build();
+        // Envoi de la requete
+        Call call = client.newCall(request);
+        this.listeEventFav = new ArrayList<Evenement>();
+        call.enqueue(new Callback() {
+            public void onResponse(Call call, Response response) throws IOException {
+                System.out.println("Connexion etablie avec succes !");
+                System.out.println(response.body());
+                Type listType = new TypeToken<ArrayList<Evenement>>(){}.getType();
+                ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
+                System.out.println("test prouti " + listeEvenement);
+                ListeObjets.listeEvenement = listeEvenement;
+            }
+            public void onFailure(Call call, IOException e){
+                System.out.println("Echec de la connexion");
+            }
+        });
+
+        ArrayList<Evenement> listEvent = ListeObjets.listeEvenement;
+        System.out.println("test prout"+listEvent.toString());
+        for(int r=0; r<listEvent.size(); r++){
+            if(listeFavoris.contains(ListeObjets.listeEvenement.get(r).getId())){
+                this.listeEventFav.add(ListeObjets.listeEvenement.get(r));
+            }
+        }
+
+        super.notifyDataSetChanged();
+    }
+
 }

@@ -14,12 +14,20 @@ import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
 
 public class GestionCompte extends template {
 
+    /**
+     * page de gestion d'un compte
+     */
+
     private Button ModifierPerso;
     private Button ModifierMdp;
     private Button Deconnexion;
     private Button Suppression;
 
     private void openModifierPerso() {
+
+        /**
+         * redirige vers la page de modification des données personnelles
+         */
 
         if (ListeObjets.visiteur != null){
             // Create intent
@@ -34,6 +42,10 @@ public class GestionCompte extends template {
 
     private void openModifierMdp() {
 
+        /**
+         * redirige vers la page de modification du mot de passe
+         */
+
         if (ListeObjets.visiteur != null){
             // Create intent
             Intent intent = new Intent(this, ModifierMdp.class);
@@ -46,6 +58,11 @@ public class GestionCompte extends template {
     }
 
     private void openSuppression() {
+
+        /**
+         * redirige vers la page de modification de suppression d'un compte
+         */
+
 
         if (ListeObjets.visiteur != null){
 
@@ -66,6 +83,11 @@ public class GestionCompte extends template {
     }
 
     private void openDeconnexion() {
+
+        /**
+         * fonction permettant de se déconnecter
+         */
+
 
         if (ListeObjets.visiteur != null){
 
