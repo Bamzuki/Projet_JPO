@@ -2,10 +2,10 @@
   //Cette fonction va nous permettre d'enregistrer des images sur le serveur depuis le site administrateur
 
 
-  //Répertoire d'enregistrement
-  $target_dir = ".\image_ecole\'";
-  	$target_dir=substr($target_dir,0,14);
+    //Répertoire d'enregistrement
+    $target_dir = "./image_ecole/";
 	$target_file = $target_dir . basename($_FILES["fileselect"]["name"]);
+	echo $target_file . "   §   ";
 	//on initialise la variable update ok
 	$uploadOk = 1;
 	//on recupère l'extention du fichier
