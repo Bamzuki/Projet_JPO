@@ -2,9 +2,34 @@ package eu.ensg.jpo.explor_descartes.donnesObjet;
 
 public class Satisfaction extends DataBaseObject {
 
-    /*
-    Classe représentant un formulaire de réponse au questionnaire de satisfaction
+    /**
+     * Classe représentant un formulaire de réponse au questionnaire de satisfaction
+     * @param id : id
+     * @param question_1 : réponse à la question 1
+     * @param question_2 : réponse à la question 2
+     * @param question_3 : réponse à la question 3
+     * @param question_4 : réponse à la question 4
+     * @param question_5 : réponse à la question 5
+     * @param question_6 : réponse à la question 6
+     * @param question_7 : réponse à la question 7
+     * @param question_8 : réponse à la question 8
+     * @param question_9 : réponse à la question 9
+     * @param question_10 : réponse à la question 10
+     * @param question_11 : réponse à la question 11
+     * @param question_12 : réponse à la question 12
+     * @param question_13 : réponse à la question 13
+     * @param question_14 : réponse à la question 14
+     * @param question_15 : réponse à la question 15
+     * @param question_16 : réponse à la question 16
+     * @param question_17 : réponse à la question 17
+     * @param question_18 : réponse à la question 18
+     * @param question_19 : réponse à la question 19
+     * @param question_20 : réponse à la question 20
+     * @param question_21 : réponse à la question 21
+     * @param question_22 : réponse à la question 22
+     * @param question_23 : réponse à la question 23
      */
+
 
     private String question_1;
     private String question_2;

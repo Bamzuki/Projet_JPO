@@ -4,8 +4,10 @@ import okhttp3.OkHttpClient;
 
 public abstract class BddEcolesDAO<T> {
 
-    /*
-    Classe mère de tous les DAO
+    /**
+     * Classe mère de toutes les DAO
+     * @param urlServeur : url du serveur
+     * @param client : client HTTP
      */
 
     protected String urlServeur;

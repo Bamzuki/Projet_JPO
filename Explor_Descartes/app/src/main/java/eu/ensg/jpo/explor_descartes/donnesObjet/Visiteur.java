@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Visiteur extends DataBaseObject{
 
-    /*
-    Classe représenatnt un compte pour un utilisateur engistré
+    /**
+     * Classe représenatnt un compte pour un utilisateur engistré
      */
 
     private String prenom;

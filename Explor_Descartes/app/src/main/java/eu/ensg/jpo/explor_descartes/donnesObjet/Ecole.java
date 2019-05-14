@@ -4,9 +4,16 @@ import java.util.List;
 
 public class Ecole extends DataBaseObject{
 
-    /*
-    Classe représentant une école
+    /**
+     * Classe représentant une école
+     * @param id : id
+     * @param image : icone
+     * @param nom : nom
+     * @param adresse : adresse
+     * @param site : url du site web
+     * @param description : texte de présentation de l'école
      */
+
 
     private String nom;
     private String image;

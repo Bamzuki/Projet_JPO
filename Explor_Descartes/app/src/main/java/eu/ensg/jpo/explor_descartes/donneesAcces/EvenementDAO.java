@@ -32,7 +32,11 @@ import okhttp3.Response;
 
 public class EvenementDAO extends BddEcolesDAO<Evenement>{
 
-    //Classe permettant d'implementer un événement en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer un événement en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
+     */
+
 
 
     public EvenementDAO(String urlServeur) {
@@ -78,6 +82,12 @@ public class EvenementDAO extends BddEcolesDAO<Evenement>{
     }
 
     public void afficherEvenement(final EcoleActivity activity) {
+
+        /**
+         * Fonction permettant d'afficher les événements d'une école
+         * @param activity : page de l'école pour laquelle on recherche les événements
+         */
+
         // Construction de la requete
         String url = this.urlServeur + "?request=listeEvenements";
         String donnees = "&&filtreEcole=" + activity.getEcole().getNom();
@@ -87,7 +97,7 @@ public class EvenementDAO extends BddEcolesDAO<Evenement>{
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
             public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("afficherEvenement : Connexion etablie avec succes !");
+                System.out.println("EvenementDAO afficherEvenement : Connexion etablie avec succes !");
                 Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
                 ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
 
@@ -119,21 +129,27 @@ public class EvenementDAO extends BddEcolesDAO<Evenement>{
             }
 
             public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connexion !");
+                System.out.println("EvenementDAO afficherEvenement : Echec de la connexion !");
             }
         });
     }
 
     public void chargerPlanning(final PlanningActivity activity) {
+
+        /**
+         * Fonction permettant de charger la liste de tout les événements
+         * @param activity: page du planning
+         */
+
         // Construction de la requete
         String url = this.urlServeur + "?request=listeEvenements";
         final Request request = new Request.Builder().url(url).build();
         // Envoi de la requete
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
-                System.out.println(response.body());
+            public void onResponse(Call call, Response response) throws IOException { //Obtention de la réponse du serveur si la requête est effectué
+                System.out.println("EvenementDAO chargerPlanning : Connexion etablie avec succes !");
+
                 Type listType = new TypeToken<ArrayList<Evenement>>() {}.getType();
                 final ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
                 Collections.sort(listeEvenement);
@@ -162,8 +178,8 @@ public class EvenementDAO extends BddEcolesDAO<Evenement>{
 
             }
 
-            public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connection !");
+            public void onFailure(Call call, IOException e) { //Cas où la requete échoue
+                System.out.println("EvenementDAO chargerPlanning : Echec de la connection !");
             }
         });
 

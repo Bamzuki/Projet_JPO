@@ -16,8 +16,9 @@ import okhttp3.Response;
 
 public class BatimentDAO extends BddEcolesDAO<Batiment>  {
 
-    /*
-    Classe permettant d'implementer un batiment en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer un batiment en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
      */
 
     //Constructeur
@@ -44,8 +45,8 @@ public class BatimentDAO extends BddEcolesDAO<Batiment>  {
 
     public void chargerBatiment() {
 
-        /*
-        Fonction permettant de charger un batiment depuis la base de données
+        /**
+         * Fonction permettant de charger un batiment depuis la base de données
          */
 
         //Construction de la requete

@@ -12,10 +12,10 @@ import okhttp3.Response;
 
 public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
 
-    /*
-    Classe permettant d'implementer un formulaire de réponse au questionnaire de satisfaction en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer un formulaire de réponse au questionnaire de satisfaction en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
      */
-
 
     //Constructeur
     public SatisfactionDAO(String urlServeur) {
@@ -40,10 +40,10 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
 
     public void saveSatisfaction(final SatisfactionActivity activity, final Satisfaction satisfaction) {
 
-        /*
-        Fonction permettant d'enregistrer les réponses au questionnaire de satisfaction
-        activity : activité dans laquelle on se trouve
-        satisfaction : formulaire de réponse
+        /**
+         * Fonction permettant d'enregistrer les réponses au questionnaire de satisfaction
+         * @param activity : page du questionnaire de satisfaction
+         * @param satisfaction : formulaire de réponse au questionnaire
          */
 
         // Construction de la requete

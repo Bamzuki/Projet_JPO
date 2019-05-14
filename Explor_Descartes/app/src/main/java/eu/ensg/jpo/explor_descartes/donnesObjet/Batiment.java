@@ -16,9 +16,17 @@ import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.textField;
 
 public class Batiment extends DataBaseObject{
 
-    /*
-    Classe représentant un batiment
+    /**
+     * Classe représentant un batiment
+     * @param id : id
+     * @param nom : nom
+     * @param fonction : fonction du batiment
+     * @param lat : lattitude
+     * @param lng : longitutde
+     * @param idEcole : id de l'école à laquelle appartient ce batiment
+     * @param geometrie : géométrie
      */
+
 
     private String nom;
     private String fonction;
@@ -26,7 +34,6 @@ public class Batiment extends DataBaseObject{
     private float lng;
     private int id_ecole;
     private JsonObject geometrie;
-
 
     //Constructeur
     public Batiment(int id, String nom, String fonction, float lat, float lng, int idEcole, JsonObject geometrie) {
@@ -42,9 +49,9 @@ public class Batiment extends DataBaseObject{
 
     public void afficherSurCarte (Style style){
 
-        /*
-        Fonction permettant d'afficher l'emprise d'batiment sur la carte
-        style : outil carte de mapbox
+        /**
+         * Fonction permettant d'afficher l'emprise d'batiment sur la carte
+         * @param style : outil carte de mapbox
          */
 
         if (!geometrie.toString().equals("{}")) {

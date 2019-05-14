@@ -23,8 +23,9 @@ import okhttp3.Response;
 
 public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
-    /*
-    Classe permettant d'implementer un utilisateur enregistré en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer un utilisateur enregistré en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
      */
 
     //Constructeur
@@ -41,9 +42,9 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
     @Override
     public void update(Visiteur visiteur) {
 
-        /*
-        Fonction permettant de mettre à jour les informations associé à un compte dans la base de données
-        visiteur : compte pour lequel on souhaite réaliser les modifications
+        /**
+         * Fonction permettant de mettre à jour les informations associé à un compte dans la base de données
+         * @param visiteur : compte pour lequel on souhaite réaliser les modifications
          */
 
         // Construction de la requete
@@ -70,9 +71,9 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
     @Override
     public void delete(Visiteur visiteur) {
 
-        /*
-        Fonction permettant de supprimier les données d'un compte dans la base de données
-        visiteur: compte que l'on souhaite supprimer
+        /**
+         * Fonction permettant de supprimer les données d'un compte dans la base de données
+         * @param visiteur: compte que l'on souhaite supprimer
          */
 
         // Construction de la requete
@@ -97,10 +98,10 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void updatePerso(final ModifierPerso activity, Visiteur visiteur) {
 
-        /*
-        Fonction permettant de mettre à jour les informations associé à un compte
-        activity: page de modification des données personnelles
-        visiteur : compte pour lequel on souhaite réaliser les modifications
+        /**
+         * Fonction permettant de mettre à jour les informations associé à un compte
+         * @param activity: page de modification des données personnelles
+         * @param visiteur : compte pour lequel on souhaite réaliser les modifications
          */
 
         // Construction de la requete
@@ -148,11 +149,11 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void connexionAuto(final MainActivity activity, String mailOrPseudo, String mdp) {
 
-        /*
-        Fonction permettant de se reconnecter automatiquement à chaque réouverture de l'application
-        activity : page principale
-        mailOrPseudo : adresse e-mail ou pseudo utilisé pour la connection
-        mdp : mot de passe associé au compte aulequel on souhaite se connecter
+        /**
+         * Fonction permettant de se reconnecter automatiquement à chaque réouverture de l'application
+         * @param activity : page principale
+         * @param mailOrPseudo : adresse e-mail ou pseudo utilisé pour la connexion
+         * @param mdp : mot de passe associé au compte aulequel on souhaite se connecter
          */
 
         // Construction de la requete
@@ -203,11 +204,11 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void connexionBdd(final SignInActivity activity, String mailOrPseudo, String mdp) {
 
-        /*
-        Fonction permettant de se connecter à l'aide de la méthode classique
-        activity : page de connextion
-        mailOrPseudo : adresse e-mail ou pseudo utilisé pour la connection
-        mdp : mot de passe associé au compte aulequel on souhaite se connecter
+        /**
+         * Fonction permettant de se connecter à l'aide de la méthode classique
+         * @param activity : page de connexion
+         * @param mailOrPseudo : adresse e-mail ou pseudo utilisé pour la connexion
+         * @param mdp : mot de passe associé au compte auquel on souhaite se connecter
          */
 
         // Construction de la requete
@@ -268,11 +269,11 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void firstConnexionBdd(final RegisterActivity activity, Visiteur newVisteur) {
 
-        /*
-        Fonction permettant de se connecter pour la première fois, une fois que l'inscription est validé
-        activity : page d'inscription
-        newVisiteur : compte crée lors de l'inscription du visiteur
-        */
+        /**
+         * Fonction permettant de se connecter pour la première fois, une fois que l'inscription est validé
+         * @param activity : page d'inscription
+         * @param newVisiteur : compte crée lors de l'inscription du visiteur
+         */
 
         // Construction de la requete
         String url = this.urlServeur + "?request=connexion";
@@ -318,10 +319,10 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void inscriptionBdd(final RegisterActivity activity, final Visiteur newVisiteur){
 
-        /*
-        Fonction permettant de s'inscrire à l'aide de la méthode classique
-        activity : page d'inscription
-        newVisiteur : nouveau compte crée à inserer dans la base de donnée
+        /**
+         * Fonction permettant de s'inscrire à l'aide de la méthode classique
+         * @param activity : page d'inscription
+         * @param newVisiteur : nouveau compte
          */
 
         // Construction de la requete
@@ -371,10 +372,10 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void ajouterFavori(final Activity activity, Evenement favori){
 
-        /*
-        Fonction permettant de mettre un événement en favori
-        activity : page depuis laquelle on réalise l'ajout
-        favori: événement que l'on souhaite mettre en favori
+        /**
+         * Fonction permettant de mettre un événement en favori
+         * @param activity : page depuis laquelle on réalise la suppression
+         * @param favori: événement que l'on souhaite mettre en favori
          */
 
         ListeObjets.listeFavoris.add(favori);
@@ -408,12 +409,11 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void supprimerFavori(final Activity activity, Evenement favori){
 
-        /*
-        Fonction permettant de retirer un événement en favori
-        activity : page depuis laquelle on réalise la suppressio,
-        favori: événement que l'on souhaite supprimer des favori
+        /**
+         * Fonction permettant de retirer un événement en favori
+         * @param activity : page depuis laquelle on réalise la suppression
+         * @param favori : événement que l'on souhaite supprimer des favoris
          */
-
 
         ListeObjets.listeFavoris.remove(favori);
         ListeObjets.visiteur.getListeFavoris().remove(ListeObjets.visiteur.getListeFavoris().indexOf(favori.getId()));
@@ -448,11 +448,11 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void ajouterFavori(final Activity activity, Visiteur visiteur, int idFavoris){
 
-        /*
-        Fonction permettant de mettre un événement en favori
-        activity : page depuis laquelle on réalise l'ajout
-        visiteur: compte pour lequel on souhaite mettre en favori
-        idFavoris : id de l'événement que l'on souhaite mettre en favori
+        /**
+         * Fonction permettant de mettre un événement en favori
+         * @param activity : page depuis laquelle on réalise l'ajout
+         * @param visiteur: compte pour lequel on souhaite mettre en favori
+         * @param idFavoris : id de l'événement que l'on souhaite mettre en favori
          */
 
         ListeObjets.visiteur.getListeFavoris().add(idFavoris);
@@ -484,11 +484,11 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
 
     public void supprimerFavori(final Activity activity, Visiteur visiteur, int idFavoris){
 
-        /*
-        Fonction permettant de retirer un événement en favori
-        activity : page depuis laquelle on réalise la suppression
-        visiteur: compte pour lequel on souhaite retirer des favoris
-        idFavoris : id de l'événement que l'on souhaite retirer des favoris
+        /**
+         * Fonction permettant de retirer un événement en favori
+         * @param activity : page depuis laquelle on réalise la suppression
+         * @param visiteur: compte pour lequel on souhaite retirer des favoris
+         * @param idFavoris : id de l'événement que l'on souhaite retirer des favoris
          */
 
         ListeObjets.visiteur.getListeFavoris().remove(ListeObjets.visiteur.getListeFavoris().indexOf(idFavoris));

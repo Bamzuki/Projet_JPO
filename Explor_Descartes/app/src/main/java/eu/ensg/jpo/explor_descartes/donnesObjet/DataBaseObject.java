@@ -2,8 +2,9 @@ package eu.ensg.jpo.explor_descartes.donnesObjet;
 
 public abstract class DataBaseObject {
 
-    /*
-    Classe abstraite représentant un objet dans la base de données
+    /**
+     * Classe abstraite représentant un objet dans la base de données
+     * @param id : id
      */
 
     protected int id;

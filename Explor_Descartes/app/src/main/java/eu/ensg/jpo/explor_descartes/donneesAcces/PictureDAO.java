@@ -23,8 +23,9 @@ import static xdroid.core.Global.getResources;
 
 public class PictureDAO {
 
-    /*
-    Classe permettant d'implementer une image en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer une image en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
      */
 
     private String url;

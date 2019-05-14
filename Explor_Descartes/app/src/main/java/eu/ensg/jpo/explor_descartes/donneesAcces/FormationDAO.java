@@ -24,8 +24,9 @@ import okhttp3.Response;
 
 public class FormationDAO extends BddEcolesDAO<Formation> {
 
-    /*
-    Classe permettant d'implementer une formation en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer une formation en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
      */
 
     //Constructeur
@@ -51,10 +52,6 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
 
     public void chargerFormation() {
 
-        /*
-        Fonction permettant de charger une formation depuis la base de données
-         */
-
         // Construction de la requete
         String url = this.urlServeur + "?request=listeFormations";
         Request request = new Request.Builder().url(url).build();
@@ -79,9 +76,9 @@ public class FormationDAO extends BddEcolesDAO<Formation> {
 
     public void afficherFormation(final EcoleActivity activity){
 
-        /*
-        Foction permettant d'afficher la liste des formations proposé dans une école
-        acticity : page de l'école dans laquelle on souhaite afficher la formation
+        /**
+         * Fonction permettant d'afficher la liste des formations proposé dans une école
+         * @param acticity : page de l'école dans laquelle on souhaite afficher la formation
          */
 
         // Construction de la requete

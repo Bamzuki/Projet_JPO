@@ -21,11 +21,23 @@ import static android.provider.Settings.System.getString;
 import static xdroid.core.Global.getResources;
 
 public class GridViewAdapter extends ArrayAdapter {
+
+    /**
+     * Adaptateur de la liste déroulante des établissements
+     *
+     * @param context : contexte
+     * @param activity : page où l'on souhaite inserer la gridView
+     * @param layoutResourceId : id de la ressource
+     * @param data : données
+     */
+
     private Context context;
     private Activity activity;
     private int layoutResourceId;
     private ArrayList<ImageEcole> data = new ArrayList<>();
 
+
+    // Constructeur
     public GridViewAdapter(Context context, Activity activity, int layoutResourceId, ArrayList data) {
         super(context, layoutResourceId, data);
         this.activity = activity;
@@ -62,6 +74,9 @@ public class GridViewAdapter extends ArrayAdapter {
         ImageView image;
     }
 
+    /*
+    Getter et setter
+     */
     public ArrayList<ImageEcole> getData() {
         return data;
     }

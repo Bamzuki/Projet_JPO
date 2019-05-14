@@ -25,8 +25,9 @@ import static xdroid.core.Global.getResources;
 
 public class EcoleDAO extends BddEcolesDAO<Ecole>{
 
-    /*
-    Classe permettant d'implementer une école en java à partir des données de la base de donnée
+    /**
+     * Classe permettant d'implementer une école en java à partir des données de la base de donnée
+     * @param urlServeur : url du serveur
      */
 
     //Constructeur
@@ -55,8 +56,8 @@ public class EcoleDAO extends BddEcolesDAO<Ecole>{
 
     public void chargerEcole() {
 
-        /*
-        Fonction permettant de charger une école depuis la base de données
+        /**
+         * Fonction permettant de charger une école depuis la base de données
          */
 
         //Construction de la requete
@@ -87,10 +88,13 @@ public class EcoleDAO extends BddEcolesDAO<Ecole>{
 
     public void addPicture (final Activity activity, final ImageView imageView, Ecole ecole) {
 
-        /* Fonction permettant de récuperer l'icone d'une école depuis la  base de données et l'joute dans une ImageView
-        activity : activité dans laquelle on se trouve
-        imageView : ImageView dans laquelle on souhaite charger l'image
-        ecole : Ecole pour laquelle on recherche l'icone */
+        /**
+         * Fonction permettant de récuperer l'icone d'une école depuis la  base de données et l'joute dans une ImageView
+         *
+         * @param activity : activité dans laquelle on se trouve
+         * @param imageView : ImageView dans laquelle on souhaite charger l'image
+         * @param ecole : Ecole pour laquelle on recherche l'icone
+         */
 
         //Construction de la requete
         String urlImage = this.urlServeur + "image_ecole/" + ecole.getImage();

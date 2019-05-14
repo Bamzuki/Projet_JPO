@@ -30,8 +30,14 @@ import com.mapbox.mapboxsdk.style.layers.Property;
 
 public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
-    /*
-    Classe représentant un événement
+    /**
+     * Classe représentant un événement
+     * @param id : id
+     * @param nom : intitulé
+     * @param debut : heure de début
+     * @param fin : heure de fin
+     * @param ecole : école où a lieu l'événement
+     * @param batiment : batiment où à lieu l'événement
      */
 
     private String nom;
@@ -55,9 +61,11 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
      public String getJson(){
 
-        /*
-        Fonction permettant de transformer un événement en GeoJSON
-         */
+         /**
+          * Fonction permettant de transformer un événement en GeoJSON
+          *
+          * @return événement sous forme de GeoJSON
+          */
 
         // I - Récupération du bâtiment accueillant l'évènement
         Batiment batiment = ListeObjets.getBatimentFromNom(this.batiment);
@@ -75,8 +83,10 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
     public String getHoraires(){
 
-        /*
-        Fonction permettant de récupérer l'horraire dun événement
+        /**
+         * Fonction permettant de récupérer l'horraire dun événement
+         *
+         * @return horaires de début et de fin de l'événement
          */
 
         return this.debut.substring(11,16) + " - " + this.fin.substring(11,16);
@@ -84,8 +94,10 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
     public boolean estUnFavori(Visiteur visiteur){
 
-        /*
-        Fonction permettant de vérifier si un événement est en favori ou pas
+        /**
+         * Fonction permettant de vérifier si un événement est en favori ou pas
+         *
+         * @return booléen true si l'événement est en favori, false sinon
          */
 
         if (ListeObjets.visiteur == null){
