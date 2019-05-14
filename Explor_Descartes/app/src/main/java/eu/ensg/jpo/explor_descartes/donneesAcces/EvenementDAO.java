@@ -32,6 +32,9 @@ import okhttp3.Response;
 
 public class EvenementDAO extends BddEcolesDAO<Evenement>{
 
+    //Classe permettant d'implementer un événement en java à partir des données de la base de donnée
+
+
     public EvenementDAO(String urlServeur) {
         super(urlServeur);
     }

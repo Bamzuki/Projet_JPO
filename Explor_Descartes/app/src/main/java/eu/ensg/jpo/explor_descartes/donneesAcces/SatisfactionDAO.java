@@ -1,17 +1,10 @@
 package eu.ensg.jpo.explor_descartes.donneesAcces;
-import android.support.v7.app.AppCompatActivity;
-
-import android.widget.Toast;
-
-import com.google.gson.Gson;
 
 import java.io.IOException;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.SatisfactionActivity;
-import eu.ensg.jpo.explor_descartes.SignInActivity;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Satisfaction;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 import okhttp3.Call;
 import okhttp3.Callback;
 import okhttp3.Request;
@@ -19,12 +12,39 @@ import okhttp3.Response;
 
 public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
 
+    /*
+    Classe permettant d'implementer un formulaire de réponse au questionnaire de satisfaction en java à partir des données de la base de donnée
+     */
 
+
+    //Constructeur
     public SatisfactionDAO(String urlServeur) {
         super(urlServeur);
     }
 
+    //Fonctions permettant de mettre à jour des informations sur unr école dans la base données
+    @Override
+    public void create(Satisfaction obj) {
+        return;
+    }  //création
+
+    @Override
+    public void update(Satisfaction obj) {
+        return;
+    } //mise à jour
+
+    @Override
+    public void delete(Satisfaction obj) {
+        return;
+    } //suppression
+
     public void saveSatisfaction(final SatisfactionActivity activity, final Satisfaction satisfaction) {
+
+        /*
+        Fonction permettant d'enregistrer les réponses au questionnaire de satisfaction
+        activity : activité dans laquelle on se trouve
+        satisfaction : formulaire de réponse
+         */
 
         // Construction de la requete
         String url = this.urlServeur + "?request=saveSatisfaction";
@@ -36,9 +56,8 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
         // Envoi de la requete
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
-                System.out.println("JSON:" + response);
+            public void onResponse(Call call, Response response) throws IOException { //Obtention de la réponse du serveur si la requête est effectué
+                System.out.println("SatisfactionDAO saveSatisfaction: Connexion etablie avec succes !");
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
@@ -47,32 +66,10 @@ public class SatisfactionDAO extends BddEcolesDAO<Satisfaction> {
                 });
             }
 
-            public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connection !");
-                activity.runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Toast.makeText(activity, "Problème de connexion au serveur..." , Toast.LENGTH_LONG).show();
-                    }
-                });
+            public void onFailure(Call call, IOException e) { //Cas où la requête échoue
+                System.out.println("SatisfactionDAO saveSatisfaction: Echec de la connection !");
             }
         });
         return;
-    }
-
-
-    @Override
-    public void create(Satisfaction obj) {
-
-    }
-
-    @Override
-    public void update(Satisfaction obj) {
-
-    }
-
-    @Override
-    public void delete(Satisfaction obj) {
-
     }
 }

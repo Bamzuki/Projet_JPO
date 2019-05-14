@@ -16,89 +16,58 @@ import okhttp3.Response;
 
 public class BatimentDAO extends BddEcolesDAO<Batiment>  {
 
+    /*
+    Classe permettant d'implementer un batiment en java à partir des données de la base de donnée
+     */
+
+    //Constructeur
     public BatimentDAO(String urlServeur) {
         super(urlServeur);
     }
 
+
+    //Fonctions permettant de mettre à jour des informations sur un batiments dans la base données
     @Override
     public void create(Batiment batiment) {
         return;
-    }
+    }  //création
 
     @Override
     public void delete(Batiment batiment) {
         return;
-    }
+    }  //suppression
 
     @Override
     public void update(Batiment batiment) {
         return;
-    }
-
-
-    public Batiment findById(int id) {
-        String url = this.urlServeur + "?request=batiment&&id="+id;
-        Request request = new Request.Builder().url(url).build();
-        // Envoi de la requete
-        Call call = client.newCall(request);
-        Response response = null;
-        try {
-            response = call.execute();
-            System.out.println("Connexion etablie avec succes !");
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Echec de la connexion.");
-        }
-        System.out.println(response.toString());
-        Batiment Batiment = new Gson().fromJson(response.toString(), Batiment.class);
-        return Batiment;
-
-    }
-
-
+    }  //mise à jour
 
     public void chargerBatiment() {
-        // Construction de la requete
+
+        /*
+        Fonction permettant de charger un batiment depuis la base de données
+         */
+
+        //Construction de la requete
         String url = this.urlServeur + "?request=listeBatiments";
         Request request = new Request.Builder().url(url).build();
-        // Envoi de la requete
+
+        //Envoi de la requete
         Call call = client.newCall(request);
         ArrayList<Batiment> listeBatiment = null;
         call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
+
+            public void onResponse(Call call, Response response) throws IOException { //Obtention de la réponse du serveur si la requête est effectué
+                System.out.println("BatimentDAO chargerBatiment: Connexion etablie avec succes !");
                 Type listType = new TypeToken<ArrayList<Batiment>>(){}.getType();
                 ArrayList<Batiment> listeBatiment = new Gson().fromJson(response.body().string(), listType);
                 ListeObjets.listeBatiment = listeBatiment;
-
             }
 
-            public void onFailure(Call call, IOException e) {
-                System.out.println("Echec de la connection !");
+            public void onFailure(Call call, IOException e) { //Cas où la requete échoue
+                System.out.println("BatimentDAO chargerBatiment: Echec de la connection !");
             }
         });
 
     }
-
-    public ArrayList<Batiment> getListeBatiment() {
-        // Construction de la requete
-        String url = this.urlServeur + "?request=listeBatiments";
-        Request request = new Request.Builder().url(url).build();
-        // Envoi de la requete
-        Call call = client.newCall(request);
-        ArrayList<Batiment> listeBatiment = null;
-        try (Response response = client.newCall(request).execute()) {
-            System.out.println("Connexion etablie avec succes !");
-            Type listType = new TypeToken<ArrayList<Batiment>>(){}.getType();
-            listeBatiment = new Gson().fromJson(response.body().string(), listType);
-        } catch (IOException e) {
-            e.printStackTrace();
-            System.out.println("Echec de la connection !");
-        }
-        return listeBatiment;
-
-    }
-
-
-
 }
