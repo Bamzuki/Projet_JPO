@@ -58,6 +58,8 @@ import java.lang.ref.WeakReference;
 import com.mapbox.mapboxsdk.location.LocationComponent;
 import com.mapbox.mapboxsdk.location.modes.CameraMode;
 import com.mapbox.mapboxsdk.location.modes.RenderMode;
+import com.mapbox.mapboxsdk.style.layers.CircleLayer;
+import com.mapbox.mapboxsdk.style.layers.LineLayer;
 import com.mapbox.mapboxsdk.style.layers.Property;
 import com.mapbox.mapboxsdk.style.layers.PropertyFactory;
 import com.mapbox.mapboxsdk.style.layers.SymbolLayer;
@@ -77,6 +79,9 @@ import static com.mapbox.mapboxsdk.style.expressions.Expression.eq;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.get;
 import static com.mapbox.mapboxsdk.style.expressions.Expression.literal;
 import static com.mapbox.mapboxsdk.style.layers.Property.ICON_ANCHOR_BOTTOM;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleColor;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.circleRadius;
+import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.fillColor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAllowOverlap;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconAnchor;
 import static com.mapbox.mapboxsdk.style.layers.PropertyFactory.iconImage;
@@ -145,17 +150,19 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                         enableLocationComponent(style);
                         style.getLayer("poi-label").setProperties(PropertyFactory.visibility(Property.NONE));
 
+
+                        // Affichage des évènements favoris (si l'utilisateur est connecté)
+                        if (ListeObjets.visiteur != null) {
+                            new LoadGeoJsonDataTask(NavigationActivity.this).execute();
+                        }
+
+                        // Affichage de l'itinéraire de la navette :
+                        afficherItineraireNavette(style);
+
                         // Affichage des batiments depuis la base de donnees
                         ArrayList<Batiment> listeBatiment = ListeObjets.listeBatiment;
                         for (Batiment batiment : listeBatiment){
                             batiment.afficherSurCarte(style);
-                        }
-
-                        // Affichage des évènements favoris (si l'utilisateur est connecté)
-                        if (ListeObjets.visiteur != null) {
-
-                            new LoadGeoJsonDataTask(NavigationActivity.this).execute();
-
                         }
 
                         // Ajout des listener
@@ -188,6 +195,7 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     }
 
     private void setUpImage(Style style){
+        style.addImage("station", BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_action_name));
         style.addImage("star", BitmapFactory.decodeResource(this.getResources(), R.drawable.star));
 
         System.out.println("SetUpImage");
@@ -687,6 +695,25 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
                         Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    public void afficherItineraireNavette(Style style){
+        System.out.println(getString(R.string.arrets_navette));
+
+
+
+        // Affichage de l'itinéraire :
+        GeoJsonSource jsonItineraire = new GeoJsonSource("json_itineraire_navette", getString(R.string.itineraire_navette));
+        style.addSource(jsonItineraire);
+        LineLayer layerNavette = new LineLayer("layer_itineraire_navette", "json_itineraire_navette").withProperties(
+                PropertyFactory.lineWidth(5f),
+                PropertyFactory.lineColor(Color.parseColor("#e55e5e")));
+        style.addLayer(layerNavette);
+        // Affichage des arrêts :
+        GeoJsonSource jsonArrets = new GeoJsonSource("json_arrets_navette", getString(R.string.arrets_navette));
+        style.addSource(jsonArrets);
+        CircleLayer layerArrets = new CircleLayer("layer_arrets_navette", "json_arrets_navette").withProperties(circleColor(Color.parseColor("#e55e5e")),circleRadius(8f));
+        style.addLayer(layerArrets);
     }
 
 
