@@ -33,6 +33,10 @@ import eu.ensg.jpo.explor_descartes.Menu.NotificationsFragment;
 
 public class template extends AppCompatActivity {
 
+    /**
+     *  Classe gérant la mise en page de l'application
+     */
+
     // Déclaration des variables
     private DrawerLayout mDrawerLayout;
     private Toolbar toolbar;
@@ -145,20 +149,24 @@ public class template extends AppCompatActivity {
         }
     }
 
-    /*
-    Méthode pour remplir le menu notifications et favoris (ajout de tabs)
-     */
     private void setViewPager(ViewPager viewPager) {
+
+        /**
+         * Méthode pour remplir le menu notifications et favoris (ajout de tabs)
+         */
+
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
         adapter.addFragment(new FavorisFragment(), "Favoris");
         adapter.addFragment(new NotificationsFragment(), "Notifications");
         viewPager.setAdapter(adapter);
     }
 
-    /*
-    Méthode pour stocker et récupérer les données
-     */
     public void getData() throws ParseException {
+
+        /**
+         * Méthode pour stocker et récupérer les données
+        */
+
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date date = sdf.parse(ListeObjets.dateJPO);
 

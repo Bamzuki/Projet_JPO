@@ -55,6 +55,10 @@ public class ModifierPerso extends AppCompatActivity {
 
     private void modification() {
 
+        /**
+         * Fonction modifiant les données personnelle d'un compte
+         */
+
         // Récupération des valeurs entrées :
         String prenom = prenomET.getText().toString();
         String nom = nomET.getText().toString();

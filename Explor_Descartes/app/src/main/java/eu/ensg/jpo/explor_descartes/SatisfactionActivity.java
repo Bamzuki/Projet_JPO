@@ -131,6 +131,10 @@ public class SatisfactionActivity extends template {
 
     public void validation() {
 
+        /**
+         * fonction permettant de valider ses réponses au questionnaire
+         */
+
         // Creation d'un formulaire de réponse
         ArrayList<String> reponses = new ArrayList<String>();
 
@@ -395,6 +399,15 @@ public class SatisfactionActivity extends template {
     }
 
     public String checked(ArrayList<CheckBox> checkBoxes){
+
+        /**
+         * fonction renvoyant les valeurs associées aux différents chekbox sélectionné
+         *
+         * @param checkBoxes : liste des propositions de réponse
+         *
+         * @return : concaténation réponses cochées
+         */
+
         String choix = new String();
         for( CheckBox checkBox : checkBoxes){
             if (checkBox.isChecked()){

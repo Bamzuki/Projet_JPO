@@ -13,6 +13,10 @@ import eu.ensg.jpo.explor_descartes.donnesObjet.Formation;
 
 public final class ListeObjets {
 
+    /**
+     * classe stockant des objets afin de permettre leur utilisation à travers les différentes activités
+     */
+
     public static ArrayList<Batiment> listeBatiment = new ArrayList<Batiment>();
     public static ArrayList<Ecole> listeEcole = new ArrayList<Ecole>();
     public static ArrayList<Formation> listeFormation = new ArrayList<Formation>();
@@ -37,6 +41,15 @@ public final class ListeObjets {
     }
 
     public static Ecole getEcoleFromNom(String nom){
+
+        /**
+         * fonction permettant de récupérer une école à partir de son nom
+         *
+         * @param nom : nom de l'école que l'on recherche
+         *
+         * @return ecole recherché
+         */
+
         for (Ecole ecole: listeEcole){
             if (ecole.getNom().equals(nom)){
                 return ecole;
@@ -46,6 +59,15 @@ public final class ListeObjets {
     }
 
     public static Batiment getBatimentFromNom(String nom){
+
+        /**
+         * fonction permettant de récupérer une école à partir de son nom
+         *
+         * @param nom : nom du batiment que l'on recherche
+         *
+         * @return batiment recherché
+         */
+
         for (Batiment batiment : listeBatiment){
             if (batiment.getNom().equals(nom)){
                 return batiment;

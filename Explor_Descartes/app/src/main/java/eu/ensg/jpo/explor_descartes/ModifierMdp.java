@@ -25,6 +25,11 @@ public class ModifierMdp extends AppCompatActivity {
 
 
     private void validation() {
+
+        /**
+         * fonction permettant de modifier le mot de passe d'un compte
+         */
+
         // Récupération des valeurs entrées :
 
         String mdp = mdpET.getText().toString();

@@ -4,16 +4,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.text.util.Linkify;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.TextView;
 
 import eu.ensg.jpo.explor_descartes.donneesAcces.VisiteurDAO;
-import eu.ensg.jpo.explor_descartes.donnesObjet.Visiteur;
 
 public class SignInActivity extends AppCompatActivity {
+
+    /**
+     * Classe gérant la connexion à lapplication
+     */
 
     Button inscriptionB;
     Button connexionB;
@@ -22,6 +23,10 @@ public class SignInActivity extends AppCompatActivity {
     Button forgotPassword;
 
     private void connexion(){
+
+        /**
+         * Fonction permettant de se connecter en récupérant le pseudo et le mot de passe
+         */
 
         // Récupération des valeurs entrées :
         String mail = mailET.getText().toString();
@@ -42,6 +47,10 @@ public class SignInActivity extends AppCompatActivity {
 
     public void openRegisterActivity() {
 
+        /**
+         * Fonction s'occupant d'ouvrir la page de connexion
+         */
+
         // Create intent
         Intent intent = new Intent(this, RegisterActivity.class);
 
@@ -51,6 +60,10 @@ public class SignInActivity extends AppCompatActivity {
 
     public void openAccueilActivity() {
 
+        /**
+         * Fonction s'occupant d'ouvrir la page d'accueil
+         */
+
         // Create intent
         Intent intent = new Intent(this, AccueilActivity.class);
 
@@ -59,6 +72,11 @@ public class SignInActivity extends AppCompatActivity {
     }
 
     public void openForgotPassword(){
+
+        /**
+         * Fonction redirigeant l'utilisateur sur la page web qui lui envoie
+         * un nouveau mot de passe s'il clique sur le lien "mot de passe oublié"
+         */
 
         String url = getString(R.string.url_serveur) + "forgotPassword.html";
         Intent i = new Intent(Intent.ACTION_VIEW);

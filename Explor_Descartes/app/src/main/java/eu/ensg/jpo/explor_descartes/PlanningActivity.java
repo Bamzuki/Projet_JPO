@@ -21,6 +21,10 @@ import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
 public class PlanningActivity extends template implements Serializable {
 
+    /**
+     * Fonction gèrant la page de planning
+     */
+
     private GridView gridView;
     private GridViewAdapterPlanning gridAdapter;
 
