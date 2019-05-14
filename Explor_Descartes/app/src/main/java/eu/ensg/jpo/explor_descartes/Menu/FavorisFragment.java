@@ -33,8 +33,9 @@ public class FavorisFragment extends Fragment {
         contextFav = getActivity();
         activityFav = getActivity();
 
-        if(ListeObjets.visiteur.getListeFavoris() != null){
+        if(ListeObjets.visiteur != null){
             CAF = new CustomAdapterFavoris(inflater,contextFav,activityFav);
+            ListeObjets.adapterFavoris = CAF;
             gdFav.setAdapter(CAF);
         }
 

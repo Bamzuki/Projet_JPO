@@ -195,7 +195,6 @@ public class NavigationActivity extends template implements OnMapReadyCallback, 
     }
 
     private void setUpImage(Style style){
-        style.addImage("station", BitmapFactory.decodeResource(activity.getResources(), R.drawable.ic_action_name));
         style.addImage("star", BitmapFactory.decodeResource(this.getResources(), R.drawable.star));
 
         System.out.println("SetUpImage");

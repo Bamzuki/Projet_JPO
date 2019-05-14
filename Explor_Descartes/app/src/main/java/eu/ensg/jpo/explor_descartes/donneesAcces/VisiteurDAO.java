@@ -3,6 +3,7 @@ package eu.ensg.jpo.explor_descartes.donneesAcces;
 import android.app.Activity;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.widget.BaseAdapter;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -11,6 +12,7 @@ import java.io.IOException;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.MainActivity;
+import eu.ensg.jpo.explor_descartes.Menu.CustomAdapterFavoris;
 import eu.ensg.jpo.explor_descartes.ModifierPerso;
 import eu.ensg.jpo.explor_descartes.RegisterActivity;
 import eu.ensg.jpo.explor_descartes.SignInActivity;
@@ -370,7 +372,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         });
     }
 
-    public void ajouterFavori(final Activity activity, Evenement favori){
+    public void ajouterFavori(final Activity activity, final Evenement favori){
 
         /**
          * Fonction permettant de mettre un événement en favori
@@ -396,6 +398,13 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        // Mise à jour de l'affichage :
+                        if (ListeObjets.adapterFavoris != null){
+                            ListeObjets.adapterFavoris.notifyDataSetChanged();
+                        }
+                        if (ListeObjets.adapterPlanning != null){
+                            ListeObjets.adapterPlanning.notifyDataSetChanged();
+                        }
                         Toast.makeText(activity, "Favori ajouté !" , Toast.LENGTH_SHORT).show();
                     }
                 });
@@ -423,7 +432,7 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
         String donnees = "&&idUtilisateur=" + ListeObjets.visiteur.getId() + "&&idFavoris=" + favori.getId();
         url = url + donnees;
         Request request = new Request.Builder().url(url).build();
-
+        System.out.println(url);
         // Envoi de la requete
         Call call = client.newCall(request);
         call.enqueue(new Callback() {
@@ -432,6 +441,13 @@ public class VisiteurDAO extends BddEcolesDAO<Visiteur> {
                 activity.runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
+                        // Mise à jour de l'affichage :
+                        if (ListeObjets.adapterFavoris != null){
+                            ListeObjets.adapterFavoris.notifyDataSetChanged();
+                        }
+                        if (ListeObjets.adapterPlanning != null){
+                            ListeObjets.adapterPlanning.notifyDataSetChanged();
+                        }
                         Toast.makeText(activity, "Favori supprimé !" , Toast.LENGTH_SHORT).show();
                     }
                 });

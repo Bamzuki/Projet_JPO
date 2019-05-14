@@ -1,5 +1,7 @@
 package eu.ensg.jpo.explor_descartes;
 
+import android.widget.BaseAdapter;
+
 import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.donnesObjet.Satisfaction;
@@ -20,6 +22,8 @@ public final class ListeObjets {
     public static ArrayList<Evenement> listeFavoris = new ArrayList<>();
     public static String dateJPO = "26/04/2019";
     public static Satisfaction satisfaction = null;
+    public static BaseAdapter adapterFavoris = null;
+    public static BaseAdapter adapterPlanning = null;
 
 
 

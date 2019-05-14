@@ -31,6 +31,7 @@ public class PlanningActivity extends template implements Serializable {
 
         gridView = (GridView) findViewById(R.id.main_grid);
         gridAdapter = new GridViewAdapterPlanning(this, this, R.layout.grid_item_layout_planning, getListImageEvenements());
+        ListeObjets.adapterPlanning = gridAdapter;
         gridView.setAdapter(gridAdapter);
         final PlanningActivity activity = this;
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -73,4 +74,6 @@ public class PlanningActivity extends template implements Serializable {
     public GridViewAdapterPlanning getGridAdapter() {
         return gridAdapter;
     }
+
+
 }
