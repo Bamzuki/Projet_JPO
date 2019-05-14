@@ -5,13 +5,12 @@
     android:background="@android:color/white"
     android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/entete"
-        android:layout_width="match_parent"
+    <GridView
+        android:id="@+id/gd_fav"
+        android:layout_marginTop="20dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:gravity="center"
-        android:text="@string/favoris"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#000" />
+        android:padding="8dp"
+        android:numColumns="1"
+        android:verticalSpacing="10dp"/>
 </LinearLayout>
