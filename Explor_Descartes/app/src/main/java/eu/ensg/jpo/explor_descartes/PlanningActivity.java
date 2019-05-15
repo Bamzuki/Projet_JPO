@@ -40,16 +40,18 @@ public class PlanningActivity extends template implements Serializable {
         final PlanningActivity activity = this;
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View v, int position, long id) {
-                ImageEvenement item = (ImageEvenement) parent.getItemAtPosition(position);
-                VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
-                Evenement evenement = item.getEvenement();
-                if (evenement.estUnFavori(ListeObjets.visiteur)){
-                    visiteurDAO.supprimerFavori(activity, evenement);
-                }else{
-                    visiteurDAO.ajouterFavori(activity, evenement);
-                }
-                activity.gridAdapter.notifyDataSetChanged();
+                if (ListeObjets.visiteur != null) {
+                    ImageEvenement item = (ImageEvenement) parent.getItemAtPosition(position);
+                    VisiteurDAO visiteurDAO = new VisiteurDAO(getString(R.string.url_serveur) + "serveur.php/");
+                    Evenement evenement = item.getEvenement();
+                    if (evenement.estUnFavori(ListeObjets.visiteur)) {
+                        visiteurDAO.supprimerFavori(activity, evenement);
+                    } else {
+                        visiteurDAO.ajouterFavori(activity, evenement);
+                    }
+                    activity.gridAdapter.notifyDataSetChanged();
 
+                }
             }
         });
 

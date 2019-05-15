@@ -32,21 +32,23 @@ public class BackgroundNotification extends Service {
                 Date date = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 ArrayList<Evenement> listEvent = ListeObjets.listeEvenement;
-                ArrayList<Integer> listFav = ListeObjets.visiteur.getListeFavoris();
-                for(int ct=0; ct<listEvent.size(); ct++){
-                    if(listFav.contains(listEvent.get(ct).getId())){
-                        Date debut;
-                        try {
-                            debut = sdf.parse(listEvent.get(ct).getDebut());
-                            long interval = debut.getTime()-date.getTime();
-                            if(!(ListeObjets.listeNotif.contains(listEvent.get(ct))) && (interval<30*60*100000) && (interval>0)){
-                                System.out.println(listEvent.get(ct).getEcole());
-                                listEvent.get(ct).setInterval(interval);
-                                ListeObjets.listeNotif.add(listEvent.get(ct));
+                if(ListeObjets.visiteur != null) {
+                    ArrayList<Integer> listFav = ListeObjets.visiteur.getListeFavoris();
+                    for (int ct = 0; ct < listEvent.size(); ct++) {
+                        if (listFav.contains(listEvent.get(ct).getId())) {
+                            Date debut;
+                            try {
+                                debut = sdf.parse(listEvent.get(ct).getDebut());
+                                long interval = debut.getTime() - date.getTime();
+                                if (!(ListeObjets.listeNotif.contains(listEvent.get(ct))) && (interval < 30 * 60 * 100000) && (interval > 0)) {
+                                    System.out.println(listEvent.get(ct).getEcole());
+                                    listEvent.get(ct).setInterval(interval);
+                                    ListeObjets.listeNotif.add(listEvent.get(ct));
 
+                                }
+                            } catch (ParseException e) {
+                                e.printStackTrace();
                             }
-                        } catch (ParseException e) {
-                            e.printStackTrace();
                         }
                     }
                 }

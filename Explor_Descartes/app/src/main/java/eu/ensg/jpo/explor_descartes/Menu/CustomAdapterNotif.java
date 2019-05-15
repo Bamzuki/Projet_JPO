@@ -43,13 +43,15 @@ public class CustomAdapterNotif extends BaseAdapter {
 
 
     public CustomAdapterNotif(LayoutInflater li, Context context){
-        this.listeFavoris = ListeObjets.visiteur.getListeFavoris();
-        this.listeNotif = ListeObjets.listeNotif;
-        this.listeNotif_prev = ListeObjets.listeNotif_prev;
-        this.liste = new ArrayList<Evenement>();
-        this.li = li;
-        this.context = context;
-        inflaterNotif = li;
+        if(ListeObjets.visiteur != null) {
+            this.listeFavoris = ListeObjets.visiteur.getListeFavoris();
+            this.listeNotif = ListeObjets.listeNotif;
+            this.listeNotif_prev = ListeObjets.listeNotif_prev;
+            this.liste = new ArrayList<Evenement>();
+            this.li = li;
+            this.context = context;
+            inflaterNotif = li;
+        }
 /*
         for(int i=0; i<listeNotif.size(); i++){
             if(!(ListeObjets.listeNotif_prev.contains(listeNotif.get(i).getId()))){
