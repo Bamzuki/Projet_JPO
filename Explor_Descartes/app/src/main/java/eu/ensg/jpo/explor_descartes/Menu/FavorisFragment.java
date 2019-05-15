@@ -26,6 +26,7 @@ public class FavorisFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {super.onCreate(savedInstanceState);}
 
+    //Fonction appelée lors de la création du fragment
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_favoris,container,false);
@@ -33,6 +34,7 @@ public class FavorisFragment extends Fragment {
         contextFav = getActivity();
         activityFav = getActivity();
 
+        //Si l'utilisateur est connecté
         if(ListeObjets.visiteur != null){
             CAF = new CustomAdapterFavoris(inflater,contextFav,activityFav);
             ListeObjets.adapterFavoris = CAF;

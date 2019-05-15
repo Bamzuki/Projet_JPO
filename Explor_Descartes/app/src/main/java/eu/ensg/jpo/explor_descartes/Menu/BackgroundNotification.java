@@ -16,6 +16,7 @@ import eu.ensg.jpo.explor_descartes.ListeObjets;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
 public class BackgroundNotification extends Service {
+    //Création du timer
     Timer timer = new Timer();
     @Nullable
     @Override
@@ -23,9 +24,11 @@ public class BackgroundNotification extends Service {
         return null;
     }
 
+    //Action lors du démarrage de la tache de fond
     @Override
     public int onStartCommand(Intent intent, int flags, int startId){
 
+        //Tache à réaliser périodiquement
         TimerTask t = new TimerTask() {
             @Override
             public void run() {
@@ -60,6 +63,7 @@ public class BackgroundNotification extends Service {
         return START_STICKY;
     }
 
+    //Destruction de la tâche de fond
     @Override
     public void onDestroy(){
         super.onDestroy();

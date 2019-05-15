@@ -10,11 +10,6 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.io.IOException;
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 
 import eu.ensg.jpo.explor_descartes.ListeObjets;
@@ -22,12 +17,7 @@ import eu.ensg.jpo.explor_descartes.PlanningActivity;
 import eu.ensg.jpo.explor_descartes.R;
 import eu.ensg.jpo.explor_descartes.donnesObjet.Evenement;
 
-import okhttp3.Call;
-import okhttp3.Callback;
 import okhttp3.OkHttpClient;
-import okhttp3.Request;
-import okhttp3.Response;
-
 
 public class CustomAdapterNotif extends BaseAdapter {
     Context context;
@@ -42,6 +32,12 @@ public class CustomAdapterNotif extends BaseAdapter {
     protected static final OkHttpClient client = new OkHttpClient();
 
 
+    /**
+     * Classe adapter pour la gridView du fragment notification
+     * @param li
+     * @param context
+     */
+    //Constructeur de la classe
     public CustomAdapterNotif(LayoutInflater li, Context context){
         if(ListeObjets.visiteur != null) {
             this.listeFavoris = ListeObjets.visiteur.getListeFavoris();
@@ -80,6 +76,7 @@ public class CustomAdapterNotif extends BaseAdapter {
         return 0;
     }
 
+    // Fonction héritée permettant de remplir le fragment NotifFragment
     @Override
     public View getView(final int position, final View convertView, ViewGroup parent) {
         final holderNotif hldNot = new holderNotif();
@@ -87,10 +84,13 @@ public class CustomAdapterNotif extends BaseAdapter {
         final Evenement evnt = ListeObjets.listeNotif.get(position);
         rowviewNotif = inflaterNotif.inflate(R.layout.gd_notif, null);
 
+        //Association des variables avec le layout
         hldNot.titreNotif = (TextView) rowviewNotif.findViewById(R.id.titreNotif);
         hldNot.textNotif = (TextView) rowviewNotif.findViewById(R.id.textNotif);
         hldNot.date = (TextView) rowviewNotif.findViewById(R.id.horairesNotif);
         hldNot.suppr = (ImageView) rowviewNotif.findViewById(R.id.supprNotif);
+
+        //Action réalisée suite au click sur le favoris (ouverture de l'activité planning)
         hldNot.titreNotif.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -98,6 +98,8 @@ public class CustomAdapterNotif extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+
+        //Suppression du favoris en cliquant sur une image
         hldNot.suppr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -105,6 +107,8 @@ public class CustomAdapterNotif extends BaseAdapter {
                 notifyDataSetChanged();
             }
         });
+
+        //Récupération des variables textes
         hldNot.titreNotif.setText(evnt.getNom());
         hldNot.textNotif.setText(evnt.getEcole());
         hldNot.date.setText("Evénement dans " + evnt.getInterval()/(60*1000)+" minutes");

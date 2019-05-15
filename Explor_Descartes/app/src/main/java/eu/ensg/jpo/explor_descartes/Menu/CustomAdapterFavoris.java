@@ -44,6 +44,13 @@ public class CustomAdapterFavoris extends BaseAdapter {
     Activity activity;
 
 
+    /**
+     * Classe adapter pour la gridView du fragment favoris
+     * @param li
+     * @param context
+     * @param activity
+     */
+    //Constructeur de la classe
     public CustomAdapterFavoris(LayoutInflater li, Context context, Activity activity){
         this.listeFavoris = ListeObjets.visiteur.getListeFavoris();
         this.li = li;
@@ -73,6 +80,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
             }
         });
 
+        //Teste pour chaque événement si il est présent dans une liste d'id de favoris
         ArrayList<Evenement> listEvent = ListeObjets.listeEvenement;
         System.out.println("test prout"+listEvent.toString());
         for(int r=0; r<listEvent.size(); r++){
@@ -100,6 +108,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
         return 0;
     }
 
+    // Fonction héritée permettant de remplir le fragment FavorisFragment
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         final holderFav hldFav = new holderFav();
@@ -107,10 +116,13 @@ public class CustomAdapterFavoris extends BaseAdapter {
         final Evenement evnt = listeEventFav.get(position);
         rowviewFav = inflaterFav.inflate(R.layout.gd_fav,null);
 
+        //Association des variables avec le layout
         hldFav.nomEvent = (TextView) rowviewFav.findViewById(R.id.nomEvent);
         hldFav.nomEcole = (TextView) rowviewFav.findViewById(R.id.nomEcole);
         hldFav.date = (TextView) rowviewFav.findViewById(R.id.horairesFav);
         hldFav.suppr = (ImageView) rowviewFav.findViewById(R.id.supprFav);
+
+        //Action réalisée suite au click sur le favoris (ouverture de l'activité planning)
         hldFav.nomEvent.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -118,6 +130,8 @@ public class CustomAdapterFavoris extends BaseAdapter {
                 context.startActivity(intent);
             }
         });
+
+        //Suppression du favoris en cliquant sur une image
         hldFav.suppr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -128,6 +142,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
             }
         });
 
+        //Récupération des variables textes
         hldFav.nomEvent.setText(evnt.getNom());
         hldFav.nomEcole.setText(evnt.getEcole());
         hldFav.date.setText(evnt.getDebut());
@@ -149,6 +164,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
 
     @Override
     public void notifyDataSetChanged(){
+        // Rechargement de la page depuis le serveur lors du changement
         // Construction de la requete
         this.url = context.getString(R.string.url_serveur) + "serveur.php/"+ "?request=listeEvenements";
         final Request request = new Request.Builder().url(this.url).build();
@@ -169,6 +185,7 @@ public class CustomAdapterFavoris extends BaseAdapter {
             }
         });
 
+        //Teste pour chaque événement si il est présent dans une liste d'id de favoris
         ArrayList<Evenement> listEvent = ListeObjets.listeEvenement;
         System.out.println("test prout"+listEvent.toString());
         for(int r=0; r<listEvent.size(); r++){

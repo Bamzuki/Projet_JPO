@@ -20,6 +20,10 @@ public class Menu {
 
     private Context con;
 
+    /**
+     * Constructeur de la classe Menu qui répertorie toutes les activités
+     * @param con
+     */
     public Menu(Context con){
         this.con = con;
     }

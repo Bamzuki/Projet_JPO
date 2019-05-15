@@ -44,8 +44,12 @@ public class CustomAdapter extends BaseAdapter {
         final holder hld=new holder();
         View rowview;
         rowview=inflater.inflate(R.layout.gdmain,null);
+
+        //Association des variables avec le layout
         hld.tv= (TextView) rowview.findViewById(R.id.txt1);
         hld.iv= (ImageView) rowview.findViewById(R.id.img1);
+
+        //Récupération des variables textes
         hld.tv.setText(result[position]);
         hld.iv.setImageResource(img[position]);
         hld.tv.setTextColor(Color.BLUE);
