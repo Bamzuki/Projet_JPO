@@ -39,11 +39,11 @@ public class BackgroundNotification extends Service {
                         try {
                             debut = sdf.parse(listEvent.get(ct).getDebut());
                             long interval = debut.getTime()-date.getTime();
-
-                            if((interval<30*60*1000) && (interval>0)){
+                            if(!(ListeObjets.listeNotif.contains(listEvent.get(ct))) && (interval<30*60*100000) && (interval>0)){
                                 System.out.println(listEvent.get(ct).getEcole());
-                            } else {
-                                System.out.println("nononon");
+                                listEvent.get(ct).setInterval(interval);
+                                ListeObjets.listeNotif.add(listEvent.get(ct));
+
                             }
                         } catch (ParseException e) {
                             e.printStackTrace();
@@ -51,6 +51,7 @@ public class BackgroundNotification extends Service {
                     }
                 }
                 System.out.println(1+" hey oh");
+
             }
         };
         timer.schedule(t,1000,10000);
@@ -65,19 +66,4 @@ public class BackgroundNotification extends Service {
         timer.purge();
         timer = null;
     }
-
-
-    //@Override
-/*
-    protected void onHandleIntent(Intent workIntent) {
-        Timer timer = new Timer();
-        TimerTask t = new TimerTask() {
-            @Override
-            public void run() {
-                System.out.println(1);
-            }
-        };
-        timer.schedule(t,1000,10000);
-    }
-*/
 }

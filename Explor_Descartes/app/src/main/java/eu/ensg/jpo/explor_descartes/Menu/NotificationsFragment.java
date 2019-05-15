@@ -29,12 +29,13 @@ public class NotificationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
         View v = inflater.inflate(R.layout.fragment_notifications,container,false);
-        View t = inflater.inflate(R.layout.gd_notif, null);
         gvNotif = (GridView) v.findViewById(R.id.gd_notif);
         contextNotif = getActivity();
         activityNotif = getActivity();
 
-        if(ListeObjets.visiteur.getListeFavoris() != null){
+        if(ListeObjets.listeNotif != null){
+            CAN = new CustomAdapterNotif(inflater,contextNotif);
+            gvNotif.setAdapter(CAN);
         }
 
         return v;

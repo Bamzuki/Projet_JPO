@@ -45,7 +45,7 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
     private String fin;
     private String ecole;
     private String batiment;
-
+    private long interval;
 
     //Constructeur
     public Evenement(int id, String nom, String debut, String fin, String ecole, String batiment) {
@@ -154,6 +154,14 @@ public class Evenement extends DataBaseObject implements Comparable<Evenement>{
 
     public void setBatiment(String batiment) {
         this.batiment = batiment;
+    }
+
+    public long getInterval(){
+        return interval;
+    }
+
+    public void setInterval(long interval){
+        this.interval = interval;
     }
 
 }

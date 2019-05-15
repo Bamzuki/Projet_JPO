@@ -2,6 +2,7 @@ package eu.ensg.jpo.explor_descartes.Menu;
 
 import android.content.Context;
 import android.content.Intent;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,8 +33,10 @@ public class CustomAdapterNotif extends BaseAdapter {
     Context context;
     LayoutInflater li;
     String url;
-    ArrayList<Evenement> listeEventFav;
+    ArrayList<Evenement> listeNotif;
+    ArrayList<Integer> listeNotif_prev;
     ArrayList<Integer> listeFavoris;
+    ArrayList<Evenement> liste;
     private static LayoutInflater inflaterNotif=null;
     ImageView supprNotif;
     protected static final OkHttpClient client = new OkHttpClient();
@@ -41,41 +44,26 @@ public class CustomAdapterNotif extends BaseAdapter {
 
     public CustomAdapterNotif(LayoutInflater li, Context context){
         this.listeFavoris = ListeObjets.visiteur.getListeFavoris();
+        this.listeNotif = ListeObjets.listeNotif;
+        this.listeNotif_prev = ListeObjets.listeNotif_prev;
+        this.liste = new ArrayList<Evenement>();
         this.li = li;
         this.context = context;
         inflaterNotif = li;
-
-        // Construction de la requete
-        this.url = context.getString(R.string.url_serveur) + "?request=listeEvenements";
-        final Request request = new Request.Builder().url(this.url).build();
-        // Envoi de la requete
-        Call call = client.newCall(request);
-        this.listeEventFav = null;
-        call.enqueue(new Callback() {
-            public void onResponse(Call call, Response response) throws IOException {
-                System.out.println("Connexion etablie avec succes !");
-                System.out.println(response.body());
-                Type listType = new TypeToken<ArrayList<Evenement>>(){}.getType();
-                ArrayList<Evenement> listeEvenement = new Gson().fromJson(response.body().string(), listType);
-                ListeObjets.listeEvenement = listeEvenement;
-            }
-            public void onFailure(Call call, IOException e){
-                System.out.println("Echec de la connexion");
-            }
-        });
-
-        ArrayList<Evenement> listEvent = ListeObjets.listeEvenement;
-        for(int r=0; r<listEvent.size(); r++){
-            if(listeFavoris.contains(listEvent.get(r).getId())){
-                this.listeEventFav.add(listEvent.get(r));
+/*
+        for(int i=0; i<listeNotif.size(); i++){
+            if(!(ListeObjets.listeNotif_prev.contains(listeNotif.get(i).getId()))){
+                liste.add(listeNotif.get(i));
+                ListeObjets.listeNotif_prev.add(listeNotif.get(i).getId());
             }
         }
+        */
     }
 
     @Override
     public int getCount() {
-        if(listeEventFav != null){
-            return listeEventFav.size();
+        if(listeNotif != null){
+            return listeNotif.size();
         } else {
             return 0;
         }
@@ -91,9 +79,10 @@ public class CustomAdapterNotif extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, final View convertView, ViewGroup parent) {
+    public View getView(final int position, final View convertView, ViewGroup parent) {
         final holderNotif hldNot = new holderNotif();
         final View rowviewNotif;
+        final Evenement evnt = ListeObjets.listeNotif.get(position);
         rowviewNotif = inflaterNotif.inflate(R.layout.gd_notif, null);
 
         hldNot.titreNotif = (TextView) rowviewNotif.findViewById(R.id.titreNotif);
@@ -110,10 +99,16 @@ public class CustomAdapterNotif extends BaseAdapter {
         hldNot.suppr.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                ListeObjets.listeNotif.remove(position);
                 notifyDataSetChanged();
             }
         });
+        hldNot.titreNotif.setText(evnt.getNom());
+        hldNot.textNotif.setText(evnt.getEcole());
+        hldNot.date.setText("Evénement dans " + evnt.getInterval()/(60*1000)+" minutes");
+        hldNot.titreNotif.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+        hldNot.textNotif.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
+        hldNot.date.setTextColor(ContextCompat.getColor(context, R.color.colorPrimary));
 
         return rowviewNotif;
     }
